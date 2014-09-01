@@ -1,0 +1,10 @@
+= simple_form_for @user, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+
+  = f.input :name
+  = f.input :surname
+  = f.association :role, :prompt => false
+  = f.input :subscription, :as => :boolean, :wrapper => :horizontal_boolean
+
+  .btn-toolbar.text-center
+    = f.button :submit, t('views.common.save'), :class => 'btn-primary'
+    %a.btn.btn-default{:href => users_path}= t('views.common.cancel')

@@ -1,0 +1,27 @@
+%h2.text-center= t('views.users.list')
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th= t('activerecord.attributes.user.name')
+              %th= t('activerecord.attributes.user.surname')
+              %th= t('activerecord.attributes.user.email')
+              %th= t('activerecord.attributes.user.role')
+              %th= t('activerecord.attributes.user.subscription')
+              %th
+
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td= user.name
+                %td= user.surname
+                %td= user.email
+                %td= user.role.name
+                %td= user.subscription
+                %td.text-right
+                  = link_to t('views.common.edit'), edit_user_path(user), :class => 'btn btn-default btn-sm'
+                  = link_to t('views.common.delete'), user, :method => :delete, :class => 'btn btn-danger btn-sm', :data => { :confirm => t('views.common.confirm') }

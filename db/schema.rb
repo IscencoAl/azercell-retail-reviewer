@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826112229) do
+ActiveRecord::Schema.define(version: 20140826130325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,5 +24,26 @@ ActiveRecord::Schema.define(version: 20140826112229) do
   create_table "user_roles", force: true do |t|
     t.string "name"
   end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "surname"
+    t.integer  "user_role_id"
+    t.boolean  "subscription",        default: false
+    t.boolean  "is_deleted",          default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",               default: "",    null: false
+    t.string   "encrypted_password",  default: "",    null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["user_role_id"], name: "index_users_on_user_role_id", using: :btree
 
 end

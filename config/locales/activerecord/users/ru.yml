@@ -1,0 +1,21 @@
+ru:
+  activerecord:
+    models:
+      user: "Пользователь"
+
+    attributes:
+      user:
+        name: "Имя"
+        surname: "Фамилия"
+        email: "Email"
+        role: "Роль"
+        subscription: "Подписка"
+
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+            surname:
+              blank: "не может быть пустой"
