@@ -8,6 +8,8 @@ ru:
         name: "Имя"
         surname: "Фамилия"
         email: "Email"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
         role: "Роль"
         subscription: "Подписка"
 
@@ -19,3 +21,10 @@ ru:
               blank: "не может быть пустым"
             surname:
               blank: "не может быть пустой"
+            email:
+              blank: "не может быть пустым"
+            password:
+              blank: "не может быть пустым"
+              too_short: "должен содержать минимум 8 символов"
+            password_confirmation:
+              confirmation: "не совпадает с паролем"

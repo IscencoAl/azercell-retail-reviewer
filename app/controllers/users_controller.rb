@@ -33,6 +33,11 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
     if @user.update(user_params)
       flash[:success] = t('controllers.users.updated', name: @user.full_name)
       redirect_to users_url
@@ -43,7 +48,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    @user.soft_delete
 
     flash[:success] = t('controllers.users.destroyed', name: @user.full_name)
     redirect_to users_url
@@ -57,6 +62,7 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :surname, :user_role_id, :subscription, :is_deleted)
+      params.require(:user).permit(:name, :surname, :user_role_id, :subscription, :is_deleted,
+        :email, :password, :password_confirmation)
     end
 end

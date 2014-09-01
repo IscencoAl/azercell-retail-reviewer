@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :surname, :presence => true
+  validates :password, :confirmation => true
 
   belongs_to :role, :class_name => 'UserRole', :foreign_key => :user_role_id
 

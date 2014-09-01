@@ -2,6 +2,9 @@
 
   = f.input :name
   = f.input :surname
+  = f.input :email
+  = f.input :password, :input_html => {:value => ""}
+  = f.input :password_confirmation
   = f.association :role, :prompt => false
   = f.input :subscription, :as => :boolean, :wrapper => :horizontal_boolean
 
