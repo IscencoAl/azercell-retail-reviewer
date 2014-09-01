@@ -1,0 +1,28 @@
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-sm-10
+        %h2 All Regions
+
+      .col-sm-2.text-right
+        %br
+        %a.btn.btn-sm.btn-primary{:href =>new_region_path} Add region
+
+  %table.table.table-striped
+    %tr
+      %th Name
+      %th
+     
+
+    - @regions.each do |region|
+      %tr
+        %td= region.name
+       
+        %td
+          .btn-toolbar.text-right
+            %a.btn.btn-sm.btn-primary{:href => edit_region_path(region)} Edit
+            %a.btn.btn-sm.btn-danger{:href => region_path(region.id), :data => {:method => :delete, :confirm => "'Are you sure?"}} Delete
+
+          
+
+
