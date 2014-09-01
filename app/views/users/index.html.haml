@@ -12,8 +12,9 @@
               %th= t('activerecord.attributes.user.surname')
               %th= t('activerecord.attributes.user.email')
               %th= t('activerecord.attributes.user.role')
-              %th= t('activerecord.attributes.user.subscription')
-              %th
+              %th.text-center= t('activerecord.attributes.user.subscription')
+              %th.text-right
+                %a.btn.btn-primary.btn-sm{:href => new_user_path}= t('views.common.add')
 
           %tbody
             - @users.each do |user|
@@ -22,7 +23,11 @@
                 %td= user.surname
                 %td= user.email
                 %td= user.role.name
-                %td= user.subscription
+                %td.text-center
+                  -if user.subscription
+                    %span.glyphicon.glyphicon-ok.text-success
+                  -else
+                    %span.glyphicon.glyphicon-minus.text-danger
                 %td.text-right
-                  = link_to t('views.common.edit'), edit_user_path(user), :class => 'btn btn-default btn-sm'
+                  = link_to t('views.common.edit'), edit_user_path(user), :class => 'btn btn-primary btn-sm'
                   = link_to t('views.common.delete'), user, :method => :delete, :class => 'btn btn-danger btn-sm', :data => { :confirm => t('views.common.confirm') }
