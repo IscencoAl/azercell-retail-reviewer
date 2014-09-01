@@ -1,0 +1,6 @@
+en:
+  views:
+    users:
+      list: "Users list"
+      edit: "Edit user '%{name}'"
+      new: "New user"

@@ -1,0 +1,10 @@
+ru:
+  views:
+    common:
+      show: "Просмотреть"
+      edit: "Изменить"
+      delete: "Удалить"
+      save: "Сохранить"
+      cancel: "Отмена"
+      add: "Добавить"
+      confirm: "Вы уверены?"

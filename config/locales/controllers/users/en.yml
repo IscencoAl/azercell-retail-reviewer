@@ -1,0 +1,6 @@
+en:
+  controllers:
+    users:
+      created: "User '%{name}' was successfully created"
+      updated: "User '%{name}' was successfully updated"
+      destroyed: "User '%{name}' was successfully destroyed"

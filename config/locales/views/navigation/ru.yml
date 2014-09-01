@@ -1,0 +1,13 @@
+ru:
+  views:
+    navigation:
+      users: "Пользователи"
+      places: "Места"
+      regions: "Регионы"
+      cities: "Города"
+      report_structure: "Структура отчета"
+      reports: "Отчеты"
+      retail: "Сеть"
+      dealers: "Дилеры"
+      shops: "Магазины"
+      log_out: "Выйти"

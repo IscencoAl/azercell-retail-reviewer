@@ -1,0 +1,13 @@
+en:
+  views:
+    navigation:
+      users: "Users"
+      places: "Places"
+      regions: "Regions"
+      cities: "Cities"
+      report_structure: "Report structure"
+      reports: "Reports"
+      retail: "Retail"
+      dealers: "Dealers"
+      shops: "Shops"
+      log_out: "Log out"

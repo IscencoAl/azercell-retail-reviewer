@@ -25,6 +25,9 @@ gem 'spring', '1.1.3', group: :development
 gem 'haml', '~> 4.0.5'
 gem 'haml-rails', '~> 0.5.3'
 
+# User Simple Form for creating forms
+gem 'simple_form', '3.1.0.rc2', github: 'plataformatec/simple_form', branch: 'master'
+
 # Use Device for users authentification
 gem 'devise', '3.3.0'
 
