@@ -1,0 +1,6 @@
+en:
+  views:
+    regions:
+      list: "Regions"
+      edit: "Edit region '%{name}'"
+      new: "Add region"

@@ -24,7 +24,8 @@ class RegionsController < ApplicationController
     @region = Region.new(region_params)
 
     if @region.save
-      redirect_to regions_url, notice: 'Region was successfully created.'
+      flash[:success] = t('controllers.regions.created', name: @region.name)
+      redirect_to regions_url
     else
       render :new
     end
@@ -33,7 +34,8 @@ class RegionsController < ApplicationController
   # PATCH/PUT /regions/1
   def update
     if @region.update(region_params)
-      redirect_to regions_url, notice: 'Region was successfully updated.'
+      flash[:success] = t('controllers.regions.updated', name: @region.name)
+      redirect_to regions_url
     else
       render :edit
     end
@@ -42,7 +44,8 @@ class RegionsController < ApplicationController
   # DELETE /regions/1
   def destroy
     @region.soft_delete
-    redirect_to regions_url, notice: 'Region was successfully destroyed.'
+    flash[:success] = t('controllers.regions.destroyed', name: @region.name)
+    redirect_to regions_url
   end
 
   private

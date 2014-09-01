@@ -1,6 +1,4 @@
-.panel.panel-default
-  .panel-heading
-    %h2.text-cente Editing region
-  .panel-body
-  
-  = render 'form'
+%h2.text-center= t('views.regions.edit', :name => @region.name_was)
+%br
+
+= render 'form'

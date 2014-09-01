@@ -1,0 +1,6 @@
+ru:
+  controllers:
+    regions:
+      created: "Регион '%{name}' был успешно создан"
+      updated: "Регион '%{name}' был успешно обновленён"
+      destroyed: "Регион '%{name}' был успешно удален"
