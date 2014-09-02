@@ -1,0 +1,14 @@
+ru:
+  activerecord:
+    attributes:
+      region:
+        name: "Имя"
+
+    errors:
+      models:
+        region:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              taken: "уже занято"
+
