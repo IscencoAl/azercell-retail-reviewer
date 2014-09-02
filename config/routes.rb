@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
 
-  scope "/:locale" do
+  scope "(:locale)" do
     resources :events
     resources :players
     resources :regions
+    devise_for :users
     resources :users
   end
 
-  devise_for :users
-
   root 'users#index'
-
   get '/:locale' => 'users#index'
-
 end

@@ -11,5 +11,6 @@ UserRole.create(:name => 'admin')
 UserRole.create(:name => 'user')
 
 # Create user
-User.create(:name => 'Admin', :surname => 'Magnetsoft', :email => 'admin@magnetsoft.md',
-  :password => 'admin@magnetsoft.md', :role => UserRole.admin)
+# User.create(:name => 'Admin', :surname => 'Magnetsoft', :email => 'admin@magnetsoft.md',
+  # :password => 'admin@magnetsoft.md', :password_confirmation => 'admin@magnetsoft.md',
+  # :role => UserRole.admin)
