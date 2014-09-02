@@ -1,0 +1,6 @@
+ru:
+  controllers:
+    cities:
+      created: "Город '%{name}' был успешно создан"
+      updated: "Город '%{name}' был успешно обновленён"
+      destroyed: "Город '%{name}' был успешно удален"

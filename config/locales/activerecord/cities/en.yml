@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      city:
+        name: "Name"
+        region: "Region"

@@ -1,0 +1,30 @@
+%h2.text-center= t('views.cities.list')
+%br
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th= t('activerecord.attributes.city.name')
+              %th= t('activerecord.attributes.city.region')
+              %th
+                .btn-toolbar.text-right
+                  = link_to t('views.common.add'), new_city_path, :class =>'btn btn-sm btn-primary'
+
+          %tbody
+            - @cities.each do |city|
+              %tr
+                %td= city.name
+                %td= city.region ? city.region.name : '-'
+                %td.text-right
+                  = link_to t('views.common.edit'), edit_city_path(city), :class => 'btn btn-sm btn-primary'
+                  = link_to t('views.common.delete'), city, :method => :delete, :class => 'btn btn-danger btn-sm', :data => { :confirm => t('views.common.confirm') }
+
+
+
+
+
+

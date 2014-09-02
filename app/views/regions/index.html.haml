@@ -18,7 +18,7 @@
               %tr
                 %td= region.name
                 %td.text-right
-                  = link_to t('views.common.edit'), edit_region_path(region), :class => 'btn btn-default btn-sm'
+                  = link_to t('views.common.edit'), edit_region_path(region), :class => 'btn btn-sm btn-primary'
                   = link_to t('views.common.delete'), region, :method => :delete, :class => 'btn btn-danger btn-sm', :data => { :confirm => t('views.common.confirm') }
 
 

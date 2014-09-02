@@ -1,0 +1,6 @@
+en:
+  views:
+    cities:
+      list: "Cities"
+      edit: "Edit city '%{name}'"
+      new: "Add city"

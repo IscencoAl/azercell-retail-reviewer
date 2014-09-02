@@ -1,9 +1,9 @@
-class Region < ActiveRecord::Base
+class City < ActiveRecord::Base
   include Modules::SoftDelete
 
   validates :name,  :presence => true, :uniqueness => true
+  validates :region,  :presence => true
 
-  has_many :cities
-  
+  belongs_to :region
   
 end
