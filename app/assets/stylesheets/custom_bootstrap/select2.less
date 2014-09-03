@@ -1,0 +1,124 @@
+.form-control .select2-choice {
+  border: 0;
+  border-radius: @border-radius-base;
+  background: @input-bg;
+  background-image: none;
+  height: 2 * @padding-base-vertical + @line-height-computed;
+  line-height: 2 * @padding-base-vertical + @line-height-computed;
+}
+
+.form-control .select2-choice .select2-arrow {
+  border-radius: 0 @border-radius-base @border-radius-base 0;   
+  background-color: @input-bg;
+  background-image: none;
+  border-left: none;
+  height: 2 * @padding-base-vertical + @line-height-computed;
+  line-height: 2 * @padding-base-vertical + @line-height-computed;
+}
+
+.form-control .select2-choice .select2-arrow b{
+  background-position-y: 3px;
+}
+
+.form-control.select2-container {
+  height: 2 * @padding-base-vertical + @line-height-computed + 2px;
+  padding: 0;
+}
+
+.form-control.select2-container.select2-dropdown-open {
+  border-color: @input-border-focus;
+  border-radius: @border-radius-base @border-radius-base 0 0;
+}
+
+.form-control .select2-container.select2-dropdown-open .select2-choices {
+  border-radius: @border-radius-base @border-radius-base 0 0;
+}
+
+.form-control.select2-container.select2-drop-above .select2-choice{
+  border: 0;
+  border-radius: 0 0 @border-radius-base @border-radius-base;
+  background: @input-bg;
+  background-image: none;
+  border-top: 1px solid @input-border-focus;
+}
+
+.form-control.select2-container .select2-choices {
+  border: 0 !important;
+  border-radius: @border-radius-base;
+}
+
+.select2-drop.select2-drop-above{
+  border-radius: @border-radius-base @border-radius-base 0 0;
+}
+
+.select2-drop.select2-drop-above.select2-drop-active{
+  border-top: 1px solid @input-border-focus;
+}
+
+.select2-drop{
+  border-radius: 0 0 @border-radius-base @border-radius-base;
+}
+
+.select2-drop-active{
+  border-color: @input-border-focus;
+}
+
+.control-group.warning .select2-container .select2-choice,
+.control-group.warning .select2-container .select2-choices,
+.control-group.warning .select2-container-active .select2-choice,
+.control-group.warning .select2-container-active .select2-choices,
+.control-group.warning .select2-dropdown-open.select2-drop-above .select2-choice,
+.control-group.warning .select2-dropdown-open.select2-drop-above .select2-choices,
+.control-group.warning .select2-container-multi.select2-container-active .select2-choices {
+  border: 1px solid #C09853 !important;
+}
+
+.control-group.warning .select2-container .select2-choice div {
+  border-left: 1px solid #C09853 !important;
+  background: #FCF8E3 !important;
+}
+
+.control-group.error .select2-container .select2-choice,
+.control-group.error .select2-container .select2-choices,
+.control-group.error .select2-container-active .select2-choice,
+.control-group.error .select2-container-active .select2-choices,
+.control-group.error .select2-dropdown-open.select2-drop-above .select2-choice,
+.control-group.error .select2-dropdown-open.select2-drop-above .select2-choices,
+.control-group.error .select2-container-multi.select2-container-active .select2-choices {
+  border: 1px solid #B94A48 !important;
+}
+
+.control-group.error .select2-container .select2-choice div {
+  border-left: 1px solid #B94A48 !important;
+  background: #F2DEDE !important;
+}
+
+.control-group.info .select2-container .select2-choice,
+.control-group.info .select2-container .select2-choices,
+.control-group.info .select2-container-active .select2-choice,
+.control-group.info .select2-container-active .select2-choices,
+.control-group.info .select2-dropdown-open.select2-drop-above .select2-choice,
+.control-group.info .select2-dropdown-open.select2-drop-above .select2-choices,
+.control-group.info .select2-container-multi.select2-container-active .select2-choices {
+  border: 1px solid #3A87AD !important;
+}
+
+.control-group.info .select2-container .select2-choice div {
+  border-left: 1px solid #3A87AD !important;
+  background: #D9EDF7 !important;
+}
+
+.control-group.success .select2-container .select2-choice,
+.control-group.success .select2-container .select2-choices,
+.control-group.success .select2-container-active .select2-choice,
+.control-group.success .select2-container-active .select2-choices,
+.control-group.success .select2-dropdown-open.select2-drop-above .select2-choice,
+.control-group.success .select2-dropdown-open.select2-drop-above .select2-choices,
+.control-group.success .select2-container-multi.select2-container-active .select2-choices {
+  border: 1px solid #468847 !important;
+}
+
+.control-group.success .select2-container .select2-choice div {
+  border-left: 1px solid #468847 !important;
+  background: #DFF0D8 !important;
+}
