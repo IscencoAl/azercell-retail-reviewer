@@ -4,6 +4,8 @@
     - type = 'warning'
   - when 'notice'
     - type = 'warning'
+  - when 'error'
+    - type = 'danger'
 
   =render "layouts/message", :type => type, :message => message
 

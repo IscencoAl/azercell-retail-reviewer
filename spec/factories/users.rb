@@ -6,9 +6,18 @@ FactoryGirl.define do
     surname { Faker::Name.last_name }
     email { "#{name}.#{surname}@fakemail.com" }
     password "password"
-    role { UserRole.all.to_a.sample }
+    password_confirmation "password"
+    user_role_id { UserRole.all.to_a.sample.id }
     subscription { [true, false].sample }
     is_deleted false
+
+    trait :admin do
+      user_role_id { UserRole.find_by_name("admin").id }
+    end
+
+    trait :simple_user do
+      user_role_id { UserRole.find_by_name("user").id }
+    end
 
     trait :deleted do
       is_deleted true

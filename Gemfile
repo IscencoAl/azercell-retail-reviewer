@@ -37,7 +37,7 @@ gem 'factory_girl_rails', '4.4.1', :group => [:development, :test]
 gem 'faker', '1.4.3', :group => [:development, :test]
 
 # Abilities
-gem 'cancan', '1.6.10'
+gem 'cancancan', '~> 1.9'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'

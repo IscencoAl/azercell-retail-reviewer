@@ -39,7 +39,7 @@ GEM
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
     builder (3.2.2)
-    cancan (1.6.10)
+    cancancan (1.9.2)
     commonjs (0.2.7)
     devise (3.3.0)
       bcrypt (~> 3.0)
@@ -154,7 +154,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cancan (= 1.6.10)
+  cancancan (~> 1.9)
   devise (= 3.3.0)
   factory_girl_rails (= 4.4.1)
   faker (= 1.4.3)

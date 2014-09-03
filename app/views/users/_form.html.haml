@@ -5,7 +5,7 @@
   = f.input :email
   = f.input :password, :input_html => {:value => ""}
   = f.input :password_confirmation
-  = f.association :role, :prompt => false
+  = f.association :role, :prompt => false, :disabled => cannot?(:manage, UserRole)
   = f.input :subscription, :as => :boolean, :wrapper => :horizontal_boolean
 
   .btn-toolbar.text-center

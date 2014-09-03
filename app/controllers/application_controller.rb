@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
   def default_url_options(options={})
     { locale: locale }
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render 'layouts/access_denied'
+  end
 end

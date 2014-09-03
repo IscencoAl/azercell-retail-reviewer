@@ -14,7 +14,8 @@
               %th= t('activerecord.attributes.user.role')
               %th.text-center= t('activerecord.attributes.user.subscription')
               %th.text-right
-                %a.btn.btn-primary.btn-sm{:href => new_user_path}= t('views.common.add')
+                - if can?(:create, User)
+                  %a.btn.btn-primary.btn-xs{:href => new_user_path}= t('views.common.add')
 
           %tbody
             - @users.each do |user|
@@ -29,5 +30,8 @@
                   -else
                     %span.glyphicon.glyphicon-minus.text-danger
                 %td.text-right
-                  = link_to t('views.common.edit'), edit_user_path(user), :class => 'btn btn-primary btn-sm'
-                  = link_to t('views.common.delete'), user, :method => :delete, :class => 'btn btn-danger btn-sm', :data => { :confirm => t('views.common.confirm') }
+                  .btn-toolbar
+                    - if can?(:update, user)
+                      = link_to t('views.common.edit'), edit_user_path(user), :class => 'btn btn-primary btn-xs'
+                    - if can?(:delete, user)
+                      = link_to t('views.common.delete'), user, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
