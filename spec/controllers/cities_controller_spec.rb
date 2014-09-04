@@ -5,7 +5,7 @@ RSpec.describe CitiesController, :type => :controller do
 
   describe "GET index" do
     it "populates an array of cities" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       city = create(:city)
@@ -15,7 +15,7 @@ RSpec.describe CitiesController, :type => :controller do
     end
 
     it "renders the index view" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :index
@@ -25,7 +25,7 @@ RSpec.describe CitiesController, :type => :controller do
 
   describe "GET new" do
     it "assignes a new city as a @city" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :new
@@ -33,7 +33,7 @@ RSpec.describe CitiesController, :type => :controller do
     end
 
     it "renders the new view" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :new
@@ -43,7 +43,7 @@ RSpec.describe CitiesController, :type => :controller do
 
   describe "GET edit" do
     it "assignes the requested city as @city" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       city = create(:city)
@@ -53,7 +53,7 @@ RSpec.describe CitiesController, :type => :controller do
     end
 
     it "renders the new view" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       city = create(:city)
@@ -67,7 +67,7 @@ RSpec.describe CitiesController, :type => :controller do
   describe "POST create" do
     context "with valid params" do
       it "creates a new City" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
        
         expect {
@@ -76,7 +76,7 @@ RSpec.describe CitiesController, :type => :controller do
       end
 
       it "assigns a newly created city as @city" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:city => FactoryGirl.build(:city).attributes.symbolize_keys}
@@ -85,7 +85,7 @@ RSpec.describe CitiesController, :type => :controller do
       end
 
       it "redirects to the index" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:city => FactoryGirl.build(:city).attributes.symbolize_keys}
@@ -95,7 +95,7 @@ RSpec.describe CitiesController, :type => :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved city as @city" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:city => FactoryGirl.attributes_for(:city, :invalid)}
@@ -104,7 +104,7 @@ RSpec.describe CitiesController, :type => :controller do
       end
 
       it "assigns a newly created city as @city" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:city => FactoryGirl.attributes_for(:city, :invalid)}
@@ -112,7 +112,7 @@ RSpec.describe CitiesController, :type => :controller do
       end
 
       it "re-renders the new view" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
         
         post :create, {:city => FactoryGirl.attributes_for(:city, :invalid)}
@@ -124,7 +124,7 @@ RSpec.describe CitiesController, :type => :controller do
   describe "PUT update" do
     context "with valid params" do
       it "updates an city" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         city = create(:city)
@@ -136,7 +136,7 @@ RSpec.describe CitiesController, :type => :controller do
       end
 
       it "assigns the requested city as @city" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         city = create(:city)
@@ -146,7 +146,7 @@ RSpec.describe CitiesController, :type => :controller do
       end
       
       it "redirects to the index" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         city = create(:city)
@@ -158,7 +158,7 @@ RSpec.describe CitiesController, :type => :controller do
 
     context "with invalid params" do
       it "assigns the requested user as @user" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         city = create(:city)
@@ -168,7 +168,7 @@ RSpec.describe CitiesController, :type => :controller do
       end
 
       it "re-renders the edit view" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
          city = create(:city)
@@ -181,7 +181,7 @@ RSpec.describe CitiesController, :type => :controller do
 
   describe "DELETE destroy" do
     it "sets is_deleted in true for the requested city" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       city = create(:city)
@@ -193,7 +193,7 @@ RSpec.describe CitiesController, :type => :controller do
     end
 
     it "redirects to the city list" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       city = create(:city)
