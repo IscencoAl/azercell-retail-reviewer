@@ -10,3 +10,4 @@ en:
         email: "Email"
         role: "Role"
         subscription: "Subscription"
+        is_deleted: "Deleted"

@@ -9,7 +9,7 @@ module Modules::SoftDelete
   
   module ClassMethods
     def deleted
-      unscoped.where(:is_deleted => true)
+      rewhere(:is_deleted => true)
     end
   end
   

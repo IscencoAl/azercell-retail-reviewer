@@ -10,7 +10,7 @@ RSpec.shared_examples "soft deletable" do |factory, model|
       end
     end
 
-    context "when deleted  records exist" do
+    context "when deleted records exist" do
       it "is not blank" do
         create(factory, :deleted)
         deleted_records = model.deleted

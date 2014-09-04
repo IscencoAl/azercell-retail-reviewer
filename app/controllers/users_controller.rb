@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
+    @users = User.filter(filtering_params)
   end
 
   # GET /users/new
@@ -50,5 +51,9 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :surname, :user_role_id, :subscription,
         :email, :password, :password_confirmation)
+    end
+
+    def filtering_params
+      params.fetch(:filter, {}).permit(:name, :surname, :role, :email, :is_deleted)
     end
 end

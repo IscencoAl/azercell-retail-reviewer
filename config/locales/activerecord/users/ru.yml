@@ -12,6 +12,7 @@ ru:
         password_confirmation: "Подтверждение пароля"
         role: "Роль"
         subscription: "Подписка"
+        is_deleted: "Удаленные"
 
     errors:
       models:

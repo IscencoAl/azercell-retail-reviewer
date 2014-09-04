@@ -9,5 +9,5 @@
   = f.input :subscription, :as => :boolean, :wrapper => :horizontal_boolean
 
   .btn-toolbar.text-center
-    = f.button :submit, t('views.common.save'), :class => 'btn-sm'
-    %a.btn.btn-sm.btn-default{:href => users_path}= t('views.common.cancel')
+    = f.button :submit, t('views.common.save')
+    %a.btn.btn-default{:href => users_path}= t('views.common.cancel')
