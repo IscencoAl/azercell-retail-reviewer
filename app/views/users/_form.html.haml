@@ -5,9 +5,9 @@
   = f.input :email
   = f.input :password, :input_html => {:value => ""}
   = f.input :password_confirmation
-  = f.association :role, :prompt => false
+  = f.association :role, :prompt => false, :disabled => cannot?(:manage, UserRole)
   = f.input :subscription, :as => :boolean, :wrapper => :horizontal_boolean
 
   .btn-toolbar.text-center
-    = f.button :submit, t('views.common.save'), :class => 'btn-primary'
-    %a.btn.btn-default{:href => users_path}= t('views.common.cancel')
+    = f.button :submit, t('views.common.save'), :class => 'btn-sm'
+    %a.btn.btn-sm.btn-default{:href => users_path}= t('views.common.cancel')

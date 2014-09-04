@@ -9,3 +9,5 @@ en:
       add: "Add"
       confirm: "Are you sure?"
       empty: "No matching records found"
+      not_authorized: "You are not authorized to access this page"
+

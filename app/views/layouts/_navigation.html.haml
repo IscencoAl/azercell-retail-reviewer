@@ -42,3 +42,12 @@
 
         %li
           %a{:href => destroy_user_session_path, :data => {:method => 'delete'}}= t('views.navigation.log_out')
+
+        %li.dropdown
+          %a.dropdown-toggle{:href => "javascript:;", :data => {:toggle => 'dropdown'}}
+            = I18n.locale
+            %span.caret
+          %ul.dropdown-menu{:role => "dropdown", :style => 'min-width: 0;'}
+            - I18n.available_locales.each do |l|
+              %li
+                = link_to l, :locale => l

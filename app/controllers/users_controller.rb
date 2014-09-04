@@ -1,14 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /users
   def index
-    @users = User.all
   end
 
   # GET /users/new
   def new
-    @user = User.new
   end
 
   # GET /users/1/edit
@@ -17,8 +15,6 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
-
     if @user.save
       flash[:success] = t('controllers.users.created', name: @user.full_name)
       redirect_to users_url
@@ -30,8 +26,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if params[:user][:password].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
+      [:password, :password_confirmation].each{ |p| params[:user].delete(p) }
     end
 
     if @user.update(user_params)
@@ -51,14 +46,9 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :surname, :user_role_id, :subscription, :is_deleted,
+      params.require(:user).permit(:name, :surname, :user_role_id, :subscription,
         :email, :password, :password_confirmation)
     end
 end

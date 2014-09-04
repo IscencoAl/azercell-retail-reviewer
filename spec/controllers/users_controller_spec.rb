@@ -4,7 +4,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "GET index" do
     it "populates an array of users" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :index
@@ -12,7 +12,7 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     it "renders the index view" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :index
@@ -22,7 +22,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "GET new" do
     it "assignes a new user as @user" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :new
@@ -30,7 +30,7 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     it "renders the new view" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :new
@@ -40,7 +40,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "GET edit" do
     it "assignes the requested user as @user" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :edit, {:id => user.to_param}
@@ -48,7 +48,7 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     it "renders the new view" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       get :edit, {:id => user.to_param}
@@ -59,7 +59,7 @@ RSpec.describe UsersController, :type => :controller do
   describe "POST create" do
     context "with valid params" do
       it "creates a new User" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         expect {
@@ -68,7 +68,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "assigns a newly created user as @user" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:user => FactoryGirl.attributes_for(:user)}
@@ -77,7 +77,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "redirects to the index" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:user => FactoryGirl.attributes_for(:user)}
@@ -87,7 +87,7 @@ RSpec.describe UsersController, :type => :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved user as @user" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:user => FactoryGirl.attributes_for(:user, :invalid)}
@@ -96,7 +96,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "assigns a newly created user as @user" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         post :create, {:user => FactoryGirl.attributes_for(:user, :invalid)}
@@ -104,7 +104,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "re-renders the new view" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
         
         post :create, {:user => FactoryGirl.attributes_for(:user, :invalid)}
@@ -116,7 +116,7 @@ RSpec.describe UsersController, :type => :controller do
   describe "PUT update" do
     context "with valid params" do
       it "updates an user" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         put :update, {:id => user.to_param, :user => {:name => 'Josh'}}
@@ -126,7 +126,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "assigns the requested user as @user" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         put :update, {:id => user.to_param, :user => FactoryGirl.attributes_for(:user)}
@@ -134,7 +134,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "redirects to the index" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         put :update, {:id => user.to_param, :user => FactoryGirl.attributes_for(:user)}
@@ -143,7 +143,7 @@ RSpec.describe UsersController, :type => :controller do
 
       context "and blank password" do
         it "removes password and confirmation from params" do
-          user = create(:user)
+          user = create(:user, :admin)
           sign_in user
 
           put :update, {:id => user.id, :user => FactoryGirl.attributes_for(:user, :password => "")}
@@ -155,7 +155,7 @@ RSpec.describe UsersController, :type => :controller do
 
     context "with invalid params" do
       it "assigns the requested user as @user" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         put :update, {:id => user.to_param, :user => FactoryGirl.attributes_for(:user, :invalid)}
@@ -163,7 +163,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "re-renders the edit view" do
-        user = create(:user)
+        user = create(:user, :admin)
         sign_in user
 
         put :update, {:id => user.to_param, :user => FactoryGirl.attributes_for(:user, :invalid)}
@@ -174,7 +174,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe "DELETE destroy" do
     it "sets is_deleted in true for the requested user" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       delete :destroy, {:id => user.to_param}
@@ -184,7 +184,7 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     it "redirects to the users list" do
-      user = create(:user)
+      user = create(:user, :admin)
       sign_in user
 
       delete :destroy, {:id => user.to_param}
