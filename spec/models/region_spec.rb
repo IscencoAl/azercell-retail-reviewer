@@ -12,7 +12,7 @@ RSpec.describe Region, :type => :model do
       expect(region).to be_valid
     end
 
-    context "deleted" do
+    context "trait 'deleted'" do
       it "is valid" do
         region = create(:region, :deleted)
 
@@ -20,6 +20,13 @@ RSpec.describe Region, :type => :model do
       end
     end
     
+    context 'trait "invalid"' do
+      it 'has an invalid factory' do
+        region = build(:region, :invalid)
+
+        expect(region).not_to be_valid
+      end
+    end    
   end
 
 end

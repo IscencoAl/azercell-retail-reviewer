@@ -1,18 +1,13 @@
 class RegionsController < ApplicationController
-  before_action :set_region, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /regions
-  def index
-    @regions = Region.all
+  def index 
   end
 
-  # GET /regions/1
-  def show
-  end
 
   # GET /regions/new
   def new
-    @region = Region.new
   end
 
   # GET /regions/1/edit
@@ -49,11 +44,6 @@ class RegionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_region
-      @region = Region.find(params[:id])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def region_params
       params.require(:region).permit(:name, :is_deleted)

@@ -2,7 +2,7 @@ ru:
   activerecord:
     attributes:
       city:
-        name: "Имя"
+        name: "Название"
         region: "Регион"
 
     errors:

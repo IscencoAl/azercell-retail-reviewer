@@ -1,16 +1,13 @@
 class CitiesController < ApplicationController
-  before_action :set_city, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /cities
   def index
-    @cities = City.all
-
   end
 
 
   # GET /cities/new
   def new
-    @city = City.new
   end
 
   # GET /cities/1/edit
@@ -47,10 +44,6 @@ class CitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_city
-      @city = City.find(params[:id])
-    end
 
     # Only allow a trusted parameter "white list" through.
     def city_params
