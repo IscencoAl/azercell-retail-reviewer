@@ -8,3 +8,4 @@ en:
       cancel: "Cancel"
       add: "Add"
       confirm: "Are you sure?"
+      empty: "No matching records found"

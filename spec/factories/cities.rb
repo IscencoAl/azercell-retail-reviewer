@@ -10,6 +10,10 @@ FactoryGirl.define do
       is_deleted true
     end
 
+    trait :invalid do
+      name nil
+    end
+
   end
 end
 

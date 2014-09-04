@@ -11,24 +11,35 @@ RSpec.describe City, :type => :model do
 
       expect(city).to be_valid
     end
-  end
 
-  describe "deleted" do
-    it "is valid" do
-      city = create(:city, :deleted)
+    context 'trait "invalid"' do
+      it 'has an invalid factory' do
+        city = build(:city, :invalid)
 
-      expect(city).to be_valid  
+        expect(city).not_to be_valid
+      end
+    end
+
+    context "trait 'deleted'" do
+      it "is valid" do
+        city = create(:city, :deleted)
+
+        expect(city).to be_valid  
+      end
     end
   end
 
-  describe "deleted region" do
-    it "is equal" do
-      city = create(:city)
+  describe ".region" do
+    context "when associated region is deleted" do
+      it "return region" do
+        city = create(:city)
 
-      region = city.region
-      region.soft_delete
+        region = city.region
+        region.soft_delete
 
-      expect(city.region).to eq(region)
+        expect(city.region).to eq(region)
+      end
     end
   end
+  
 end

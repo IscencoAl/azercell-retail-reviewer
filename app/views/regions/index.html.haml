@@ -11,15 +11,21 @@
               %th= t('activerecord.attributes.region.name')
               %th
                 .btn-toolbar.text-right
-                  = link_to t('views.common.add'), new_region_path, :class =>'btn btn-sm btn-primary'
+                  = link_to t('views.common.add'), new_region_path, :class =>'btn btn-xs btn-primary'
 
           %tbody
-            - @regions.each do |region|
+            -if @regions.any?
+              - @regions.each do |region|
+                %tr
+                  %td= region.name
+                  %td.text-right
+                    = link_to t('views.common.edit'), edit_region_path(region), :class => 'btn btn-xs btn-primary'
+                    = link_to t('views.common.delete'), region, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+            -else
               %tr
-                %td= region.name
-                %td.text-right
-                  = link_to t('views.common.edit'), edit_region_path(region), :class => 'btn btn-sm btn-primary'
-                  = link_to t('views.common.delete'), region, :method => :delete, :class => 'btn btn-danger btn-sm', :data => { :confirm => t('views.common.confirm') }
+                %td{:colspan => 2}
+                  %h4.text-center= t('views.common.empty')
+
 
 
 
