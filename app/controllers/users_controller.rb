@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource :only => [:restore]
 
   # GET /users
   def index
@@ -43,6 +44,15 @@ class UsersController < ApplicationController
     @user.soft_delete
 
     flash[:success] = t('controllers.users.destroyed', name: @user.full_name)
+    redirect_to users_url
+  end
+
+  # GET /users/1/restore
+  def restore
+    @user = User.deleted.find(params[:id])
+    @user.restore
+
+    flash[:success] = t('controllers.users.restored', name: @user.full_name)
     redirect_to users_url
   end
 

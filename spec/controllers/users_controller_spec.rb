@@ -11,6 +11,16 @@ RSpec.describe UsersController, :type => :controller do
       expect(assigns(:users)).to eq([user])
     end
 
+    it "filters users" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      user = create(:user, :simple_user)
+
+      get :index, {:filter => {:role => UserRole.user}}
+      expect(assigns(:users)).to eq([user])
+    end
+
     it "renders the index view" do
       user = create(:user, :admin)
       sign_in user
@@ -188,6 +198,30 @@ RSpec.describe UsersController, :type => :controller do
       sign_in user
 
       delete :destroy, {:id => user.to_param}
+      expect(response).to redirect_to(users_url)
+    end
+  end
+
+  describe "GET restore" do
+    it "sets is_deleted in false for the requested user" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      deleted_user = create(:user, :deleted)
+
+      get :restore, {:id => deleted_user.to_param}
+      deleted_user.reload
+
+      expect(deleted_user.is_deleted).to be_falsey
+    end
+
+    it "redirects to the users list" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      deleted_user = create(:user, :deleted)
+
+      get :restore, {:id => deleted_user = create(:user, :deleted).to_param}
       expect(response).to redirect_to(users_url)
     end
   end

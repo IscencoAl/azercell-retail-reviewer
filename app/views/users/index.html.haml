@@ -33,7 +33,9 @@
                     %span.glyphicon.glyphicon-minus.text-danger
                 %td.text-right
                   .btn-toolbar
+                    - if can?(:restore, user)
+                      = link_to t('views.common.restore'), restore_user_path(user), :class => 'btn btn-primary btn-xs'
                     - if can?(:update, user)
                       = link_to t('views.common.edit'), edit_user_path(user), :class => 'btn btn-primary btn-xs'
-                    - if can?(:delete, user)
+                    - if can?(:destroy, user)
                       = link_to t('views.common.delete'), user, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }

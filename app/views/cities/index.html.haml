@@ -24,7 +24,7 @@
                     .btn-toolbar
                       -if can?(:update, city)
                         = link_to t('views.common.edit'), edit_city_path(city), :class => 'btn btn-xs btn-primary'
-                      -if can?(:delete, city)
+                      -if can?(:destroy, city)
                         = link_to t('views.common.delete'), city, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
             -else
               %tr
