@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    attributes:
+      dealer:
+        name: "Name"
+        contact_name: "Contact Name"
+        phone_number: "Phone Number"
+        email: "Email"
+        is_deleted: "Deleted"

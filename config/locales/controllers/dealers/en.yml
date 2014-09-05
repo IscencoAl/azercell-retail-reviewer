@@ -1,0 +1,7 @@
+en:
+  controllers:
+    dealers:
+      created: "Dealer '%{name}' was successfully created"
+      updated: "Dealer '%{name}' was successfully updated"
+      destroyed: "Dealer '%{name}' was successfully destroyed"
+      restored: "Dealer '%{name}' was successfully restored"

@@ -13,7 +13,7 @@
 
             .form-group.col-sm-2
               %label{:for => 'region'}= t('activerecord.attributes.city.region')
-              %select#role.form-control{:type => 'text', :name => 'filter[region]'}
+              %select#region.form-control{:type => 'text', :name => 'filter[region]'}
                 %option{:value => ''}= t('views.common.all')
                 - Region.all.each do |region|
                   %option{:value => region.id, :selected => filtering_params[:region].to_i == region.id}= region.name
