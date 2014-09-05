@@ -4,3 +4,4 @@ en:
       created: "Region '%{name}' was successfully created"
       updated: "Region '%{name}' was successfully updated"
       destroyed: "Region '%{name}' was successfully destroyed"
+      restored: "Region '%{name}' was successfully restored"

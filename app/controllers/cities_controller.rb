@@ -1,5 +1,6 @@
 class CitiesController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource :only => [:restore]
   
   # GET /cities
   def index
@@ -39,6 +40,15 @@ class CitiesController < ApplicationController
   def destroy
     @city.soft_delete
     flash[:success] = t('controllers.cities.destroyed', name: @city.name)
+    redirect_to cities_url
+  end
+
+  # GET /cities/1/restore
+  def restore
+    @city = City.deleted.find(params[:id])
+    @city.restore
+
+    flash[:success] = t('controllers.cities.restored', name: @city.name)
     redirect_to cities_url
   end
 

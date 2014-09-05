@@ -24,6 +24,8 @@
                   %td= city.region ? city.region.name : '-'
                   %td.text-right
                     .btn-toolbar
+                      -if can?(:restore, city)
+                        = link_to t('views.common.restore'), restore_city_path(city), :class => 'btn btn-primary btn-xs'
                       -if can?(:update, city)
                         = link_to t('views.common.edit'), edit_city_path(city), :class => 'btn btn-xs btn-primary'
                       -if can?(:destroy, city)

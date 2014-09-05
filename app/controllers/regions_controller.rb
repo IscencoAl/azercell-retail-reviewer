@@ -1,5 +1,6 @@
 class RegionsController < ApplicationController
   load_and_authorize_resource
+  skip_load_resource :only => [:restore]
 
   # GET /regions
   def index 
@@ -39,6 +40,15 @@ class RegionsController < ApplicationController
   def destroy
     @region.soft_delete
     flash[:success] = t('controllers.regions.destroyed', name: @region.name)
+    redirect_to regions_url
+  end
+  
+  # GET /regions/1/restore
+  def restore
+    @region = Region.deleted.find(params[:id])
+    @region.restore
+
+    flash[:success] = t('controllers.regions.restored', name: @region.name)
     redirect_to regions_url
   end
 

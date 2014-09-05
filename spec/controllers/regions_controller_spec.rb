@@ -204,4 +204,28 @@ RSpec.describe RegionsController, :type => :controller do
       expect(response).to redirect_to(regions_url)
     end
   end
+
+  describe "GET restore" do
+    it "sets is_deleted in false for the requested region" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      deleted_region =  create(:region, :deleted)
+
+      get :restore, {:id => deleted_region.to_param}
+      deleted_region.reload
+
+      expect(deleted_region.is_deleted).to be_falsey
+    end
+
+    it "redirects to the users list" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      deleted_region =  create(:region, :deleted)
+
+      get :restore, {:id => deleted_region = create(:region, :deleted).to_param}
+      expect(response).to redirect_to(regions_url)
+    end
+  end
 end

@@ -203,4 +203,28 @@ RSpec.describe CitiesController, :type => :controller do
     end
   end
 
+  describe "GET restore" do
+    it "sets is_deleted in false for the requested city" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      deleted_city =  create(:city, :deleted)
+
+      get :restore, {:id => deleted_city.to_param}
+      deleted_city.reload
+
+      expect(deleted_city.is_deleted).to be_falsey
+    end
+
+    it "redirects to the users list" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      deleted_city =  create(:city, :deleted)
+
+      get :restore, {:id => deleted_city = create(:city, :deleted).to_param}
+      expect(response).to redirect_to(cities_url)
+    end
+  end
+
 end

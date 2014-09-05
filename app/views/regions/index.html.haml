@@ -22,6 +22,8 @@
                   %td= region.name
                   %td.text-right
                     .btn-toolbar
+                      - if can?(:restore, region)
+                        = link_to t('views.common.restore'), restore_region_path(region), :class => 'btn btn-primary btn-xs'
                       - if can?(:update, region)
                         = link_to t('views.common.edit'), edit_region_path(region), :class => 'btn btn-xs btn-primary'
                       - if can?(:destroy, region)

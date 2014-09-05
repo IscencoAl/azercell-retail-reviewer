@@ -10,9 +10,12 @@ class Ability
 
       can :manage, UserRole
 
-      can :crud, City
+      can :crud, City, :is_deleted => false
+      can :restore, City, :is_deleted => true
 
-      can :crud, Region
+
+      can :crud, Region, :is_deleted => false
+      can :restore, Region, :is_deleted => true
     end
 
     if user.simple_user?

@@ -4,3 +4,4 @@ en:
       created: "City '%{name}' was successfully created"
       updated: "City '%{name}' was successfully updated"
       destroyed: "City '%{name}' was successfully destroyed"
+      restored: "City '%{name}' was successfully restored"
