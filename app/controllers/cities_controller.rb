@@ -1,10 +1,12 @@
 class CitiesController < ApplicationController
   load_and_authorize_resource
   skip_load_resource :only => [:restore]
+
+  helper_method :sorting_params
   
   # GET /cities
   def index
-    @cities = City.filter(filtering_params)
+    @cities = City.filter(filtering_params).sort(sorting_params)
   end
 
 
@@ -61,5 +63,9 @@ class CitiesController < ApplicationController
 
     def filtering_params
       params.fetch(:filter, {}).permit(:name, :region, :is_deleted)
+    end
+
+    def sorting_params
+      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
     end
 end

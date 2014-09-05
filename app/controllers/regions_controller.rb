@@ -2,9 +2,11 @@ class RegionsController < ApplicationController
   load_and_authorize_resource
   skip_load_resource :only => [:restore]
 
+  helper_method :sorting_params
+
   # GET /regions
   def index 
-    @regions = Region.filter(filtering_params)
+    @regions = Region.filter(filtering_params).sort(sorting_params)
   end
 
 
@@ -60,5 +62,9 @@ class RegionsController < ApplicationController
 
     def filtering_params
       params.fetch(:filter, {}).permit(:name, :is_deleted)
+    end
+
+    def sorting_params
+      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
     end
 end

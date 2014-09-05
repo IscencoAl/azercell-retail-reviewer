@@ -7,24 +7,24 @@
 
         %form{:role => 'form'}
           .row
-            .form-group.col-sm-2
+            .form-group.col-sm-3
               %label{:for => 'name'}= t('activerecord.attributes.city.name')
               %input#name.form-control{:type => 'text', :name => 'filter[name]', :value => filtering_params[:name], :autocomplete => :off}
 
-            .form-group.col-sm-2
+            .form-group.col-sm-3
               %label{:for => 'region'}= t('activerecord.attributes.city.region')
               %select#role.form-control{:type => 'text', :name => 'filter[region]'}
                 %option{:value => ''}= t('views.common.all')
                 - Region.all.each do |region|
                   %option{:value => region.id, :selected => filtering_params[:region].to_i == region.id}= region.name
 
-
-            .form-group.col-sm-2
-              %br
-              .checkbox{:style => 'margin-bottom: 0px;'}
-                %label
-                  %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
-                    %strong= t('activerecord.attributes.city.is_deleted')
+            - if can?(:restore, User)
+              .form-group.col-sm-2
+                %br
+                .checkbox{:style => 'margin-bottom: 0px;'}
+                  %label
+                    %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
+                      %strong= t('activerecord.attributes.city.is_deleted')
 
 
             .form-group.col-sm-2

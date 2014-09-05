@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   include Modules::SoftDelete
   include Modules::Filterable
+  include Modules::Sortable
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :omniauthable:, registerable, :recoverable
@@ -18,6 +19,12 @@ class User < ActiveRecord::Base
   scope :with_email, -> (email) { where("email ilike ?", "%#{email}%") }
   scope :with_role, -> (role) { where(:role => role) }
   scope :with_is_deleted, -> (is_deleted) { deleted unless is_deleted.blank? }
+
+  scope :by_name, -> (dir) { order("name #{dir}") }
+  scope :by_surname, -> (dir) { order("surname #{dir}") }
+  scope :by_email, -> (dir) { order("email #{dir}") }
+  scope :by_role, -> (dir) { joins(:role).order("user_roles.name #{dir}") }
+  scope :by_subscription, -> (dir) { order("subscription #{dir}") }
 
   def admin?
     self.role == UserRole.admin

@@ -84,4 +84,24 @@ RSpec.describe Region, :type => :model do
       end
     end
   end
+
+  describe '.by_name' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        center = create(:region, :name => 'Center')
+        west = create(:region, :name => 'West')
+
+        expect(Region.by_name('asc')).to eq([center, west])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        center = create(:region, :name => 'Center')
+        west = create(:region, :name => 'West')
+
+        expect(Region.by_name('desc')).to eq([west, center])
+      end
+    end
+  end
 end

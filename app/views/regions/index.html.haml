@@ -10,7 +10,7 @@
         %table.table.table-condensed.table-striped.table-vcentered
           %thead
             %tr
-              %th= t('activerecord.attributes.region.name')
+              %th= sortable(:name, t('activerecord.attributes.region.name'))
               %th.text-right
                 - if can?(:create, Region)
                   = link_to t('views.common.add'), new_region_path, :class =>'btn btn-xs btn-primary'

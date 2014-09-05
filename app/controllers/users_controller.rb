@@ -2,9 +2,11 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   skip_load_resource :only => [:restore]
 
+  helper_method :sorting_params
+
   # GET /users
   def index
-    @users = User.filter(filtering_params)
+    @users = User.filter(filtering_params).sort(sorting_params)
   end
 
   # GET /users/new
@@ -65,5 +67,9 @@ class UsersController < ApplicationController
 
     def filtering_params
       params.fetch(:filter, {}).permit(:name, :surname, :role, :email, :is_deleted)
+    end
+
+    def sorting_params
+      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
     end
 end

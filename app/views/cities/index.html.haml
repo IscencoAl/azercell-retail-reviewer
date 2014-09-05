@@ -10,8 +10,8 @@
         %table.table.table-condensed.table-striped.table-vcentered
           %thead
             %tr
-              %th= t('activerecord.attributes.city.name')
-              %th= t('activerecord.attributes.city.region')
+              %th= sortable(:name, t('activerecord.attributes.city.name'))
+              %th= sortable(:region, t('activerecord.attributes.city.region'))
               %th.text-right
                 - if can?(:create, City)
                   = link_to t('views.common.add'), new_city_path, :class =>'btn btn-xs btn-primary'

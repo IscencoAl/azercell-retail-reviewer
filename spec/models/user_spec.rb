@@ -216,5 +216,105 @@ RSpec.describe User, :type => :model do
       end
     end
   end
+
+  describe '.by_name' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        john = create(:user, :name => 'John')
+        michael = create(:user, :name => 'Michael')
+
+        expect(User.by_name('asc')).to eq([john, michael])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        john = create(:user, :name => 'John')
+        michael = create(:user, :name => 'Michael')
+
+        expect(User.by_name('desc')).to eq([michael, john])
+      end
+    end
+  end
+
+  describe '.by_surname' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        john = create(:user, :surname => 'John')
+        michael = create(:user, :surname => 'Michael')
+
+        expect(User.by_surname('asc')).to eq([john, michael])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        john = create(:user, :surname => 'John')
+        michael = create(:user, :surname => 'Michael')
+
+        expect(User.by_surname('desc')).to eq([michael, john])
+      end
+    end
+  end
+
+  describe '.by_email' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        john = create(:user, :email => 'John@fakemail.com')
+        michael = create(:user, :email => 'Michael@fakemail.com')
+
+        expect(User.by_email('asc')).to eq([john, michael])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        john = create(:user, :email => 'John@fakemail.com')
+        michael = create(:user, :email => 'Michael@fakemail.com')
+
+        expect(User.by_email('desc')).to eq([michael, john])
+      end
+    end
+  end
+
+  describe '.by_role' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        admin = create(:user, :role => UserRole.admin)
+        user = create(:user, :role => UserRole.user)
+
+        expect(User.by_role('asc')).to eq([admin, user])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        admin = create(:user, :role => UserRole.admin)
+        user = create(:user, :role => UserRole.user)
+
+        expect(User.by_role('desc')).to eq([user, admin])
+      end
+    end
+  end
+
+  describe '.by_subscription' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        nonsubscribed = create(:user, :subscription => false)
+        subscribed = create(:user, :subscription => true)
+
+        expect(User.by_subscription('asc')).to eq([nonsubscribed, subscribed])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        nonsubscribed = create(:user, :subscription => false)
+        subscribed = create(:user, :subscription => true)
+
+        expect(User.by_subscription('desc')).to eq([subscribed, nonsubscribed])
+      end
+    end
+  end
   
 end

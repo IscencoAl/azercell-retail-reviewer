@@ -97,4 +97,44 @@ RSpec.describe City, :type => :model do
       end
     end
   end
+
+  describe '.by_name' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        london = create(:city, :name => 'London')
+        new_york = create(:city, :name => 'New York')
+
+        expect(City.by_name('asc')).to eq([london, new_york])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        london = create(:city, :name => 'London')
+        new_york = create(:city, :name => 'New York')
+
+        expect(City.by_name('desc')).to eq([new_york, london])
+      end
+    end
+  end
+
+  describe '.by_region' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        center = create(:city, :region => create(:region, {:name => 'Center'}))
+        west = create(:city, :region => create(:region, {:name => 'West'}))
+
+        expect(City.by_region('asc')).to eq([center, west])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        center = create(:city, :region => create(:region, {:name => 'Center'}))
+        west = create(:city, :region => create(:region, {:name => 'West'}))
+
+        expect(City.by_region('desc')).to eq([west, center])
+      end
+    end
+  end
 end
