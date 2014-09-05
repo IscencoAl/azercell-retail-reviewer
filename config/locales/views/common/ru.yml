@@ -3,6 +3,7 @@ ru:
     common:
       show: "Просмотреть"
       edit: "Изменить"
+      restore: "Восстановить"
       delete: "Удалить"
       save: "Сохранить"
       cancel: "Отмена"

@@ -3,6 +3,7 @@ en:
     common:
       show: "Show"
       edit: "Edit"
+      restore: "Restore"
       delete: "Delete"
       save: "Save"
       cancel: "Cancel"
