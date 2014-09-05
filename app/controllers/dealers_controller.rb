@@ -2,9 +2,11 @@ class DealersController < ApplicationController
   load_and_authorize_resource
   skip_load_resource :only => [:restore]
 
+  helper_method :sorting_params
+
   # GET /dealers
   def index
-    @dealers = Dealer.filter(filtering_params)
+    @dealers = Dealer.filter(filtering_params).sort(sorting_params)
 
   end
 
@@ -64,6 +66,10 @@ class DealersController < ApplicationController
     end
 
     def filtering_params
-      params.fetch(:filter, {}).permit(:name, :contact_name, :phone_number, :email, :is_deleted)
+      params.fetch(:filter, {}).permit(:name, :contact_name, :is_deleted)
+    end
+
+    def sorting_params
+      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
     end
 end
