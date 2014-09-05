@@ -3,6 +3,7 @@ ru:
     attributes:
       region:
         name: "Название"
+        is_deleted: "Удаленные"
 
     errors:
       models:

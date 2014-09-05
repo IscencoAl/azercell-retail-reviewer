@@ -3,6 +3,7 @@ class CitiesController < ApplicationController
   
   # GET /cities
   def index
+    @cities = City.filter(filtering_params)
   end
 
 
@@ -16,8 +17,6 @@ class CitiesController < ApplicationController
 
   # POST /cities
   def create
-    @city = City.new(city_params)
-
     if @city.save
       flash[:success] = t('controllers.cities.created', name: @city.name)
       redirect_to cities_url
@@ -48,5 +47,9 @@ class CitiesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def city_params
       params.require(:city).permit(:name, :region_id, :is_deleted)
+    end
+
+    def filtering_params
+      params.fetch(:filter, {}).permit(:name, :region, :is_deleted)
     end
 end

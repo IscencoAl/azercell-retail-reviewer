@@ -29,4 +29,59 @@ RSpec.describe Region, :type => :model do
     end    
   end
 
+  describe '.with_name' do
+    context 'when part of name exists' do
+      it 'returns corresponding region' do
+        region = create(:region, :name => 'John')
+
+        ['oh', 'oHn', 'joh', 'John'].each do |name_part|
+          expect(Region.with_name(name_part)).to eq([region])
+        end
+      end
+    end
+
+    context 'when part of name is absent' do
+      it 'returns empty result' do
+        region = create(:region, :name => 'John')
+
+        ['a', 'on', 'jh', 'Johns'].each do |name_part|
+          expect(Region.with_name(name_part)).to eq([])
+        end
+      end
+    end
+  end
+
+  describe '.with_is_deleted' do
+    context 'when true' do
+      it 'returns deleted user' do
+        region = create(:region, :deleted)
+
+        expect(Region.with_is_deleted(true)).to eq([region])
+      end
+    end
+
+    context 'when is_deleted is nil' do
+      it 'returns empty result' do
+        region = create(:region, :deleted)
+
+        expect(Region.with_is_deleted(nil)).to eq([])
+      end
+    end
+
+    context 'when is_deleted is ""' do
+      it 'returns empty result' do
+        region = create(:region, :deleted)
+
+        expect(Region.with_is_deleted("")).to eq([])
+      end
+    end
+
+    context 'when is_deleted is false' do
+      it 'returns empty result' do
+        region = create(:region, :deleted)
+
+        expect(Region.with_is_deleted(false)).to eq([])
+      end
+    end
+  end
 end

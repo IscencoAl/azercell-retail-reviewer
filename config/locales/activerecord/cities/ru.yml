@@ -4,6 +4,7 @@ ru:
       city:
         name: "Название"
         region: "Регион"
+        is_deleted: "Удаленные"
 
     errors:
       models:

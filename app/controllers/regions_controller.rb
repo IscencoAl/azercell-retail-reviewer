@@ -3,6 +3,7 @@ class RegionsController < ApplicationController
 
   # GET /regions
   def index 
+    @regions = Region.filter(filtering_params)
   end
 
 
@@ -16,8 +17,6 @@ class RegionsController < ApplicationController
 
   # POST /regions
   def create
-    @region = Region.new(region_params)
-
     if @region.save
       flash[:success] = t('controllers.regions.created', name: @region.name)
       redirect_to regions_url
@@ -46,6 +45,10 @@ class RegionsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def region_params
-      params.require(:region).permit(:name, :is_deleted)
+      params.require(:region).permit(:name)
+    end
+
+    def filtering_params
+      params.fetch(:filter, {}).permit(:name, :is_deleted)
     end
 end

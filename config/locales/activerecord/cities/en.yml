@@ -4,3 +4,4 @@ en:
       city:
         name: "Name"
         region: "Region"
+        is_deleted: "Deleted"
