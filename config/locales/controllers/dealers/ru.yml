@@ -1,0 +1,7 @@
+ru:
+  controllers:
+    dealers:
+      created: "Дилер '%{name}' был успешно создан"
+      updated: "Дилер '%{name}' был успешно обновленён"
+      destroyed: "Дилер '%{name}' был успешно удален"
+      restored: " Дилер '%{name}' был успешно восстановлен"

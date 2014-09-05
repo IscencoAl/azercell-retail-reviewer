@@ -1,0 +1,7 @@
+en:
+  views:
+    dealers:
+      list: "Dealers"
+      edit: "Edit dealer '%{name}'"
+      new: "Add dealer"
+    

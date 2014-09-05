@@ -14,6 +14,16 @@ RSpec.describe RegionsController, :type => :controller do
       expect(assigns(:regions)).to eq([region])
     end
 
+    it "filters region" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      region = create(:region, :name => "West")
+
+      get :index, {:filter => {:name => "West"}}
+      expect(assigns(:regions)).to eq([region])
+    end
+
     it "renders the index view" do
       user = create(:user, :admin)
       sign_in user

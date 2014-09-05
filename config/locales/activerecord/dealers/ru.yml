@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    attributes:
+      dealer:
+        name: "Название"
+        contact_name: "Имя контакта"
+        phone_number: "Телефонный номер"
+        email: "Email"
+        is_deleted: "Удаленные"
+
+    errors:
+      models:
+        dealer:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              taken: "уже занято"
+          

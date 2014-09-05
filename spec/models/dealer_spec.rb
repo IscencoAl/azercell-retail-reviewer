@@ -1,0 +1,111 @@
+require 'rails_helper'
+require 'modules/soft_delete_spec'
+
+RSpec.describe Dealer, :type => :model do
+
+  it_behaves_like "soft deletable", :dealer, Dealer
+
+  describe "factory" do
+    it "is valid" do
+      dealer = create(:dealer)
+
+      expect(dealer).to be_valid
+    end
+
+    context "trait 'deleted'" do
+      it "is valid" do
+        dealer = create(:dealer, :deleted)
+
+        expect(dealer).to be_valid
+      end
+    end
+    
+    context 'trait "invalid"' do
+      it 'has an invalid factory' do
+        dealer = build(:dealer, :invalid)
+
+        expect(dealer).not_to be_valid
+      end
+    end    
+  end
+
+  describe '.with_name' do
+    context 'when part of name exists' do
+      it 'returns corresponding dealer' do
+        dealer = create(:dealer, :name => 'John')
+
+        ['oh', 'oHn', 'joh', 'John'].each do |name_part|
+          expect(Dealer.with_name(name_part)).to eq([dealer])
+        end
+      end
+    end
+
+    context 'when part of name is absent' do
+      it 'returns empty result' do
+        dealer = create(:dealer, :name => 'John')
+
+        ['a', 'on', 'jh', 'Johns'].each do |name_part|
+          expect(Dealer.with_name(name_part)).to eq([])
+        end
+      end
+    end
+  end
+
+  describe '.with_contact_name' do
+    context 'when part of contact_name exists' do
+      it 'returns corresponding dealer' do
+        dealer = create(:dealer, :contact_name => 'John')
+
+        ['oh', 'oHn', 'joh', 'John'].each do |cont_name|
+          expect(Dealer.with_contact_name(cont_name)).to eq([dealer])
+        end
+      end
+    end
+
+    context 'when part of name is absent' do
+      it 'returns empty result' do
+        dealer = create(:dealer, :contact_name => 'John')
+
+        ['a', 'on', 'jh', 'Johns'].each do |cont_name|
+          expect(Dealer.with_contact_name(cont_name)).to eq([])
+        end
+      end
+    end
+  end
+
+
+  describe '.with_is_deleted' do
+    context 'when true' do
+      it 'returns deleted dealer' do
+        dealer = create(:dealer, :deleted)
+
+        expect(Dealer.with_is_deleted(true)).to eq([dealer])
+      end
+    end
+
+    context 'when is_deleted is nil' do
+      it 'returns empty result' do
+        dealer = create(:dealer, :deleted)
+
+        expect(Dealer.with_is_deleted(nil)).to eq([])
+      end
+    end
+
+    context 'when is_deleted is ""' do
+      it 'returns empty result' do
+        dealer = create(:dealer, :deleted)
+
+        expect(Dealer.with_is_deleted("")).to eq([])
+      end
+    end
+
+    context 'when is_deleted is false' do
+      it 'returns empty result' do
+        dealer = create(:dealer, :deleted)
+
+        expect(Dealer.with_is_deleted(false)).to eq([])
+      end
+    end
+  end
+  
+end

@@ -14,6 +14,16 @@ RSpec.describe CitiesController, :type => :controller do
       expect(assigns(:cities)).to eq([city])
     end
 
+    it "filters city" do
+      admin = create(:user, :admin)
+      sign_in admin
+
+      city = create(:city, :name => "West")
+
+      get :index, {:filter => {:name => "West"}}
+      expect(assigns(:cities)).to eq([city])
+    end
+
     it "renders the index view" do
       user = create(:user, :admin)
       sign_in user

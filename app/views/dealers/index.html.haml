@@ -1,0 +1,41 @@
+%h2.text-center= t('views.dealers.list')
+%br
+
+=render 'filter'
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th= t('activerecord.attributes.dealer.name')
+              %th= t('activerecord.attributes.dealer.contact_name')
+              %th= t('activerecord.attributes.dealer.phone_number')
+              %th= t('activerecord.attributes.dealer.email')
+              %th.text-right
+                - if can?(:create, Dealer)
+                  %a.btn.btn-primary.btn-xs{:href => new_dealer_path}= t('views.common.add')
+
+          %tbody
+            -if @dealers.any?
+              - @dealers.each do |dealer|
+                %tr
+                  %td= dealer.name
+                  %td= dealer.contact_name
+                  %td= dealer.phone_number
+                  %td= dealer.email
+                  %td.text-right
+                    .btn-toolbar
+                      - if can?(:restore, dealer)
+                        = link_to t('views.common.restore'), restore_dealer_path(dealer), :class => 'btn btn-primary btn-xs'
+                      - if can?(:update, dealer)
+                        = link_to t('views.common.edit'), edit_dealer_path(dealer), :class => 'btn btn-primary btn-xs'
+                      - if can?(:destroy, dealer)
+                        = link_to t('views.common.delete'), dealer, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+
+            - else 
+              %tr
+                %td{:colspan => 5}
+                  %h4.text-center= t('views.common.empty')
