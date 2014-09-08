@@ -1,0 +1,20 @@
+ru:
+  activerecord:
+    attributes:
+      shop_type:
+        name: "Название"
+        abbreviation: "Аббревиатура"
+        is_deleted: "Удаленные"
+
+    errors:
+      models:
+        shop_type:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              taken: "уже занято"
+            abbreviation:
+              blank: "не может быть пустым"
+              taken: "уже занято"
+
+

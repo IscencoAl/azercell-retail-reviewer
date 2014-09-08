@@ -1,0 +1,38 @@
+%h2.text-center= t('views.shop_types.list')
+%br
+
+=render 'filter'
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th= t('activerecord.attributes.shop_type.name')
+              %th= t('activerecord.attributes.shop_type.abbreviation')
+              %th.text-right
+                - if can?(:create, ShopType)
+                  = link_to t('views.common.add'), new_shop_type_path, :class =>'btn btn-xs btn-primary'
+          %tbody
+            -if @shop_types.any?
+              - @shop_types.each do |shop_type|
+                %tr
+                  %td= shop_type.name
+                  %td= shop_type.abbreviation
+                  %td.text-right
+                    .btn-toolbar
+                      -if can?(:restore, shop_type)
+                        = link_to t('views.common.restore'), restore_shop_type_path(shop_type), :class => 'btn btn-primary btn-xs'
+                      -if can?(:update, shop_type)
+                        = link_to t('views.common.edit'), edit_shop_type_path(shop_type), :class => 'btn btn-xs btn-primary'
+                      -if can?(:destroy, shop_type)
+                        = link_to t('views.common.delete'), shop_type, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+            -else
+              %tr
+                %td{:colspan => 3}
+                  %h4.text-center= t('views.common.empty')
+
+
+

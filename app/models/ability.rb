@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new
     alias_action :create, :read, :update, :destroy, :to => :crud
     
     if user.admin?
@@ -14,6 +15,9 @@ class Ability
 
       can :crud, City, :is_deleted => false
       can :restore, City, :is_deleted => true
+
+      can :crud, ShopType, :is_deleted => false
+      can :restore, ShopType, :is_deleted => true
 
 
       can :crud, Region, :is_deleted => false
