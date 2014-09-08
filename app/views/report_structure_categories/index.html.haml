@@ -1,0 +1,19 @@
+%h1 Listing report_structure_categories
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @report_structure_categories.each do |report_structure_category|
+    %tr
+      %td= report_structure_category.name
+      %td= link_to 'Show', report_structure_category
+      %td= link_to 'Edit', edit_report_structure_category_path(report_structure_category)
+      %td= link_to 'Destroy', report_structure_category, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Report structure category', new_report_structure_category_path
