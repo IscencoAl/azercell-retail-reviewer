@@ -10,6 +10,11 @@
 UserRole.create(:name => 'admin')
 UserRole.create(:name => 'user')
 
+# Create report element types
+ReportStructureElementType.create(:name => 'mark')
+ReportStructureElementType.create(:name => 'check')
+ReportStructureElementType.create(:name => 'input')
+
 # Create user
 # User.create(:name => 'Admin', :surname => 'Magnetsoft', :email => 'admin@magnetsoft.md',
   # :password => 'admin@magnetsoft.md', :password_confirmation => 'admin@magnetsoft.md',
