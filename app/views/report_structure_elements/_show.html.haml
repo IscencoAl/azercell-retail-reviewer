@@ -10,7 +10,9 @@
       %span= @element.weight
 
     .col-sm-2
-      %span= @element.shop_types
+      .btn-group{:data => {:toggle => 'buttons'}}
+        - ShopType.all.each do |t|
+          %a.btn.btn-default{:href => t.abbreviation, :class => ("btn-primary" if @element.shop_types.include?(t.abbreviation)), :disabled => 'disabled'}= t.abbreviation
 
     .col-sm-2
       .btn-toolbar.text-right

@@ -203,4 +203,17 @@ function handleReportElements($elem){
     }
   })
 
+  // report_structure_element[shop_types]
+  $elem.find('.shoptypes-control').on('click', 'a.btn', function(e){
+    var $btn = $(this),
+        $input = $btn.siblings('input'),
+        value = $input.val(),
+        abbr = $btn.attr('href'),
+        active = $btn.hasClass('active');
+
+    value = active ? value.replace(abbr, '') : value + abbr;
+
+    $input.val(value);
+  })
+
 }

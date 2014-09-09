@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908101016) do
+ActiveRecord::Schema.define(version: 20140908143338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,23 @@ ActiveRecord::Schema.define(version: 20140908101016) do
     t.string  "abbreviation"
     t.boolean "is_deleted"
   end
+
+  create_table "shops", force: true do |t|
+    t.integer "shop_type_id"
+    t.integer "city_id"
+    t.string  "address"
+    t.decimal "latitude",       precision: 9, scale: 6
+    t.decimal "longitude",      precision: 9, scale: 6
+    t.integer "dealer_id"
+    t.decimal "square_footage", precision: 8, scale: 2
+    t.integer "user_id"
+    t.boolean "is_deleted"
+  end
+
+  add_index "shops", ["city_id"], name: "index_shops_on_city_id", using: :btree
+  add_index "shops", ["dealer_id"], name: "index_shops_on_dealer_id", using: :btree
+  add_index "shops", ["shop_type_id"], name: "index_shops_on_shop_type_id", using: :btree
+  add_index "shops", ["user_id"], name: "index_shops_on_user_id", using: :btree
 
   create_table "user_roles", force: true do |t|
     t.string "name"

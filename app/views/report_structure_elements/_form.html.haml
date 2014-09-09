@@ -3,7 +3,12 @@
     = f.input :name, :wrapper_html => {:class => 'col-sm-4'}, :label_html => {:class => 'sr-only'}
     = f.association :type, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}, :prompt => false
     = f.input :weight, :as => :select, :collection => 1..10, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}, :prompt => false
-    = f.input :shop_types, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}
+
+    .col-sm-2
+      .shoptypes-control.btn-group{:data => {:toggle => 'buttons'}}
+        - ShopType.all.each do |t|
+          %a.btn.btn-default{:href => t.abbreviation, :class => ("active" if @element.shop_types and @element.shop_types.include?(t.abbreviation))}= t.abbreviation
+        = f.input_field :shop_types, :as => :hidden
 
     = f.input :report_structure_category_id, :as => :hidden
 
