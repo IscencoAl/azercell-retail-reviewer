@@ -1,0 +1,7 @@
+en:
+  views:
+    shop_types:
+      list: "Shop Types"
+      edit: "Edit shop type '%{name}'"
+      new: "Add Shop Type"
+    

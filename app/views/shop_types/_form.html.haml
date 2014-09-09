@@ -1,0 +1,8 @@
+= simple_form_for @shop_type, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+
+  = f.input :name
+  = f.input :abbreviation
+
+  .btn-toolbar.text-center
+    = f.button :submit, t('views.common.save')
+    %a.btn.btn-default{:href => shop_types_path}= t('views.common.cancel')

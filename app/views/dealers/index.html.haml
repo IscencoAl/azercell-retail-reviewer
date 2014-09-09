@@ -10,8 +10,8 @@
         %table.table.table-condensed.table-striped.table-vcentered
           %thead
             %tr
-              %th= t('activerecord.attributes.dealer.name')
-              %th= t('activerecord.attributes.dealer.contact_name')
+              %th= sortable(:name, t('activerecord.attributes.dealer.name'))
+              %th= sortable(:contact_name, t('activerecord.attributes.dealer.contact_name'))
               %th= t('activerecord.attributes.dealer.phone_number')
               %th= t('activerecord.attributes.dealer.email')
               %th.text-right

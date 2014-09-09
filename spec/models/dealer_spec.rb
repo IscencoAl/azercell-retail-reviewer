@@ -107,5 +107,45 @@ RSpec.describe Dealer, :type => :model do
       end
     end
   end
+
+  describe '.by_name' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        center = create(:dealer, :name => 'Center')
+        west = create(:dealer, :name => 'West')
+
+        expect(Dealer.by_name('asc')).to eq([center, west])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        center = create(:dealer, :name => 'Center')
+        west = create(:dealer, :name => 'West')
+
+        expect(Dealer.by_name('desc')).to eq([west, center])
+      end
+    end
+  end
+
+  describe '.by_contact_name' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        center = create(:dealer, :contact_name => 'Center')
+        west = create(:dealer, :contact_name => 'West')
+
+        expect(Dealer.by_contact_name('asc')).to eq([center, west])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        center = create(:dealer, :contact_name => 'Center')
+        west = create(:dealer, :contact_name => 'West')
+
+        expect(Dealer.by_contact_name('desc')).to eq([west, center])
+      end
+    end
+  end
   
 end

@@ -4,7 +4,7 @@ module ApplicationHelper
     direction = "asc"
 
     if sorting_params[:col] == column.to_s
-      direction = (sorting_params[:dir] == "asc") ? "desc" : "asc"  
+      direction = (sorting_params[:dir] == "asc") ? "desc" : "asc"
       title += "#{direction == 'asc' ? '▲' : '▼'}"
     end
 

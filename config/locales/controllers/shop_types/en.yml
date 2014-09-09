@@ -1,0 +1,7 @@
+en:
+  controllers:
+    shop_types:
+      created: "Shop type '%{name}' was successfully created"
+      updated: "Shop type '%{name}' was successfully updated"
+      destroyed: "Shop type '%{name}' was successfully destroyed"
+      restored: "Shop type '%{name}' was successfully restored"

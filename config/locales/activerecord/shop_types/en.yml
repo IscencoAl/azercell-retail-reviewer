@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    attributes:
+      shop_type:
+        name: "Name"
+        abbreviation: "Abbreviation"
+        is_deleted: "Deleted"
