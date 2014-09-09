@@ -12,7 +12,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :label, class: 'control-label'
 
-    b.use :input, class: 'form-control'
+    b.use :input, class: 'form-control', autocomplete: :off
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
@@ -60,7 +60,7 @@ SimpleForm.setup do |config|
     b.use :label, class: 'col-sm-4 control-label'
 
     b.wrapper tag: 'div', class: 'col-sm-4' do |ba|
-      ba.use :input, class: 'form-control'
+      ba.use :input, class: 'form-control', autocomplete: :off
     end
 
     b.wrapper tag: 'div', class: 'col-sm-4' do |ba|
@@ -121,7 +121,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :label, class: 'sr-only'
 
-    b.use :input, class: 'form-control'
+    b.use :input, class: 'form-control', autocomplete: :off
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end

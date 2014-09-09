@@ -1,8 +1,11 @@
-= simple_form_for(@report_structure_category) do |f|
-  = f.error_notification
+= simple_form_for(@category, :html => {:role => 'form'}, :wrapper => 'vertical_form') do |f|
+  .row
+    = f.input :name, :wrapper_html => {:class => 'col-sm-10'}, :label_html => {:class => 'sr-only'}
 
-  .form-inputs
-    = f.input :name
+    .col-sm-2
+      .btn-toolbar.text-right
+        %a.btn.btn-primary{:href => "javascript:;", :data => {:savecategory => true}}
+          %span.glyphicon.glyphicon-ok
 
-  .form-actions
-    = f.button :submit
+        %a.btn.btn-default{:href => @category.id ? report_structure_category_path(@category) : '', :data => {:showcategory => true}}
+          %span.glyphicon.glyphicon-minus

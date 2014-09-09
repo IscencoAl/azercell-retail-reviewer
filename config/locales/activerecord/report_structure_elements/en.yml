@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    models:
+      report_structure_element: "Report Structure Element"
+
+    attributes:
+      report_structure_element:
+        name: "Name"
+        type: "Type"
+        category: "Category"
+        weight: "Weight"
+        shop_types: "Shop Types"

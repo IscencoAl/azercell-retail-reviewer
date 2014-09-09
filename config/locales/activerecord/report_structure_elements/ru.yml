@@ -1,0 +1,27 @@
+ru:
+  activerecord:
+    models:
+      report_structure_element: "Элемент отчета"
+
+    attributes:
+      report_structure_element:
+        name: "Название"
+        type: "Тип"
+        category: "Категория"
+        weight: "Вес"
+        shop_types: "Типы магазинов"
+
+    errors:
+      models:
+        report_structure_element:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+            type:
+              blank: "не может быть пустой"
+            category:
+              blank: "не может быть пустым"
+            weight:
+              blank: "не может быть пустым"
+            shop_types:
+              blank: "не может быть пустым"

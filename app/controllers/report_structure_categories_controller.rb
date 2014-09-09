@@ -1,58 +1,79 @@
 class ReportStructureCategoriesController < ApplicationController
-  before_action :set_report_structure_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /report_structure_categories
   def index
-    @report_structure_categories = ReportStructureCategory.all
+    @categories = ReportStructureCategory.all
   end
 
   # GET /report_structure_categories/1
   def show
+    if request.xhr?
+      respond_to do |format|
+        format.html { render :partial => 'header' }
+      end
+    end
   end
 
   # GET /report_structure_categories/new
   def new
-    @report_structure_category = ReportStructureCategory.new
+    @category = ReportStructureCategory.new
+
+    if request.xhr?
+      respond_to do |format|
+        format.html { render :partial => 'new' }
+      end
+    end
   end
 
   # GET /report_structure_categories/1/edit
   def edit
+    if request.xhr?
+      respond_to do |format|
+        format.html { render :partial => 'form' }
+      end
+    end
   end
 
   # POST /report_structure_categories
   def create
-    @report_structure_category = ReportStructureCategory.new(report_structure_category_params)
+    @category = ReportStructureCategory.new(category_params)
 
-    if @report_structure_category.save
-      redirect_to @report_structure_category, notice: 'Report structure category was successfully created.'
-    else
-      render :new
+    if request.xhr?
+      if @category.save
+        render :partial => 'header'
+      else
+        render :partial => 'form'
+      end
     end
   end
 
   # PATCH/PUT /report_structure_categories/1
   def update
-    if @report_structure_category.update(report_structure_category_params)
-      redirect_to @report_structure_category, notice: 'Report structure category was successfully updated.'
-    else
-      render :edit
+    if request.xhr?
+      if @category.update(category_params)
+        redirect_to @category
+      else
+        render :partial => 'form'
+      end
     end
   end
 
   # DELETE /report_structure_categories/1
   def destroy
-    @report_structure_category.destroy
-    redirect_to report_structure_categories_url, notice: 'Report structure category was successfully destroyed.'
+    @category.soft_delete
+
+    render :nothing => true
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_report_structure_category
-      @report_structure_category = ReportStructureCategory.find(params[:id])
+    def set_category
+      @category = ReportStructureCategory.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def report_structure_category_params
+    def category_params
       params.require(:report_structure_category).permit(:name)
     end
 end

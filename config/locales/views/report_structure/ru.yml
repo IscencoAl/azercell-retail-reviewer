@@ -1,0 +1,5 @@
+ru:
+  views:
+    report_structure:
+      index: "Структура отчетов"
+      add_category: "Добавить категорию"

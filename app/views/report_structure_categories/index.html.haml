@@ -1,19 +1,19 @@
-%h1 Listing report_structure_categories
+= javascript_include_tag "report_structure"
 
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
+.row
+  .col-lg-offset-1.col-lg-7.col-sm-9
+    %h2= t('views.report_structure.index')
 
-  - @report_structure_categories.each do |report_structure_category|
-    %tr
-      %td= report_structure_category.name
-      %td= link_to 'Show', report_structure_category
-      %td= link_to 'Edit', edit_report_structure_category_path(report_structure_category)
-      %td= link_to 'Destroy', report_structure_category, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  .col-sm-3
+    %br
+    .btn-toolbar.text-right
+      %a.btn.btn.btn-primary{:href => new_report_structure_category_path, :data => {:newcategory => true}}= t('views.report_structure.add_category')
 
 %br
 
-= link_to 'New Report structure category', new_report_structure_category_path
+.row
+  #report_structure.col-lg-offset-1.col-lg-10
+
+    - @categories.each do |cat|
+      - @category = cat
+      = render :partial => 'report_structure_categories/show'

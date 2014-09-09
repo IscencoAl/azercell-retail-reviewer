@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    models:
+      report_structure_category: "Report Structure Category"
+
+    attributes:
+      report_structure_category:
+        name: "Name"

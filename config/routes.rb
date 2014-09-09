@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     get '/regions/:id/regions', :to => 'regions#restore', :id => /\d+/, :as => 'restore_region'
 
     resources :report_structure_categories
+    resources :report_structure_elements
+    get '/report_structure', :to => 'report_structure_categories#index', :as => 'report_structure'
 
     devise_for :users
     resources :users

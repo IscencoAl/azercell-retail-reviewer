@@ -1,0 +1,16 @@
+= simple_form_for(@element, :html => {:role => 'form'}, :wrapper => 'vertical_form') do |f|
+  .row
+    = f.input :name, :wrapper_html => {:class => 'col-sm-4'}, :label_html => {:class => 'sr-only'}
+    = f.association :type, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}, :prompt => false
+    = f.input :weight, :as => :select, :collection => 1..10, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}, :prompt => false
+    = f.input :shop_types, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}
+
+    = f.input :report_structure_category_id, :as => :hidden
+
+    .col-sm-2
+      .btn-toolbar.text-right
+        %a.btn.btn-primary{:href => "javascript:;", :data => {:saveelement => true}}
+          %span.glyphicon.glyphicon-ok
+
+        %a.btn.btn-default{:href => @element.id ? report_structure_element_path(@element) : '', :data => {:showelement => true}}
+          %span.glyphicon.glyphicon-minus

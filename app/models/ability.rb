@@ -15,6 +15,7 @@ class Ability
       can :restore, Region, :is_deleted => true
 
       can :crud, ReportStructureCategory, :is_deleted => false
+      can :crud, ReportStructureElement
 
       can :crud, User, :is_deleted => false
       can :restore, User, :is_deleted => true

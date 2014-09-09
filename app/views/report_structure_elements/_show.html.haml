@@ -1,0 +1,21 @@
+.element.list-group-item
+  .row
+    .col-sm-4
+      %span= @element.name
+
+    .col-sm-2
+      %span= @element.type.name
+
+    .col-sm-2
+      %span= @element.weight
+
+    .col-sm-2
+      %span= @element.shop_types
+
+    .col-sm-2
+      .btn-toolbar.text-right
+        %a.btn.btn-primary{:href => edit_report_structure_element_path(@element), :data => {:editelement => true}}
+          %span.glyphicon.glyphicon-edit
+
+        %a.btn.btn-danger{:href => report_structure_element_path(@element), :data => {:deleteelement => true, :confirmation => t('views.common.confirm')}}
+          %span.glyphicon.glyphicon-remove

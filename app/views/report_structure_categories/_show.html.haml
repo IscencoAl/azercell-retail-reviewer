@@ -1,0 +1,8 @@
+.category-container.panel.panel-default
+  .category-header.panel-heading
+    = render :partial => 'report_structure_categories/header'
+
+  .element-list.list-group
+    - @category.elements.each do |elem|
+      - @element = elem
+      = render :partial => 'report_structure_elements/show'
