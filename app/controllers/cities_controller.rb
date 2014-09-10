@@ -6,7 +6,7 @@ class CitiesController < ApplicationController
   
   # GET /cities
   def index
-    @cities = City.filter(filtering_params).sort(sorting_params)
+    @cities = City.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
 

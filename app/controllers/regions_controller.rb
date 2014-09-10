@@ -6,7 +6,7 @@ class RegionsController < ApplicationController
 
   # GET /regions
   def index 
-    @regions = Region.filter(filtering_params).sort(sorting_params)
+    @regions = Region.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
 
