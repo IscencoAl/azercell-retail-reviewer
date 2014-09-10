@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :shop_type do
-    name {Faker::Lorem.word}
-    abbreviation {["A", "B", "C", "D"].sample}
+    name { Faker::Lorem.word }
+    sequence(:abbreviation) { |n| "#{['A', 'B', 'C', 'D'].sample}#{n}" }
     is_deleted false
 
     trait :deleted do

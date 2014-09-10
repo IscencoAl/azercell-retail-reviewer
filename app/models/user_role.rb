@@ -10,4 +10,8 @@ class UserRole < ActiveRecord::Base
   def self.user
     find_by_name('user')
   end
+
+  def self.reviewer
+    find_by_name('reviewer')
+  end
 end

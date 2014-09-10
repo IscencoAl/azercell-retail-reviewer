@@ -9,6 +9,7 @@
 # Create user roles
 UserRole.create(:name => 'admin')
 UserRole.create(:name => 'user')
+UserRole.create(:name => 'reviewer')
 
 # Create report element types
 ReportStructureElementType.create(:name => 'mark')

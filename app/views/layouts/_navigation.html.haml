@@ -10,8 +10,9 @@
 
     #navbar-main.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li
-          %a{:href => report_structure_path}= t('views.navigation.report_structure')
+        - if can?(:change, :report_structure)
+          %li
+            %a{:href => report_structure_path}= t('views.navigation.report_structure')
 
         %li
           %a{:href => '#'}= t('views.navigation.reports')

@@ -15,8 +15,7 @@ class Ability
       can :crud, Region, :is_deleted => false
       can :restore, Region, :is_deleted => true
 
-      can :crud, ReportStructureCategory, :is_deleted => false
-      can :crud, ReportStructureElement
+      can :change, :report_structure
 
       can :crud, ShopType, :is_deleted => false
       can :restore, ShopType, :is_deleted => true
@@ -28,6 +27,17 @@ class Ability
     end
 
     if user.simple_user?
+      can :read, City
+
+      can :read, Dealer
+
+      can :read, Region
+
+      can :update, User, :id => user.id
+      can :read, User
+    end
+
+    if user.reviewer?
       can :read, City
 
       can :read, Dealer

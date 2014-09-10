@@ -3,6 +3,7 @@ class ReportStructureCategoriesController < ApplicationController
 
   # GET /report_structure_categories
   def index
+    authorize!(:change, :report_structure)
     @categories = ReportStructureCategory.all
   end
 
