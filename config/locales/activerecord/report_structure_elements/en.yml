@@ -5,8 +5,8 @@ en:
 
     attributes:
       report_structure_element:
-        name: "Name"
+        name: "Question"
         type: "Type"
         category: "Category"
         weight: "Weight"
-        shop_types: "Shop Types"
+        shop_types: "Shop Categories"

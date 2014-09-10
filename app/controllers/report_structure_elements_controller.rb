@@ -21,7 +21,7 @@ class ReportStructureElementsController < ApplicationController
 
     if request.xhr?
       respond_to do |format|
-        format.html { render :partial => 'new' }
+        format.html { render :partial => 'form' }
       end
     end
   end
@@ -30,7 +30,7 @@ class ReportStructureElementsController < ApplicationController
   def edit
     if request.xhr?
       respond_to do |format|
-        format.html { render :partial => 'edit' }
+        format.html { render :partial => 'form' }
       end
     end
   end
@@ -43,7 +43,7 @@ class ReportStructureElementsController < ApplicationController
       if @element.save
         redirect_to @element
       else
-        render :partial => 'new'
+        render :partial => 'form'
       end
     end
   end
@@ -54,7 +54,7 @@ class ReportStructureElementsController < ApplicationController
       if @element.update(element_params)
         redirect_to @element
       else
-        render :partial => 'edit'
+        render :partial => 'form'
       end
     end
   end

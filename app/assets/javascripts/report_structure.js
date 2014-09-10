@@ -10,7 +10,7 @@ $(document).ready(function(){
       url: url,
       success: function(data){
         var $data = $(data)
-        $('#report_structure').append($data);
+        $('#report-structure').append($data);
         handleReportElements($data);
       }
     })

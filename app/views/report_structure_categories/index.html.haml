@@ -1,3 +1,5 @@
+= stylesheet_link_tag "report_structure"
+
 = javascript_include_tag "report_structure"
 
 .row
@@ -12,7 +14,7 @@
 %br
 
 .row
-  #report_structure.col-lg-offset-1.col-lg-10
+  #report-structure.col-lg-offset-1.col-lg-10
 
     - @categories.each do |cat|
       - @category = cat

@@ -1,23 +1,21 @@
-.element.list-group-item
-  .row
-    .col-sm-4
-      %span= @element.name
+.element.div-tr
 
-    .col-sm-2
-      %span= @element.type.name
+  .div-td.name= @element.name
 
-    .col-sm-2
-      %span= @element.weight
+  .div-td.type= @element.type.name
 
-    .col-sm-2
-      .btn-group{:data => {:toggle => 'buttons'}}
+  .div-td.weight= @element.weight
+
+  .div-td.shop-types
+    .btn-toolbar
+      .btn-group.btn-group-sm{:data => {:toggle => 'buttons'}}
         - ShopType.all.each do |t|
           %a.btn.btn-default{:href => t.abbreviation, :class => ("btn-primary" if @element.shop_types.include?(t.abbreviation)), :disabled => 'disabled'}= t.abbreviation
 
-    .col-sm-2
-      .btn-toolbar.text-right
-        %a.btn.btn-primary{:href => edit_report_structure_element_path(@element), :data => {:editelement => true}}
-          %span.glyphicon.glyphicon-edit
+  .div-td.controls.text-right
+    .btn-toolbar
+      %a.btn.btn-xs.btn-primary{:href => edit_report_structure_element_path(@element), :data => {:editelement => true}}
+        %span.glyphicon.glyphicon-edit
 
-        %a.btn.btn-danger{:href => report_structure_element_path(@element), :data => {:deleteelement => true, :confirmation => t('views.common.confirm')}}
-          %span.glyphicon.glyphicon-remove
+      %a.btn.btn-xs.btn-danger{:href => report_structure_element_path(@element), :data => {:deleteelement => true, :confirmation => t('views.common.confirm')}}
+        %span.glyphicon.glyphicon-remove

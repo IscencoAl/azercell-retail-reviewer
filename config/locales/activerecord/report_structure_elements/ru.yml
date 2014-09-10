@@ -5,11 +5,11 @@ ru:
 
     attributes:
       report_structure_element:
-        name: "Название"
+        name: "Вопрос"
         type: "Тип"
         category: "Категория"
         weight: "Вес"
-        shop_types: "Типы магазинов"
+        shop_types: "Категории магазинов"
 
     errors:
       models:

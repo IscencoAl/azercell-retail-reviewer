@@ -1,21 +1,26 @@
-= simple_form_for(@element, :html => {:role => 'form'}, :wrapper => 'vertical_form') do |f|
-  .row
-    = f.input :name, :wrapper_html => {:class => 'col-sm-4'}, :label_html => {:class => 'sr-only'}
-    = f.association :type, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}, :prompt => false
-    = f.input :weight, :as => :select, :collection => 1..10, :wrapper_html => {:class => 'col-sm-2'}, :label_html => {:class => 'sr-only'}, :prompt => false
+= simple_form_for(@element, :html => {:role => 'form', :class => 'element div-tr form-table'}, :wrapper => 'table_form') do |f|
+  .div-td.name
+    = f.input :name, :input_html => {:class => 'input-sm'}
 
-    .col-sm-2
-      .shoptypes-control.btn-group{:data => {:toggle => 'buttons'}}
+  .div-td.type
+    = f.association :type, :input_html => {:class => 'input-sm'}, :prompt => false
+
+  .div-td.weight
+    = f.input :weight, :as => :select, :collection => 0..10, :input_html => {:class => 'input-sm'}, :prompt => false
+
+  .div-td.shop-types
+    .btn-toolbar
+      .shoptypes-control.btn-group.btn-group-sm{:data => {:toggle => 'buttons'}}
         - ShopType.all.each do |t|
           %a.btn.btn-default{:href => t.abbreviation, :class => ("active" if @element.shop_types and @element.shop_types.include?(t.abbreviation))}= t.abbreviation
         = f.input_field :shop_types, :as => :hidden
 
-    = f.input :report_structure_category_id, :as => :hidden
+      = f.input :report_structure_category_id, :as => :hidden
 
-    .col-sm-2
-      .btn-toolbar.text-right
-        %a.btn.btn-primary{:href => "javascript:;", :data => {:saveelement => true}}
-          %span.glyphicon.glyphicon-ok
+  .div-td.controls.text-right
+    .btn-toolbar
+      %a.btn.btn-xs.btn-primary{:href => "javascript:;", :data => {:saveelement => true}}
+        %span.glyphicon.glyphicon-ok
 
-        %a.btn.btn-default{:href => @element.id ? report_structure_element_path(@element) : '', :data => {:showelement => true}}
-          %span.glyphicon.glyphicon-minus
+      %a.btn.btn-xs.btn-default{:href => @element.id ? report_structure_element_path(@element) : '', :data => {:showelement => true}}
+        %span.glyphicon.glyphicon-minus
