@@ -6,10 +6,7 @@ class ShopsController < ApplicationController
 
   # GET /shops
   def index
-    puts "!!!!!!!!!!!!!!!!!"
-    puts sorting_params
-    @shops = Shop.filter(filtering_params).sort(sorting_params)
-
+    @shops = Shop.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
   # GET /shops/1
