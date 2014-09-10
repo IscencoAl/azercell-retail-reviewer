@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      shop:
+        shop_type: "Shop type"
+        city: "City"
+        address: "Address"
+        latitude: "Latitude"
+        longitude: "Longitude"
+        dealer: "Dealer"
+        square_footage: "Square footage"
+        user: "Reviewer"
+        is_deleted: "Deleted"

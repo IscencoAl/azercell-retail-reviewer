@@ -1,0 +1,7 @@
+en:
+  views:
+    shops:
+      list: "Shops"
+      edit: "Edit shop '%{name}'"
+      new: "Add shop"
+    

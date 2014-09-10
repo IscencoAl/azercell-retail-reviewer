@@ -1,0 +1,42 @@
+%h2.text-center= t('views.shops.list')
+%br
+
+= render 'filter'
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th= sortable(:shop_type, t('activerecord.attributes.shop.shop_type'))
+              %th= t('activerecord.attributes.shop.address')
+              %th= sortable(:dealer, t('activerecord.attributes.shop.dealer'))
+              %th= sortable(:user, t('activerecord.attributes.shop.user'))
+              %th.text-right
+                - if can?(:create, Shop)
+                  = link_to t('views.common.add'), new_shop_path, :class =>'btn btn-xs btn-primary'
+
+          %tbody
+            - if @shops.any?
+              - @shops.each do |shop|
+                %tr
+                  %td= shop.shop_type.name
+                  %td= shop.full_address
+                  %td= shop.dealer.name
+                  %td= shop.user.name
+                  %td.text-right
+                    .btn-toolbar
+                      - if can?(:restore, shop)
+                        = link_to t('views.common.restore'), restore_shop_path(shop), :class => 'btn btn-primary btn-xs'
+                      - if can?(:update, shop)
+                        = link_to t('views.common.edit'), edit_shop_path(shop), :class => 'btn btn-xs btn-primary'
+                      - if can?(:destroy, shop)
+                        = link_to t('views.common.delete'), shop, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+            - else
+              %tr
+                %td{:colspan => 5}
+                  %h4.text-center= t('views.common.empty')
+
+    = paginate @shops

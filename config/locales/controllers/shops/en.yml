@@ -1,0 +1,7 @@
+en:
+  controllers:
+    shops:
+      created: "Shop '%{name}' was successfully created"
+      updated: "Shop '%{name}' was successfully updated"
+      destroyed: "Shop '%{name}' was successfully destroyed"
+      restored: "Shop '%{name}' was successfully restored"

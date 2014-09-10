@@ -6,6 +6,8 @@ class City < ActiveRecord::Base
   validates :name,  :presence => true, :uniqueness => true
   validates :region,  :presence => true
 
+  has_many :shops
+
   belongs_to :region
 
   scope :with_name, -> (name) { where("name ilike ?", "%#{name}%") }

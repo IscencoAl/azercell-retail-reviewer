@@ -16,6 +16,9 @@ class Ability
       can :crud, City, :is_deleted => false
       can :restore, City, :is_deleted => true
 
+      can :crud, Shop, :is_deleted => false
+      can :restore, Shop, :is_deleted => true
+
       can :crud, ShopType, :is_deleted => false
       can :restore, ShopType, :is_deleted => true
 
@@ -31,6 +34,7 @@ class Ability
 
       can :read, City
       
+      can :read, Shop
       can :read, Region
     end
 

@@ -24,7 +24,7 @@
             %li
               %a{:href => dealers_path}= t('views.navigation.dealers')
             %li
-              %a{:href => '#'}= t('views.navigation.shops')
+              %a{:href => shops_path}= t('views.navigation.shops')
             -if can?(:read, ShopType)
               %li
                 %a{:href => shop_types_path}= t('views.navigation.shop_types')

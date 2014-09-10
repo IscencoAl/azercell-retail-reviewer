@@ -1,0 +1,28 @@
+ru:
+  activerecord:
+    attributes:
+      shop:
+        shop_type: "Тип магазина"
+        city: "Город"
+        address: "Адрес"
+        latitude: "Широта"
+        longitude: "Долгота"
+        dealer: "Дилер"
+        square_footage: "Площадь"
+        user: "Обозреватель"
+        is_deleted: "Удаленные"
+
+    errors:
+      models:
+        shop:
+          attributes:
+            shop_type:
+              blank: "не может быть пустым"
+            city:
+                blank: "не может быть пустым"
+            address:
+                blank: "не может быть пустым"
+            dealer:
+                blank: "не может быть пустым"
+            user:
+                blank: "не может быть пустым"

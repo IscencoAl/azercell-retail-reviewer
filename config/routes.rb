@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
  
 
+  
+
   scope "(:locale)" do
     resources :cities
     get '/cities/:id/cities', :to => 'cities#restore', :id => /\d+/, :as => 'restore_city'
@@ -17,6 +19,9 @@ Rails.application.routes.draw do
     devise_for :users
     resources :users
     get '/users/:id/restore', :to => 'users#restore', :id => /\d+/, :as => 'restore_user'
+
+    resources :shops
+    get '/shops/:id/restore', :to => 'shops#restore', :id => /\d+/, :as => 'restore_shop'
 
     resources :shop_types
     get '/shop_types/:id/restore', :to => 'shop_types#restore', :id => /\d+/, :as => 'restore_shop_type'

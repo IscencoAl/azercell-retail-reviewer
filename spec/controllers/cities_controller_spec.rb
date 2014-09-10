@@ -181,7 +181,7 @@ RSpec.describe CitiesController, :type => :controller do
         user = create(:user, :admin)
         sign_in user
 
-         city = create(:city)
+        city = create(:city)
 
         put :update, {:id => city.to_param, :city => FactoryGirl.attributes_for(:city, :invalid)}
         expect(response).to render_template(:edit)

@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true
   validates :role, :presence => true
 
+  has_many :shops
+
   belongs_to :role, :class_name => 'UserRole', :foreign_key => :user_role_id
 
   scope :with_name, -> (name) { where("name ilike ?", "%#{name}%") }
