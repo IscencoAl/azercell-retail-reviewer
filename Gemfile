@@ -36,8 +36,11 @@ gem 'rspec-rails', '3.0.2', :group => [:development, :test]
 gem 'factory_girl_rails', '4.4.1', :group => [:development, :test]
 gem 'faker', '1.4.3', :group => [:development, :test]
 
-# Abilities
+# Use cancancan to define abilities
 gem 'cancancan', '~> 1.9'
+
+# Use Kaminari for pagination
+gem 'kaminari', '0.16.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'

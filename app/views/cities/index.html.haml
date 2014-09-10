@@ -1,7 +1,7 @@
 %h2.text-center= t('views.cities.list')
 %br
 
-=render 'filter'
+= render 'filter'
 
 .row
   .col-lg-offset-1.col-lg-10
@@ -35,8 +35,4 @@
                 %td{:colspan => 3}
                   %h4.text-center= t('views.common.empty')
 
-
-
-
-
-
+    = paginate @cities

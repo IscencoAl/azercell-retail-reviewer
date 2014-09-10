@@ -1,0 +1,13 @@
+.row
+  .col-sm-9
+    %h4= @category.name
+  .col-sm-3
+    .btn-toolbar.text-right
+      %a.btn.btn-sm.btn-primary{:href => "#{new_report_structure_element_path}?report_structure_element[report_structure_category_id]=#{@category.id}", :data => {:newelement => true}}
+        %span.glyphicon.glyphicon-plus
+        
+      %a.btn.btn-sm.btn-primary{:href => edit_report_structure_category_path(@category), :data => {:editcategory => true}}
+        %span.glyphicon.glyphicon-edit
+
+      %a.btn.btn-sm.btn-danger{:href => report_structure_category_path(@category), :data => {:deletecategory => true, :confirmation => t('views.common.confirm')}}
+        %span.glyphicon.glyphicon-remove

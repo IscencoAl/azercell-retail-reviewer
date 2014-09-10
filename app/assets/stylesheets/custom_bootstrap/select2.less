@@ -35,7 +35,6 @@
   border-radius: 0 0 @border-radius-base @border-radius-base;
   background: @input-bg;
   background-image: none;
-  border-top: 1px solid @input-border-focus;
 }
 
 .form-control.select2-container .select2-choices {
@@ -59,6 +58,25 @@
   border-color: @input-border-focus;
 }
 
+// Sizing
+.input-sm.form-control.select2-container {
+  height: 2 * @padding-small-vertical + @line-height-small-computed + 2px;
+}
+
+.input-sm.form-control.select2-container .select2-choice {
+  height: 2 * @padding-small-vertical + @line-height-small-computed;
+  line-height: 2 * @padding-small-vertical + @line-height-small-computed;
+}
+
+.input-sm.form-control .select2-choice .select2-arrow {
+  height: 2 * @padding-small-vertical + @line-height-small-computed;
+  line-height: 2 * @padding-small-vertical + @line-height-small-computed;
+  b{
+    background-position-y: 0px;
+  }
+}
+
+// Colors
 .control-group.warning .select2-container .select2-choice,
 .control-group.warning .select2-container .select2-choices,
 .control-group.warning .select2-container-active .select2-choice,

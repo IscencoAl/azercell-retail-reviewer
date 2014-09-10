@@ -5,7 +5,7 @@ RSpec.describe UserRole, :type => :model do
   it 'has predefined values' do
     user_roles = UserRole.all.map{ |ur| ur.name }.to_set
 
-    expect(user_roles).to be_eql Set.new(['admin', 'user'])
+    expect(user_roles).to be_eql Set.new(['admin', 'user', 'reviewer'])
   end
 
   describe '.admin' do
@@ -21,6 +21,14 @@ RSpec.describe UserRole, :type => :model do
       user = UserRole.user
 
       expect(user.name).to eql('user')
+    end
+  end
+
+  describe '.reviewer' do
+    it 'return user role with name "reviewer"' do
+      user = UserRole.reviewer
+
+      expect(user.name).to eql('reviewer')
     end
   end
 

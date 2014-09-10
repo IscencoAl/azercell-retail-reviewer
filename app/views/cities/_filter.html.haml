@@ -9,19 +9,19 @@
           .row
             .form-group.col-sm-3
               %label{:for => 'name'}= t('activerecord.attributes.city.name')
-              %input#name.form-control{:type => 'text', :name => 'filter[name]', :value => filtering_params[:name], :autocomplete => :off}
+              %input#name.form-control.input-sm{:type => 'text', :name => 'filter[name]', :value => filtering_params[:name], :autocomplete => :off}
 
             .form-group.col-sm-3
               %label{:for => 'region'}= t('activerecord.attributes.city.region')
-              %select#region.form-control{:type => 'text', :name => 'filter[region]'}
+              %select#region.form-control.input-sm{:type => 'text', :name => 'filter[region]'}
                 %option{:value => ''}= t('views.common.all')
                 - Region.all.each do |region|
                   %option{:value => region.id, :selected => filtering_params[:region].to_i == region.id}= region.name
 
             - if can?(:restore, User)
               .form-group.col-sm-2
-                %br
-                .checkbox{:style => 'margin-bottom: 0px;'}
+                %label &nbsp;
+                .checkbox{:style => 'margin: 0px;'}
                   %label
                     %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
                       %strong= t('activerecord.attributes.city.is_deleted')
@@ -29,4 +29,4 @@
 
             .form-group.col-sm-2
               %label.text-block &nbsp;
-              %input.btn-block.btn.btn-default{:type => 'submit', :value => t('views.common.filter')}
+              %input.btn.btn-block.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}

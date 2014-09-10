@@ -6,7 +6,7 @@ class DealersController < ApplicationController
 
   # GET /dealers
   def index
-    @dealers = Dealer.filter(filtering_params).sort(sorting_params)
+    @dealers = Dealer.filter(filtering_params).sort(sorting_params).page(params[:page])
 
   end
 

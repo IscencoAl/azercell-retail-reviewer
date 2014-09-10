@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     self.role == UserRole.user
   end
 
+  def reviewer?
+    self.role == UserRole.reviewer
+  end
+
   def full_name
     [name, surname].join(' ')
   end
