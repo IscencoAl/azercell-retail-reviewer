@@ -19,6 +19,10 @@ FactoryGirl.define do
       user_role_id { UserRole.find_by_name("user").id }
     end
 
+    trait :reviewer do
+      user_role_id { UserRole.find_by_name("reviewer").id }
+    end
+
     trait :deleted do
       is_deleted true
     end

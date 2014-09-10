@@ -1,0 +1,5 @@
+en:
+  views:
+    report_structure:
+      index: "Reports Structure"
+      add_category: "Add Category"

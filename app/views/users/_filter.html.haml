@@ -9,23 +9,23 @@
           .row
             .form-group.col-sm-2
               %label{:for => 'name'}= t('activerecord.attributes.user.name')
-              %input#name.form-control{:type => 'text', :name => 'filter[name]', :value => filtering_params[:name], :autocomplete => :off}
+              %input#name.form-control.input-sm{:type => 'text', :name => 'filter[name]', :value => filtering_params[:name], :autocomplete => :off}
 
             .form-group.col-sm-2
               %label{:for => 'surname'}= t('activerecord.attributes.user.surname')
-              %input#surname.form-control{:type => 'text', :name => 'filter[surname]', :value => filtering_params[:surname], :autocomplete => :off}
+              %input#surname.form-control.input-sm{:type => 'text', :name => 'filter[surname]', :value => filtering_params[:surname], :autocomplete => :off}
 
             .form-group.col-sm-2
               %label{:for => 'role'}= t('activerecord.attributes.user.role')
-              %select#role.form-control{:type => 'text', :name => 'filter[role]'}
+              %select#role.form-control.input-sm{:type => 'text', :name => 'filter[role]'}
                 %option{:value => ''}= t('views.common.all')
                 - UserRole.all.each do |role|
                   %option{:value => role.id, :selected => filtering_params[:role].to_i == role.id}= role.name
 
             - if can?(:restore, User)
               .form-group.col-sm-2
-                %br
-                .checkbox{:style => 'margin-bottom: 0px;'}
+                %label &nbsp;
+                .checkbox{:style => 'margin: 0px;'}
                   %label
                     %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
                       %strong= t('activerecord.attributes.user.is_deleted')
@@ -33,4 +33,4 @@
 
             .form-group.col-sm-2
               %label.text-block &nbsp;
-              %input.btn-block.btn.btn-default{:type => 'submit', :value => t('views.common.filter')}
+              %input.btn.btn-block.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}

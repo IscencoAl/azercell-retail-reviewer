@@ -217,6 +217,24 @@ RSpec.describe User, :type => :model do
     end
   end
 
+  describe '#reviewer?' do
+    context 'when user is reviewer' do
+      it 'returns true' do
+        user = build(:user, :reviewer)
+
+        expect(user.reviewer?).to eq(true)
+      end
+    end
+
+    context 'when user is not reviewer' do
+      it 'returns true' do
+        user = build(:user, :admin)
+
+        expect(user.reviewer?).to eq(false)
+      end
+    end
+  end
+
   describe '.by_name' do
     context 'when asc' do
       it 'sorts ascending' do

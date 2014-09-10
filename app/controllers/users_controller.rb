@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.filter(filtering_params).sort(sorting_params)
+    @users = User.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
   # GET /users/new

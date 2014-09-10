@@ -1,7 +1,7 @@
 %h2.text-center= t('views.dealers.list')
 %br
 
-=render 'filter'
+= render 'filter'
 
 .row
   .col-lg-offset-1.col-lg-10
@@ -19,7 +19,7 @@
                   %a.btn.btn-primary.btn-xs{:href => new_dealer_path}= t('views.common.add')
 
           %tbody
-            -if @dealers.any?
+            - if @dealers.any?
               - @dealers.each do |dealer|
                 %tr
                   %td= dealer.name
@@ -39,3 +39,5 @@
               %tr
                 %td{:colspan => 5}
                   %h4.text-center= t('views.common.empty')
+
+    = paginate @dealers

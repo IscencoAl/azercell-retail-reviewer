@@ -1,0 +1,16 @@
+ru:
+  activerecord:
+    models:
+      report_structure_category: "Категория очета"
+
+    attributes:
+      report_structure_category:
+        name: "Название"
+
+    errors:
+      models:
+        report_structure_category:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              taken: "уже занято"
