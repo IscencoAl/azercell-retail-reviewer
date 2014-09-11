@@ -21,3 +21,6 @@
 /test
 
 /config/database.yml
+
+/public/photos
+/public/uploads

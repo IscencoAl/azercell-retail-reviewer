@@ -1,13 +1,14 @@
 class Shop < ActiveRecord::Base
   include Modules::SoftDelete
   include Modules::Filterable
-
   include Modules::Sortable
 
   belongs_to :shop_type
   belongs_to :city
   belongs_to :dealer
   belongs_to :user
+
+  has_many :photos, :class_name => 'ShopPhoto', :dependent => :destroy
 
   validates :shop_type,  :presence => true
   validates :city,  :presence => true
@@ -25,9 +26,6 @@ class Shop < ActiveRecord::Base
   scope :by_shop_type, -> (dir) { joins(:shop_type).order("shop_types.name #{dir}") }
   scope :by_dealer, -> (dir) { joins(:dealer).order("dealers.name #{dir}") }
   scope :by_user, -> (dir) { joins(:user).order("users.name #{dir}") }
-  
-
-
 
   def full_address
     [city.name, address].join(' ')
@@ -36,6 +34,5 @@ class Shop < ActiveRecord::Base
   def full_address_was
     [city.name_was, address_was].join(' ')
   end
-
 
 end

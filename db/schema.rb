@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908143338) do
+ActiveRecord::Schema.define(version: 20140910133859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(version: 20140908143338) do
     t.integer "weight"
     t.string  "shop_types"
   end
+
+  create_table "shop_photos", force: true do |t|
+    t.string  "photo"
+    t.integer "shop_id"
+  end
+
+  add_index "shop_photos", ["shop_id"], name: "index_shop_photos_on_shop_id", using: :btree
 
   create_table "shop_types", force: true do |t|
     t.string  "name"

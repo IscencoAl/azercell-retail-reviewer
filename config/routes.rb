@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :shops
     get '/shops/:id/restore', :to => 'shops#restore', :id => /\d+/, :as => 'restore_shop'
 
+    resources :shop_photos
     resources :shop_types
     get '/shop_types/:id/restore', :to => 'shop_types#restore', :id => /\d+/, :as => 'restore_shop_type'
 

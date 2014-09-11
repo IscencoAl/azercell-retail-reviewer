@@ -61,7 +61,8 @@ class ShopsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def shop_params
-      params.require(:shop).permit(:shop_type_id, :city_id, :address, :latitude, :longitude, :dealer_id, :square_footage, :user_id, :is_deleted)
+      params.require(:shop).permit(:shop_type_id, :city_id, :address, :latitude, :longitude,
+        :dealer_id, :square_footage, :user_id, :is_deleted)
     end
 
     def filtering_params

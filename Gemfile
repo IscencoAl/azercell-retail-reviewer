@@ -42,6 +42,12 @@ gem 'cancancan', '~> 1.9'
 # Use Kaminari for pagination
 gem 'kaminari', '0.16.1'
 
+# Use CarrierWave for file upload
+gem 'carrierwave', '0.10.0'
+
+# Use Jquery File Upload for AJAX file upload
+gem 'jquery.fileupload-rails', '1.10.0'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
 

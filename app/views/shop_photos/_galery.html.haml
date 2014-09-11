@@ -1,0 +1,7 @@
+- persisted_photos = shop.photos.select{ |p| p.persisted? }
+
+.galery-wrapper.panel.panel-default{:class => "#{"hidden" if persisted_photos.blank?}"}
+  .panel-body
+    .galery.row
+      - persisted_photos.each do |p|
+        = render 'shop_photos/show', :shop_photo => p
