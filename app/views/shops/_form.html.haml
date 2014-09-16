@@ -1,14 +1,21 @@
-= simple_form_for @shop, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-body
+        %div#map_canvas{:style => "height:300px; width: 100%"}
 
-  = f.association :shop_type
-  = f.association :city
-  = f.input :address
-  = f.input :latitude
-  = f.input :longitude
-  = f.association :dealer
-  = f.input :square_footage
-  = f.association :user
-
-  .btn-toolbar.text-center
-    = f.button :submit, t('views.common.save')
-    %a.btn.btn-default{:href => shops_path}= t('views.common.cancel')
+  .col-sm-6
+    = simple_form_for @shop, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+    
+      = f.association :shop_type
+      = f.association :city
+      = f.input :address
+      = f.input :latitude
+      = f.input :longitude
+      = f.association :dealer
+      = f.input :square_footage
+      = f.association :user
+       
+      .btn-toolbar.text-center
+        = f.button :submit, t('views.common.save')
+        %a.btn.btn-default{:href => shops_path}= t('views.common.cancel')

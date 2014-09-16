@@ -1,7 +1,6 @@
 class Shop < ActiveRecord::Base
   include Modules::SoftDelete
   include Modules::Filterable
-
   include Modules::Sortable
 
   belongs_to :shop_type
@@ -26,9 +25,6 @@ class Shop < ActiveRecord::Base
   scope :by_dealer, -> (dir) { joins(:dealer).order("dealers.name #{dir}") }
   scope :by_user, -> (dir) { joins(:user).order("users.name #{dir}") }
   
-
-
-
   def full_address
     [city.name, address].join(' ')
   end
@@ -36,6 +32,4 @@ class Shop < ActiveRecord::Base
   def full_address_was
     [city.name_was, address_was].join(' ')
   end
-
-
 end
