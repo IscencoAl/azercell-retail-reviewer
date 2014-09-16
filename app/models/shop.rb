@@ -9,6 +9,7 @@ class Shop < ActiveRecord::Base
   belongs_to :user
 
   has_many :photos, :class_name => 'ShopPhoto', :dependent => :destroy
+  has_many :reports
 
   validates :shop_type,  :presence => true
   validates :city,  :presence => true

@@ -1,0 +1,46 @@
+= javascript_include_tag "range_picker"
+
+- filtering_params = params[:filter] || {}
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .panel-body
+
+        %form{:role => 'form'}
+          .row
+            .form-group.col-sm-2
+              %label{:for => 'user'}= t('activerecord.attributes.report.user')
+              %select#user.form-control.input-sm{:name => 'filter[user]', :value => filtering_params[:user]}
+                %option{:value => ''} All
+                - UserRole.reviewer.users.all.each do |u|
+                  %option{:value => u.id, :selected => u.id == filtering_params[:user].to_i}= u.full_name
+
+            .form-group.col-sm-4
+              %label{:for => 'shop'}= t('activerecord.attributes.report.shop')
+              %select#shop.form-control.input-sm{:name => 'filter[shop]', :value => filtering_params[:shop]}
+                %option{:value => ''} All
+                - Shop.all.each do |s|
+                  %option{:value => s.id, :selected => s.id == filtering_params[:shop].to_i}= s.full_address
+
+            - score_params = {:from => filtering_params[:score_from] ? filtering_params[:score_from].to_i : nil, :to => filtering_params[:score_to] ? filtering_params[:score_to].to_i : nil}
+            - puts score_params.inspect
+            .form-group.col-sm-3
+              %label{:for => 'score'}= t('activerecord.attributes.report.score')
+              %div
+                #score-control.btn-group.btn-group-sm
+                  - (0..5).each do |score|
+                    - active = (score_params[:from] and score_params[:to] and score.between?(score_params[:from], score_params[:to]))
+                    %span.btn.btn-default{:class => "#{'active' if active}", :data => {:value => score}}= score
+              
+              %input#score-from{:type => 'hidden', :name => 'filter[score_from]', :value => score_params[:from]}
+              %input#score-to{:type => 'hidden', :name => 'filter[score_to]', :value => score_params[:to]}
+
+            .form-group.col-sm-2
+              %label.text-block &nbsp;
+              %input.btn.btn-block.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}
+
+:javascript
+  $(document).ready(function(){
+    new RangePicker($('#score-control'), $('#score-from'), $('#score-to'));
+  });

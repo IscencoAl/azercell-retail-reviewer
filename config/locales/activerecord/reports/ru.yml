@@ -1,0 +1,12 @@
+ru:
+  activerecord:
+    attributes:
+      report:
+        city: "Город"
+        address: "Адрес"
+        latitude: "Широта"
+        longitude: "Долгота"
+        shop: "Магазин"
+        user: "Обозреватель"
+        created_at: "Время"
+        score: "Оценка"

@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :role, :presence => true
 
   has_many :shops
+  has_many :reports
 
   belongs_to :role, :class_name => 'UserRole', :foreign_key => :user_role_id
 

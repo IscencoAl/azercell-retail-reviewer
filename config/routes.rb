@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :regions
     get '/regions/:id/regions', :to => 'regions#restore', :id => /\d+/, :as => 'restore_region'
 
+    get '/reports', to: 'reports#index', as: 'reports'
+    get '/reports/:id', to: 'reports#show', :id => /\d+/, as: 'report'
+
     resources :report_structure_categories
     resources :report_structure_elements
     get '/report_structure', :to => 'report_structure_categories#index', :as => 'report_structure'
@@ -28,4 +31,5 @@ Rails.application.routes.draw do
 
   root 'users#index'
   get '/:locale' => 'users#index'
+
 end
