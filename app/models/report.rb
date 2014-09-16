@@ -11,7 +11,10 @@ class Report < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :shop
+
   has_one :city, :through => :shop
+
+  has_many :elements, :class_name => 'ReportElement'
 
   scope :with_user, -> (user) { where(:user => user) }
   scope :with_shop, -> (shop) { where(:shop => shop) }
@@ -22,4 +25,8 @@ class Report < ActiveRecord::Base
   scope :by_score, -> (dir) { order("score #{dir}") }
   scope :by_user, -> (dir) { joins(:user).order("users.name #{dir}, users.surname #{dir}") }
   scope :by_shop, -> (dir) { joins(:city).order("cities.name #{dir}, shops.address #{dir}") }
+
+  def structured
+    elements.group_by(&:category)
+  end
 end

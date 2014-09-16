@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :dealer do
-    name { Faker::Company.name }
+    sequence(:name) { |n| "#{Faker::Company.name}_#{n}" }
     contact_name { Faker::Name.name }
     phone_number { Faker::Number.number(9)}
-    email {Faker::Internet.email}
+    email { Faker::Internet.email }
     is_deleted false
 
     trait :deleted do

@@ -184,4 +184,24 @@ RSpec.describe Report, :type => :model do
     end
   end
 
+  describe '#structured' do
+    context 'empty report' do
+      it 'return empty hash' do
+        report = create(:report)
+
+        expect(report.structured).to eq({})
+      end
+    end
+
+    context 'with elements' do
+      it 'returns report grouped by category' do
+        report = create(:report)
+        category = create(:report_structure_category)
+        element = create(:report_element, :category => category, :report => report)
+
+        expect(report.structured).to eq({category => [element]})
+      end
+    end
+  end
+
 end

@@ -1,24 +1,15 @@
-%p#notice= notice
+.row
+  .col-lg-offset-1.col-lg-10
+    - @report.structured.each do |category, elements|
+      .panel.panel-default
+        .panel-heading
+          %h4= category.name
 
-%p
-  %b Created at:
-  = @report.created_at
-%p
-  %b Latitude:
-  = @report.latitude
-%p
-  %b Longitude:
-  = @report.longitude
-%p
-  %b User:
-  = @report.user
-%p
-  %b Shop:
-  = @report.shop
-%p
-  %b Score:
-  = @report.score
-
-= link_to 'Edit', edit_report_path(@report)
-\|
-= link_to 'Back', reports_path
+        .list-group
+          - elements.each do |e|
+            .list-group-item
+              .row
+                .col-xs-6
+                  = e.name
+                .col-xs-6.text-right
+                  = e.value
