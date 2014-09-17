@@ -1,5 +1,14 @@
 .row
   .col-lg-offset-1.col-lg-10
+
+    .galery-wrapper.panel.panel-default{:class => "#{"hidden" if @report.photos.blank?}"}
+      .panel-body
+        .galery.row
+          - @report.photos.each do |photo|
+            .col-sm-2.photo
+              %a.thumbnail{:target => "_blank", :href => photo.photo}
+                %img.img-responsive{:src => photo.photo}
+
     - @report.structured.each do |category, elements|
       .panel.panel-default
         .panel-heading

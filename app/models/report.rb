@@ -15,6 +15,7 @@ class Report < ActiveRecord::Base
   has_one :city, :through => :shop
 
   has_many :elements, :class_name => 'ReportElement'
+  has_many :photos, :class_name => 'ReportPhoto', :dependent => :destroy
 
   scope :with_user, -> (user) { where(:user => user) }
   scope :with_shop, -> (shop) { where(:shop => shop) }
