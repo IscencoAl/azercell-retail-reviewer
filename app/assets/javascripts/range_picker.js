@@ -7,7 +7,7 @@ function RangePicker($control, $from, $to){
   this.from = 0;
   this.to = 0;
 
-  $control.find('span.btn').mousedown(function(){
+  $control.find('span.btn').bind('mousedown touchstart', function(){
     var $btn = $(this),
         value = $btn.data('value');
 
@@ -47,6 +47,14 @@ function RangePicker($control, $from, $to){
       $btn.addClass('active');
     })
   })
+
+  $control.find('span.btn').bind('touchmove', function(e){
+    var x = e.originalEvent.touches[0].clientX,
+        y = e.originalEvent.touches[0].clientY,
+        $btn = $(document.elementFromPoint(x, y));
+
+    $btn.mouseenter();
+  });
 
   $(document).mouseup(function(){
     $control.find('span.btn').unbind('mouseenter');
