@@ -10,6 +10,7 @@ ru:
         dealer: "Дилер"
         square_footage: "Площадь"
         user: "Обозреватель"
+        id: "Id"
         is_deleted: "Удаленные"
 
     errors:

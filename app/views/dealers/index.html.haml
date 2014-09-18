@@ -22,7 +22,8 @@
             - if @dealers.any?
               - @dealers.each do |dealer|
                 %tr
-                  %td= dealer.name
+                  %td
+                    = link_to dealer.name, dealer_path(dealer.id)
                   %td= dealer.contact_name
                   %td= dealer.phone_number
                   %td= dealer.email
