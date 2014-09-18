@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
   private
 
     def filtering_params
-      params.fetch(:filter, {}).permit(:user, :shop, :score_from, :score_to)
+      params.fetch(:filter, {}).permit(:user, :shop, :score_from, :score_to, :date_from, :date_to)
     end
 
     def sorting_params

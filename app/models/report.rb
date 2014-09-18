@@ -21,6 +21,8 @@ class Report < ActiveRecord::Base
   scope :with_shop, -> (shop) { where(:shop => shop) }
   scope :with_score_from, -> (score) { where('score >= ?', score) }
   scope :with_score_to, -> (score) { where('score <= ?', score) }
+  scope :with_date_from, -> (date) { where('created_at >= ?', date) }
+  scope :with_date_to, -> (date) { where('created_at <= ?', date) }
 
   scope :by_created_at, -> (dir) { order("created_at #{dir}") }
   scope :by_score, -> (dir) { order("score #{dir}") }

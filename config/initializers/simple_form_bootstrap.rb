@@ -2,6 +2,7 @@ SimpleForm.setup do |config|
   config.error_notification_class = 'alert alert-danger'
   config.button_class = 'btn btn-primary'
   config.boolean_label_class = nil
+  config.required_by_default = false
 
   config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
@@ -137,6 +138,18 @@ SimpleForm.setup do |config|
     b.use :input, class: 'form-control', autocomplete: :off
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+
+  config.wrappers :filter_form, tag: 'div', class: 'form-group' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :label
+
+    b.use :input, class: 'form-control input-sm', autocomplete: :off
   end
 
   # Wrappers for forms and inputs using the Bootstrap toolkit.

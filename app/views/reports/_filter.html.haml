@@ -7,24 +7,19 @@
     .panel.panel-default
       .panel-body
 
-        %form{:role => 'form'}
+        = simple_form_for :filter, :html => {:method => 'get'}, :wrapper => :filter_form do |f|
           .row
-            .form-group.col-sm-2
-              %label{:for => 'user'}= t('activerecord.attributes.report.user')
-              %select#user.form-control.input-sm{:name => 'filter[user]', :value => filtering_params[:user]}
-                %option{:value => ''} All
-                - UserRole.reviewer.users.all.each do |u|
-                  %option{:value => u.id, :selected => u.id == filtering_params[:user].to_i}= u.full_name
+            = f.input :user, :as => :select, :collection => [[t('views.common.all'), '']] + UserRole.reviewer.users.all.map{ |u| [u.full_name, u.id] }, :selected => filtering_params[:user], :label => t('activerecord.attributes.report.user'), :wrapper_html => {:class => 'col-sm-2'}
 
-            .form-group.col-sm-4
-              %label{:for => 'shop'}= t('activerecord.attributes.report.shop')
-              %select#shop.form-control.input-sm{:name => 'filter[shop]', :value => filtering_params[:shop]}
-                %option{:value => ''} All
-                - Shop.all.each do |s|
-                  %option{:value => s.id, :selected => s.id == filtering_params[:shop].to_i}= s.full_address
+            = f.input :shop, :as => :select, :collection => [[t('views.common.all'), '']] + Shop.all.map{ |s| [s.full_address, s.id] }, :selected => filtering_params[:shop], :label => t('activerecord.attributes.report.shop'), :wrapper_html => {:class => 'col-sm-3'}
 
-            - score_params = {:from => filtering_params[:score_from] ? filtering_params[:score_from].to_i : nil, :to => filtering_params[:score_to] ? filtering_params[:score_to].to_i : nil}
-            - puts score_params.inspect
+            = f.input :date, :label => t('views.reports.period'), :wrapper_html => {:class => 'col-sm-4'} do
+              .input-group.input-group-sm{:data => {:rangepicker => 'yes'}}
+                = f.input_field :date_from, :class => 'form-control', :value => filtering_params[:date_from], :data => {:border => 'from'}
+                %span.input-group-addon -
+                = f.input_field :date_to, :class => 'form-control', :value => filtering_params[:date_to], :data => {:border => 'to'}
+
+            - score_params = {:from => (not filtering_params[:score_from].blank?) ? filtering_params[:score_from].to_i : nil, :to => (not filtering_params[:score_to].blank?) ? filtering_params[:score_to].to_i : nil}
             .form-group.col-sm-3
               %label{:for => 'score'}= t('activerecord.attributes.report.score')
               %div
@@ -33,12 +28,11 @@
                     - active = (score_params[:from] and score_params[:to] and score.between?(score_params[:from], score_params[:to]))
                     %span.btn.btn-default{:class => "#{'active' if active}", :data => {:value => score}}= score
               
-              %input#score-from{:type => 'hidden', :name => 'filter[score_from]', :value => score_params[:from]}
-              %input#score-to{:type => 'hidden', :name => 'filter[score_to]', :value => score_params[:to]}
+              = f.input_field :score_from, :as => :hidden, :id => 'score-from', :value => score_params[:from]
+              = f.input_field :score_to, :as => :hidden, :id => 'score-to', :value => score_params[:to]
 
-            .form-group.col-sm-2
-              %label.text-block &nbsp;
-              %input.btn.btn-block.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}
+            .btn-toolbar.text-center
+              = f.submit t('views.common.filter'), :class => 'btn btn-sm btn-default'
 
 :javascript
   $(document).ready(function(){

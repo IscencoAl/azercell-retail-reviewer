@@ -61,7 +61,6 @@ RSpec.describe Report, :type => :model do
   describe '.with_score_from' do
     context 'when report for score exists' do
       it 'returns corresponding report' do
-        shop = create(:shop)
         report = create(:report, :score => 4)
 
         expect(Report.with_score_from(3)).to eq([report])
@@ -80,7 +79,6 @@ RSpec.describe Report, :type => :model do
   describe '.with_score_to' do
     context 'when report for score exists' do
       it 'returns corresponding report' do
-        shop = create(:shop)
         report = create(:report, :score => 4)
 
         expect(Report.with_score_to(4)).to eq([report])
@@ -92,6 +90,42 @@ RSpec.describe Report, :type => :model do
         report = create(:report, :score => 3)
 
         expect(Report.with_score_to(2)).to be_blank
+      end
+    end
+  end
+
+  describe '.with_date_from' do
+    context 'when report for date exists' do
+      it 'returns corresponding report' do
+        report = create(:report)
+
+        expect(Report.with_date_from(Date.today)).to eq([report])
+      end
+    end
+
+    context 'when report for date is absent' do
+      it 'returns empty result' do
+        report = create(:report, :created_at => Time.now - 1.day)
+
+        expect(Report.with_date_from(Date.today)).to be_blank
+      end
+    end
+  end
+
+  describe '.with_date_to' do
+    context 'when report for date exists' do
+      it 'returns corresponding report' do
+        report = create(:report)
+
+        expect(Report.with_date_to(Date.today + 1.day)).to eq([report])
+      end
+    end
+
+    context 'when report for date is absent' do
+      it 'returns empty result' do
+        report = create(:report, :score => 3)
+
+        expect(Report.with_date_to(Date.today)).to be_blank
       end
     end
   end

@@ -17,6 +17,7 @@ gem 'less-rails-bootstrap', '~> 3.2.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '3.1.1'
+gem 'jquery-ui-rails', '~> 5.0.0'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring', '1.1.3', group: :development
