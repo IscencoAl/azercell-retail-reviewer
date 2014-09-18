@@ -35,5 +35,4 @@ class Shop < ActiveRecord::Base
   def full_address_was
     [city.name_was, address_was].join(' ')
   end
-
 end

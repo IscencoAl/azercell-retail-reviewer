@@ -10,4 +10,5 @@ en:
         dealer: "Dealer"
         square_footage: "Square footage"
         user: "Reviewer"
+        id: "Id"
         is_deleted: "Deleted"

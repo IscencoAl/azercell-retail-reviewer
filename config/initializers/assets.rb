@@ -8,4 +8,5 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(
   photo_uploader.js range_picker.js
   report_structure.js report_structure.css
-  jquery.fileupload.js jquery.fileupload-ui.css )
+  jquery.fileupload.js jquery.fileupload-ui.css
+  maps/shop_edit.js maps/dealer_show.js )
