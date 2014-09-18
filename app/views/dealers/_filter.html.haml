@@ -23,7 +23,6 @@
                     %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
                       %strong= t('activerecord.attributes.dealer.is_deleted')
 
-
             .form-group.col-sm-2
               %label.text-block &nbsp;
               %input.btn.btn-block.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}
