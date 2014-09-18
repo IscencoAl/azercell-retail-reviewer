@@ -1,0 +1,4 @@
+.col-sm-2.photo
+  %a.thumbnail{:href => shop_photo.photo}
+    %img.img-responsive{:src => shop_photo.photo}
+  %a.btn.btn-danger.btn-xs{:href => "#{shop_photo_path(shop_photo)}.json", :style => 'position: absolute; top:0px; right:0px;', :data => {:deletephoto => true}} &times;

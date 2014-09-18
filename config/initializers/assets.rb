@@ -5,4 +5,8 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( report_structure.js report_structure.css  maps/shop_edit.js maps/dealer_show.js)
+Rails.application.config.assets.precompile += %w(
+  photo_uploader.js range_picker.js
+  report_structure.js report_structure.css
+  jquery.fileupload.js jquery.fileupload-ui.css
+  maps/shop_edit.js maps/dealer_show.js )

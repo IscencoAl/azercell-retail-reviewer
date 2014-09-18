@@ -8,6 +8,9 @@ class Shop < ActiveRecord::Base
   belongs_to :dealer
   belongs_to :user
 
+  has_many :photos, :class_name => 'ShopPhoto', :dependent => :destroy
+  has_many :reports
+
   validates :shop_type,  :presence => true
   validates :city,  :presence => true
   validates :dealer,  :presence => true
@@ -24,7 +27,7 @@ class Shop < ActiveRecord::Base
   scope :by_shop_type, -> (dir) { joins(:shop_type).order("shop_types.name #{dir}") }
   scope :by_dealer, -> (dir) { joins(:dealer).order("dealers.name #{dir}") }
   scope :by_user, -> (dir) { joins(:user).order("users.name #{dir}") }
-  
+
   def full_address
     [city.name, address].join(' ')
   end

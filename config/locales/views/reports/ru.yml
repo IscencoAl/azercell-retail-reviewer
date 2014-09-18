@@ -1,0 +1,5 @@
+ru:
+  views:
+    reports:
+      list: "Отчеты"
+      period: "Период"

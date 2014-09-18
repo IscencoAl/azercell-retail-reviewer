@@ -17,6 +17,7 @@ gem 'less-rails-bootstrap', '~> 3.2.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '3.1.1'
+gem 'jquery-ui-rails', '~> 5.0.0'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring', '1.1.3', group: :development
@@ -41,6 +42,12 @@ gem 'cancancan', '~> 1.9'
 
 # Use Kaminari for pagination
 gem 'kaminari', '0.16.1'
+
+# Use CarrierWave for file upload
+gem 'carrierwave', '0.10.0'
+
+# Use Jquery File Upload for AJAX file upload
+gem 'jquery.fileupload-rails', '1.10.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'

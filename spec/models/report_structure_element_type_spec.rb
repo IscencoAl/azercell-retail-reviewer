@@ -8,4 +8,28 @@ RSpec.describe ReportStructureElementType, :type => :model do
     expect(elements).to be_eql Set.new(['mark', 'check', 'input'])
   end
 
+  describe '.mark' do
+    it 'returns type with name "mark"' do
+      mark = ReportStructureElementType.mark
+
+      expect(mark.name).to eq("mark")
+    end
+  end
+
+  describe '.check' do
+    it 'returns type with name "check"' do
+      check = ReportStructureElementType.check
+
+      expect(check.name).to eq("check")
+    end
+  end
+
+  describe '.input' do
+    it 'returns type with name "input"' do
+      input = ReportStructureElementType.input
+
+      expect(input.name).to eq("input")
+    end
+  end
+
 end

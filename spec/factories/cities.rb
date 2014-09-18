@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :city do
-    name { Faker::Address.state}
+    sequence(:name) { |n| "#{Faker::Address.city}_#{n}" }
     region
     is_deleted false
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908143338) do
+ActiveRecord::Schema.define(version: 20140917091600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,25 @@ ActiveRecord::Schema.define(version: 20140908143338) do
     t.boolean "is_deleted"
   end
 
+  create_table "report_elements", force: true do |t|
+    t.string  "name"
+    t.string  "value"
+    t.integer "report_structure_element_type_id"
+    t.integer "report_structure_category_id"
+    t.integer "report_id"
+  end
+
+  add_index "report_elements", ["report_id"], name: "index_report_elements_on_report_id", using: :btree
+  add_index "report_elements", ["report_structure_category_id"], name: "index_report_elements_on_report_structure_category_id", using: :btree
+  add_index "report_elements", ["report_structure_element_type_id"], name: "index_report_elements_on_report_structure_element_type_id", using: :btree
+
+  create_table "report_photos", force: true do |t|
+    t.string  "photo"
+    t.integer "report_id"
+  end
+
+  add_index "report_photos", ["report_id"], name: "index_report_photos_on_report_id", using: :btree
+
   create_table "report_structure_categories", force: true do |t|
     t.string  "name"
     t.boolean "is_deleted"
@@ -53,6 +72,25 @@ ActiveRecord::Schema.define(version: 20140908143338) do
     t.integer "weight"
     t.string  "shop_types"
   end
+
+  create_table "reports", force: true do |t|
+    t.datetime "created_at"
+    t.decimal  "latitude",   precision: 9, scale: 6
+    t.decimal  "longitude",  precision: 9, scale: 6
+    t.integer  "user_id"
+    t.integer  "shop_id"
+    t.decimal  "score",      precision: 5, scale: 2
+  end
+
+  add_index "reports", ["shop_id"], name: "index_reports_on_shop_id", using: :btree
+  add_index "reports", ["user_id"], name: "index_reports_on_user_id", using: :btree
+
+  create_table "shop_photos", force: true do |t|
+    t.string  "photo"
+    t.integer "shop_id"
+  end
+
+  add_index "shop_photos", ["shop_id"], name: "index_shop_photos_on_shop_id", using: :btree
 
   create_table "shop_types", force: true do |t|
     t.string  "name"

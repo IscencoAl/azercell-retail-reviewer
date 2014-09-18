@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :shop_type do
-    name { Faker::Lorem.word }
+    sequence(:name) { |n| "#{Faker::Lorem.word}_#{n}" }
     sequence(:abbreviation) { |n| "#{['A', 'B', 'C', 'D'].sample}#{n}" }
     is_deleted false
 

@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    attributes:
+      report:
+        city: "City"
+        address: "Address"
+        latitude: "Latitude"
+        longitude: "Longitude"
+        shop: "Shop"
+        user: "Reviewer"
+        created_at: "Time"
+        score: "Score"

@@ -15,6 +15,8 @@ class Ability
       can :crud, Region, :is_deleted => false
       can :restore, Region, :is_deleted => true
 
+      can :read, Report
+
       can :change, :report_structure
 
       can :crud, Shop, :is_deleted => false
@@ -36,6 +38,8 @@ class Ability
 
       can :read, Region
 
+      can :read, Report
+
       can :read, Shop
 
       can :update, User, :id => user.id
@@ -48,6 +52,8 @@ class Ability
       can :read, Dealer
 
       can :read, Region
+
+      can :read, Report, :user_id => user.id
 
       can :read, Shop
 

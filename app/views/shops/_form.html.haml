@@ -1,3 +1,24 @@
+- if @shop.persisted?
+  = stylesheet_link_tag 'jquery.fileupload-ui'
+  = javascript_include_tag 'jquery.fileupload'
+  = javascript_include_tag 'photo_uploader'
+
+  = simple_form_for @shop.photos.build, :html => {:id => 'photoupload'} do |f|
+    .row
+      .col-sm-2.col-xs-4
+        %span.btn.btn-xs.btn-primary.fileinput-button
+          %i.glyphicon.glyphicon-plus
+          %span= t('views.shops.add_photo')
+          = f.input_field :photo, :as => :file, :accept => "image/jpeg, image/png, image/gif, image/jpg"
+
+      .col-sm-10.col-xs-8
+        .progress.progress-xs
+          .progress-bar{:role => 'progressbar', :style => "width: 0%;"} 0%
+
+    = f.input_field :shop_id, :as => :hidden
+
+    = render "shop_photos/galery", :shop => @shop
+
 .row
   .col-sm-6
     .panel.panel-default
@@ -6,7 +27,7 @@
 
   .col-sm-6
     = simple_form_for @shop, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
-    
+
       = f.association :shop_type
       = f.association :city
       = f.input :address
@@ -15,7 +36,7 @@
       = f.association :dealer
       = f.input :square_footage
       = f.association :user
-       
+
       .btn-toolbar.text-center
         = f.button :submit, t('views.common.save')
         %a.btn.btn-default{:href => shops_path}= t('views.common.cancel')

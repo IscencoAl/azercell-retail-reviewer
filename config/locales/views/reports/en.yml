@@ -1,0 +1,5 @@
+en:
+  views:
+    reports:
+      list: "Reports"
+      period: "Period"
