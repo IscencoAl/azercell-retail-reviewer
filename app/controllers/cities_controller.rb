@@ -9,6 +9,9 @@ class CitiesController < ApplicationController
     @cities = City.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
+  # GET /cities/1
+  def show
+  end
 
   # GET /cities/new
   def new

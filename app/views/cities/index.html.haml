@@ -20,8 +20,8 @@
             -if @cities.any?
               - @cities.each do |city|
                 %tr
-                  %td= city.name
-                  %td= city.region ? city.region.name : '-'
+                  %td= link_to city.name, city
+                  %td= city.region ? link_to(city.region.name, city.region) : '-'
                   %td.text-right
                     .btn-toolbar
                       -if can?(:restore, city)
