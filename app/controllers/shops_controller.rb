@@ -20,6 +20,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /shops
@@ -36,7 +37,7 @@ class ShopsController < ApplicationController
   def update
     if @shop.update(shop_params)
       flash[:success] = t('controllers.shops.updated', name: @shop.full_address)
-      redirect_to shops_url
+      redirect_to session.delete(:return_to)
     else
       render :edit
     end
@@ -50,13 +51,20 @@ class ShopsController < ApplicationController
     redirect_to shops_url
   end
 
-   # GET /users/1/restore
+   # GET /shops/1/restore
   def restore
     @shop = Shop.deleted.find(params[:id])
     @shop.restore
 
     flash[:success] = t('controllers.shops.restored', name: @shop.full_address)
     redirect_to shops_url
+  end
+
+  # GET /shops/1/info
+  def info
+    if request.xhr?
+      render :partial => "info"
+    end
   end
 
   private

@@ -39,4 +39,4 @@
 
       .btn-toolbar.text-center
         = f.button :submit, t('views.common.save')
-        %a.btn.btn-default{:href => shops_path}= t('views.common.cancel')
+        = link_to t('views.common.cancel'), :back, :class => "btn btn-default"

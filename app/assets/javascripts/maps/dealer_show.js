@@ -6,10 +6,15 @@ function initialize() {
       map = new google.maps.Map($("#map_canvas")[0], mapOptions),
       shops = GetShops(),
       bounds = new google.maps.LatLngBounds();
-
+      
   $.each(shops, function(index, shop){
-    var location = new google.maps.LatLng(shop.lat, shop.lng)
-    addMarker(location, map);
+    var location = new google.maps.LatLng(shop.lat, shop.lng),
+        marker = addMarker(location, map);
+        
+    google.maps.event.addListener(marker, 'click', function() {
+      ShowTooltip(shop.info, map, marker);
+    });
+
     bounds.extend(location);
   })
 
@@ -22,17 +27,29 @@ function initialize() {
   })
 }
 
+function ShowTooltip(info, map, marker){
+  $.ajax({
+    url: info,
+    success: function(data){
+      var infowindow = new google.maps.InfoWindow({
+        content: data
+      });
+      infowindow.open(map,marker);
+    }
+  });
+}
+
 function GetShops(){
   var shops = [];
 
   $("tr.shop").each(function(index, tr){
     var $tr = $(tr),
-      id = $tr.data("id"),
+      info = $tr.data("info"),
       lat = $tr.data("latitude"),
       lng = $tr.data("longitude");
 
       if (lat && lng)
-        shops.push({id:id, lat:lat, lng:lng});
+        shops.push({info:info, lat:lat, lng:lng});
   })
 
   return shops;
