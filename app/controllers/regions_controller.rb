@@ -9,6 +9,9 @@ class RegionsController < ApplicationController
     @regions = Region.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
+  # GET /regions/1
+  def show
+  end
 
   # GET /regions/new
   def new

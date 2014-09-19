@@ -19,7 +19,7 @@
             - if @regions.any?
               - @regions.each do |region|
                 %tr
-                  %td= region.name
+                  %td= link_to region.name, region
                   %td.text-right
                     .btn-toolbar
                       - if can?(:restore, region)
