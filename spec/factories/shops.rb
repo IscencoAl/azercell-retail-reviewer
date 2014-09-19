@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :shop do
-    shop_type
+    association :type, :factory => [:shop_type]
     city
     address { Faker::Address.street_address }
     latitude { rand(38.448265..41.884439) }

@@ -1,0 +1,30 @@
+@slide-height: 300px;
+
+#shop-photos{
+  height: @slide-height;
+
+  .carousel-inner{
+    .item{
+      .img-container{
+        line-height: @slide-height;
+
+        img{
+          max-height: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+#general-info{
+  tr{
+    td:first-child{
+      font-weight: bold;
+    }
+
+    td:last-child{
+      text-align: right;
+    }
+  }
+}

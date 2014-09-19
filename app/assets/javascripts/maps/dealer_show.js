@@ -6,11 +6,13 @@ function initialize() {
       map = new google.maps.Map($("#map_canvas")[0], mapOptions),
       shops = GetShops(),
       bounds = new google.maps.LatLngBounds();
+
   $.each(shops, function(index, shop){
     var location = new google.maps.LatLng(shop.lat, shop.lng)
     addMarker(location, map);
     bounds.extend(location);
   })
+
   map.fitBounds(bounds)
 
   google.maps.event.addListenerOnce(map, "bounds_changed", function(event){
@@ -29,7 +31,8 @@ function GetShops(){
       lat = $tr.data("latitude"),
       lng = $tr.data("longitude");
 
-      shops.push({id:id, lat:lat, lng:lng});
+      if (lat && lng)
+        shops.push({id:id, lat:lat, lng:lng});
   })
 
   return shops;

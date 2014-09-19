@@ -2,13 +2,15 @@ en:
   activerecord:
     attributes:
       shop:
-        shop_type: "Shop type"
+        type: "Type"
+        region: "Region"
         city: "City"
         address: "Address"
         latitude: "Latitude"
         longitude: "Longitude"
         dealer: "Dealer"
-        square_footage: "Square footage"
+        square_footage: "Area"
         user: "Reviewer"
+        score: "Score"
         id: "Id"
         is_deleted: "Deleted"

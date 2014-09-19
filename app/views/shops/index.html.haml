@@ -10,8 +10,8 @@
         %table.table.table-condensed.table-striped.table-vcentered
           %thead
             %tr
-              %th= sortable(:shop_type, t('activerecord.attributes.shop.shop_type'))
-              %th= t('activerecord.attributes.shop.address')
+              %th= sortable(:type, t('activerecord.attributes.shop.type'))
+              %th= sortable(:address, t('activerecord.attributes.shop.address'))
               %th= sortable(:dealer, t('activerecord.attributes.shop.dealer'))
               %th= sortable(:user, t('activerecord.attributes.shop.user'))
               %th.text-right
@@ -22,10 +22,11 @@
             - if @shops.any?
               - @shops.each do |shop|
                 %tr
-                  %td= shop.shop_type.name
-                  %td= shop.full_address
+                  %td= shop.type.name
+                  %td
+                    = link_to shop.full_address, shop
                   %td= shop.dealer.name
-                  %td= shop.user.name
+                  %td= shop.user.full_name
                   %td.text-right
                     .btn-toolbar
                       - if can?(:restore, shop)

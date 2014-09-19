@@ -29,22 +29,21 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
-  describe '.with_shop_type' do
-    context 'when shop_type exists' do
+  describe '.with_type' do
+    context 'when type exists' do
       it 'returns corresponding shop' do
+        type = create(:shop_type)
+        shop = create(:shop, :type => type)
 
-        shop_type = create(:shop_type)
-        shop = create(:shop,  :shop_type => shop_type)
-
-        expect(Shop.with_shop_type(shop_type)).to eq([shop])
+        expect(Shop.with_type(type)).to eq([shop])
       end
     end
 
-    context 'when shop_type is absent' do
+    context 'when type is absent' do
       it 'returns empty result' do
         shop = create(:shop)
 
-        expect(Shop.with_shop_type(0)).to eq([])
+        expect(Shop.with_type(0)).to eq([])
       end
     end
   end
@@ -54,7 +53,7 @@ RSpec.describe Shop, :type => :model do
       it 'returns corresponding shop' do
 
         city = create(:city)
-        shop = create(:shop,  :city => city)
+        shop = create(:shop, :city => city)
 
         expect(Shop.with_city(city)).to eq([shop])
       end
@@ -74,7 +73,7 @@ RSpec.describe Shop, :type => :model do
       it 'returns corresponding shop' do
 
         dealer = create(:dealer)
-        shop = create(:shop,  :dealer => dealer)
+        shop = create(:shop, :dealer => dealer)
 
         expect(Shop.with_dealer(dealer)).to eq([shop])
       end
@@ -94,7 +93,7 @@ RSpec.describe Shop, :type => :model do
       it 'returns corresponding shop' do
 
         user = create(:user)
-        shop = create(:shop,  :user => user)
+        shop = create(:shop, :user => user)
 
         expect(Shop.with_user(user)).to eq([shop])
       end
@@ -165,43 +164,22 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
-
-  describe '#full_address' do
-    it 'returns full address' do
-      city = create(:city, :name => "Gorod")
-      shop = build(:shop, :city => city, :address => 'Doe')
-
-      expect(shop.full_address).to eql('Gorod Doe')
-    end
-  end
-
-  describe '#full_address_was' do
-    it 'returns old full address' do
-      city = create(:city, :name => "Gorod")
-      shop = create(:shop, :city => city, :address => 'Doe')
-
-      shop.address = 'hristo'
-
-      expect(shop.full_address_was).to eql('Gorod Doe')
-    end
-  end
-
-  describe '.by_shop_type' do
+  describe '.by_type' do
     context 'when asc' do
       it 'sorts ascending' do
-        a = create(:shop, :shop_type => create(:shop_type, :name => "A"))
-        b = create(:shop, :shop_type => create(:shop_type, :name => "B"))
+        a = create(:shop, :type => create(:shop_type, :name => "A"))
+        b = create(:shop, :type => create(:shop_type, :name => "B"))
 
-        expect(Shop.by_shop_type('asc')).to eq([a, b])
+        expect(Shop.by_type('asc')).to eq([a, b])
       end
     end
 
     context 'when desc' do
       it 'sorts descending' do
-        a = create(:shop, :shop_type => create(:shop_type, :name => "A"))
-        b = create(:shop, :shop_type => create(:shop_type, :name => "B"))
+        a = create(:shop, :type => create(:shop_type, :name => "A"))
+        b = create(:shop, :type => create(:shop_type, :name => "B"))
 
-        expect(Shop.by_shop_type('desc')).to eq([b, a])
+        expect(Shop.by_type('desc')).to eq([b, a])
       end
     end
   end
@@ -245,4 +223,83 @@ RSpec.describe Shop, :type => :model do
       end
     end
   end
+
+  describe '.by_address' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        a = create(:shop, :city => create(:city, :name => "A"), :address => 'D')
+        b = create(:shop, :city => create(:city, :name => "B"), :address => 'C')
+
+        expect(Shop.by_address('asc')).to eq([a, b])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        a = create(:shop, :city => create(:city, :name => "A"), :address => 'D')
+        b = create(:shop, :city => create(:city, :name => "B"), :address => 'C')
+
+        expect(Shop.by_address('desc')).to eq([b, a])
+      end
+    end
+  end
+
+  describe '#full_address' do
+    it 'returns full address' do
+      city = create(:city, :name => "Gorod")
+      shop = build(:shop, :city => city, :address => 'Doe')
+
+      expect(shop.full_address).to eql('Gorod, Doe')
+    end
+  end
+
+  describe '#full_address_was' do
+    it 'returns old full address' do
+      city = create(:city, :name => "Gorod")
+      shop = create(:shop, :city => city, :address => 'Doe')
+
+      shop.address = 'hristo'
+
+      expect(shop.full_address_was).to eql('Gorod, Doe')
+    end
+  end
+
+  describe '#score' do
+    context 'without reports' do
+      it 'returns nil' do
+        shop = create(:shop)
+
+        expect(shop.score).to be_nil
+      end
+    end
+
+    context 'with reports' do
+      it 'returns last report score' do
+        shop = create(:shop)
+        report = create(:report, :shop => shop, :score => 3)
+
+        expect(shop.score).to eq(3)
+      end
+    end
+  end
+
+  describe '#last_report' do
+    context 'without reports' do
+      it 'returns nil' do
+        shop = create(:shop)
+
+        expect(shop.last_report).to be_nil
+      end
+    end
+
+    context 'with reports' do
+      it 'returns last report' do
+        shop = create(:shop)
+        report = create(:report, :shop => shop)
+
+        expect(shop.last_report).to eq(report)
+      end
+    end
+  end
+
 end

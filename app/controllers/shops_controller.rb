@@ -11,6 +11,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/1
   def show
+    @reports = @shop.reports.order('created_at DESC').page(params[:page])
   end
 
   # GET /shops/new
@@ -61,15 +62,15 @@ class ShopsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def shop_params
-      params.require(:shop).permit(:shop_type_id, :city_id, :address, :latitude, :longitude,
+      params.require(:shop).permit(:type_id, :city_id, :address, :latitude, :longitude,
         :dealer_id, :square_footage, :user_id, :is_deleted)
     end
 
     def filtering_params
-      params.fetch(:filter, {}).permit(:shop_type, :city, :address, :dealer, :user, :is_deleted)
+      params.fetch(:filter, {}).permit(:type, :city, :address, :dealer, :user, :is_deleted)
     end
 
      def sorting_params
-      params.fetch(:sort, {:col => "shop_type", :dir => "asc"}).permit(:col, :dir)
+      params.fetch(:sort, {:col => "type", :dir => "asc"}).permit(:col, :dir)
     end
 end

@@ -2,7 +2,8 @@ ru:
   activerecord:
     attributes:
       shop:
-        shop_type: "Тип магазина"
+        type: "Тип"
+        region: "Регион"
         city: "Город"
         address: "Адрес"
         latitude: "Широта"
@@ -10,6 +11,7 @@ ru:
         dealer: "Дилер"
         square_footage: "Площадь"
         user: "Обозреватель"
+        score: "Оценка"
         id: "Id"
         is_deleted: "Удаленные"
 

@@ -16,7 +16,7 @@
         %table.table.table-condensed.table-striped.table-vcentered
           %thead
             %tr
-              %th= sortable(:shop_type, t('activerecord.attributes.shop.shop_type'))
+              %th= sortable(:type, t('activerecord.attributes.shop.type'))
               %th= t('activerecord.attributes.shop.address')
               %th= sortable(:user, t('activerecord.attributes.shop.user'))
               %th.text-right
@@ -27,7 +27,7 @@
             - if @dealer.shops.any?
               - @dealer.shops.each do |shop|
                 %tr.shop{:data => {:id => shop.id, :latitude => shop.latitude, :longitude => shop.longitude}}
-                  %td= shop.shop_type.name
+                  %td= shop.type.name
                   %td= shop.full_address
                   %td= shop.user.name
                   %td.text-right

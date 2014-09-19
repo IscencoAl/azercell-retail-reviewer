@@ -23,12 +23,12 @@
   .col-sm-6
     .panel.panel-default
       .panel-body
-        %div#map_canvas{:style => "height:300px; width: 100%"}
+        #map_canvas.map-container
 
   .col-sm-6
     = simple_form_for @shop, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
 
-      = f.association :shop_type
+      = f.association :type
       = f.association :city
       = f.input :address
       = f.input :latitude

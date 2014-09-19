@@ -1,0 +1,19 @@
+- if shop.photos.any?
+  #shop-photos.carousel.slide{:data => {:ride => "carousel"}}
+    %ol.carousel-indicators
+      - shop.photos.count.times do |i|
+        %li{:class => "#{'active' if i == 0}", :data => {:target => "#shop-photos", :slide => {:to => i}}}
+
+    .carousel-inner
+      - shop.photos.each_with_index do |p, i|
+        .item{:class => "#{'active' if i == 0}"}
+          .img-container.text-center
+            %img{:src => p.photo}
+
+    %a.left.carousel-control{:href => "#shop-photos", :role => "button", :data => {:slide => "prev"}}
+      %span.glyphicon.glyphicon-chevron-left
+    %a.right.carousel-control{:href => "#shop-photos", :role => "button", :data => {:slide => "next"}}
+      %span.glyphicon.glyphicon-chevron-right
+- else
+  %br
+  %h3.text-center= t('views.shop_photos.no_photo')

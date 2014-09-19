@@ -8,11 +8,11 @@
         %form{:role => 'form'}
           .row
             .form-group.col-sm-2
-              %label{:for => 'shop_type'}= t('activerecord.attributes.shop.shop_type')
-              %select#shop_type.form-control.input-sm{:type => 'text', :name => 'filter[shop_type]'}
+              %label{:for => 'type'}= t('activerecord.attributes.shop.type')
+              %select#type.form-control.input-sm{:type => 'text', :name => 'filter[type]'}
                 %option{:value => ''}= t('views.common.all')
-                - ShopType.all.each do |shop_type|
-                  %option{:value => shop_type.id, :selected => filtering_params[:shop_type].to_i == shop_type.id}= shop_type.name
+                - ShopType.all.each do |type|
+                  %option{:value => type.id, :selected => filtering_params[:type].to_i == type.id}= type.name
 
             .form-group.col-sm-2
               %label{:for => 'city'}= t('activerecord.attributes.shop.city')
@@ -36,8 +36,8 @@
               %label{:for => 'user'}= t('activerecord.attributes.shop.user')
               %select#user.form-control.input-sm{:type => 'text', :name => 'filter[user]'}
                 %option{:value => ''}= t('views.common.all')
-                - User.all.each do |user|
-                  %option{:value => user.id, :selected => filtering_params[:user].to_i == user.id}= user.name
+                - UserRole.reviewer.users.all.each do |user|
+                  %option{:value => user.id, :selected => filtering_params[:user].to_i == user.id}= user.full_name
 
             - if can?(:restore, User)
               .form-group.col-sm-2
