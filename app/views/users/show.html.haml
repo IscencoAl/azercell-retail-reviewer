@@ -4,16 +4,15 @@
 %h2.text-center= @user.full_name
 %br
 
-.row
-  .col-sm-6
-    .panel.panel-default
-      .panel-body
+.panel.panel-default
+  .panel-body
+    .row
+      .col-md-6
         %div#map_canvas.map-container-lg
-
-  .col-sm-6
-    .panel.panel-default
-      - @shops = @user.shops
-      = render 'shops/list'
+      .col-md-6
+        .panel.panel-default
+          - @shops = @user.shops
+          = render 'shops/list'
 
 %h3.text-center= t('views.reports.list')
 %br

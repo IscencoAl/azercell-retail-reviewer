@@ -1,16 +1,15 @@
 =javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp"
 =javascript_include_tag "maps/dealer_show"
 
-%h2.text-center=  @region.name
+%h2.text-center= @region.name
 %br
 
-.row
-  .col-sm-6
-    .panel.panel-default
-      .panel-body
+.panel.panel-default
+  .panel-body
+    .row
+      .col-md-6
         %div#map_canvas.map-container-lg
-
-  .col-sm-6
-    .panel.panel-default
-      - @shops = @region.shops
-      = render 'shops/list'
+      .col-md-6
+        .panel.panel-default
+          - @shops = @region.shops
+          = render 'shops/list'
