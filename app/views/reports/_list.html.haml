@@ -1,0 +1,37 @@
+.table-responsive
+  %table.table
+    %thead
+      %tr
+        - if params[:controller] == "reports"
+          %th= sortable(:shop, t('activerecord.attributes.report.shop'))
+          %th= sortable(:user, t('activerecord.attributes.report.user'))
+          %th= sortable(:created_at, t('activerecord.attributes.report.created_at'))
+          %th= sortable(:score, t('activerecord.attributes.report.score'))
+          %th
+        -else
+          - unless params[:controller] == "shops"
+            %th= t('activerecord.attributes.report.shop')
+          - unless params[:controller] == "users"
+            %th= t('activerecord.attributes.report.user')
+          %th= t('activerecord.attributes.report.created_at')
+          %th= t('activerecord.attributes.report.score')
+          %th
+
+    %tbody
+      - if @reports.any?
+        - @reports.each do |report|
+          %tr
+            - unless params[:controller] == "shops"
+              %td= report.shop.full_address
+            - unless params[:controller] == "users"
+              %td= report.user.full_name
+            %td= report.created_at.strftime("%d.%m.%Y %H:%M")
+            %td= report.score
+            %td.text-right
+              - if can?(:read, report)
+                %a.btn.btn-xs.btn-primary{:href => report_path(report)}= t('views.common.show')
+
+      - else
+        %tr
+          %td{:colspan => 5}
+            %h4.text-center= t('views.common.empty')

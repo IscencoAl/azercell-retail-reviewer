@@ -6,31 +6,6 @@
 .row
   .col-lg-offset-1.col-lg-10
     .panel.panel-default
-      .table-responsive
-        %table.table
-          %thead
-            %tr
-              %th= sortable(:shop, t('activerecord.attributes.report.shop'))
-              %th= sortable(:user, t('activerecord.attributes.report.user'))
-              %th= sortable(:created_at, t('activerecord.attributes.report.created_at'))
-              %th= sortable(:score, t('activerecord.attributes.report.score'))
-              %th
-
-          %tbody
-            - if @reports.any?
-              - @reports.each do |report|
-                %tr
-                  %td= report.shop.full_address
-                  %td= report.user.full_name
-                  %td= report.created_at.strftime("%d.%m.%Y %H:%M")
-                  %td= report.score
-                  %td.text-right
-                    - if can?(:read, report)
-                      %a.btn.btn-xs.btn-primary{:href => report_path(report)}= t('views.common.show')
-
-            - else
-              %tr
-                %td{:colspan => 5}
-                  %h4.text-center= t('views.common.empty')
+      = render "list"
 
     = paginate @reports

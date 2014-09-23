@@ -43,6 +43,11 @@
                 %td{:colspan => 5}
                   %h4.text-center= t('views.common.empty')
 
+%h3.text-center= t('views.reports.list')
+%br
 .row
-  =render 'reports'
+  .col-sm-12
+    .panel.panel-default
+      =render 'reports/list'
 
+    = paginate @reports

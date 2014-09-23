@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @reports = @user.reports.page(params[:page])
+    @reports = @user.reports.order('created_at DESC').page(params[:page])
   end
 
   # GET /users/new

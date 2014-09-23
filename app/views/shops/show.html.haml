@@ -14,4 +14,11 @@
     .col-sm-4
       = render 'shop_photos/slideshow', :shop => @shop
 
-= render 'reports'
+%h3.text-center= t('views.reports.list')
+%br
+.row
+  .col-sm-12 
+    .panel.panel-default
+      = render 'reports/list'
+
+    = paginate @reports
