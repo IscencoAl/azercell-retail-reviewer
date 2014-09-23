@@ -23,11 +23,12 @@
                   %td.text-right
                     .btn-toolbar
                       - if can?(:restore, region)
-                        = link_to t('views.common.restore'), restore_region_path(region), :class => 'btn btn-primary btn-xs'
-                      - if can?(:update, region)
-                        = link_to t('views.common.edit'), edit_region_path(region), :class => 'btn btn-xs btn-primary'
+                        = link_to t('views.common.restore'), restore_region_path(region), :class => 'btn btn-success btn-xs'
                       - if can?(:destroy, region)
                         = link_to t('views.common.delete'), region, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+                      - if can?(:update, region)
+                        = link_to t('views.common.edit'), edit_region_path(region), :class => 'btn btn-xs btn-primary'
+                        
             -else
               %tr
                 %td{:colspan => 2}

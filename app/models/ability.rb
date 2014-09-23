@@ -12,7 +12,10 @@ class Ability
       can :crud, Dealer, :is_deleted => false
       can :restore, Dealer, :is_deleted => true
 
-      can :crud, Region, :is_deleted => false
+      can [:create, :read, :update], Region, :is_deleted => false
+      can :destroy, Region do |region|
+        not region.is_deleted and region.cities.blank?
+      end
       can :restore, Region, :is_deleted => true
 
       can :read, Report
