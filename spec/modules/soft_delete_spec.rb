@@ -29,6 +29,27 @@ RSpec.shared_examples "soft deletable" do |factory, model|
     end
   end
 
+  describe ".with_deleted" do
+    context "when records are apsent" do
+      it "is blank" do
+        records = model.with_deleted
+
+        expect(records).to be_blank
+      end
+    end
+
+    context "when records exist" do
+      it "is not blank" do
+        record1 = create(factory, :deleted)
+        record2 = create(factory)
+
+        records = model.with_deleted
+
+        expect(Set.new(records)).to eq(Set.new([record1, record2]))
+      end
+    end
+  end
+
   describe "#soft_delete" do
     context "for existing record" do
       it "set is_deleted to false" do

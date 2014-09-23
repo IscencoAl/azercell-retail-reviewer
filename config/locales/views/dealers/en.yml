@@ -4,4 +4,4 @@ en:
       list: "Dealers"
       edit: "Edit dealer '%{name}'"
       new: "Add dealer"
-    
+      confirm: "Attention! After deleting the dealer all it's shops will be deleted too. Are you sure?"

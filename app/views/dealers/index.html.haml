@@ -34,7 +34,7 @@
                       - if can?(:update, dealer)
                         = link_to t('views.common.edit'), edit_dealer_path(dealer), :class => 'btn btn-primary btn-xs'
                       - if can?(:destroy, dealer)
-                        = link_to t('views.common.delete'), dealer, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+                        = link_to t('views.common.delete'), dealer, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.dealers.confirm') }
 
             - else 
               %tr

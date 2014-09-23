@@ -11,6 +11,10 @@ module Modules::SoftDelete
     def deleted
       rewhere(:is_deleted => true)
     end
+
+    def with_deleted
+      rewhere(:is_deleted => [true, false])
+    end
   end
   
   def soft_delete

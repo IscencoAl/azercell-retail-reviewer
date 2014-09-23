@@ -147,5 +147,17 @@ RSpec.describe Dealer, :type => :model do
       end
     end
   end
+
+  describe 'delete shops' do
+    it 'deletes all shops' do
+      dealer = create(:dealer)
+      shop = create(:shop, :dealer => dealer)
+
+      dealer.delete_shops
+      dealer.reload
+
+      expect(dealer.shops).to be_blank
+    end
+  end
   
 end

@@ -23,10 +23,9 @@
               - @shops.each do |shop|
                 %tr
                   %td= shop.type.name
-                  %td
-                    = link_to shop.full_address, shop
-                  %td= shop.dealer.name
-                  %td= shop.user.full_name
+                  %td= shop.is_deleted ? shop.full_address : link_to(shop.full_address, shop)
+                  %td= shop.dealer ? link_to(shop.dealer.name, shop.dealer) : '-'
+                  %td= shop.user ? link_to(shop.user.full_name, shop.user) : '-'
                   %td.text-right
                     .btn-toolbar
                       - if can?(:restore, shop)
