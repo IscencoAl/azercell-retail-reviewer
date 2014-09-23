@@ -11,7 +11,6 @@
           %thead
             %tr
               %th= sortable(:name, t('activerecord.attributes.user.name'))
-              %th= sortable(:surname, t('activerecord.attributes.user.surname'))
               %th= sortable(:email, t('activerecord.attributes.user.email'))
               %th= sortable(:role, t('activerecord.attributes.user.role'))
               %th.text-center= sortable(:subscription, t('activerecord.attributes.user.subscription'))
@@ -23,8 +22,10 @@
             - if @users.any?
               - @users.each do |user|
                 %tr
-                  %td= user.name
-                  %td= user.surname
+                  -if user.reviewer?
+                    %td= link_to user.full_name, user
+                  -else
+                    %td= user.full_name
                   %td= user.email
                   %td= user.role.name
                   %td.text-center
@@ -42,7 +43,7 @@
                         = link_to t('views.common.delete'), user, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
             -else
               %tr
-                %td{:colspan => 6}
+                %td{:colspan => 5}
                   %h4.text-center= t('views.common.empty')
 
     = paginate @users

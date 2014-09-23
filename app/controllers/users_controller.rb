@@ -9,6 +9,10 @@ class UsersController < ApplicationController
     @users = User.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
+  def show
+    @reports = @user.reports.order('created_at DESC').page(params[:page])
+  end
+
   # GET /users/new
   def new
   end
