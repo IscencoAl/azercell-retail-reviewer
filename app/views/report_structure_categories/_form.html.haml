@@ -4,7 +4,7 @@
 
     .col-sm-3
       .btn-toolbar.text-right
-        %a.btn.btn-sm.btn-primary{:href => "javascript:;", :data => {:savecategory => true}}
+        %a.btn.btn-sm.btn-default{:href => "javascript:;", :data => {:savecategory => true}}
           %span.glyphicon.glyphicon-ok
 
         %a.btn.btn-sm.btn-default{:href => @category.id ? report_structure_category_path(@category) : '', :data => {:showcategory => true}}

@@ -29,7 +29,8 @@
             %td= report.score
             %td.text-right
               - if can?(:read, report)
-                %a.btn.btn-xs.btn-primary{:href => report_path(report)}= t('views.common.show')
+                %a.btn.btn-xs.btn-default{:href => report_path(report), :title => t('views.common.show'), :data => {:toggle => "tooltip"}}
+                  %span.glyphicon.glyphicon-list
 
       - else
         %tr

@@ -32,8 +32,8 @@ class Shop < ActiveRecord::Base
   scope :by_address, -> (dir) { joins(:city).order("cities.name #{dir}, address #{dir}") }
   scope :by_score, -> (dir) {
     last_reports_sql = Report.select('distinct on(shop_id) *').order('shop_id, created_at desc').to_sql
-    joins("inner join (#{last_reports_sql}) as reports on reports.shop_id = shops.id")
-      .order("reports.score #{dir}")
+    joins("left outer join (#{last_reports_sql}) as reports on reports.shop_id = shops.id")
+      .order("reports.score #{dir} nulls last")
   }
 
   def full_address

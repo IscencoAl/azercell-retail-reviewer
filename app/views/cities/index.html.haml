@@ -14,7 +14,8 @@
               %th= sortable(:region, t('activerecord.attributes.city.region'))
               %th.text-right
                 - if can?(:create, City)
-                  = link_to t('views.common.add'), new_city_path, :class =>'btn btn-xs btn-primary'
+                  %a.btn.btn-default.btn-xs{:href => new_city_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
+                    %span.glyphicon.glyphicon-plus
 
           %tbody
             -if @cities.any?
@@ -23,13 +24,15 @@
                   %td= link_to city.name, city
                   %td= city.region ? link_to(city.region.name, city.region) : '-'
                   %td.text-right
-                    .btn-toolbar
-                      -if can?(:restore, city)
-                        = link_to t('views.common.restore'), restore_city_path(city), :class => 'btn btn-success btn-xs'
-                      -if can?(:destroy, city)
-                        = link_to t('views.common.delete'), city, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
-                      -if can?(:update, city)
-                        = link_to t('views.common.edit'), edit_city_path(city), :class => 'btn btn-xs btn-primary'
+                    - if can?(:restore, city)
+                      %a.btn.btn-default.btn-xs{:href => restore_city_path(city), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-ok
+                    - if can?(:destroy, city)
+                      %a.btn.btn-default.btn-xs{:href => city_path(city), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
+                        %span.glyphicon.glyphicon-remove
+                    - if can?(:update, city)
+                      %a.btn.btn-default.btn-xs{:href => edit_city_path(city), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-edit
 
             -else
               %tr

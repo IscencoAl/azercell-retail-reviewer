@@ -51,4 +51,9 @@ function handleElements($elem){
     });
   })
 
+  // Tooltips
+  $elem.find('[data-toggle="tooltip"]').each(function(index, elem){
+    $(elem).tooltip();
+  })
+
 }

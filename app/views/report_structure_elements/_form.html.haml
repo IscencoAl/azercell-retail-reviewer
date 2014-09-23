@@ -19,7 +19,7 @@
 
   .div-td.controls.text-right
     .btn-toolbar
-      %a.btn.btn-xs.btn-primary{:href => "javascript:;", :data => {:saveelement => true}}
+      %a.btn.btn-xs.btn-default{:href => "javascript:;", :data => {:saveelement => true}}
         %span.glyphicon.glyphicon-ok
 
       %a.btn.btn-xs.btn-default{:href => @element.id ? report_structure_element_path(@element) : '', :data => {:showelement => true}}

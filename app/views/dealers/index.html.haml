@@ -16,25 +16,27 @@
               %th= t('activerecord.attributes.dealer.email')
               %th.text-right
                 - if can?(:create, Dealer)
-                  %a.btn.btn-primary.btn-xs{:href => new_dealer_path}= t('views.common.add')
+                  %a.btn.btn-default.btn-xs{:href => new_dealer_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
+                    %span.glyphicon.glyphicon-plus
 
           %tbody
             - if @dealers.any?
               - @dealers.each do |dealer|
                 %tr
-                  %td
-                    = link_to dealer.name, dealer_path(dealer.id)
+                  %td= link_to dealer.name, dealer_path(dealer.id)
                   %td= dealer.contact_name
                   %td= dealer.phone_number
                   %td= dealer.email
                   %td.text-right
-                    .btn-toolbar
-                      - if can?(:restore, dealer)
-                        = link_to t('views.common.restore'), restore_dealer_path(dealer), :class => 'btn btn-primary btn-xs'
-                      - if can?(:update, dealer)
-                        = link_to t('views.common.edit'), edit_dealer_path(dealer), :class => 'btn btn-primary btn-xs'
-                      - if can?(:destroy, dealer)
-                        = link_to t('views.common.delete'), dealer, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.dealers.confirm') }
+                    - if can?(:restore, dealer)
+                      %a.btn.btn-default.btn-xs{:href => restore_dealer_path(dealer), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-ok
+                    - if can?(:update, dealer)
+                      %a.btn.btn-default.btn-xs{:href => edit_dealer_path(dealer), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-edit
+                    - if can?(:destroy, dealer)
+                      %a.btn.btn-default.btn-xs{:href => dealer_path(dealer), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.dealers.confirm')}}
+                        %span.glyphicon.glyphicon-remove
 
             - else 
               %tr
