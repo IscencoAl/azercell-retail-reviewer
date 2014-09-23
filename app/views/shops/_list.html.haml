@@ -1,0 +1,49 @@
+.table-responsive
+  %table.table.table-condensed.table-striped.table-vcentered
+    %thead
+      %tr
+        - if params[:controller] == 'shops'
+          %th= sortable(:type, t('activerecord.attributes.shop.type'))
+          %th= sortable(:address, t('activerecord.attributes.shop.address'))
+          %th= sortable(:dealer, t('activerecord.attributes.shop.dealer'))
+          %th= sortable(:user, t('activerecord.attributes.shop.user'))
+          %th= sortable(:score, t('activerecord.attributes.shop.score'))
+          %th.text-right
+            - if can?(:create, Shop)
+              = link_to t('views.common.add'), new_shop_path, :class =>'btn btn-xs btn-primary'
+        - else
+          %th= t('activerecord.attributes.shop.type')
+          %th= t('activerecord.attributes.shop.address')
+          - unless params[:controller] == 'dealers'
+            %th= t('activerecord.attributes.shop.dealer')
+          - unless params[:controller] == 'users'
+            %th= t('activerecord.attributes.shop.user')
+          %th= t('activerecord.attributes.shop.score')
+          %th.text-right
+            - if can?(:create, Shop)
+              = link_to t('views.common.add'), new_shop_path, :class =>'btn btn-xs btn-primary'
+
+
+    %tbody
+      - if @shops.any?
+        - @shops.each do |shop|
+          %tr.shop{:data => {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude}}
+            %td= shop.type.name
+            %td= shop.is_deleted ? shop.full_address : link_to(shop.full_address, shop)
+            - unless params[:controller] == 'dealers'
+              %td= shop.dealer ? link_to(shop.dealer.name, shop.dealer) : '-'
+            - unless params[:controller] == 'users'
+              %td= shop.user ? link_to(shop.user.full_name, shop.user) : '-'
+            %td= shop.score ? link_to(shop.score, shop.last_report) : "-"
+            %td.text-right
+              .btn-toolbar
+                - if can?(:restore, shop)
+                  = link_to t('views.common.restore'), restore_shop_path(shop), :class => 'btn btn-primary btn-xs'
+                - if can?(:update, shop)
+                  = link_to t('views.common.edit'), edit_shop_path(shop), :class => 'btn btn-xs btn-primary'
+                - if can?(:destroy, shop)
+                  = link_to t('views.common.delete'), shop, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+      - else
+        %tr
+          %td{:colspan => 6}
+            %h4.text-center= t('views.common.empty')

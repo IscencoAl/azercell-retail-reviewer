@@ -244,6 +244,30 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
+  describe '.by_score' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        a = create(:shop)
+        create(:report, :shop => a, :score => 1)
+        b = create(:shop)
+        create(:report, :shop => b, :score => 2)
+
+        expect(Shop.by_score('asc')).to eq([a, b])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        a = create(:shop)
+        create(:report, :shop => a, :score => 1)
+        b = create(:shop)
+        create(:report, :shop => b, :score => 2)
+
+        expect(Shop.by_score('desc')).to eq([b, a])
+      end
+    end
+  end
+
   describe '#full_address' do
     it 'returns full address' do
       city = create(:city, :name => "Gorod")
