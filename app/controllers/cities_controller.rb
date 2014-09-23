@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
   load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  skip_load_resource :only => [:restore, :restore_info]
 
   helper_method :sorting_params
   
@@ -51,17 +51,26 @@ class CitiesController < ApplicationController
   # GET /cities/1/restore
   def restore
     @city = City.deleted.find(params[:id])
-    @city.restore
+  end
 
-    flash[:success] = t('controllers.cities.restored', name: @city.name)
-    redirect_to cities_url
+  # GET /cities/1/restore_info
+  def restore_info
+    @city = City.deleted.find(params[:id])
+
+    if @city.update(city_params)
+      @city.restore
+      flash[:success] = t('controllers.cities.restored', name: @city.name)
+      redirect_to cities_url
+    else
+      render :restore
+    end
   end
 
   private
 
     # Only allow a trusted parameter "white list" through.
     def city_params
-      params.require(:city).permit(:name, :region_id, :is_deleted)
+      params.require(:city).permit(:name, :region_id)
     end
 
     def filtering_params

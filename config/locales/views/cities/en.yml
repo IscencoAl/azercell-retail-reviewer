@@ -4,4 +4,4 @@ en:
       list: "Cities"
       edit: "Edit city '%{name}'"
       new: "Add city"
- 
+      restore: "Restore city '%{name}'"

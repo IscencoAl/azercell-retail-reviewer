@@ -25,11 +25,12 @@
                   %td.text-right
                     .btn-toolbar
                       -if can?(:restore, city)
-                        = link_to t('views.common.restore'), restore_city_path(city), :class => 'btn btn-primary btn-xs'
-                      -if can?(:update, city)
-                        = link_to t('views.common.edit'), edit_city_path(city), :class => 'btn btn-xs btn-primary'
+                        = link_to t('views.common.restore'), restore_city_path(city), :class => 'btn btn-success btn-xs'
                       -if can?(:destroy, city)
                         = link_to t('views.common.delete'), city, :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t('views.common.confirm') }
+                      -if can?(:update, city)
+                        = link_to t('views.common.edit'), edit_city_path(city), :class => 'btn btn-xs btn-primary'
+
             -else
               %tr
                 %td{:colspan => 3}

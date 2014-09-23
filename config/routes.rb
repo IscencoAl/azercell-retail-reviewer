@@ -2,13 +2,14 @@ Rails.application.routes.draw do
 
   scope "(:locale)" do
     resources :cities
-    get '/cities/:id/cities', :to => 'cities#restore', :id => /\d+/, :as => 'restore_city'
+    get '/cities/:id/restore', :to => 'cities#restore', :id => /\d+/, :as => 'restore_city'
+    patch '/cities/:id/restore_info', :to => 'cities#restore_info', :id => /\d+/, :as => 'restore_info_city'
 
     resources :dealers
-    get '/dealers/:id/dealers', :to => 'dealers#restore', :id => /\d+/, :as => 'restore_dealer'
+    get '/dealers/:id/restore', :to => 'dealers#restore', :id => /\d+/, :as => 'restore_dealer'
     
     resources :regions
-    get '/regions/:id/regions', :to => 'regions#restore', :id => /\d+/, :as => 'restore_region'
+    get '/regions/:id/restore', :to => 'regions#restore', :id => /\d+/, :as => 'restore_region'
 
     get '/reports', to: 'reports#index', as: 'reports'
     get '/reports/:id', to: 'reports#show', :id => /\d+/, as: 'report'

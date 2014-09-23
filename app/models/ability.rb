@@ -6,8 +6,11 @@ class Ability
     alias_action :create, :read, :update, :destroy, :to => :crud
     
     if user.admin?
-      can :crud, City, :is_deleted => false
-      can :restore, City, :is_deleted => true
+      can [:create, :read, :update], City, :is_deleted => false
+      can :destroy, City do |city|
+        not city.is_deleted and city.shops.blank?
+      end
+      can [:restore, :restore_info], City, :is_deleted => true
 
       can :crud, Dealer, :is_deleted => false
       can :restore, Dealer, :is_deleted => true
