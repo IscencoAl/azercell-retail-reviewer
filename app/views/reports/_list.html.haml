@@ -22,9 +22,9 @@
         - @reports.each do |report|
           %tr
             - unless params[:controller] == "shops"
-              %td= report.shop.full_address
+              %td= report.shop.is_deleted ? report.shop.full_address : link_to(report.shop.full_address, report.shop)
             - unless params[:controller] == "users"
-              %td= report.user.full_name
+              %td= report.user.is_deleted ? report.user.full_name : link_to(report.user.full_name, report.user)
             %td= report.created_at.strftime("%d.%m.%Y %H:%M")
             %td= report.score
             %td.text-right

@@ -15,17 +15,19 @@ class DealersController < ApplicationController
 
   # GET /dealers/new
   def new
+    session[:return_to] = request.referer
   end
 
   # GET /dealers/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /dealers
   def create
     if @dealer.save
       flash[:success] = t('controllers.dealers.created', name: @dealer.name)
-      redirect_to dealers_url
+      redirect_to session.delete(:return_to)
     else
       render :new
     end
@@ -35,7 +37,7 @@ class DealersController < ApplicationController
   def update
     if @dealer.update(dealer_params)
       flash[:success] = t('controllers.dealers.updated', name: @dealer.name)
-      redirect_to dealers_url
+      redirect_to session.delete(:return_to)
     else
       render :edit
     end
@@ -45,7 +47,7 @@ class DealersController < ApplicationController
   def destroy
     @dealer.soft_delete
     flash[:success] = t('controllers.dealers.destroyed', name: @dealer.name)
-    redirect_to dealers_url
+    redirect_to request.referer
   end
 
   # GET /regions/1/restore
@@ -54,7 +56,7 @@ class DealersController < ApplicationController
     @dealer.restore
 
     flash[:success] = t('controllers.dealers.restored', name: @dealer.name)
-    redirect_to dealers_url
+    redirect_to request.referer
   end
 
   private

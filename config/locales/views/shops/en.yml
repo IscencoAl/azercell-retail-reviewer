@@ -4,4 +4,5 @@ en:
       list: "Shops"
       edit: "Edit shop '%{name}'"
       new: "Add shop"
+      restore: "Restore shop '%{name}'"
       add_photo: "Add photo"

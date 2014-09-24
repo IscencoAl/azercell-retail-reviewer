@@ -15,17 +15,19 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    session[:return_to] = request.referer
   end
 
   # GET /users/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /users
   def create
     if @user.save
       flash[:success] = t('controllers.users.created', name: @user.full_name)
-      redirect_to users_url
+      redirect_to session.delete(:return_to)
     else
       render :new
     end
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = t('controllers.users.updated', name: @user.full_name)
-      redirect_to users_url
+      redirect_to session.delete(:return_to)
     else
       render :edit
     end
@@ -50,7 +52,7 @@ class UsersController < ApplicationController
     @user.soft_delete
 
     flash[:success] = t('controllers.users.destroyed', name: @user.full_name)
-    redirect_to users_url
+    redirect_to request.referer
   end
 
   # GET /users/1/restore
@@ -59,7 +61,7 @@ class UsersController < ApplicationController
     @user.restore
 
     flash[:success] = t('controllers.users.restored', name: @user.full_name)
-    redirect_to users_url
+    redirect_to request.referer
   end
 
   private

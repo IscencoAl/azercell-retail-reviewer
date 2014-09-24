@@ -20,7 +20,7 @@
       %td= link_to @shop.dealer.name, @shop.dealer
     %tr
       %td= t('activerecord.attributes.shop.user')
-      %td= link_to @shop.user.full_name, @shop.user
+      %td= @shop.user ? link_to(@shop.user.full_name, @shop.user) : '-'
     %tr
       %td= t('activerecord.attributes.shop.score')
       %td= @shop.score ? link_to(@shop.score, @shop.last_report) : '-'

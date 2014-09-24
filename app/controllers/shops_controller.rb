@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  skip_load_resource :only => [:restore, :restore_info]
 
   helper_method :sorting_params
 
@@ -16,6 +16,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/new
   def new
+    session[:return_to] = request.referer
   end
 
   # GET /shops/1/edit
@@ -27,7 +28,7 @@ class ShopsController < ApplicationController
   def create
     if @shop.save
       flash[:success] = t('controllers.shops.created', name: @shop.full_address)
-      redirect_to shops_url
+      redirect_to session.delete(:return_to)
     else
       render :new
     end
@@ -48,16 +49,26 @@ class ShopsController < ApplicationController
     @shop.soft_delete
 
     flash[:success] = t('controllers.shops.destroyed', name: @shop.full_address)
-    redirect_to shops_url
+    redirect_to request.referer
   end
 
-   # GET /shops/1/restore
+  # GET /shops/1/restore
   def restore
+    session[:return_to] = request.referer
     @shop = Shop.deleted.find(params[:id])
-    @shop.restore
+  end
 
-    flash[:success] = t('controllers.shops.restored', name: @shop.full_address)
-    redirect_to shops_url
+  # GET /shops/1/restore_info
+  def restore_info
+    @shop = Shop.deleted.find(params[:id])
+    
+    if @shop.update(shop_params)
+      @shop.restore
+      flash[:success] = t('controllers.shops.restored', name: @shop.full_address)
+      redirect_to session.delete(:return_to)
+    else
+      render :restore
+    end
   end
 
   # GET /shops/1/info
@@ -70,7 +81,7 @@ class ShopsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def shop_params
-      params.require(:shop).permit(:type_id, :city_id, :address, :latitude, :longitude,
+      params.require(:shop).permit(:shop_type_id, :city_id, :address, :latitude, :longitude,
         :dealer_id, :square_footage, :user_id, :is_deleted)
     end
 

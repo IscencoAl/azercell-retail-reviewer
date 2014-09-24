@@ -14,17 +14,19 @@ class ShopTypesController < ApplicationController
 
   # GET /shop_types/new
   def new
+    session[:return_to] = request.referer
   end
 
   # GET /shop_types/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /shop_types
   def create
     if @shop_type.save
       flash[:success] = t('controllers.shop_types.created', name: @shop_type.name)
-      redirect_to shop_types_url
+      redirect_to session.delete(:return_to)
     else
       render :new
     end
@@ -34,7 +36,7 @@ class ShopTypesController < ApplicationController
   def update
     if @shop_type.update(shop_type_params)
       flash[:success] = t('controllers.shop_types.updated', name: @shop_type.name)
-      redirect_to shop_types_url
+      redirect_to session.delete(:return_to)
     else
       render :edit
     end
@@ -44,15 +46,16 @@ class ShopTypesController < ApplicationController
   def destroy
     @shop_type.soft_delete
     flash[:success] = t('controllers.shop_types.destroyed', name: @shop_type.name)
-    redirect_to shop_types_url
+    redirect_to request.referer
   end
+  
   # GET /shop_types/1/restore
   def restore
     @shop_type = ShopType.deleted.find(params[:id])
     @shop_type.restore
 
     flash[:success] = t('controllers.shop_types.restored', name: @shop_type.name)
-    redirect_to shop_types_url
+    redirect_to request.referer
   end
 
   private

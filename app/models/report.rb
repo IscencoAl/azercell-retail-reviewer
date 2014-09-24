@@ -9,8 +9,8 @@ class Report < ActiveRecord::Base
   validates :score, :presence => true
   validates :created_at, :presence => true
 
-  belongs_to :user
-  belongs_to :shop
+  belongs_to :user, -> { with_deleted }
+  belongs_to :shop, -> { with_deleted }
 
   has_one :city, :through => :shop
 

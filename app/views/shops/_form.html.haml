@@ -26,7 +26,7 @@
         #map_canvas.map-container
 
   .col-sm-6
-    = simple_form_for @shop, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+    = simple_form_for @shop, :url => (action if defined?(action)), :html => {:class => 'form-horizontal', :role => 'form'} do |f|
 
       = f.association :type
       = f.association :city
@@ -35,8 +35,8 @@
       = f.input :longitude
       = f.association :dealer
       = f.input :square_footage
-      = f.association :user
+      = f.association :user, :collection => UserRole.reviewer.users.map{ |u| [u.full_name, u.id] }
 
       .btn-toolbar.text-center
         = f.button :submit, t('views.common.save')
-        = link_to t('views.common.cancel'), :back, :class => "btn btn-default"
+        = link_to t('views.common.cancel'), session[:return_to], :class => "btn btn-default"

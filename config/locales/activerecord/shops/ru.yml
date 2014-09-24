@@ -19,7 +19,7 @@ ru:
       models:
         shop:
           attributes:
-            shop_type:
+            type:
               blank: "не может быть пустым"
             city:
                 blank: "не может быть пустым"

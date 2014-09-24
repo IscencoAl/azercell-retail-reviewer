@@ -6,7 +6,7 @@ class Shop < ActiveRecord::Base
   belongs_to :type, :class_name => 'ShopType', :foreign_key => 'shop_type_id'
   belongs_to :city
   belongs_to :dealer
-  belongs_to :user
+  belongs_to :user, -> { where(:role => UserRole.reviewer) }
 
   has_one :region, :through => :city
 
@@ -37,11 +37,16 @@ class Shop < ActiveRecord::Base
   }
 
   def full_address
-    [city.name, address].join(', ')
+    City.unscoped do
+      [city.name, address].join(', ')
+    end
   end
 
   def full_address_was
-    [city.name_was, address_was].join(', ')
+    City.unscoped do
+      city_was = Shop.with_deleted.find(self.id).city
+      [city_was.name, address_was].join(', ')
+    end
   end
 
   def score

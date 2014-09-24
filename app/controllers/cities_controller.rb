@@ -15,17 +15,19 @@ class CitiesController < ApplicationController
 
   # GET /cities/new
   def new
+    session[:return_to] = request.referer
   end
 
   # GET /cities/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /cities
   def create
     if @city.save
       flash[:success] = t('controllers.cities.created', name: @city.name)
-      redirect_to cities_url
+      redirect_to session.delete(:return_to)
     else
       render :new
     end
@@ -35,7 +37,7 @@ class CitiesController < ApplicationController
   def update
     if @city.update(city_params)
       flash[:success] = t('controllers.cities.updated', name: @city.name)
-      redirect_to cities_url
+      redirect_to session.delete(:return_to)
     else
       render :edit
     end
@@ -45,12 +47,13 @@ class CitiesController < ApplicationController
   def destroy
     @city.soft_delete
     flash[:success] = t('controllers.cities.destroyed', name: @city.name)
-    redirect_to cities_url
+    redirect_to request.referer
   end
 
   # GET /cities/1/restore
   def restore
     @city = City.deleted.find(params[:id])
+    session[:return_to] = request.referer
   end
 
   # GET /cities/1/restore_info
@@ -60,7 +63,7 @@ class CitiesController < ApplicationController
     if @city.update(city_params)
       @city.restore
       flash[:success] = t('controllers.cities.restored', name: @city.name)
-      redirect_to cities_url
+      redirect_to session.delete(:return_to)
     else
       render :restore
     end

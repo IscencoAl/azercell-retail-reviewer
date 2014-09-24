@@ -15,17 +15,19 @@ class RegionsController < ApplicationController
 
   # GET /regions/new
   def new
+    session[:return_to] = request.referer
   end
 
   # GET /regions/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /regions
   def create
     if @region.save
       flash[:success] = t('controllers.regions.created', name: @region.name)
-      redirect_to regions_url
+      redirect_to session.delete(:return_to)
     else
       render :new
     end
@@ -35,7 +37,7 @@ class RegionsController < ApplicationController
   def update
     if @region.update(region_params)
       flash[:success] = t('controllers.regions.updated', name: @region.name)
-      redirect_to regions_url
+      redirect_to session.delete(:return_to)
     else
       render :edit
     end
@@ -45,7 +47,7 @@ class RegionsController < ApplicationController
   def destroy
     @region.soft_delete
     flash[:success] = t('controllers.regions.destroyed', name: @region.name)
-    redirect_to regions_url
+    redirect_to request.referer
   end
   
   # GET /regions/1/restore
@@ -54,7 +56,7 @@ class RegionsController < ApplicationController
     @region.restore
 
     flash[:success] = t('controllers.regions.restored', name: @region.name)
-    redirect_to regions_url
+    redirect_to request.referer
   end
 
   private

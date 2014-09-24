@@ -26,10 +26,13 @@ class Ability
       can :change, :report_structure
 
       can :crud, Shop, :is_deleted => false
-      can :restore, Shop, :is_deleted => true
+      can [:restore, :restore_info], Shop, :is_deleted => true
       can :info, Shop
 
-      can :crud, ShopType, :is_deleted => false
+      can [:create, :read, :update], ShopType, :is_deleted => false
+      can :destroy, ShopType do |type|
+        not type.is_deleted and type.shops.blank?
+      end
       can :restore, ShopType, :is_deleted => true
 
       can :crud, User, :is_deleted => false
