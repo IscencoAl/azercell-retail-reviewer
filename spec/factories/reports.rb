@@ -15,7 +15,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :exisiting_report_with_elements, :class => Report do
+  factory :report_with_existing_elements, :class => Report do
     created_at { Time.now }
     latitude { rand(38.448265..41.884439) }
     longitude { rand(44.770598..50.365260) }

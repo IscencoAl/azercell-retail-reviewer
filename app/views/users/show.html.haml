@@ -12,7 +12,7 @@
       .col-md-6
         .panel.panel-default
           - @shops = @user.shops
-          = render 'shops/list'
+          = render 'shops/list', :max_height => 450
 
 %h3.text-center= t('views.reports.list')
 %br

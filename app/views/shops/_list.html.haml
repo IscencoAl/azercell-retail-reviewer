@@ -1,4 +1,4 @@
-.table-responsive{:style =>"max-height:450px"}
+.table-responsive{:style => ("max-height:#{max_height}px;" if defined?(max_height))}
   %table.table.table-condensed.table-striped.table-vcentered
     %thead
       %tr
