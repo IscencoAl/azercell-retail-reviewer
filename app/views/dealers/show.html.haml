@@ -4,13 +4,12 @@
 %h2.text-center= @dealer.name
 %br
 
-.row
-  .col-sm-6
-    .panel.panel-default
-      .panel-body
+.panel.panel-default
+  .panel-body
+    .row
+      .col-md-6
         %div#map_canvas.map-container-lg
-
-  .col-sm-6
-    .panel.panel-default
-      - @shops = @dealer.shops
-      = render 'shops/list'
+      .col-md-6
+        .panel.panel-default
+          - @shops = @dealer.shops
+          = render 'shops/list'
