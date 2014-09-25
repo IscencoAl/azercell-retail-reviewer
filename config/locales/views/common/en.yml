@@ -13,3 +13,5 @@ en:
       empty: "No matching records found"
       all: "All"
       filter: "Filter"
+      best: "Best"
+      worst: "Worst"

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
     resources :dealers
     get '/dealers/:id/restore', :to => 'dealers#restore', :id => /\d+/, :as => 'restore_dealer'
-    
+
     resources :regions
     get '/regions/:id/restore', :to => 'regions#restore', :id => /\d+/, :as => 'restore_region'
 
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get '/users/:id/restore', :to => 'users#restore', :id => /\d+/, :as => 'restore_user'
   end
 
-  root 'users#index'
-  get '/:locale' => 'users#index'
+  root 'dashboard#index'
+  get '/:locale' => 'dashboard#index'
 
 end
