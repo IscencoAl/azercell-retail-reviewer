@@ -4,10 +4,25 @@ class ChartsController < ApplicationController
     data = Chart.reports_score(params[:filter], 20)
 
     render :json => {
-      type: 'one_line',
+      type: 'line',
       options: {
         title: t('controllers.charts.last_scores'),
         vAxis: { minValue: 0, maxValue: 5 },
+        legend: { position: 'none' }
+      },
+      table: data
+    }
+  end
+
+  # GET /charts/reports_count
+  def reports_count
+    data = Chart.reports_count(params[:filter], 30)
+
+    render :json => {
+      type: 'column',
+      options: {
+        title: t('controllers.charts.reports_count'),
+        vAxis: { minValue: 0 },
         legend: { position: 'none' }
       },
       table: data
