@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917091600) do
+ActiveRecord::Schema.define(version: 20140925123622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140917091600) do
     t.string  "phone_number"
     t.string  "email"
     t.boolean "is_deleted"
+    t.decimal "score",        precision: 5, scale: 2
   end
 
   create_table "regions", force: true do |t|
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 20140917091600) do
     t.decimal "square_footage", precision: 8, scale: 2
     t.integer "user_id"
     t.boolean "is_deleted"
+    t.decimal "score",          precision: 5, scale: 2
   end
 
   add_index "shops", ["city_id"], name: "index_shops_on_city_id", using: :btree

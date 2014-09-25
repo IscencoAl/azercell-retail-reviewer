@@ -13,9 +13,12 @@ class Report < ActiveRecord::Base
   belongs_to :shop, -> { with_deleted }
 
   has_one :city, :through => :shop
+  has_one :dealer, :through => :shop
 
   has_many :elements, :class_name => 'ReportElement', :dependent => :destroy
   has_many :photos, :class_name => 'ReportPhoto', :dependent => :destroy
+
+  after_create :update_scores
 
   scope :with_user, -> (user) { where(:user => user) }
   scope :with_shop, -> (shop) { where(:shop => shop) }
@@ -31,5 +34,12 @@ class Report < ActiveRecord::Base
 
   def structured
     elements.group_by(&:category)
+  end
+
+  def update_scores
+    self.shop.update_attribute(:score, self.score)
+
+    avg_score = dealer.shops.average(:score)
+    dealer.update_attribute(:score, avg_score)
   end
 end
