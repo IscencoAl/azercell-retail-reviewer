@@ -1,21 +1,39 @@
 = javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp"
+= javascript_include_tag "http://www.google.com/jsapi"
 = javascript_include_tag "maps/shop_show"
+= javascript_include_tag "chart_helper"
+
+:javascript
+  google.load("visualization", "1", {packages:["corechart"]});
 
 = stylesheet_link_tag "shops"
 
 .well.well-sm
   .row
-    .col-sm-4
-      #map_canvas.map-container{:data => {:lat => @shop.latitude, :lng => @shop.longitude}}
+    .col-md-4.col-sm-12
+      .panel.panel-default
+        #map_canvas.map-container{:data => {:lat => @shop.latitude, :lng => @shop.longitude}}
 
-    .col-sm-4
-      = render 'info'
+    .col-md-4.col-sm-6
+      .panel.panel-default
+        = render 'info'
+      .btn-toolbar.text-center
+        - if can?(:update, @shop)
+          %a.btn.btn-default.btn-sm{:href => edit_shop_path(@shop)}= t('views.common.edit')
+        - if can?(:destroy, @shop)
+          %a.btn.btn-default.btn-sm{:href => shop_path(@shop), :data => {:method => 'delete', :confirm => t('views.common.confirm')}}= t('views.common.delete')
       
-    .col-sm-4
-      = render 'shop_photos/slideshow', :shop => @shop
+    .col-md-4.col-sm-6
+      .panel.panel-default
+        = render 'shop_photos/slideshow', :shop => @shop
 
 %h3.text-center= t('views.reports.list')
-%br
+
+- if @reports.any?
+  .row
+    .col-sm-12
+      = render 'layouts/chart', :container_id => 'score-chart', :source => reports_score_chart_path, :extra_params => {:filter => {:shop => @shop.id}}
+
 .row
   .col-sm-12 
     .panel.panel-default

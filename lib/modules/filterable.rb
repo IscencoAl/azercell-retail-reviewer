@@ -3,6 +3,7 @@ module Modules::Filterable
 
   module ClassMethods
     def filter(filtering_params)
+      filtering_params = filtering_params || {}
       results = self.where(nil)
 
       filtering_params.each do |key, value|

@@ -1,0 +1,4 @@
+en:
+  controllers:
+    charts:
+      last_scores: "Last Scores"
