@@ -20,7 +20,7 @@
             -if @shop_types.any?
               - @shop_types.each do |shop_type|
                 %tr
-                  %td= shop_type.name
+                  %td= link_to shop_type.name, shops_url(:filter => {:type => shop_type.id})
                   %td= shop_type.abbreviation
                   %td.text-right
                     - if can?(:restore, shop_type)

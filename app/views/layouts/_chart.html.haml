@@ -1,0 +1,7 @@
+- extra_params = defined?(extra_params) ? extra_params.to_json : {}
+
+.panel.panel-default
+  %div.chart-container{:id => container_id, :data => {:source => source, :params => extra_params}}
+
+  :javascript
+    new ChartHelper("#" + "#{container_id}");

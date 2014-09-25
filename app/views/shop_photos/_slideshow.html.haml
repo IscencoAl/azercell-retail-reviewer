@@ -15,5 +15,5 @@
     %a.right.carousel-control{:href => "#shop-photos", :role => "button", :data => {:slide => "next"}}
       %span.glyphicon.glyphicon-chevron-right
 - else
-  %br
-  %h3.text-center= t('views.shop_photos.no_photo')
+  #shop-photos
+    %h3.placeholder.text-center= t('views.shop_photos.no_photo')

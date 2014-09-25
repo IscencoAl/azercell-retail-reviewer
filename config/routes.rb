@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   scope "(:locale)" do
+    get '/charts/:id/reports_score', :to => 'charts#reports_score', :id => /\d+/, :as => 'reports_score_chart'
+
     resources :cities
     get '/cities/:id/restore', :to => 'cities#restore', :id => /\d+/, :as => 'restore_city'
     patch '/cities/:id/restore_info', :to => 'cities#restore_info', :id => /\d+/, :as => 'restore_info_city'

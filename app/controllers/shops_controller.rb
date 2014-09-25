@@ -11,7 +11,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/1
   def show
-    @reports = @shop.reports.order('created_at DESC').page(params[:page])
+    @reports = @shop.reports.by_created_at('DESC').page(params[:page]).per(10)
   end
 
   # GET /shops/new

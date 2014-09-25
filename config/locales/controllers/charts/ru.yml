@@ -1,0 +1,4 @@
+ru:
+  controllers:
+    charts:
+      last_scores: "Последние оценки"
