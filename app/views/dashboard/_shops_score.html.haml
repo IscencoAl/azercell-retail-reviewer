@@ -1,0 +1,12 @@
+.table-responsive
+  %table.table.table-condensed.table-striped.table-vcentered
+    %thead
+      %tr
+        %th{:class => "#{title == "best" ? "text-success" : "text-danger"}"}= t("views.common.#{title}")
+        %th
+
+    %tbody
+      - shops.each do |shop|
+        %tr
+          %td= link_to shop.full_address, shop
+          %td.text-right= shop.score

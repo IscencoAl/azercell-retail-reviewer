@@ -238,4 +238,37 @@ RSpec.describe Report, :type => :model do
     end
   end
 
+  describe '#update_scores' do
+    it 'updates shop score' do
+      shop = create(:shop)
+      report = create(:report, :shop => shop, :score => 2.1)
+
+      expect(shop.score).to eq(2.1)
+
+    end
+    context 'when all shops have score' do
+      it 'updates dealer score' do
+        dealer = create(:dealer)
+        shop1 = create(:shop, :dealer => dealer)
+        shop2 = create(:shop, :dealer => dealer)
+        report = create(:report, :shop => shop1, :score => 2)
+        report = create(:report, :shop => shop2, :score => 4)
+
+        dealer.reload
+        expect(dealer.score).to eq(3)
+      end
+    end
+
+    context 'when some shop have no score' do
+      it 'updates dealer score' do
+        dealer = create(:dealer)
+        shop1 = create(:shop, :dealer => dealer)
+        shop2 = create(:shop, :dealer => dealer)
+        report = create(:report, :shop => shop1, :score => 2)
+        
+        dealer.reload
+        expect(dealer.score).to eq(2)
+      end
+    end
+  end
 end
