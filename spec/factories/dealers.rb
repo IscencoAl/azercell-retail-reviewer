@@ -7,6 +7,7 @@ FactoryGirl.define do
     phone_number { Faker::Number.number(9)}
     email { Faker::Internet.email }
     is_deleted false
+    score { rand(0..5) }
 
     trait :deleted do
       is_deleted true

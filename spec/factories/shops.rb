@@ -9,8 +9,9 @@ FactoryGirl.define do
     longitude { rand(44.770598..50.365260) }
     dealer
     square_footage { Faker::Number.number(3) }
-    user
+    association :user, :factory => [:user, :reviewer] 
     is_deleted false
+    score { rand(0..5) }
 
     trait :invalid do
       address nil

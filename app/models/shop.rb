@@ -30,11 +30,7 @@ class Shop < ActiveRecord::Base
   scope :by_dealer, -> (dir) { joins(:dealer).order("dealers.name #{dir}") }
   scope :by_user, -> (dir) { joins(:user).order("users.name #{dir}") }
   scope :by_address, -> (dir) { joins(:city).order("cities.name #{dir}, address #{dir}") }
-  scope :by_score, -> (dir) {
-    last_reports_sql = Report.select('distinct on(shop_id) *').order('shop_id, created_at desc').to_sql
-    joins("left outer join (#{last_reports_sql}) as reports on reports.shop_id = shops.id")
-      .order("reports.score #{dir} nulls last")
-  }
+  scope :by_score, -> (dir) { order("score #{dir} nulls last")}
 
   def full_address
     City.unscoped do
@@ -47,10 +43,6 @@ class Shop < ActiveRecord::Base
       city_was = Shop.with_deleted.find(self.id).city
       [city_was.name, address_was].join(', ')
     end
-  end
-
-  def score
-    return last_report.score if last_report
   end
 
   def last_report

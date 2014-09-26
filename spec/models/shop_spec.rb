@@ -187,8 +187,8 @@ RSpec.describe Shop, :type => :model do
   describe '.by_user' do
     context 'when asc' do
       it 'sorts ascending' do
-        a = create(:shop, :user => create(:user, :name => "A"))
-        b = create(:shop, :user => create(:user, :name => "B"))
+        a = create(:shop, :user => create(:user, :reviewer, :name => "A"))
+        b = create(:shop, :user => create(:user, :reviewer, :name => "B"))
 
         expect(Shop.by_user('asc')).to eq([a, b])
       end
@@ -196,8 +196,8 @@ RSpec.describe Shop, :type => :model do
 
     context 'when desc' do
       it 'sorts descending' do
-        a = create(:shop, :user => create(:user, :name => "A"))
-        b = create(:shop, :user => create(:user, :name => "B"))
+        a = create(:shop, :user => create(:user, :reviewer, :name => "A"))
+        b = create(:shop, :user => create(:user, :reviewer, :name => "B"))
 
         expect(Shop.by_user('desc')).to eq([b, a])
       end

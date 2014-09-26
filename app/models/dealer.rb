@@ -13,6 +13,7 @@ class Dealer < ActiveRecord::Base
 
   scope :by_name, -> (dir) { order("name #{dir}") }
   scope :by_contact_name, -> (dir) { order("contact_name #{dir}") }
+  scope :by_score, -> (dir) { order("score #{dir} nulls last")}
 
   before_soft_delete :delete_shops
 

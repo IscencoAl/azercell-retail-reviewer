@@ -148,6 +148,26 @@ RSpec.describe Dealer, :type => :model do
     end
   end
 
+  describe '.by_score' do
+    context 'when asc' do
+      it 'sorts ascending' do
+        dealer1 = create(:dealer, :score => 1)
+        dealer2 = create(:dealer, :score => 2)
+
+        expect(Dealer.by_score('asc')).to eq([dealer1, dealer2])
+      end
+    end
+
+    context 'when desc' do
+      it 'sorts descending' do
+        dealer1 = create(:dealer, :score => 1)
+        dealer2 = create(:dealer, :score => 2)
+
+        expect(Dealer.by_score('desc')).to eq([dealer2, dealer1])
+      end
+    end
+  end
+
   describe 'delete shops' do
     it 'deletes all shops' do
       dealer = create(:dealer)
