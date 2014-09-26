@@ -1,5 +1,8 @@
 en:
   activerecord:
+    models:
+      shop: "Shop"
+
     attributes:
       shop:
         type: "Type"

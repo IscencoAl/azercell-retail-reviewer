@@ -2,6 +2,7 @@ en:
   activerecord:
     models:
       user: "User"
+      reviewer: "Reviewer"
 
     attributes:
       user:

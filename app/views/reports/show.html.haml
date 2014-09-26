@@ -1,14 +1,51 @@
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp"
+= javascript_include_tag "maps/report_show"
+= stylesheet_link_tag "shops"
+
 .row
   .col-lg-offset-1.col-lg-10
+    .well.well-sm
+      .row
+        .col-sm-6
+          .panel.panel-default
+            = render 'shop_photos/slideshow', :shop => @report.shop
 
-    .galery-wrapper.panel.panel-default{:class => "#{"hidden" if @report.photos.blank?}"}
-      .panel-body
-        .galery.row
-          - @report.photos.each do |photo|
-            .col-sm-2.photo
-              %a.thumbnail{:target => "_blank", :href => photo.photo}
-                %img.img-responsive{:src => photo.photo}
+        .col-sm-6
+          %h3.text-center= t('views.reports.shop_info')
+          .panel.panel-default
+            = render 'shops/info', :shop => @report.shop
 
+.row
+  .col-lg-offset-1.col-lg-10
+    .row
+      .col-sm-6
+        %h3= "#{t('views.reports.report_score')}: #{@report.score}"
+        %hr
+
+        %address
+          = "#{t('activerecord.models.reviewer')}: "
+          %br
+          = "#{t('activerecord.attributes.user.name')}: "
+          %strong= @report.user.full_name
+          %br
+          = "#{t('activerecord.attributes.user.email')}: "
+          = @report.user.email
+          %br
+          = mail_to @report.user.email, t('views.common.send_mail'), :subject => "Report for '#{@report.shop.full_address}' completed at #{@report.created_at.strftime("%d %b %Y %H:%M")}", :body => "Report: #{report_url(@report)}"
+        %hr
+
+        %address
+          = "#{t('activerecord.attributes.report.created_at')}: "
+          = @report.created_at.strftime("%d %b %Y %H:%M")
+
+      .col-sm-6
+        .panel.panel-default
+          #map_canvas.map-container{:data => {:markers => [{:lat => @report.shop.latitude, :lng => @report.shop.longitude, :tooltip => t('activerecord.models.shop')}, {:lat => @report.latitude, :lng => @report.longitude, :tooltip => t('activerecord.models.report')}].to_json}}
+
+%hr
+
+.row
+  .col-lg-offset-1.col-lg-10
     - @report.structured.each do |category, elements|
       .panel.panel-default
         .panel-heading
@@ -22,3 +59,5 @@
                   = e.name
                 .col-xs-6.text-right
                   = e.value
+
+    = render 'report_photos/galery', :photos => @report.photos

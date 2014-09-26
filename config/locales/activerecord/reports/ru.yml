@@ -1,5 +1,8 @@
 ru:
   activerecord:
+    models:
+      report: "Отчет"
+
     attributes:
       report:
         city: "Город"

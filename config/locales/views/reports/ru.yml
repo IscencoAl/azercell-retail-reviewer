@@ -3,3 +3,5 @@ ru:
     reports:
       list: "Отчеты"
       period: "Период"
+      report_score: "Оценка по отчету"
+      shop_info: "Информация о магазине"

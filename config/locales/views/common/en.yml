@@ -15,3 +15,4 @@ en:
       filter: "Filter"
       best: "Best"
       worst: "Worst"
+      send_mail: "Send Mail"

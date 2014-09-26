@@ -10,6 +10,6 @@ Rails.application.config.assets.precompile +=
     photo_uploader.js range_picker.js chart_helper.js
     report_structure.js report_structure.css
     jquery.fileupload.js jquery.fileupload-ui.css
-    maps/shop_edit.js maps/dealer_show.js maps/shop_show.js
+    maps/shop_edit.js maps/dealer_show.js maps/shop_show.js maps/report_show.js
     shops.css
   )
