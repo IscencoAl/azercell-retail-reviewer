@@ -1,21 +1,30 @@
-=javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp"
-=javascript_include_tag "maps/dealer_show"
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp"
+= javascript_include_tag "http://www.google.com/jsapi"
+= javascript_include_tag "maps/dealer_show"
+= javascript_include_tag "chart_helper"
+
+:javascript
+  google.load("visualization", "1", {packages:["corechart"]});
+
 
 %h2.text-center= @user.full_name
 %br
 
-.panel.panel-default
-  .panel-body
-    .row
-      .col-md-6
-        %div#map_canvas.map-container-lg
-      .col-md-6
-        .panel.panel-default
-          - @shops = @user.shops
-          = render 'shops/list', :max_height => 450
+.well.well-sm
+  .row
+    .col-md-6
+      .panel.panel-default
+        %div#map_canvas.map-container
+    .col-md-6
+      .panel.panel-default
+        - @shops = @user.shops
+        = render 'shops/list', :max_height => 300
 
 %h3.text-center= t('views.reports.list')
-%br
+- if @reports.any?
+  .row
+    .col-sm-12
+      = render 'layouts/chart', :container_id => 'report-chart', :source => reports_count_chart_path, :extra_params => {:filter => {:user => @user.id}}
 .row
   .col-sm-12
     .panel.panel-default

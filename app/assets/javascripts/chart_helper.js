@@ -29,13 +29,13 @@ ChartHelper.prototype.drawChart = function(){
     }
     ,success: function(data){
       self.$container.removeClass("loading");
-      self.renderGraph(data);
+      self.renderChart(data);
     }
     ,dataType: 'json'
   })
 }
 
-ChartHelper.prototype.oneLineChart = function(data){
+ChartHelper.prototype.lineChart = function(data){
   var data_table = google.visualization.arrayToDataTable(data.table),
       chart = new google.visualization.LineChart(this.$container[0]);
 
@@ -46,12 +46,30 @@ ChartHelper.prototype.oneLineChart = function(data){
   chart.draw(data_table, options);
 }
 
-ChartHelper.prototype.renderGraph = function(data, position){
+ChartHelper.prototype.columnChart = function(data){
+  var data_table = google.visualization.arrayToDataTable(data.table),
+      data_view = new google.visualization.DataView(data_table),
+      chart = new google.visualization.ColumnChart(this.$container[0]);
+
+  data_view.setColumns([0, 1, { calc: "stringify", sourceColumn: 1, type: "string", role: "annotation" }]);
+
+  var options = $.extend(this.default_options, data.options);
+
+  chart.draw(data_view, options);
+}
+
+ChartHelper.prototype.renderChart = function(data, position){
   switch (data["type"]){
     // [[<y_name>, <x_name>], [<y_val>, <x_val>], ...]
     // Ex.: [['Name', 'Quantity'], ['John Doe', 30], ['Jim Carey', 40]]
-    case "one_line":
-      this.oneLineChart(data, position);
+    case "line":
+      this.lineChart(data, position);
+    break;
+
+    // [[<y_name>, <x_name>], [<y_val>, <x_val>], ...]
+    // Ex.: [['Name', 'Quantity'], ['John Doe', 30], ['Jim Carey', 40]]
+    case "column":
+      this.columnChart(data, position);
     break;
     
     default : console.log("GraphType Error: Unsupported Graphtype:" + data.type);
