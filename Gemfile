@@ -27,7 +27,7 @@ gem 'haml', '~> 4.0.5'
 gem 'haml-rails', '~> 0.5.3'
 
 # User Simple Form for creating forms
-gem 'simple_form', '3.1.0.rc2', github: 'plataformatec/simple_form', branch: 'master'
+gem 'simple_form', '3.1.0.rc2', git: 'git://github.com/plataformatec/simple_form', branch: 'master'
 
 # Use Device for users authentification
 gem 'devise', '3.3.0'
@@ -48,6 +48,10 @@ gem 'carrierwave', '0.10.0'
 
 # Use Jquery File Upload for AJAX file upload
 gem 'jquery.fileupload-rails', '1.10.0'
+
+# User WickedPDF for PDF generation
+gem 'wicked_pdf', '0.11.0'
+gem 'wkhtmltopdf-binary', '0.9.9.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'

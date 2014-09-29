@@ -8,7 +8,6 @@ Bundler.require(*Rails.groups)
 
 module AzercellRetailReviewer
   class Application < Rails::Application
-
     # Include modules folder
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/uploaders)
 

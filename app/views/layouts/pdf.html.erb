@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AzercellRetailReviewer</title>
+  <%= wicked_pdf_stylesheet_link_tag 'application', media: 'all' %>
+  <%= wicked_pdf_javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <style>
+    .container-main{
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container container-main">
+    <%= yield %>
+  </div>
+
+</body>
+</html>

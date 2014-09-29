@@ -37,6 +37,8 @@
         %address
           = "#{t('activerecord.attributes.report.created_at')}: "
           = @report.created_at.strftime("%d %b %Y %H:%M")
+          %br
+          = link_to t('views.common.save_as_pdf'), report_path(@report, :format => :pdf)
 
       .col-sm-6
         .panel.panel-default
