@@ -55,4 +55,4 @@
           %ul.dropdown-menu{:role => "dropdown", :style => 'min-width: 0;'}
             - I18n.available_locales.each do |l|
               %li
-                = link_to l, :locale => l
+                = link_to l, params.merge(:locale => l)

@@ -14,6 +14,7 @@
               %th= sortable(:contact_name, t('activerecord.attributes.dealer.contact_name'))
               %th= t('activerecord.attributes.dealer.phone_number')
               %th= t('activerecord.attributes.dealer.email')
+              %th= sortable(:score, t('activerecord.attributes.report.score'))
               %th.text-right
                 - if can?(:create, Dealer)
                   %a.btn.btn-default.btn-xs{:href => new_dealer_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
@@ -27,6 +28,7 @@
                   %td= dealer.contact_name
                   %td= dealer.phone_number
                   %td= dealer.email
+                  %td= dealer.score
                   %td.text-right
                     - if can?(:restore, dealer)
                       %a.btn.btn-default.btn-xs{:href => restore_dealer_path(dealer), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
