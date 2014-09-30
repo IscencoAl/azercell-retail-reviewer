@@ -1,0 +1,7 @@
+ru:
+  views:
+    dashboard:
+      last_reports: "Последние отчёты"
+      shops_top: "Рейтинг магазинов"
+      dealers_top: "Рейтинг дилеров"
+      not_reviewed: "Непосещённые магазины за месяц"

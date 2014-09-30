@@ -288,25 +288,6 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
-  describe '#score' do
-    context 'without reports' do
-      it 'returns nil' do
-        shop = create(:shop)
-
-        expect(shop.score).to be_nil
-      end
-    end
-
-    context 'with reports' do
-      it 'returns last report score' do
-        shop = create(:shop)
-        report = create(:report, :shop => shop, :score => 3)
-
-        expect(shop.score).to eq(3)
-      end
-    end
-  end
-
   describe '#last_report' do
     context 'without reports' do
       it 'returns nil' do
@@ -326,4 +307,31 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
+  describe "#not_reviewed" do
+    context 'without reports' do
+      it "return last non reviewed shop" do
+        shop = create(:shop)
+
+        expect(Shop.not_reviewed(Time.now - 1.month)).to eq([shop])
+      end
+    end
+
+    context "with old report" do
+      it "return last non reviewed shop" do
+        shop = create(:shop)
+        report = create(:report, :shop => shop, :created_at => Time.now - 2.month)
+
+        expect(Shop.not_reviewed(Time.now - 1.month)).to eq([shop])
+      end
+    end
+
+    context "with new report" do
+      it "return empty list" do
+        shop = create(:shop)
+        report = create(:report, :shop => shop, :created_at => Time.now)
+
+        expect(Shop.not_reviewed(Time.now - 1.month)).to be_blank
+      end
+    end
+  end
 end
