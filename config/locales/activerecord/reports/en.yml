@@ -1,5 +1,8 @@
 en:
   activerecord:
+    models:
+        report: "Report"
+        
     attributes:
       report:
         city: "City"

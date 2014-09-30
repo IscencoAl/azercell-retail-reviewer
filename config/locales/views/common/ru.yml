@@ -15,3 +15,5 @@ ru:
       filter: "Фильтр"
       best: "Лучшие"
       worst: "Худшие"
+      send_mail: "Отправить письмо"
+      save_as_pdf: "Сохранить в формате pdf"

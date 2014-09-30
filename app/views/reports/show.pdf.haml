@@ -1,0 +1,67 @@
+= stylesheet_link_tag "shops"
+
+.well.well-sm
+  .row
+    .col-xs-6
+      %h3= "#{t('views.reports.report_score')}: #{@report.score}"
+      %hr
+
+      %address
+        = "#{t('activerecord.models.reviewer')}: "
+        %br
+        = "#{t('activerecord.attributes.user.name')}: "
+        %strong= @report.user.full_name
+        %br
+        = "#{t('activerecord.attributes.user.email')}: "
+        = @report.user.email
+      %hr
+
+      %address
+        = "#{t('activerecord.attributes.report.created_at')}: "
+        = @report.created_at.strftime("%d %b %Y %H:%M")
+
+    .col-xs-6
+      %h3.text-center= t('views.reports.shop_info')
+      %hr
+      .panel.panel-default
+        %table#general-info.table.table-condensed.table-striped
+          %tbody
+            %tr
+              %td= t('activerecord.attributes.shop.region')
+              %td= link_to @report.shop.region.name, @report.shop.region
+            %tr
+              %td= t('activerecord.attributes.shop.city')
+              %td= link_to @report.shop.city.name, @report.shop.city
+            %tr
+              %td= t('activerecord.attributes.shop.address')
+              %td= link_to @report.shop.address, @report.shop
+            %tr
+              %td= t('activerecord.attributes.shop.type')
+              %td= @report.shop.type.name
+            %tr
+              %td= t('activerecord.attributes.shop.square_footage')
+              %td= @report.shop.square_footage || '-'
+            %tr
+              %td= t('activerecord.attributes.shop.dealer')
+              %td= link_to @report.shop.dealer.name, @report.shop.dealer
+            %tr
+              %td= t('activerecord.attributes.shop.user')
+              %td= @report.shop.user ? link_to(@report.shop.user.full_name, @report.shop.user) : '-'
+
+.row
+  .col-lg-offset-1.col-lg-10
+    - @report.structured.each do |category, elements|
+      .panel.panel-default
+        .panel-heading
+          %h4= category.name
+
+        .list-group
+          - elements.each do |e|
+            .list-group-item
+              .row
+                .col-xs-6
+                  = e.name
+                .col-xs-6.text-right
+                  = e.value
+
+    = render 'report_photos/galery', :photos => @report.photos

@@ -10,6 +10,11 @@ class ReportsController < ApplicationController
 
   # GET /reports/1
   def show
+    respond_to do |format|
+      format.html
+      format.pdf { render :pdf => "#{t('activerecord.models.report')}",
+        :template => 'reports/show', :layout => 'layouts/pdf.html.erb', :encoding => 'utf-8;' }
+    end
   end
 
   private

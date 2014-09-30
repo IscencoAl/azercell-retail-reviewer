@@ -16,7 +16,7 @@
 
     .col-md-4.col-sm-6
       .panel.panel-default
-        = render 'info'
+        = render 'info', :shop => @shop
       .btn-toolbar.text-center
         - if can?(:update, @shop)
           %a.btn.btn-default.btn-sm{:href => edit_shop_path(@shop)}= t('views.common.edit')

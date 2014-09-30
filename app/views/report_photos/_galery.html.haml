@@ -1,0 +1,7 @@
+.galery-wrapper.panel.panel-default{:class => "#{"hidden" if photos.blank?}"}
+  .panel-body
+    .galery.row
+      - photos.each do |p|
+        .col-sm-2.photo
+          %a.thumbnail{:href => p.photo, :target => '_blank;'}
+            %img.img-responsive{:src => p.photo}

@@ -3,3 +3,5 @@ en:
     reports:
       list: "Reports"
       period: "Period"
+      report_score: "Report Score"
+      shop_info: "Shop Info"
