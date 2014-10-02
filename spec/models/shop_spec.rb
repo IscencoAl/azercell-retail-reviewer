@@ -288,25 +288,6 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
-  describe '#score' do
-    context 'without reports' do
-      it 'returns nil' do
-        shop = create(:shop)
-
-        expect(shop.score).to be_nil
-      end
-    end
-
-    context 'with reports' do
-      it 'returns last report score' do
-        shop = create(:shop)
-        report = create(:report, :shop => shop, :score => 3)
-
-        expect(shop.score).to eq(3)
-      end
-    end
-  end
-
   describe '#last_report' do
     context 'without reports' do
       it 'returns nil' do

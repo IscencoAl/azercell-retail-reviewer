@@ -11,4 +11,5 @@ en:
         email: "Email"
         role: "Role"
         subscription: "Subscription"
+        dealer: "Dealer"
         is_deleted: "Deleted"

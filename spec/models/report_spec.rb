@@ -244,8 +244,8 @@ RSpec.describe Report, :type => :model do
       report = create(:report, :shop => shop, :score => 2.1)
 
       expect(shop.score).to eq(2.1)
-
     end
+
     context 'when all shops have score' do
       it 'updates dealer score' do
         dealer = create(:dealer)
@@ -262,8 +262,8 @@ RSpec.describe Report, :type => :model do
     context 'when some shop have no score' do
       it 'updates dealer score' do
         dealer = create(:dealer)
-        shop1 = create(:shop, :dealer => dealer)
-        shop2 = create(:shop, :dealer => dealer)
+        shop1 = create(:shop, :dealer => dealer, :score => nil)
+        shop2 = create(:shop, :dealer => dealer, :score => nil)
         report = create(:report, :shop => shop1, :score => 2)
         
         dealer.reload

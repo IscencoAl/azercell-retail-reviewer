@@ -14,4 +14,8 @@ class UserRole < ActiveRecord::Base
   def self.reviewer
     find_by_name('reviewer')
   end
+
+  def self.dealer
+    find_by_name('dealer')
+  end
 end

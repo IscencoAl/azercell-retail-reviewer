@@ -11,5 +11,5 @@
         %div#map_canvas.map-container-lg
       .col-md-6
         .panel.panel-default
-          - @shops = @dealer.shops
+          - @shops = @dealer.shops.by_score('desc')
           = render 'shops/list', :max_height => 450

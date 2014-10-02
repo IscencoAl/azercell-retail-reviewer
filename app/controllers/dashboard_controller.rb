@@ -6,6 +6,4 @@ class DashboardController < ApplicationController
     @best_dealers = Dealer.by_score("desc").limit(3)
     @worst_dealers = Dealer.by_score("asc").limit(3)
   end
-
-
 end

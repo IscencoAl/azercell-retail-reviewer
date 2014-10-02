@@ -12,6 +12,8 @@ class Ability
       end
       can [:restore, :restore_info], City, :is_deleted => true
 
+      can :read, :dashboard
+
       can :crud, Dealer, :is_deleted => false
       can :restore, Dealer, :is_deleted => true
 
@@ -58,19 +60,22 @@ class Ability
     end
 
     if user.reviewer?
-      can :read, City
-
-      can :read, Dealer
-
-      can :read, Region
-
       can :read, Report, :user_id => user.id
 
       can :read, Shop, :user_id => user.id
       can :info, Shop, :user_id => user.id
 
       can :update, User, :id => user.id
-      can :read, User
+      can :read, User, :id => user.id
+    end
+
+    if user.dealer?
+      can :read, user.dealer
+
+      can :read, Report, :shop => { :dealer_id => user.dealer_id }
+
+      can :read, Shop, :dealer_id => user.dealer_id
+      can :info, Shop, :dealer_id => user.dealer_id
     end
 
   end

@@ -11,11 +11,13 @@ class User < ActiveRecord::Base
   validates :surname, :presence => true
   validates :password, :confirmation => true
   validates :role, :presence => true
+  validates :dealer_id, :presence => true, :if => :dealer?
 
   has_many :shops
   has_many :reports
 
   belongs_to :role, :class_name => 'UserRole', :foreign_key => :user_role_id
+  belongs_to :dealer
 
   scope :with_name, -> (name) { where("name ilike ?", "%#{name}%") }
   scope :with_surname, -> (surname) { where("surname ilike ?", "%#{surname}%") }
@@ -39,6 +41,10 @@ class User < ActiveRecord::Base
 
   def reviewer?
     self.role == UserRole.reviewer
+  end
+
+  def dealer?
+    self.role == UserRole.dealer
   end
 
   def full_name

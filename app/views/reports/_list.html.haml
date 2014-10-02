@@ -22,9 +22,15 @@
         - @reports.each do |report|
           %tr
             - unless params[:controller] == "shops"
-              %td= report.shop.is_deleted ? report.shop.full_address : link_to(report.shop.full_address, report.shop)
+              - if not report.shop.is_deleted and can?(:read, report.shop)
+                %td= link_to(report.shop.full_address, report.shop)
+              - else
+                %td= report.shop.full_address
             - unless params[:controller] == "users"
-              %td= report.user.is_deleted ? report.user.full_name : link_to(report.user.full_name, report.user)
+              - if not report.user.is_deleted and can?(:read, report.user)
+                %td= link_to(report.user.full_name, report.user)
+              - else
+                %td= report.user.full_name
             %td= report.created_at.strftime("%d.%m.%Y %H:%M")
             %td= report.score
             %td.text-right

@@ -25,19 +25,21 @@
               %label{:for => 'address'}= t('activerecord.attributes.shop.address')
               %input#address.form-control.input-sm{:type => 'text', :name => 'filter[address]', :value => filtering_params[:address], :autocomplete => :off}
 
-            .form-group.col-sm-2
-              %label{:for => 'dealer'}= t('activerecord.attributes.shop.dealer')
-              %select#dealer.form-control.input-sm{:type => 'text', :name => 'filter[dealer]'}
-                %option{:value => ''}= t('views.common.all')
-                - Dealer.all.each do |dealer|
-                  %option{:value => dealer.id, :selected => filtering_params[:dealer].to_i == dealer.id}= dealer.name
+            - unless current_user.dealer?
+              .form-group.col-sm-2
+                %label{:for => 'dealer'}= t('activerecord.attributes.shop.dealer')
+                %select#dealer.form-control.input-sm{:type => 'text', :name => 'filter[dealer]'}
+                  %option{:value => ''}= t('views.common.all')
+                  - Dealer.all.each do |dealer|
+                    %option{:value => dealer.id, :selected => filtering_params[:dealer].to_i == dealer.id}= dealer.name
 
-            .form-group.col-sm-2
-              %label{:for => 'user'}= t('activerecord.attributes.shop.user')
-              %select#user.form-control.input-sm{:type => 'text', :name => 'filter[user]'}
-                %option{:value => ''}= t('views.common.all')
-                - UserRole.reviewer.users.all.each do |user|
-                  %option{:value => user.id, :selected => filtering_params[:user].to_i == user.id}= user.full_name
+            - unless current_user.reviewer?
+              .form-group.col-sm-2
+                %label{:for => 'user'}= t('activerecord.attributes.shop.user')
+                %select#user.form-control.input-sm{:type => 'text', :name => 'filter[user]'}
+                  %option{:value => ''}= t('views.common.all')
+                  - UserRole.reviewer.users.all.each do |user|
+                    %option{:value => user.id, :selected => filtering_params[:user].to_i == user.id}= user.full_name
 
             - if can?(:restore, User)
               .form-group.col-sm-2

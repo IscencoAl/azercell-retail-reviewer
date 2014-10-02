@@ -6,7 +6,7 @@ class ShopsController < ApplicationController
 
   # GET /shops
   def index
-    @shops = Shop.filter(filtering_params).sort(sorting_params).page(params[:page])
+    @shops = @shops.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
   # GET /shops/1
@@ -74,7 +74,7 @@ class ShopsController < ApplicationController
   # GET /shops/1/info
   def info
     if request.xhr?
-      render :partial => "info"
+      render :partial => "info", :locals => { :shop => @shop }
     end
   end
 

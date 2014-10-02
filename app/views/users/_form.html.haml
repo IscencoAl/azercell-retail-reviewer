@@ -1,3 +1,5 @@
+= javascript_include_tag "user_form"
+
 = simple_form_for @user, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
 
   = f.input :name
@@ -5,7 +7,8 @@
   = f.input :email
   = f.input :password, :input_html => {:value => ""}
   = f.input :password_confirmation
-  = f.association :role, :prompt => false, :disabled => cannot?(:manage, UserRole)
+  = f.association :role, :prompt => false, :disabled => cannot?(:manage, UserRole), :input_html => {:id => 'user_role', :data => {:enable_dealer => UserRole.dealer.id}}
+  = f.association :dealer, :prompt => false, :disabled => (not @user.dealer?), :input_html => {:id => 'user_dealer'}
   = f.input :subscription, :as => :boolean, :wrapper => :horizontal_boolean
 
   .btn-toolbar.text-center
