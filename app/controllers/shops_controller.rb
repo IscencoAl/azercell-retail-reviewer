@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   load_and_authorize_resource
-  skip_load_resource :only => [:restore, :restore_info]
+  skip_load_resource :only => [:restore, :restore_info, :map_info]
 
   helper_method :sorting_params
 
@@ -74,8 +74,14 @@ class ShopsController < ApplicationController
   # GET /shops/1/info
   def info
     if request.xhr?
-      render :partial => "info"
+      render :partial => "info", :locals => {:shop => @shop}
     end
+  end
+
+  # GET /shops/map_info
+  def map_info
+    @map_shops = Shop.select("id, latitude, longitude").all.map{ |shop| {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude}}
+    render :json => @map_shops
   end
 
   private

@@ -28,6 +28,7 @@ class Ability
       can :crud, Shop, :is_deleted => false
       can [:restore, :restore_info], Shop, :is_deleted => true
       can :info, Shop
+      can :map_info, Shop
 
       can [:create, :read, :update], ShopType, :is_deleted => false
       can :destroy, ShopType do |type|
@@ -52,6 +53,7 @@ class Ability
 
       can :read, Shop
       can :info, Shop
+      can :map_info, Shop
 
       can :update, User, :id => user.id
       can :read, User
@@ -68,6 +70,7 @@ class Ability
 
       can :read, Shop, :user_id => user.id
       can :info, Shop, :user_id => user.id
+      can :map_info, Shop
 
       can :update, User, :id => user.id
       can :read, User
