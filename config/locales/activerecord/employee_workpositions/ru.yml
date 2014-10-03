@@ -1,0 +1,14 @@
+ru:
+  activerecord:
+    attributes:
+      employee_workposition:
+        name: "Название"
+        is_deleted: "Удаленные"
+
+    errors:
+      models:
+        employee_workposition:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              taken: "уже занято"

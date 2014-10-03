@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @employee_workposition.name
+%p
+  %b Is deleted:
+  = @employee_workposition.is_deleted
+
+= link_to 'Edit', edit_employee_workposition_path(@employee_workposition)
+\|
+= link_to 'Back', employee_workpositions_path

@@ -1,0 +1,6 @@
+ru:
+  views:
+    employee_workpositions:
+      list: "Должности"
+      edit: "Изменение должности '%{name}'"
+      new: "Добавление должности"

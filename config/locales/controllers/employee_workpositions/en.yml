@@ -1,0 +1,7 @@
+en:
+  controllers:
+    employee_workpositions:
+      created: "Workposition '%{name}' was successfully created"
+      updated: "Workposition '%{name}' was successfully updated"
+      destroyed: "Workposition '%{name}' was successfully destroyed"
+      restored: "Workposition '%{name}' was successfully restored"

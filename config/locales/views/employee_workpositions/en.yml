@@ -1,0 +1,6 @@
+en:
+  views:
+    employee_workpositions:
+      list: "Workpositions"
+      edit: "Edit workposition '%{name}'"
+      new: "Add Workposition"

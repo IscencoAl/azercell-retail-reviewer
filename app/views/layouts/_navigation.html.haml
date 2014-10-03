@@ -29,6 +29,9 @@
             -if can?(:read, ShopType)
               %li
                 %a{:href => shop_types_path}= t('views.navigation.shop_types')
+            -if can?(:read, EmployeeWorkposition)
+              %li
+                %a{:href => employee_workpositions_path}= t('views.navigation.employee_workpositions')
 
 
         %li.dropdown
