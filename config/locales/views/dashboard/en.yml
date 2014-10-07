@@ -1,0 +1,7 @@
+en:
+  views:
+    dashboard:
+      last_reports: "Last reports"
+      shops_top: "Shops top"
+      dealers_top: "Dealers top"
+      not_reviewed: "Not reviewed shops for a month"

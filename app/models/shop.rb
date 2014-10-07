@@ -48,4 +48,9 @@ class Shop < ActiveRecord::Base
   def last_report
     reports.order('created_at desc').first
   end
+
+  def self.not_reviewed(date)
+    last_reports = Report.select("distinct on(shop_id) shop_id, created_at").order("shop_id, created_at desc").to_sql
+    return Shop.joins("left outer join (#{last_reports}) as reports on reports.shop_id = shops.id").where("reports.created_at < ? or reports.created_at is null", date)
+  end
 end

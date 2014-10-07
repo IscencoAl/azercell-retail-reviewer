@@ -26,7 +26,7 @@
     %tbody
       - if @shops.any?
         - @shops.each do |shop|
-          %tr.shop{:data => {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude}}
+          %tr
             %td= shop.type.name
             - if not shop.is_deleted and can?(:read, shop)
               %td= link_to(shop.full_address, shop)

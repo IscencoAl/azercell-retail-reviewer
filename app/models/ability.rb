@@ -17,6 +17,9 @@ class Ability
       can :crud, Dealer, :is_deleted => false
       can :restore, Dealer, :is_deleted => true
 
+      can :crud, EmployeeWorkposition, :is_deleted => false
+      can :restore, EmployeeWorkposition, :is_deleted => true
+
       can [:create, :read, :update], Region, :is_deleted => false
       can :destroy, Region do |region|
         not region.is_deleted and region.cities.blank?
@@ -30,6 +33,7 @@ class Ability
       can :crud, Shop, :is_deleted => false
       can [:restore, :restore_info], Shop, :is_deleted => true
       can :info, Shop
+      can :map_info, Shop
 
       can [:create, :read, :update], ShopType, :is_deleted => false
       can :destroy, ShopType do |type|
@@ -54,6 +58,7 @@ class Ability
 
       can :read, Shop
       can :info, Shop
+      can :map_info, Shop
 
       can :update, User, :id => user.id
       can :read, User
@@ -64,6 +69,7 @@ class Ability
 
       can :read, Shop, :user_id => user.id
       can :info, Shop, :user_id => user.id
+      can :map_info, Shop
 
       can :update, User, :id => user.id
       can :read, User, :id => user.id

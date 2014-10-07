@@ -1,0 +1,7 @@
+ru:
+  controllers:
+    employee_workpositions:
+      created: "Должность '%{name}' была успешно создана"
+      updated: "Должность '%{name}' была успешно обновлена"
+      destroyed: "Должность '%{name}' была успешно удалена"
+      restored: "Должность'%{name}' была успешно восстановлена"

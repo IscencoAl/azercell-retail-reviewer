@@ -1,20 +1,35 @@
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v= 3.exp"
+= javascript_include_tag "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"
+= javascript_include_tag "maps/all_shops"
+
 .row
   .col-sm-6
     .panel.panel-default
-      .panel-heading
-        %h4.text-center Last reports
-   
-   
-      =render "reports/list"
+      .panel-heading 
+        %h4.text-center= t('views.dashboard.not_reviewed')
+      = render "not_reviewed", :shops => @not_reviewed_shops
   .col-sm-6
     .panel.panel-default
       .panel-heading
-        %h4.text-center  Shops top
+        %h4.text-center= t('views.dashboard.shops_top')
 
       = render 'top_shops'
   .col-sm-6
     .panel.panel-default
       .panel-heading
-        %h4.text-center  Dealers top
+        %h4.text-center= t('views.dashboard.dealers_top')
 
       = render 'top_dealers'
+
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h4.text-center= t('views.dashboard.last_reports')
+   
+   
+      = render "reports/list"
+  .col-sm-6
+    .panel.panel-default
+      .panel-body
+        %div#map_canvas.map-container-shop{:data =>{:mapinfo => shop_map_info_path}}

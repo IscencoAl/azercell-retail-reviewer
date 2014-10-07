@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      employee_workposition:
+        name: "Name"
+        is_deleted: "Deleted"
