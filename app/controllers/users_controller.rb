@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.filter(filtering_params).sort(sorting_params).page(params[:page])
+    @users = @users.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
   def show
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.require(:user).permit(:name, :surname, :user_role_id, :subscription,
-        :email, :password, :password_confirmation)
+        :email, :password, :password_confirmation, :dealer_id)
     end
 
     def filtering_params

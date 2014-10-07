@@ -9,18 +9,20 @@
 
         %form{:role => 'form'}
           .row
-            .form-group.col-sm-2
-              %label{:for => 'user'}= t('activerecord.attributes.report.user')
-              %select#user.form-control.input-sm{:name => 'filter[user]'}
-                %option{:value => ''}= t('views.common.all')
-                - UserRole.reviewer.users.each do |u|
-                  %option{:value => u.id, :selected => filtering_params[:user].to_i == u.id}= u.full_name
+            - unless current_user.reviewer?
+              .form-group.col-sm-2
+                %label{:for => 'user'}= t('activerecord.attributes.report.user')
+                %select#user.form-control.input-sm{:name => 'filter[user]'}
+                  %option{:value => ''}= t('views.common.all')
+                  - UserRole.reviewer.users.each do |u|
+                    %option{:value => u.id, :selected => filtering_params[:user].to_i == u.id}= u.full_name
 
+            - shops = (current_user.dealer?) ? current_user.dealer.shops : Shop.all
             .form-group.col-sm-3
               %label{:for => 'shop'}= t('activerecord.attributes.report.shop')
               %select#shop.form-control.input-sm{:name => 'filter[shop]'}
                 %option{:value => ''}= t('views.common.all')
-                - Shop.all.each do |s|
+                - shops.each do |s|
                   %option{:value => s.id, :selected => filtering_params[:shop].to_i == s.id}= s.name
 
             .form-group.col-sm-4

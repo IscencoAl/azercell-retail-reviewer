@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => root_url} Retail Reviewer
+      %a.navbar-brand{:href => root_url} Dashboard
 
     #navbar-main.collapse.navbar-collapse
       %ul.nav.navbar-nav
@@ -22,11 +22,13 @@
             = t('views.navigation.retail')
             %span.caret
           %ul.dropdown-menu{:role => "dropdown"}
-            %li
-              %a{:href => dealers_path}= t('views.navigation.dealers')
-            %li
-              %a{:href => shops_path}= t('views.navigation.shops')
-            -if can?(:read, ShopType)
+            - if can?(:read, Dealer)
+              %li
+                %a{:href => dealers_path}= t('views.navigation.dealers')
+            - if can?(:read, Shop)
+              %li
+                %a{:href => shops_path}= t('views.navigation.shops')
+            - if can?(:read, ShopType)
               %li
                 %a{:href => shop_types_path}= t('views.navigation.shop_types')
             -if can?(:read, EmployeeWorkposition)
@@ -36,20 +38,23 @@
               %li
                 %a{:href => employees_path}= t('views.navigation.employees')
 
-
-        %li.dropdown
-          %a.dropdown-toggle{:href => "javascript:;", :data => {:toggle => 'dropdown'}}
-            = t('views.navigation.places')
-            %span.caret
-          %ul.dropdown-menu{:role => "dropdown"}
-            %li
-              %a{:href => regions_path}= t('views.navigation.regions')
-            %li
-              %a{:href => cities_path}= t('views.navigation.cities')
+        - if can?(:read, Region) or can?(:read, City)
+          %li.dropdown
+            %a.dropdown-toggle{:href => "javascript:;", :data => {:toggle => 'dropdown'}}
+              = t('views.navigation.places')
+              %span.caret
+            %ul.dropdown-menu{:role => "dropdown"}
+              - if can?(:read, Region)
+                %li
+                  %a{:href => regions_path}= t('views.navigation.regions')
+              - if can?(:read, City)
+                %li
+                  %a{:href => cities_path}= t('views.navigation.cities')
 
       %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{:href => users_path}= t('views.navigation.users')
+        - if can?(:read, User)
+          %li
+            %a{:href => users_path}= t('views.navigation.users')
 
         %li
           %a{:href => destroy_user_session_path, :data => {:method => 'delete'}}= t('views.navigation.log_out')

@@ -12,6 +12,8 @@ class Ability
       end
       can [:restore, :restore_info], City, :is_deleted => true
 
+      can :read, :dashboard
+
       can :crud, Dealer, :is_deleted => false
       can :restore, Dealer, :is_deleted => true
 
@@ -85,7 +87,19 @@ class Ability
       can :map_info, Shop
 
       can :update, User, :id => user.id
-      can :read, User
+      can :read, User, :id => user.id
+    end
+
+    if user.dealer?
+      can :read, user.dealer
+
+      can :crud, Employee, :shop =>{:dealer_id => user.dealer_id}
+      can :restore, Employee, :shop =>{:dealer_id => user.dealer_id}
+
+      can :read, Report, :shop => { :dealer_id => user.dealer_id }
+
+      can :read, Shop, :dealer_id => user.dealer_id
+      can :info, Shop, :dealer_id => user.dealer_id
     end
 
   end

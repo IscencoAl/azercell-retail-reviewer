@@ -28,6 +28,22 @@ RSpec.describe User, :type => :model do
       end
     end
 
+    context 'trait "reviewer"' do
+      it 'has a valid factory' do
+        user = build(:user, :reviewer)
+
+        expect(user).to be_valid 
+      end
+    end
+
+     context 'trait "user_dealer"' do
+      it 'has a valid factory' do
+        user = build(:user, :user_dealer)
+
+        expect(user).to be_valid 
+      end
+    end
+
     context 'trait "deleted"' do
       it 'has a valid factory' do
         user = build(:user, :deleted)
@@ -231,6 +247,24 @@ RSpec.describe User, :type => :model do
         user = build(:user, :admin)
 
         expect(user.reviewer?).to eq(false)
+      end
+    end
+  end
+
+  describe '#dealer?' do
+    context 'when user has dealer role' do
+      it 'returns true' do
+        user = build(:user, :user_dealer)
+
+        expect(user.dealer?).to eq(true)
+      end
+    end
+
+    context 'when user has no dealer role' do
+      it 'returns false' do
+        user = build(:user, :simple_user)
+
+        expect(user.dealer?).to eq(false)
       end
     end
   end

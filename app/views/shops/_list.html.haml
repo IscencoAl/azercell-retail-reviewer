@@ -28,12 +28,27 @@
         - @shops.each do |shop|
           %tr
             %td= shop.type.name
-            %td= shop.is_deleted ? shop.name : link_to(shop.name, shop)
+            - if not shop.is_deleted and can?(:read, shop)
+              %td= link_to(shop.name, shop)
+            - else
+              %td= shop.name
             - unless params[:controller] == 'dealers'
-              %td= shop.dealer ? link_to(shop.dealer.name, shop.dealer) : '-'
+              - if shop.dealer
+                - if can?(:read, shop.dealer)
+                  %td= link_to(shop.dealer.name, shop.dealer)
+                - else
+                  %td= shop.dealer.name
+              - else
+                %td -
             - unless params[:controller] == 'users'
-              %td= shop.user ? link_to(shop.user.full_name, shop.user) : '-'
-            %td= shop.score ? link_to(shop.score, shop.last_report) : "-"
+              - if shop.user
+                - if can?(:read, shop.user)
+                  %td= link_to(shop.user.full_name, shop.user)
+                - else
+                  %td= shop.user.full_name
+              - else
+                %td -
+            %td= shop.score ? link_to(shop.score, shop.last_report) : '-'
             %td.text-right
               - if can?(:restore, shop)
                 %a.btn.btn-default.btn-xs{:href => restore_shop_path(shop), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}

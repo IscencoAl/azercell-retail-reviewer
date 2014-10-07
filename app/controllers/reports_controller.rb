@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
 
   # GET /reports
   def index
-    @reports = Report.filter(filtering_params).sort(sorting_params).page(params[:page])
+    @reports = @reports.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
   # GET /reports/1
