@@ -32,13 +32,13 @@ class Shop < ActiveRecord::Base
   scope :by_address, -> (dir) { joins(:city).order("cities.name #{dir}, address #{dir}") }
   scope :by_score, -> (dir) { order("score #{dir} nulls last")}
 
-  def full_address
+  def name
     City.unscoped do
       [city.name, address].join(', ')
     end
   end
 
-  def full_address_was
+  def name_was
     City.unscoped do
       city_was = Shop.with_deleted.find(self.id).city
       [city_was.name, address_was].join(', ')

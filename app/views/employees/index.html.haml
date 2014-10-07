@@ -1,0 +1,48 @@
+%h2.text-center= t('views.employees.list')
+%br
+
+=render 'filter'
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th= sortable(:name, t('activerecord.attributes.employee.name'))
+              %th= t('activerecord.attributes.employee.phone')
+              %th= t('activerecord.attributes.employee.email')
+              %th= sortable(:shop ,t('activerecord.attributes.employee.shop'))
+              %th= sortable(:employee_workposition ,t('activerecord.attributes.employee.employee_workposition'))
+              %th.text-right
+                - if can?(:create, Employee)
+                  %a.btn.btn-default.btn-xs{:href => new_employee_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
+                    %span.glyphicon.glyphicon-plus
+          %tbody
+            -if @employees.any?
+              - @employees.each do |employee|
+                %tr
+                  %td= employee.name
+                  %td= employee.phone
+                  %td= employee.email
+                  %td= employee.shop.name
+                  %td= employee.employee_workposition.name
+                  %td.text-right
+                    - if can?(:restore, employee)
+                      %a.btn.btn-default.btn-xs{:href => restore_employee_path(employee), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-ok
+                    - if can?(:destroy, employee)
+                      %a.btn.btn-default.btn-xs{:href => employee_path(employee), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
+                        %span.glyphicon.glyphicon-remove
+                    - if can?(:update, employee)
+                      %a.btn.btn-default.btn-xs{:href => edit_employee_path(employee), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-edit
+            -else
+              %tr
+                %td{:colspan => 6}
+                  %h4.text-center= t('views.common.empty')
+
+    = paginate @employees
+
+

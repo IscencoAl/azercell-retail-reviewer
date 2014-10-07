@@ -1,0 +1,7 @@
+en:
+  controllers:
+    employees:
+      created: "Employee '%{name}' was successfully created"
+      updated: "Employee '%{name}' was successfully updated"
+      destroyed: "Employee '%{name}' was successfully destroyed"
+      restored: "Employee '%{name}' was successfully restored"

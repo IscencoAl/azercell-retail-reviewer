@@ -1,0 +1,6 @@
+en:
+  views:
+    employees:
+      list: "Employees"
+      edit: "Edit employee '%{name}'"
+      new: "Add Employee"

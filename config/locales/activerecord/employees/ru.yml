@@ -1,0 +1,23 @@
+ru:
+  activerecord:
+    attributes:
+      employee:
+        name: "Имя"
+        phone: "Телефон"
+        email: "Email"
+        employee_workposition: "Должность"
+        shop: "Магазин"
+        is_deleted: "Удаленные"
+    errors:
+      models:
+        employee:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              taken: "уже занято"
+            shop:
+              blank: "не может быть пустым"
+            employee_workposition:
+              blank: "не может быть пустым"
+              
+              

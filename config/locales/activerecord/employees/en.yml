@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    attributes:
+      employee:
+        name: "Name"
+        phone: "Phone"
+        email: "Email"
+        employee_workposition: "Workposition"
+        shop: "Shop"
+        is_deleted: "Deleted"

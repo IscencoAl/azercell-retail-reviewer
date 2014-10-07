@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     get '/dealers/:id/restore', :to => 'dealers#restore', :id => /\d+/, :as => 'restore_dealer'
     resources :dealers
 
+    get '/employees/:id/restore', :to => 'employees#restore', :id => /\d+/, :as => 'restore_employee'
+    resources :employees
+
     get '/employee_workpositions/:id/restore', :to => 'employee_workpositions#restore', :id => /\d+/, :as => 'restore_employee_workposition'
     resources :employee_workpositions
 

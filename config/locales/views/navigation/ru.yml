@@ -11,5 +11,6 @@ ru:
       dealers: "Дилеры"
       shops: "Магазины"
       shop_types: "Типы магазинов"
+      employees: "Работники"
       employee_workpositions: "Должности"
       log_out: "Выйти"

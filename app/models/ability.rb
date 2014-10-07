@@ -15,6 +15,9 @@ class Ability
       can :crud, Dealer, :is_deleted => false
       can :restore, Dealer, :is_deleted => true
 
+      can :crud, Employee, :is_deleted => false
+      can :restore, Employee, :is_deleted => true
+
       can :crud, EmployeeWorkposition, :is_deleted => false
       can :restore, EmployeeWorkposition, :is_deleted => true
 
@@ -50,6 +53,9 @@ class Ability
 
       can :read, Dealer
 
+      can :crud, Employee, :is_deleted => false
+      can :restore, Employee, :is_deleted => true
+
       can :read, Region
 
       can :read, Report
@@ -66,6 +72,9 @@ class Ability
       can :read, City
 
       can :read, Dealer
+
+      can :crud, Employee, :shop =>{:user_id => user.id}
+      can :restore, Employee, :shop =>{:user_id => user.id}
 
       can :read, Region
 

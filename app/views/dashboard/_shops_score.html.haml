@@ -8,5 +8,5 @@
     %tbody
       - shops.each do |shop|
         %tr
-          %td= link_to shop.full_address, shop
+          %td= link_to shop.name, shop
           %td.text-right= shop.score

@@ -27,7 +27,7 @@ class ShopsController < ApplicationController
   # POST /shops
   def create
     if @shop.save
-      flash[:success] = t('controllers.shops.created', name: @shop.full_address)
+      flash[:success] = t('controllers.shops.created', name: @shop.name)
       redirect_to session.delete(:return_to)
     else
       render :new
@@ -37,7 +37,7 @@ class ShopsController < ApplicationController
   # PATCH/PUT /shops/1
   def update
     if @shop.update(shop_params)
-      flash[:success] = t('controllers.shops.updated', name: @shop.full_address)
+      flash[:success] = t('controllers.shops.updated', name: @shop.name)
       redirect_to session.delete(:return_to)
     else
       render :edit
@@ -48,7 +48,7 @@ class ShopsController < ApplicationController
   def destroy
     @shop.soft_delete
 
-    flash[:success] = t('controllers.shops.destroyed', name: @shop.full_address)
+    flash[:success] = t('controllers.shops.destroyed', name: @shop.name)
     redirect_to request.referer
   end
 
@@ -64,7 +64,7 @@ class ShopsController < ApplicationController
     
     if @shop.update(shop_params)
       @shop.restore
-      flash[:success] = t('controllers.shops.restored', name: @shop.full_address)
+      flash[:success] = t('controllers.shops.restored', name: @shop.name)
       redirect_to session.delete(:return_to)
     else
       render :restore

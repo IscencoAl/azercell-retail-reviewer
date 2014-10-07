@@ -21,7 +21,7 @@
               %select#shop.form-control.input-sm{:name => 'filter[shop]'}
                 %option{:value => ''}= t('views.common.all')
                 - Shop.all.each do |s|
-                  %option{:value => s.id, :selected => filtering_params[:shop].to_i == s.id}= s.full_address
+                  %option{:value => s.id, :selected => filtering_params[:shop].to_i == s.id}= s.name
 
             .form-group.col-sm-4
               %label{:for => 'period'}= t('views.reports.period')

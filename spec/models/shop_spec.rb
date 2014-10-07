@@ -268,23 +268,23 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
-  describe '#full_address' do
+  describe '#name' do
     it 'returns full address' do
       city = create(:city, :name => "Gorod")
       shop = build(:shop, :city => city, :address => 'Doe')
 
-      expect(shop.full_address).to eql('Gorod, Doe')
+      expect(shop.name).to eql('Gorod, Doe')
     end
   end
 
-  describe '#full_address_was' do
+  describe '#name_was' do
     it 'returns old full address' do
       city = create(:city, :name => "Gorod")
       shop = create(:shop, :city => city, :address => 'Doe')
 
       shop.address = 'hristo'
 
-      expect(shop.full_address_was).to eql('Gorod, Doe')
+      expect(shop.name_was).to eql('Gorod, Doe')
     end
   end
 

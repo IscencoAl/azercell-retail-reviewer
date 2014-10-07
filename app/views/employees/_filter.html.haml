@@ -1,0 +1,38 @@
+- filtering_params = params[:filter] || {}
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .panel-body
+
+        %form{:role => 'form'}
+          .row
+            .form-group.col-sm-4
+              %label{:for => 'name'}= t('activerecord.attributes.employee.name')
+              %input#name.form-control.input-sm{:type => 'text', :name => 'filter[name]', :value => filtering_params[:name], :autocomplete => :off}
+
+            .form-group.col-sm-3
+              %label{:for => 'shop'}= t('activerecord.attributes.employee.shop')
+              %select#shop.form-control.input-sm{:type => 'text', :name => 'filter[shop]'}
+                %option{:value => ''}= t('views.common.all')
+                - Shop.all.each do |shop|
+                  %option{:value => shop.id, :selected => filtering_params[:shop].to_i == shop.id}= shop.name
+            .form-group.col-sm-3
+              %label{:for => 'employee_workposition'}= t('activerecord.attributes.employee.employee_workposition')
+              %select#employee_workposition.form-control.input-sm{:type => 'text', :name => 'filter[employee_workposition]'}
+                %option{:value => ''}= t('views.common.all')
+                - EmployeeWorkposition.all.each do |workposition|
+                  %option{:value => workposition.id, :selected => filtering_params[:employee_workposition].to_i == workposition.id}= workposition.name
+              
+            - if can?(:restore, Employee)
+              .form-group.col-sm-2
+                %label &nbsp;
+                .checkbox{:style => 'margin: 0px;'}
+                  %label
+                    %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
+                      %strong= t('activerecord.attributes.employee_workposition.is_deleted')
+
+
+          .row
+            .col-sm-offset-5.col-sm-2
+              %input.btn.btn-block.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @employee.name
+%p
+  %b Phone:
+  = @employee.phone
+%p
+  %b Shop:
+  = @employee.shop_id
+%p
+  %b Employee workposition:
+  = @employee.employee_workposition_id
+%p
+  %b Is deleted:
+  = @employee.is_deleted
+
+= link_to 'Edit', edit_employee_path(@employee)
+\|
+= link_to 'Back', employees_path

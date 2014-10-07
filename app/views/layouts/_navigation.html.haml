@@ -32,6 +32,9 @@
             -if can?(:read, EmployeeWorkposition)
               %li
                 %a{:href => employee_workpositions_path}= t('views.navigation.employee_workpositions')
+            -if can?(:read, Employee)
+              %li
+                %a{:href => employees_path}= t('views.navigation.employees')
 
 
         %li.dropdown
