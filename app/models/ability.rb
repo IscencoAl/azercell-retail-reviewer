@@ -23,6 +23,9 @@ class Ability
       can :crud, EmployeeWorkposition, :is_deleted => false
       can :restore, EmployeeWorkposition, :is_deleted => true
 
+      can :crud, Item, :is_deleted => false
+      can :restore, Item, :is_deleted => true
+
       can [:create, :read, :update], Region, :is_deleted => false
       can :destroy, Region do |region|
         not region.is_deleted and region.cities.blank?

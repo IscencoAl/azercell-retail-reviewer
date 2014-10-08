@@ -1,0 +1,7 @@
+en:
+  controllers:
+    items:
+      created: "Item '%{name}' was successfully created"
+      updated: "Item '%{name}' was successfully updated"
+      destroyed: "Item '%{name}' was successfully destroyed"
+      restored: "Item '%{name}' was successfully restored"

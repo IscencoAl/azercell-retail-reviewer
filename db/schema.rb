@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007072408) do
+ActiveRecord::Schema.define(version: 20141008082112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,11 @@ ActiveRecord::Schema.define(version: 20141007072408) do
 
   add_index "employees", ["employee_workposition_id"], name: "index_employees_on_employee_workposition_id", using: :btree
   add_index "employees", ["shop_id"], name: "index_employees_on_shop_id", using: :btree
+
+  create_table "items", force: true do |t|
+    t.string  "name"
+    t.boolean "is_deleted"
+  end
 
   create_table "regions", force: true do |t|
     t.string  "name"

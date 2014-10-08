@@ -37,6 +37,9 @@
             -if can?(:read, Employee)
               %li
                 %a{:href => employees_path}= t('views.navigation.employees')
+            -if can?(:read, Item)
+              %li
+                %a{:href => items_path}= t('views.navigation.items')
 
         - if can?(:read, Region) or can?(:read, City)
           %li.dropdown

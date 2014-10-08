@@ -1,0 +1,14 @@
+ru:
+  activerecord:
+    attributes:
+      item:
+        name: "Название"
+        is_deleted: "Удаленные"
+
+    errors:
+      models:
+        item:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+              taken: "уже занято"

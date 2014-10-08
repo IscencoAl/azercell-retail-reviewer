@@ -1,0 +1,36 @@
+%h2.text-center= t('views.items.list')
+%br
+
+=render 'filter'
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th= t('activerecord.attributes.shop_type.name')
+              %th.text-right
+                - if can?(:create, Item)
+                  %a.btn.btn-default.btn-xs{:href => new_item_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
+                    %span.glyphicon.glyphicon-plus
+          %tbody
+            -if @items.any?
+              - @items.each do |item|
+                %tr
+                  %td= item.name
+                  %td.text-right
+                    - if can?(:restore, item)
+                      %a.btn.btn-default.btn-xs{:href => restore_item_path(item), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-ok
+                    - if can?(:update, item)
+                      %a.btn.btn-default.btn-xs{:href => edit_item_path(item), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-edit
+                    - if can?(:destroy, item)
+                      %a.btn.btn-default.btn-xs{:href => item_path(item), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
+                        %span.glyphicon.glyphicon-remove
+            -else
+              %tr
+                %td{:colspan => 2}
+                  %h4.text-center= t('views.common.empty')
