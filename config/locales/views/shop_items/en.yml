@@ -1,0 +1,6 @@
+en:
+  views:
+    shop_items:
+      list: "Shop Items"
+      edit: "Edit item '%{name}'"
+      new: "Add item"

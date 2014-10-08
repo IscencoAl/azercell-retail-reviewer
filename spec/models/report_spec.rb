@@ -204,7 +204,7 @@ RSpec.describe Report, :type => :model do
       end
     end
 
-    context 'when asc' do
+    context 'when desc' do
       it 'sorts descending' do
         report_boston = create(:report,
           :shop => create(:shop, :city => create(:city, :name => 'Boston'), :address => 'TV 141')

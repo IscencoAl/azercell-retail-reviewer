@@ -47,6 +47,8 @@ class Ability
       end
       can :restore, ShopType, :is_deleted => true
 
+      can :crud, ShopItem
+
       can :crud, User, :is_deleted => false
       can :restore, User, :is_deleted => true
 
@@ -69,6 +71,8 @@ class Ability
       can :info, Shop
       can :map_info, Shop
 
+      can :crud, ShopItem
+
       can :update, User, :id => user.id
       can :read, User
     end
@@ -78,8 +82,8 @@ class Ability
 
       can :read, Dealer
 
-      can :crud, Employee, :shop =>{:user_id => user.id}
-      can :restore, Employee, :shop =>{:user_id => user.id}
+      can :crud, Employee, :shop => { :user_id => user.id }
+      can :restore, Employee, :shop => { :user_id => user.id }
 
       can :read, Region
 
@@ -89,6 +93,8 @@ class Ability
       can :info, Shop, :user_id => user.id
       can :map_info, Shop
 
+      can :crud, ShopItem, :shop => { :user_id => user.id }
+
       can :update, User, :id => user.id
       can :read, User, :id => user.id
     end
@@ -96,13 +102,15 @@ class Ability
     if user.dealer?
       can :read, user.dealer
 
-      can :crud, Employee, :shop =>{:dealer_id => user.dealer_id}
-      can :restore, Employee, :shop =>{:dealer_id => user.dealer_id}
+      can :crud, Employee, :shop => { :dealer_id => user.dealer_id }
+      can :restore, Employee, :shop => { :dealer_id => user.dealer_id }
 
       can :read, Report, :shop => { :dealer_id => user.dealer_id }
 
       can :read, Shop, :dealer_id => user.dealer_id
       can :info, Shop, :dealer_id => user.dealer_id
+
+      can :crud, ShopItem, :shop => { :dealer_id => user.dealer_id }
     end
 
   end

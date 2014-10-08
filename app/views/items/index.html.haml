@@ -10,7 +10,7 @@
         %table.table.table-condensed.table-striped.table-vcentered
           %thead
             %tr
-              %th= t('activerecord.attributes.shop_type.name')
+              %th= sortable(:name, t('activerecord.attributes.item.name'))
               %th.text-right
                 - if can?(:create, Item)
                   %a.btn.btn-default.btn-xs{:href => new_item_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}

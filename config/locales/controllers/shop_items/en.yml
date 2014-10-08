@@ -1,0 +1,6 @@
+en:
+  controllers:
+    shop_items:
+      created: "Item '%{name}' was successfully added for shop"
+      updated: "Item '%{name}' was successfully updated"
+      destroyed: "Item '%{name}' was successfully removed from shop"

@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      shop_item:
+        shop: "Shop"
+        item: "Item"
