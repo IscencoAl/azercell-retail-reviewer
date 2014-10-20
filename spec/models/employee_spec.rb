@@ -125,19 +125,19 @@ RSpec.describe Employee, :type => :model do
   describe '.by_name' do
     context 'when asc' do
       it 'sorts ascending' do
-        Anna = create(:employee, :name => 'Anna')
-        Jora = create(:employee, :name => 'Jora')
+        anna = create(:employee, :name => 'anna')
+        jora = create(:employee, :name => 'jora')
 
-        expect(Employee.by_name('asc')).to eq([Anna, Jora])
+        expect(Employee.by_name('asc')).to eq([anna, jora])
       end
     end
 
     context 'when desc' do
       it 'sorts descending' do
-        Anna = create(:employee, :name => 'Anna')
-        Jora = create(:employee, :name => 'Jora')
+        anna = create(:employee, :name => 'anna')
+        jora = create(:employee, :name => 'jora')
 
-        expect(Employee.by_name('desc')).to eq([Jora, Anna])
+        expect(Employee.by_name('desc')).to eq([jora, anna])
       end
     end
   end

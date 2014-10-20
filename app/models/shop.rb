@@ -12,6 +12,7 @@ class Shop < ActiveRecord::Base
 
   has_many :photos, :class_name => 'ShopPhoto', :dependent => :destroy
   has_many :reports
+  has_many :employees
 
   validates :type,  :presence => true
   validates :city,  :presence => true

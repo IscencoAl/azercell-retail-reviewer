@@ -12,6 +12,7 @@ class ShopsController < ApplicationController
   # GET /shops/1
   def show
     @reports = @shop.reports.by_created_at('DESC').page(params[:page]).per(10)
+    @employee_list = @shop.employees
   end
 
   # GET /shops/new
