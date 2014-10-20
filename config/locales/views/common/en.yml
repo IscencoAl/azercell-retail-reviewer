@@ -7,6 +7,7 @@ en:
       delete: "Delete"
       save: "Save"
       cancel: "Cancel"
+      close: "Close"
       add: "Add"
       confirm: "Are you sure?"
       not_authorized: "You are not authorized to access this page"
@@ -17,3 +18,5 @@ en:
       worst: "Worst"
       send_mail: "Send Mail"
       save_as_pdf: "Save as pdf"
+      show_items: "Show Items"
+      show_employees: "Show Employees"
