@@ -13,4 +13,6 @@ ru:
       shop_types: "Типы магазинов"
       employees: "Работники"
       employee_workpositions: "Должности"
+      items: "Предметы"
+      shop_items: "Предметы в магазинах"
       log_out: "Выйти"

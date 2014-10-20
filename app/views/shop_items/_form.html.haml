@@ -1,0 +1,8 @@
+= simple_form_for @shop_item, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+
+  = f.association :shop
+  = f.association :item
+
+  .btn-toolbar.text-center
+    = f.button :submit, t('views.common.save')
+    %a.btn.btn-default{:href => shop_items_path}= t('views.common.cancel')

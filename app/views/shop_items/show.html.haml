@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Item:
+  = @shop_item.item
+%p
+  %b Shop:
+  = @shop_item.shop
+
+= link_to 'Edit', edit_shop_item_path(@shop_item)
+\|
+= link_to 'Back', shop_items_path

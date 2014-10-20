@@ -1,0 +1,16 @@
+ru:
+  activerecord:
+    attributes:
+      shop_item:
+        shop: "Магазин"
+        item: "Предмет"
+
+    errors:
+      models:
+        shop_item:
+          attributes:
+            item:
+              blank: "не может быть пустым"
+              taken: "уже есть в данном магазине"
+            shop:
+              blank: "не может быть пустым"

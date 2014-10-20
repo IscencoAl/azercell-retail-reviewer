@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     get '/employee_workpositions/:id/restore', :to => 'employee_workpositions#restore', :id => /\d+/, :as => 'restore_employee_workposition'
     resources :employee_workpositions
 
+    get '/items/:id/restore', :to => 'items#restore', :id => /\d+/, :as => 'restore_item'
+    resources :items
+
     get '/regions/:id/restore', :to => 'regions#restore', :id => /\d+/, :as => 'restore_region'
     resources :regions
     
@@ -31,14 +34,14 @@ Rails.application.routes.draw do
     get '/shops/:id/restore', :to => 'shops#restore', :id => /\d+/, :as => 'restore_shop'
     patch '/shops/:id/restore_info', :to => 'shops#restore_info', :id => /\d+/, :as => 'restore_info_shop'
     get '/shops/:id/info', :to => 'shops#info', :id => /\d+/, :as => 'info_shop'
-
     resources :shops
-    
+
+    resources :shop_items
    
     resources :shop_photos
+    
     get '/shop_types/:id/restore', :to => 'shop_types#restore', :id => /\d+/, :as => 'restore_shop_type'
     resources :shop_types
-   
 
     devise_for :users
     resources :users

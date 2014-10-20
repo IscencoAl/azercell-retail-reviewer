@@ -1,0 +1,26 @@
+- filtering_params = params[:filter] || {}
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .panel-body
+
+        %form{:role => 'form'}
+          .row
+            - shops = (current_user.dealer?) ? current_user.dealer.shops : Shop.all
+            .form-group.col-sm-6
+              %label{:for => 'shop'}= t('activerecord.attributes.shop_item.shop')
+              %select#shop.form-control.input-sm{:name => 'filter[shop]'}
+                %option{:value => ''}= t('views.common.all')
+                - shops.each do |s|
+                  %option{:value => s.id, :selected => filtering_params[:shop].to_i == s.id}= s.name
+
+            .form-group.col-sm-6
+              %label{:for => 'item'}= t('activerecord.attributes.shop_item.item')
+              %select#item.form-control.input-sm{:name => 'filter[item]'}
+                %option{:value => ''}= t('views.common.all')
+                - Item.all.each do |item|
+                  %option{:value => item.id, :selected => filtering_params[:item].to_i == item.id}= item.name
+
+          .btn-toolbar.text-center
+            %input.btn.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}

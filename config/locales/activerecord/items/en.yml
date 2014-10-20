@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      item:
+        name: "Name"
+        is_deleted: "Deleted"
