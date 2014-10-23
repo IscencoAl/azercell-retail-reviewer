@@ -45,17 +45,8 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1
   def destroy
-    @item.soft_delete
+    @item.destroy
     flash[:success] = t('controllers.items.destroyed', name: @item.name)
-    redirect_to request.referer
-  end
-
-  # GET /items/1/restore
-  def restore
-    @item = Item.deleted.find(params[:id])
-    @item.restore
-
-    flash[:success] = t('controllers.items.restored', name: @item.name)
     redirect_to request.referer
   end
 

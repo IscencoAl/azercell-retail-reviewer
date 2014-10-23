@@ -14,9 +14,6 @@
             %tr
               %td= item.name
               %td.text-right
-                - if can?(:restore, item)
-                  %a.btn.btn-default.btn-xs{:href => restore_item_path(item), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
-                    %span.glyphicon.glyphicon-ok
                 - if can?(:update, item)
                   %a.btn.btn-default.btn-xs{:href => edit_item_path(item), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-edit

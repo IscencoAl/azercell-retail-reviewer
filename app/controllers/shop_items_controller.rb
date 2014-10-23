@@ -20,6 +20,9 @@ class ShopItemsController < ApplicationController
   # GET /shop_items/1/edit
   def edit
     session[:return_to] = request.referer
+    if request.xhr?
+      render :partial => "shops/items/edit", :locals => {:item => @shop_item}
+    end
   end
 
   # POST /shop_items

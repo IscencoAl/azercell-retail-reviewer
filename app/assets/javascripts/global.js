@@ -56,4 +56,51 @@ function handleElements($elem){
     $(elem).tooltip();
   })
 
+  // Handle links in modal window
+  $elem.find('a[data-modal="true"]').click(function(e) {
+    var $element = $(this),
+        $modal_container = $('#mainmodal'),
+        $body = $modal_container.find('.modal-body'),
+        url = $element.data('source'),
+        type = $element.data('type') ? $element.data('type') : 'get';
+
+    $.ajax({
+      url : url,
+      type: type,
+      success:function(data){
+        var $data = $(data) 
+        $body.html($data)
+        handleElements($data) 
+      }
+    })
+    
+    $modal_container.modal();
+    e.preventDefault();
+  })
+
+  // Handle forms submit in modal window
+  $("body").find('form[data-modal="form"]').submit(function(e){
+    var $modal_container = $('#mainmodal'),
+        $body = $modal_container.find('.modal-body'),
+        $form = $(this),
+        data = $form.serialize(),
+        url = $form.attr("action"),
+        type = $form.attr("method");
+
+    $.ajax({
+      url : url,
+      type: type,
+      data : data,
+      success:function(data) 
+      {
+        var $data = $(data) 
+        $body.html($data)
+        handleElements($data)
+      }
+    });
+
+    e.preventDefault();
+  })
+
 }
+ 

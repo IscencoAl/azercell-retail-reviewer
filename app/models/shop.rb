@@ -12,7 +12,6 @@ class Shop < ActiveRecord::Base
 
   has_many :photos, :class_name => 'ShopPhoto', :dependent => :destroy
   has_many :shop_items, :dependent => :destroy
-  has_many :items, :through => :shop_items
   has_many :reports
   has_many :employees
 

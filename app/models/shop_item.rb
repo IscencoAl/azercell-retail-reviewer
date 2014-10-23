@@ -15,4 +15,13 @@ class ShopItem < ActiveRecord::Base
 
   scope :by_item, -> (dir) { joins(:item).order("items.name #{dir}") }
   scope :by_shop, -> (dir) { joins(:city).order("cities.name #{dir}, shops.address #{dir}") }
+
+  def missing_items
+    shop = self.shop
+
+    return Item.all unless shop
+
+    existing_items_id = shop.shop_items.select(:item_id)
+    Item.where("id not in (?)", existing_items_id)
+  end
 end

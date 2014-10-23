@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   load_and_authorize_resource
-  skip_load_resource :only => [:restore, :restore_info, :map_info]
+  skip_load_resource :only => [:restore, :restore_info, :map_info, :destroy_item]
 
   helper_method :sorting_params
 
@@ -12,8 +12,6 @@ class ShopsController < ApplicationController
   # GET /shops/1
   def show
     @reports = @shop.reports.by_created_at('DESC').page(params[:page]).per(10)
-    @employees_list = @shop.employees
-    @items_list = @shop.items
   end
 
   # GET /shops/new
@@ -86,11 +84,56 @@ class ShopsController < ApplicationController
     render :json => @map_shops
   end
 
+  # --================== Item methods ========================--
+
+  # GET /shops/1/items
+  def items
+    items = @shop.shop_items
+    if request.xhr?
+      render :partial => "shops/items/list", :locals => {:items => items}
+    end
+  end
+
+  # GET /shops/1/items/new
+  def new_item
+    item = ShopItem.new(:shop => @shop)
+    if request.xhr?
+      render :partial => "shops/items/new", :locals => {:item => item}
+    end
+  end
+
+  # POST /shops/1/items/create
+  def create_item
+    new_item = ShopItem.new(item_params)
+    new_item.shop = @shop
+    
+    if new_item.save
+      render :partial => "shops/items/list", :locals => {:items => @shop.shop_items}
+    else
+      render :partial => "shops/items/new", :locals => {:item => new_item}
+    end
+  end
+
+  # DELETE /shops/items/1
+  def destroy_item
+    item = ShopItem.find(params[:item_id])
+    @shop = item.shop
+    
+    item.destroy
+    if request.xhr?
+      render :partial => "shops/items/list", :locals => {:items => @shop.shop_items}
+    end
+  end
+
   private
     # Only allow a trusted parameter "white list" through.
     def shop_params
       params.require(:shop).permit(:shop_type_id, :city_id, :address, :latitude, :longitude,
         :dealer_id, :square_footage, :user_id, :is_deleted)
+    end
+
+    def item_params
+      params.require(:shop_item).permit(:item_id, :shop_id)
     end
 
     def filtering_params

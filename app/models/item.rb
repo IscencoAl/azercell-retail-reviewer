@@ -1,5 +1,4 @@
 class Item < ActiveRecord::Base
-  include Modules::SoftDelete
   include Modules::Filterable
   include Modules::Sortable
 

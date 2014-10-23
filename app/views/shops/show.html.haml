@@ -17,8 +17,8 @@
       .panel.panel-default
         = render 'info', :shop => @shop
       .btn-toolbar.text-center
-        %a.btn.btn-default.btn-sm{:data=>{:toggle=>"modal", :target=>"#myModalEmployee"}}= t('views.common.show_employees')
-        %a.btn.btn-default.btn-sm{:data=>{:toggle=>"modal", :target=>"#myModalItems"}}=t('views.common.show_items')
+        %a.btn.btn-default.btn-sm{:data=>{:modal=>"true", :target=>"#myModalEmployee"}}= t('views.common.show_employees')
+        %a.btn.btn-default.btn-sm{:data=> {:modal=>"true", :source =>items_from_shop_path(@shop)}}=t('views.common.show_items')
       %br
       .btn-toolbar.text-center
         - if can?(:update, @shop)
@@ -45,22 +45,22 @@
 
       = paginate @reports
 
-.modal.fade#myModalEmployee{:tabindex => -1, :role => "dialog", :aria => {:labelledby => "myModalLabel", :hidden => "true"}}
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-header
-        .h4.modal-title.text-center.myModalLabel= t('views.employees.list')
-      .modal-body
-        =render "employees/list", :employees => @employees_list
-      .modal-footer
-        %button.btn.btn-default{:type => "button", :data =>{:dismiss => "modal"}}= t('views.common.close')
+/ .modal.fade#myModalEmployee{:tabindex => -1, :role => "dialog", :aria => {:labelledby => "myModalLabel", :hidden => "true"}}
+/   .modal-dialog.modal-lg
+/     .modal-content
+/       .modal-header
+/         .h4.modal-title.text-center.myModalLabel= t('views.employees.list')
+/       .modal-body
+/         =render "employees/list", :employees => @employees_list
+/       .modal-footer
+/         %button.btn.btn-default{:type => "button", :data =>{:dismiss => "modal"}}= t('views.common.close')
 
-.modal.fade#myModalItems{:tabindex => -1, :role => "dialog", :aria => {:labelledby => "myModalLabel", :hidden => "true"}}
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-header
-        .h4.modal-title.text-center.myModalLabel= t('views.items.list')
-      .modal-body
-        =render "items/list", :items => @items_list
-      .modal-footer
-        %button.btn.btn-default{:type => "button", :data =>{:dismiss => "modal"}}= t('views.common.close')
+/ .modal.fade#myModalItems{:tabindex => -1, :role => "dialog", :aria => {:labelledby => "myModalLabel", :hidden => "true"}}
+/   .modal-dialog.modal-lg
+/     .modal-content
+/       .modal-header
+/         .h4.modal-title.text-center.myModalLabel= t('views.items.list')
+/       .modal-body
+/         =render "items/list", :items => @items_list
+/       .modal-footer
+/         %button.btn.btn-default{:type => "button", :data =>{:dismiss => "modal"}}= t('views.common.close')
