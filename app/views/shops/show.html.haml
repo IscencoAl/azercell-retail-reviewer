@@ -17,7 +17,7 @@
       .panel.panel-default
         = render 'info', :shop => @shop
       .btn-toolbar.text-center
-        %a.btn.btn-default.btn-sm{:data=>{:modal=>"true", :target=>"#myModalEmployee"}}= t('views.common.show_employees')
+        %a.btn.btn-default.btn-sm{:data=>{:modal=>"true", :source =>employees_from_shop_path(@shop)}}= t('views.common.show_employees')
         %a.btn.btn-default.btn-sm{:data=> {:modal=>"true", :source =>items_from_shop_path(@shop)}}=t('views.common.show_items')
       %br
       .btn-toolbar.text-center

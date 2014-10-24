@@ -1,0 +1,45 @@
+.panel.panel-default
+  .table-responsive
+    %table.table.table-condensed.table-striped.table-vcentered
+      %thead
+        %tr
+          - if params[:controller] == 'employees'
+            %th= sortable(:name, t('activerecord.attributes.employee.name'))
+            %th= t('activerecord.attributes.employee.phone')
+            %th= t('activerecord.attributes.employee.email')
+            %th= sortable(:shop ,t('activerecord.attributes.employee.shop'))
+            %th= sortable(:employee_workposition ,t('activerecord.attributes.employee.employee_workposition'))
+          -else
+            %th= sortable(:name, t('activerecord.attributes.employee.name'))
+            %th= t('activerecord.attributes.employee.phone')
+            %th= t('activerecord.attributes.employee.email')
+            - unless params[:controller] == 'shops'
+              %th= sortable(:shop ,t('activerecord.attributes.employee.shop'))
+            %th= sortable(:employee_workposition ,t('activerecord.attributes.employee.employee_workposition'))
+          %th.text-right
+            - if can?(:create, Employee)
+              %a.btn.btn-default.btn-xs{:title => t('views.common.add'), :data => {:toggle => "tooltip", :modal => "true", :source => new_employee_for_shop_path(@shop)}}
+                %span.glyphicon.glyphicon-plus
+      %tbody
+        -if employees.any?
+          - employees.each do |employee|
+            %tr
+              %td= employee.name
+              %td= employee.phone
+              %td= employee.email
+              - unless params[:controller] == 'shops'
+                %td= employee.shop.name
+              %td= employee.employee_workposition.name
+              %td.text-right
+                - if can?(:update, employee)
+                  %a.btn.btn-default.btn-xs{ :title => t('views.common.edit'), :data => {:toggle => "tooltip", :modal => "true", :source => edit_employee_for_shop_path(employee)}}
+                    %span.glyphicon.glyphicon-edit
+                - if can?(:destroy, employee)
+                  %a.btn.btn-default.btn-xs{:title => t('views.common.delete'), :data => {:toggle => "tooltip",:modal => "true", :source => destroy_employee_from_shop_path(employee), :type => 'delete', :confirm => t('views.common.confirm')}}
+                    %span.glyphicon.glyphicon-remove
+        -else
+          %tr
+            %td{:colspan => 6}
+              %h4.text-center= t('views.common.empty')
+
+    

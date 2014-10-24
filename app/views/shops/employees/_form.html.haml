@@ -1,0 +1,11 @@
+= simple_form_for employee, :url => url, :method => method, :html => {:class => 'form-horizontal', :role => 'form', :data => {:modal => "form"}} do |f|
+
+  = f.input :name
+  = f.input :phone
+  = f.input :email
+  = f.association :shop, :disabled => true
+  = f.association :employee_workposition
+
+  .btn-toolbar.text-center
+    = f.button :submit, t('views.common.save')
+    %a.btn.btn-default{:data => {:modal => "true", :source =>employees_from_shop_path(employee.shop)}}= t('views.common.cancel')
