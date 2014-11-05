@@ -4,8 +4,8 @@ class Shop < ActiveRecord::Base
   include Modules::Sortable
 
   belongs_to :type, :class_name => 'ShopType', :foreign_key => 'shop_type_id'
-  belongs_to :city
-  belongs_to :dealer
+  belongs_to :city, touch: true
+  belongs_to :dealer, touch: true
   belongs_to :user, -> { where(:role => UserRole.reviewer) }
 
   has_one :region, :through => :city

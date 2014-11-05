@@ -16,10 +16,17 @@ class Dealer < ActiveRecord::Base
   scope :by_score, -> (dir) { order("score #{dir} nulls last")}
 
   before_soft_delete :delete_shops
-
   def delete_shops
     shops.each do |shop|
       shop.soft_delete
     end
   end
+
+  after_soft_delete -> { self.touch }
+  after_save -> { self.touch }
+  after_touch :change_shop_structure_version
+  def change_shop_structure_version
+    ApiSetting.change_version('shops_structure_version')
+  end
+
 end
