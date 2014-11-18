@@ -73,8 +73,8 @@ function PhotoUploader(){
           $modal = $('#mainmodal'),
           $modal_content = $modal.find('.modal-body'),
           $img = $photo.find('img').clone();
-
-      $modal_content.html($img);
+          console.log($photo)
+    
 
       $modal.modal();
     });

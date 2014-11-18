@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'modules/soft_delete_spec'
 
 RSpec.describe Item, :type => :model do
-  it_behaves_like "soft deletable", :item, Item
 
   describe 'factory' do
     it 'has a valid factory' do

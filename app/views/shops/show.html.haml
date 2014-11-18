@@ -7,7 +7,6 @@
   google.load("visualization", "1", {packages:["corechart"]});
 
 = stylesheet_link_tag "shops"
-
 .well.well-sm
   .row
     .col-md-4.col-sm-12
@@ -17,6 +16,10 @@
     .col-md-4.col-sm-6
       .panel.panel-default
         = render 'info', :shop => @shop
+      .btn-toolbar.text-center
+        %a.btn.btn-default.btn-sm{:data=>{:modal=>"true", :source =>employees_from_shop_path(@shop)}}= t('views.common.show_employees')
+        %a.btn.btn-default.btn-sm{:data=> {:modal=>"true", :source =>items_from_shop_path(@shop)}}=t('views.common.show_items')
+      %br
       .btn-toolbar.text-center
         - if can?(:update, @shop)
           %a.btn.btn-default.btn-sm{:href => edit_shop_path(@shop)}= t('views.common.edit')
@@ -31,12 +34,33 @@
 
 - if @reports.any?
   .row
-    .col-sm-12
+    .col-sm-6
       = render 'layouts/chart', :container_id => 'score-chart', :source => reports_score_chart_path, :extra_params => {:filter => {:shop => @shop.id}}
 
-.row
-  .col-sm-12 
-    .panel.panel-default
-      = render 'reports/list'
 
-    = paginate @reports
+    .col-sm-6
+      .panel.panel-default
+        %div.chart-container
+          = render 'reports/list'
+
+      = paginate @reports
+
+/ .modal.fade#myModalEmployee{:tabindex => -1, :role => "dialog", :aria => {:labelledby => "myModalLabel", :hidden => "true"}}
+/   .modal-dialog.modal-lg
+/     .modal-content
+/       .modal-header
+/         .h4.modal-title.text-center.myModalLabel= t('views.employees.list')
+/       .modal-body
+/         =render "employees/list", :employees => @employees_list
+/       .modal-footer
+/         %button.btn.btn-default{:type => "button", :data =>{:dismiss => "modal"}}= t('views.common.close')
+
+/ .modal.fade#myModalItems{:tabindex => -1, :role => "dialog", :aria => {:labelledby => "myModalLabel", :hidden => "true"}}
+/   .modal-dialog.modal-lg
+/     .modal-content
+/       .modal-header
+/         .h4.modal-title.text-center.myModalLabel= t('views.items.list')
+/       .modal-body
+/         =render "items/list", :items => @items_list
+/       .modal-footer
+/         %button.btn.btn-default{:type => "button", :data =>{:dismiss => "modal"}}= t('views.common.close')

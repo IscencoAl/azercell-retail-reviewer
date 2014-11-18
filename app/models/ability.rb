@@ -23,8 +23,7 @@ class Ability
       can :crud, EmployeeWorkposition, :is_deleted => false
       can :restore, EmployeeWorkposition, :is_deleted => true
 
-      can :crud, Item, :is_deleted => false
-      can :restore, Item, :is_deleted => true
+      can :crud, Item
 
       can [:create, :read, :update], Region, :is_deleted => false
       can :destroy, Region do |region|
@@ -38,8 +37,9 @@ class Ability
 
       can :crud, Shop, :is_deleted => false
       can [:restore, :restore_info], Shop, :is_deleted => true
-      can :info, Shop
-      can :map_info, Shop
+      can [:info, :map_info], Shop
+      can [:items, :new_item, :create_item, :destroy_item], Shop
+      can [:employees, :new_employee, :create_employee, :edit_employee, :update_employee, :destroy_employee], Shop
 
       can [:create, :read, :update], ShopType, :is_deleted => false
       can :destroy, ShopType do |type|
@@ -70,6 +70,8 @@ class Ability
       can :read, Shop
       can :info, Shop
       can :map_info, Shop
+      can [:items, :new_item, :create_item, :destroy_item], Shop
+      can [:employees, :new_employee, :create_employee, :edit_employee, :update_employee, :destroy_employee], Shop
 
       can :crud, ShopItem
 
@@ -92,6 +94,8 @@ class Ability
       can :read, Shop, :user_id => user.id
       can :info, Shop, :user_id => user.id
       can :map_info, Shop
+      can [:items, :new_item, :create_item, :destroy_item], Shop, :user_id => user.id
+      can [:employees, :new_employee, :create_employee, :edit_employee, :update_employee, :destroy_employee], Shop, :user_id => user.id
 
       can :crud, ShopItem, :shop => { :user_id => user.id }
 
@@ -109,6 +113,8 @@ class Ability
 
       can :read, Shop, :dealer_id => user.dealer_id
       can :info, Shop, :dealer_id => user.dealer_id
+      can [:items, :new_item, :create_item, :destroy_item], Shop, :dealer_id => user.dealer_id
+      can [:employees, :new_employee, :create_employee, :edit_employee, :update_employee, :destroy_employee], Shop, :dealer_id => user.dealer_id
 
       can :crud, ShopItem, :shop => { :dealer_id => user.dealer_id }
     end

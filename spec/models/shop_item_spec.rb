@@ -96,4 +96,26 @@ RSpec.describe ShopItem, :type => :model do
     end
   end
 
+  describe '#missing_items' do
+    context 'when item has no shop' do
+      it 'returns all items' do
+        item1 = create(:item)
+        item2 = create(:item)
+        shop_item = build(:shop_item, :shop => nil, :item => item1)
+
+        expect(shop_item.missing_items.count).to eq(2)
+      end
+    end
+
+    context 'when item has a shop' do
+      it 'return only missing items ' do
+        item1 = create(:item)
+        item2 = create(:item)
+        shop_item = create(:shop_item)
+
+        expect(shop_item.missing_items.count).to eq(2)
+      end
+    end
+  end
+
 end

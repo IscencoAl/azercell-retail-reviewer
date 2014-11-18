@@ -10,6 +10,7 @@ class Employee < ActiveRecord::Base
   belongs_to :shop
   belongs_to :employee_workposition
   has_one :city, :through => :shop
+  
 
   scope :with_name, -> (name) { where("name ilike ?", "%#{name}%") }
   scope :with_is_deleted, -> (is_deleted) { deleted unless is_deleted.blank? }

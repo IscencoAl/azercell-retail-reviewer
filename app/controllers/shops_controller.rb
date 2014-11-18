@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   load_and_authorize_resource
-  skip_load_resource :only => [:restore, :restore_info, :map_info]
+  skip_load_resource :only => [:restore, :restore_info, :map_info, :destroy_item, :edit_employee, :update_employee, :destroy_employee]
 
   helper_method :sorting_params
 
@@ -84,6 +84,109 @@ class ShopsController < ApplicationController
     render :json => @map_shops
   end
 
+  # --================== Item methods ========================--
+
+  # GET /shops/1/items
+  def items
+    items = @shop.shop_items
+    if request.xhr?
+      render :partial => "shops/items/list", :locals => {:items => items}
+    end
+  end
+
+  # GET /shops/1/items/new
+  def new_item
+    item = ShopItem.new(:shop => @shop)
+    if request.xhr?
+      render :partial => "shops/items/new", :locals => {:item => item}
+    end
+  end
+
+  # POST /shops/1/items/create
+  def create_item
+    item = ShopItem.new(item_params)
+    item.shop = @shop
+    
+    if item.save
+      render :partial => "shops/items/list", :locals => {:items => @shop.shop_items}
+    else
+      render :partial => "shops/items/new", :locals => {:item => item}
+    end
+  end
+
+  # DELETE /shops/items/1
+  def destroy_item
+    item = ShopItem.find(params[:item_id])
+    @shop = item.shop
+    
+    item.destroy
+    if request.xhr?
+      render :partial => "shops/items/list", :locals => {:items => @shop.shop_items}
+    end
+  end
+
+  # --================== Employee methods ========================--
+
+  # GET /shops/1/employees
+  def employees
+    employees = @shop.employees
+    if request.xhr?
+      render :partial => "shops/employees/list", :locals => {:employees => employees}
+    end
+  end
+
+  # GET /shops/1/employees/new
+  def new_employee
+    employee = Employee.new(:shop => @shop)
+    if request.xhr?
+      render :partial => "shops/employees/new", :locals => {:employee => employee}
+    end
+  end
+
+  # POST /shops/1/employees/create
+  def create_employee
+    employee = Employee.new(employee_params)
+    employee.shop = @shop
+    
+    if employee.save
+      render :partial => "shops/employees/list", :locals => {:employees => @shop.employees}
+    else
+      render :partial => "shops/employees/new", :locals => {:employee => employee}
+    end
+  end
+
+  # GET /shops/employees/1/edit
+  def edit_employee
+    employee = Employee.find(params[:employee_id])
+
+    if request.xhr?
+      render :partial => "shops/employees/edit", :locals => {:employee => employee}
+    end
+  end
+
+  #PATCH/PUT /shops/employees/1
+  def update_employee
+    employee = Employee.find(params[:employee_id])
+    @shop = employee.shop
+   
+    if employee.update(employee_params)
+      render :partial => "shops/employees/list", :locals => {:employees => @shop.employees}
+    else
+      render :partial => "shops/employees/edit", :locals => {:employee => employee}
+    end
+  end
+
+  # DELETE /shops/employees/1
+  def destroy_employee
+    employee = Employee.find(params[:employee_id])
+    @shop = employee.shop
+    
+    employee.soft_delete
+    if request.xhr?
+      render :partial => "shops/employees/list", :locals => {:employees => @shop.employees}
+    end
+  end
+
   private
     # Only allow a trusted parameter "white list" through.
     def shop_params
@@ -91,11 +194,19 @@ class ShopsController < ApplicationController
         :dealer_id, :square_footage, :user_id, :is_deleted)
     end
 
+    def item_params
+      params.require(:shop_item).permit(:item_id, :shop_id)
+    end
+
+    def employee_params
+      params.require(:employee).permit(:name, :phone, :email, :shop_id, :employee_workposition_id, :is_deleted)
+    end
+
     def filtering_params
       params.fetch(:filter, {}).permit(:type, :city, :address, :dealer, :user, :is_deleted)
     end
 
-     def sorting_params
+    def sorting_params
       params.fetch(:sort, {:col => "type", :dir => "asc"}).permit(:col, :dir)
     end
 end

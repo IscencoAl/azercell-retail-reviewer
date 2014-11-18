@@ -34,8 +34,17 @@ Rails.application.routes.draw do
     get '/shops/:id/restore', :to => 'shops#restore', :id => /\d+/, :as => 'restore_shop'
     patch '/shops/:id/restore_info', :to => 'shops#restore_info', :id => /\d+/, :as => 'restore_info_shop'
     get '/shops/:id/info', :to => 'shops#info', :id => /\d+/, :as => 'info_shop'
+    get '/shops/:id/items', :to => 'shops#items', :id => /\d+/, :as => 'items_from_shop'
+    get '/shops/:id/items/new', :to =>'shops#new_item', :id => /\d+/, :as => 'new_item_for_shop'
+    post '/shops/:id/items/create', :to => 'shops#create_item', :id => /\d+/, :as => 'create_item_for_shop'
+    delete '/shops/items/:item_id', :to => 'shops#destroy_item', :item_id => /\d+/, :as => 'destroy_item_from_shop'
+    get '/shops/:id/employees', :to => 'shops#employees', :id => /\d+/, :as => 'employees_from_shop'
+    get '/shops/:id/employees/new', :to => 'shops#new_employee', :id => /\d+/, :as => 'new_employee_for_shop'
+    post '/shops/:id/employees/create', :to => 'shops#create_employee', :id => /\d+/, :as => 'create_employee_for_shop'
+    get '/shops/employees/:employee_id/edit', :to => 'shops#edit_employee', :employee_id => /\d+/, :as => 'edit_employee_for_shop'
+    put '/shops/employees/:employee_id', :to => 'shops#update_employee', :employee_id => /\d+/, :as => 'update_employee_for_shop'
+    delete '/shops/employees/:employee_id', :to => 'shops#destroy_employee', :employee_id => /\d+/, :as => 'destroy_employee_from_shop'
     resources :shops
-
     resources :shop_items
    
     resources :shop_photos
