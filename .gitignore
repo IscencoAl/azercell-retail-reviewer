@@ -23,3 +23,6 @@
 
 /public/photos
 /public/uploads
+
+# Ignore RubyMine config files
+/.idea
