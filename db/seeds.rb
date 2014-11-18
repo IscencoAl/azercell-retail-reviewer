@@ -21,6 +21,7 @@ ReportStructureElementType.create(:name => 'input')
 ApiSetting.create(:name => 'app_version', :value => '1')
 ApiSetting.create(:name => 'shops_structure_version', :value => '1')
 ApiSetting.create(:name => 'report_structure_version', :value => '1')
+ApiSetting.create(:name => 'server_path', :value => '/Users/sergheycebotari/Work/azercell-retail-reviewer/public/')
 
 # Create user
 # User.create(:name => 'Admin', :surname => 'Magnetsoft', :email => 'admin@magnetsoft.md', :password => 'admin@magnetsoft.md', :password_confirmation => 'admin@magnetsoft.md', :role => UserRole.admin)

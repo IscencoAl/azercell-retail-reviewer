@@ -53,6 +53,9 @@ gem 'jquery.fileupload-rails', '1.10.0'
 gem 'wicked_pdf', '0.11.0'
 gem 'wkhtmltopdf-binary', '0.9.9.3'
 
+# Use Capistrano for deployment
+gem 'capistrano-rails', group: :development
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
 
@@ -64,9 +67,6 @@ gem 'wkhtmltopdf-binary', '0.9.9.3'
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
