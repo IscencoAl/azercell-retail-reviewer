@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008130109) do
+ActiveRecord::Schema.define(version: 20141113125518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_settings", force: true do |t|
+    t.string "name"
+    t.string "value"
+  end
 
   create_table "cities", force: true do |t|
     t.string  "name"
@@ -77,6 +82,7 @@ ActiveRecord::Schema.define(version: 20141008130109) do
   create_table "report_photos", force: true do |t|
     t.string  "photo"
     t.integer "report_id"
+    t.string  "comment"
   end
 
   add_index "report_photos", ["report_id"], name: "index_report_photos_on_report_id", using: :btree
@@ -170,6 +176,7 @@ ActiveRecord::Schema.define(version: 20141008130109) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.integer  "dealer_id"
+    t.string   "api_key"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

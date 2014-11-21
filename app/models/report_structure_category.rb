@@ -9,6 +9,13 @@ class ReportStructureCategory < ActiveRecord::Base
 
   def delete_elements
     elements.delete_all
+    self.touch
+  end
+
+  after_save -> { self.touch }
+  after_touch :change_shop_structure_version
+  def change_shop_structure_version
+    ApiSetting.change_version('report_structure_version')
   end
 
 end

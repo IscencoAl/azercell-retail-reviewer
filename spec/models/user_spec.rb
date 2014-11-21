@@ -61,6 +61,14 @@ RSpec.describe User, :type => :model do
     end
   end
 
+  describe '.generate_api_key' do
+    it 'generates unexisting api_key' do
+      user = create(:user)
+
+      expect(user.api_key).not_to be_blank
+    end
+  end
+
   describe '.with_name' do
     context 'when part of name exists' do
       it 'returns corresponding user' do

@@ -16,7 +16,6 @@
 
 # Ignore all logfiles and tempfiles.
 /log
-/tmp
 
 /test
 
@@ -24,3 +23,6 @@
 
 /public/photos
 /public/uploads
+
+# Ignore RubyMine config files
+/.idea
