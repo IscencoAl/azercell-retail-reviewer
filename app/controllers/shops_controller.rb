@@ -80,7 +80,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/map_info
   def map_info
-    @map_shops = Shop.select("id, latitude, longitude").all.map{ |shop| {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude}}
+    @map_shops = Shop.filter(filtering_params).all.map{ |shop| {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude} }
     render :json => @map_shops
   end
 
@@ -203,7 +203,7 @@ class ShopsController < ApplicationController
     end
 
     def filtering_params
-      params.fetch(:filter, {}).permit(:type, :city, :address, :dealer, :user, :is_deleted)
+      params.fetch(:filter, {}).permit(:type, :city, :region, :address, :dealer, :user, :is_deleted)
     end
 
     def sorting_params

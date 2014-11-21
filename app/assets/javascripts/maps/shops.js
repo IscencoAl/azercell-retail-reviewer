@@ -3,9 +3,11 @@ function initialize() {
     center: new google.maps.LatLng(40.413, 47.647),
     zoom: 6
   };
+
   var map_container = $("#map_canvas"),
       map = new google.maps.Map(map_container[0], mapOptions),
       url = map_container.data("mapinfo");
+      bounds = new google.maps.LatLngBounds();
 
   $.ajax({
     url: url,
@@ -18,8 +20,17 @@ function initialize() {
         google.maps.event.addListener(marker, 'click', function() {
           ShowTooltip(shop.info, map, marker);
         });
+        bounds.extend(location);
       })
-      new MarkerClusterer(map, markers);
+      
+      if (markers.length > 0){
+        map.fitBounds(bounds);
+      }
+      
+      if (map_container.data("clusterize") == true){
+        new MarkerClusterer(map, markers);
+      }
+      
     }
   });
 

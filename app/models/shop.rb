@@ -27,6 +27,7 @@ class Shop < ActiveRecord::Base
   scope :with_user, -> (user) { where(:user => user) }
   scope :with_address, -> (address) { where("address ilike ?", "%#{address}%") }
   scope :with_is_deleted, -> (is_deleted) { deleted unless is_deleted.blank? }
+  scope :with_region, -> (region) { joins(:city).where(:cities => {:region_id => region}) }
 
   scope :by_type, -> (dir) { joins(:type).order("shop_types.name #{dir}") }
   scope :by_dealer, -> (dir) { joins(:dealer).order("dealers.name #{dir}") }

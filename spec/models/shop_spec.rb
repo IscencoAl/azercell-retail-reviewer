@@ -142,7 +142,7 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
-    describe '.with_address' do
+  describe '.with_address' do
     context 'when part of address exists' do
       it 'returns corresponding shop' do
         shop = create(:shop, :address => 'John')
@@ -163,6 +163,26 @@ RSpec.describe Shop, :type => :model do
       end
     end
   end
+
+  describe '.with_region' do
+    context 'when region exists' do
+      it 'returns corresponding shop' do
+        region = create(:region)
+        shop = create(:shop, :region => region)
+
+        expect(Shop.with_region(region)).to eq([shop])
+      end
+    end
+
+    context 'when region is absent' do
+      it 'returns empty result' do
+        shop = create(:shop)
+
+        expect(Shop.with_region(0)).to eq([])
+      end
+    end
+  end
+
 
   describe '.by_type' do
     context 'when asc' do

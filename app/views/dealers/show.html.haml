@@ -1,5 +1,6 @@
 =javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp"
-=javascript_include_tag "maps/dealer_show"
+= javascript_include_tag "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"
+=javascript_include_tag "maps/shops"
 
 %h2.text-center= @dealer.name
 %br
@@ -8,7 +9,7 @@
   .panel-body
     .row
       .col-md-6
-        %div#map_canvas.map-container-lg
+        %div#map_canvas.map-container-lg{:data =>{:mapinfo => shop_map_info_path({:filter =>{:dealer => @dealer}})}}
       .col-md-6
         .panel.panel-default
           - @shops = @dealer.shops.by_score('desc')
