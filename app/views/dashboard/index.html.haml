@@ -1,6 +1,6 @@
 = javascript_include_tag "https://maps.googleapis.com/maps/api/js?v= 3.exp"
 = javascript_include_tag "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"
-= javascript_include_tag "maps/all_shops"
+= javascript_include_tag "maps/shops"
 
 .row
   .col-sm-6
@@ -32,4 +32,4 @@
   .col-sm-6
     .panel.panel-default
       .panel-body
-        %div#map_canvas.map-container-shop{:data =>{:mapinfo => shop_map_info_path}}
+        %div#map_canvas.map-container-shop{:data =>{:mapinfo => shop_map_info_path, :clusterize => "true"}}

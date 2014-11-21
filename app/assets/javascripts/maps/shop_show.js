@@ -8,7 +8,7 @@ function initialize() {
   if(latitude && longitude){
     latlng = new google.maps.LatLng(latitude, longitude);
     mapOptions = {
-      zoom: 14,
+      zoom: 9,
       center: latlng
     };
   }else{
