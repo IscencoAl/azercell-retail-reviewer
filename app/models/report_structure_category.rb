@@ -15,7 +15,7 @@ class ReportStructureCategory < ActiveRecord::Base
   after_save -> { self.touch }
   after_touch :change_shop_structure_version
   def change_shop_structure_version
-    ApiSetting.change_version('report_structure_version')
+    Setting.change_version('report_structure_version')
   end
 
 end

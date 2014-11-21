@@ -21,6 +21,6 @@ class City < ActiveRecord::Base
   after_soft_delete -> { self.touch }
   after_touch :change_shop_structure_version
   def change_shop_structure_version
-    ApiSetting.change_version('shops_structure_version')
+    Setting.change_version('shops_structure_version')
   end
 end

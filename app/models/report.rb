@@ -18,7 +18,7 @@ class Report < ActiveRecord::Base
   has_many :elements, :class_name => 'ReportElement', :dependent => :destroy
   has_many :photos, :class_name => 'ReportPhoto', :dependent => :destroy
 
-  after_create :update_scores
+  accepts_nested_attributes_for :elements
 
   scope :with_user, -> (user) { where(:user => user) }
   scope :with_shop, -> (shop) { where(:shop => shop) }
@@ -31,6 +31,10 @@ class Report < ActiveRecord::Base
   scope :by_score, -> (dir) { order("score #{dir}") }
   scope :by_user, -> (dir) { joins(:user).order("users.name #{dir}, users.surname #{dir}") }
   scope :by_shop, -> (dir) { joins(:city).order("cities.name #{dir}, shops.address #{dir}") }
+
+  MAX_SCORE = 5
+
+  after_create :update_scores
 
   def structured
     elements.group_by(&:category)

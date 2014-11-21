@@ -33,12 +33,6 @@ class User < ActiveRecord::Base
 
   before_create :generate_api_key
 
-  def generate_api_key
-    begin
-      self.api_key = SecureRandom.hex
-    end while self.class.exists?(:api_key => api_key)
-  end
-
   def admin?
     self.role == UserRole.admin
   end
@@ -61,6 +55,19 @@ class User < ActiveRecord::Base
 
   def full_name_was
     [name_was, surname_was].join(' ')
+  end
+
+  def valid_password?(password)
+    user_pass = BCrypt::Password.new(self.encrypted_password)
+    return user_pass == password
+  end
+
+  private
+
+  def generate_api_key
+    begin
+      self.api_key = SecureRandom.hex
+    end while self.class.exists?(:api_key => api_key)
   end
 
 end
