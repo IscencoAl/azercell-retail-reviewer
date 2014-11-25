@@ -40,7 +40,8 @@
 
     .col-sm-6
       .panel.panel-default
-        %div.chart-container
+  
+        %div.chart-container{:style =>("overflow:auto")}
           = render 'reports/list'
 
       = paginate @reports
