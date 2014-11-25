@@ -102,5 +102,19 @@ function handleElements($elem){
     e.preventDefault();
   })
 
+  // Handle photo preview in modal window
+  $elem.find('a[data-preview ="modal"]').click(function(e){
+    e.preventDefault();
+
+    var $photo = $(this),
+        $modal = $('#mainmodal'),
+        $modal_content = $modal.find('.modal-body'),
+        $img = $photo.find('img').clone();
+    
+    $modal_content.empty();
+    $modal_content.append($img);
+    $modal.modal();
+  });
+
 }
  

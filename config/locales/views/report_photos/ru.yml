@@ -1,0 +1,5 @@
+ru:
+  views:
+    report_photos:
+      list: 'Фотографии'
+      comment: 'Коментарий'
