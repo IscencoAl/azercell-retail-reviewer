@@ -4,9 +4,9 @@ RSpec.describe Setting, :type => :model do
   
   describe 'factory' do
     it 'has a valid factory' do
-      api_setting = build(:api_setting)
+      setting = build(:setting)
 
-      expect(api_setting).to be_valid
+      expect(setting).to be_valid
     end
   end
 
@@ -31,18 +31,18 @@ RSpec.describe Setting, :type => :model do
 
     context 'with existing name' do
       it 'returns true' do
-        create(:api_setting, :name => 'test')
+        create(:setting, :name => 'test')
 
         expect(Setting.change_version('test')).to eq(true)
       end
 
       it 'changes version' do
-        api_setting = create(:api_setting, :name => 'test', :value => '3')
+        setting = create(:setting, :name => 'test', :value => '3')
 
         Setting.change_version('test')
-        api_setting.reload
+        setting.reload
 
-        expect(api_setting.value).not_to eq('3')
+        expect(setting.value).not_to eq('3')
       end
     end
 

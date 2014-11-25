@@ -17,8 +17,6 @@ class Api::ReportsController < Api::ApiController
 
       @report = Report.new(treated_params)
       unless @report.save
-        puts '---------------------------------------------------------------------'
-        puts @report.errors.inspect
         raise Exception.new(@report.errors.full_messages.join('; '))
       end
 
@@ -85,9 +83,6 @@ class Api::ReportsController < Api::ApiController
       end
 
       treated_params[:score] = score / max_score * Report::MAX_SCORE
-
-      puts '---------------------------------------------------------------------'
-      puts treated_params.inspect
 
       return treated_params
 

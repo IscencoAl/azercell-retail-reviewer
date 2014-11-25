@@ -33,40 +33,6 @@ RSpec.describe Item, :type => :model do
     end
   end
 
-  describe '.with_is_deleted' do
-    context 'when true' do
-      it 'returns deleted item' do
-        item = create(:item, :deleted)
-
-        expect(Item.with_is_deleted(true)).to eq([item])
-      end
-    end
-
-    context 'when is_deleted is nil' do
-      it 'returns empty result' do
-        item = create(:item, :deleted)
-
-        expect(Item.with_is_deleted(nil)).to eq([])
-      end
-    end
-
-    context 'when is_deleted is ""' do
-      it 'returns empty result' do
-        item = create(:item, :deleted)
-
-        expect(Item.with_is_deleted("")).to eq([])
-      end
-    end
-
-    context 'when is_deleted is false' do
-      it 'returns empty result' do
-        item = create(:item, :deleted)
-
-        expect(Item.with_is_deleted(false)).to eq([])
-      end
-    end
-  end
-
   describe '.by_name' do
     context 'when asc' do
       it 'sorts ascending' do

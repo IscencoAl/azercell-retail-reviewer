@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     get '/settings/versions', :to => 'settings#versions', :as => 'settings_versions'
 
-    post '/users/sign_in', :to => 'users#sign_in', :as => 'api_sign_in'
+    post '/users/sign_in', :to => 'users#sign_in', :as => 'sign_in'
     # End API routes
   end
 
