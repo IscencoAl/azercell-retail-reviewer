@@ -26,7 +26,7 @@ class Dealer < ActiveRecord::Base
   after_save -> { self.touch }
   after_touch :change_shop_structure_version
   def change_shop_structure_version
-    ApiSetting.change_version('shops_structure_version')
+    Setting.change_version('shops_structure_version')
   end
 
 end

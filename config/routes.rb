@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
 
+  namespace 'api' do
+    # API routes
+    get '/mobile_app', :to => 'mobile_app#index', :as => 'mobile_app'
+
+    post '/reports', :to => 'reports#create', :as => 'reports'
+    get '/reports/structure', :to => 'reports#structure', :as => 'reports_structure'
+    post '/reports/:id/photo', :to => 'reports#photo', :as => 'reports_photo'
+
+    get '/shops', :to => 'shops#index', :as => 'shops'
+
+    get '/settings/versions', :to => 'settings#versions', :as => 'settings_versions'
+
+    post '/users/sign_in', :to => 'users#sign_in', :as => 'api_sign_in'
+    # End API routes
+  end
+
   scope "(:locale)" do
     get '/charts/reports_score', :to => 'charts#reports_score', :as => 'reports_score_chart'
     get '/charts/reports_count', :to => 'charts#reports_count', :as => 'reports_count_chart'
