@@ -15,8 +15,8 @@ class Report < ActiveRecord::Base
   has_one :city, :through => :shop
   has_one :dealer, :through => :shop
 
-  has_many :elements, :class_name => 'ReportElement', :dependent => :destroy
-  has_many :photos, :class_name => 'ReportPhoto', :dependent => :destroy
+  has_many :elements, :class_name => 'ReportElement'
+  has_many :photos, :class_name => 'ReportPhoto'
 
   accepts_nested_attributes_for :elements
 
@@ -37,7 +37,9 @@ class Report < ActiveRecord::Base
   after_create :update_scores
 
   def structured
-    elements.group_by(&:category)
+    ReportStructureCategory.unscoped do
+      elements.group_by(&:category)
+    end
   end
 
   def update_scores

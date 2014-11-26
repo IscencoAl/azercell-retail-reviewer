@@ -1,35 +1,30 @@
-= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v= 3.exp"
-= javascript_include_tag "http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"
-= javascript_include_tag "maps/shops"
-
-.row
-  .col-sm-6
-    .panel.panel-default
-      .panel-heading 
-        %h4.text-center= t('views.dashboard.not_reviewed')
-      = render "not_reviewed", :shops => @not_reviewed_shops
-  .col-sm-6
-    .panel.panel-default
-      .panel-heading
-        %h4.text-center= t('views.dashboard.shops_top')
-
-      = render 'top_shops'
-  .col-sm-6
-    .panel.panel-default
-      .panel-heading
-        %h4.text-center= t('views.dashboard.dealers_top')
-
-      = render 'top_dealers'
+= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v= 3.exp'
+= javascript_include_tag 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'
+= javascript_include_tag 'maps/shops'
 
 .row
   .col-sm-6
     .panel.panel-default
       .panel-heading
         %h4.text-center= t('views.dashboard.last_reports')
-   
-   
-      = render "reports/list"
+      = render 'reports/list', :reports => @reports
+
+    .panel.panel-default
+      .panel-heading
+        %h4.text-center= t('views.dashboard.shops_top')
+      = render 'top_shops', :best_shops => @best_shops, :worst_shops => @worst_shops
+
+    .panel.panel-default
+      .panel-heading
+        %h4.text-center= t('views.dashboard.dealers_top')
+      = render 'top_dealers', :best_dealers => @best_dealers, :worst_dealers => @worst_dealers
+
   .col-sm-6
     .panel.panel-default
+      .panel-heading
+        %h4.text-center= t('views.dashboard.not_reviewed')
+      = render 'not_reviewed', :shops => @not_reviewed_shops
+
+    .panel.panel-default
       .panel-body
-        %div#map_canvas.map-container-shop{:data =>{:mapinfo => shop_map_info_path, :clusterize => "true"}}
+        %div#map_canvas.map-container-shop{:data => {:mapinfo => shop_map_info_path, :clusterize => "true"}}

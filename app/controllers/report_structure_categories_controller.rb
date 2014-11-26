@@ -11,7 +11,7 @@ class ReportStructureCategoriesController < ApplicationController
   def show
     if request.xhr?
       respond_to do |format|
-        format.html { render :partial => 'header' }
+        format.html { render :partial => 'header', :locals => {:category => @category} }
       end
     end
   end
@@ -42,7 +42,7 @@ class ReportStructureCategoriesController < ApplicationController
 
     if request.xhr?
       if @category.save
-        render :partial => 'header'
+        redirect_to @category
       else
         render :partial => 'form'
       end

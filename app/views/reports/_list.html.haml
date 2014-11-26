@@ -1,5 +1,5 @@
 .table-responsive
-  %table.table
+  %table.table.table-condensed.table-striped.table-vcentered
     %thead
       %tr
         - if params[:controller] == "reports"
@@ -18,8 +18,8 @@
           %th
 
     %tbody
-      - if @reports.any?
-        - @reports.each do |report|
+      - if reports.any?
+        - reports.each do |report|
           %tr
             - unless params[:controller] == "shops"
               - if not report.shop.is_deleted and can?(:read, report.shop)

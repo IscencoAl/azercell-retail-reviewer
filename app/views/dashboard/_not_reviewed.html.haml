@@ -1,14 +1,17 @@
-.table-responsive{:style => ("max-height:577px;")}
+.table-responsive{:style => 'max-height:577px;'}
   %table.table.table-condensed.table-striped.table-vcentered
     %thead
       %tr
         %th= t('activerecord.attributes.report.shop')
         %th= t('activerecord.attributes.report.user')
-        
 
     %tbody
-      - shops.each do |shop|
+      -if shops.any?
+        - shops.each do |shop|
+          %tr
+            %td= link_to shop.name, shop
+            %td= link_to shop.user.full_name, shop.user
+      - else
         %tr
-          %td= link_to shop.name, shop
-          %td= link_to shop.user.full_name, shop.user
-          
+          %td{:colspan => 2}
+            %h4.text-center= t('views.common.empty')

@@ -68,8 +68,6 @@ function handleReportElements($elem){
   $elem.find('a[data-editcategory]').click(function(e){
     e.preventDefault();
 
-    console.log('HERE')
-
     var $btn = $(this),
         $elem = $btn.closest('.category-header'),
         url = $btn.attr('href');

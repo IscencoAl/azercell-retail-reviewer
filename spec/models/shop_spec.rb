@@ -3,7 +3,7 @@ require 'modules/soft_delete_spec'
 
 RSpec.describe Shop, :type => :model do
   
-  it_behaves_like "soft deletable", :shop, Shop
+  it_behaves_like 'soft deletable', :shop, Shop
 
   describe 'factory' do
     it 'has a valid factory' do
@@ -129,7 +129,7 @@ RSpec.describe Shop, :type => :model do
       it 'returns empty result' do
         shop = create(:shop, :deleted)
 
-        expect(Shop.with_is_deleted("")).to eq([])
+        expect(Shop.with_is_deleted('')).to eq([])
       end
     end
 
@@ -187,8 +187,8 @@ RSpec.describe Shop, :type => :model do
   describe '.by_type' do
     context 'when asc' do
       it 'sorts ascending' do
-        a = create(:shop, :type => create(:shop_type, :name => "A"))
-        b = create(:shop, :type => create(:shop_type, :name => "B"))
+        a = create(:shop, :type => create(:shop_type, :name => 'A'))
+        b = create(:shop, :type => create(:shop_type, :name => 'B'))
 
         expect(Shop.by_type('asc')).to eq([a, b])
       end
@@ -196,8 +196,8 @@ RSpec.describe Shop, :type => :model do
 
     context 'when desc' do
       it 'sorts descending' do
-        a = create(:shop, :type => create(:shop_type, :name => "A"))
-        b = create(:shop, :type => create(:shop_type, :name => "B"))
+        a = create(:shop, :type => create(:shop_type, :name => 'A'))
+        b = create(:shop, :type => create(:shop_type, :name => 'B'))
 
         expect(Shop.by_type('desc')).to eq([b, a])
       end
@@ -207,8 +207,8 @@ RSpec.describe Shop, :type => :model do
   describe '.by_user' do
     context 'when asc' do
       it 'sorts ascending' do
-        a = create(:shop, :user => create(:user, :reviewer, :name => "A"))
-        b = create(:shop, :user => create(:user, :reviewer, :name => "B"))
+        a = create(:shop, :user => create(:user, :reviewer, :name => 'A'))
+        b = create(:shop, :user => create(:user, :reviewer, :name => 'B'))
 
         expect(Shop.by_user('asc')).to eq([a, b])
       end
@@ -216,8 +216,8 @@ RSpec.describe Shop, :type => :model do
 
     context 'when desc' do
       it 'sorts descending' do
-        a = create(:shop, :user => create(:user, :reviewer, :name => "A"))
-        b = create(:shop, :user => create(:user, :reviewer, :name => "B"))
+        a = create(:shop, :user => create(:user, :reviewer, :name => 'A'))
+        b = create(:shop, :user => create(:user, :reviewer, :name => 'B'))
 
         expect(Shop.by_user('desc')).to eq([b, a])
       end
@@ -227,8 +227,8 @@ RSpec.describe Shop, :type => :model do
   describe '.by_dealer' do
     context 'when asc' do
       it 'sorts ascending' do
-        a = create(:shop, :dealer => create(:dealer, :name => "A"))
-        b = create(:shop, :dealer => create(:dealer, :name => "B"))
+        a = create(:shop, :dealer => create(:dealer, :name => 'A'))
+        b = create(:shop, :dealer => create(:dealer, :name => 'B'))
 
         expect(Shop.by_dealer('asc')).to eq([a, b])
       end
@@ -236,8 +236,8 @@ RSpec.describe Shop, :type => :model do
 
     context 'when desc' do
       it 'sorts descending' do
-        a = create(:shop, :dealer => create(:dealer, :name => "A"))
-        b = create(:shop, :dealer => create(:dealer, :name => "B"))
+        a = create(:shop, :dealer => create(:dealer, :name => 'A'))
+        b = create(:shop, :dealer => create(:dealer, :name => 'B'))
 
         expect(Shop.by_dealer('desc')).to eq([b, a])
       end
@@ -247,8 +247,8 @@ RSpec.describe Shop, :type => :model do
   describe '.by_address' do
     context 'when asc' do
       it 'sorts ascending' do
-        a = create(:shop, :city => create(:city, :name => "A"), :address => 'D')
-        b = create(:shop, :city => create(:city, :name => "B"), :address => 'C')
+        a = create(:shop, :city => create(:city, :name => 'A'), :address => 'D')
+        b = create(:shop, :city => create(:city, :name => 'B'), :address => 'C')
 
         expect(Shop.by_address('asc')).to eq([a, b])
       end
@@ -256,8 +256,8 @@ RSpec.describe Shop, :type => :model do
 
     context 'when desc' do
       it 'sorts descending' do
-        a = create(:shop, :city => create(:city, :name => "A"), :address => 'D')
-        b = create(:shop, :city => create(:city, :name => "B"), :address => 'C')
+        a = create(:shop, :city => create(:city, :name => 'A'), :address => 'D')
+        b = create(:shop, :city => create(:city, :name => 'B'), :address => 'C')
 
         expect(Shop.by_address('desc')).to eq([b, a])
       end
@@ -290,7 +290,7 @@ RSpec.describe Shop, :type => :model do
 
   describe '#name' do
     it 'returns full address' do
-      city = create(:city, :name => "Gorod")
+      city = create(:city, :name => 'Gorod')
       shop = build(:shop, :city => city, :address => 'Doe')
 
       expect(shop.name).to eql('Gorod, Doe')
@@ -299,7 +299,7 @@ RSpec.describe Shop, :type => :model do
 
   describe '#name_was' do
     it 'returns old full address' do
-      city = create(:city, :name => "Gorod")
+      city = create(:city, :name => 'Gorod')
       shop = create(:shop, :city => city, :address => 'Doe')
 
       shop.address = 'hristo'
@@ -327,31 +327,56 @@ RSpec.describe Shop, :type => :model do
     end
   end
 
-  describe "#not_reviewed" do
+  describe '#not_reviewed' do
     context 'without reports' do
-      it "return last non reviewed shop" do
+      it 'return last non reviewed shop' do
         shop = create(:shop)
 
         expect(Shop.not_reviewed(Time.now - 1.month)).to eq([shop])
       end
     end
 
-    context "with old report" do
-      it "return last non reviewed shop" do
+    context 'with old report' do
+      it 'return last non reviewed shop' do
         shop = create(:shop)
-        report = create(:report, :shop => shop, :created_at => Time.now - 2.month)
+        create(:report, :shop => shop, :created_at => Time.now - 2.month)
 
         expect(Shop.not_reviewed(Time.now - 1.month)).to eq([shop])
       end
     end
 
-    context "with new report" do
-      it "return empty list" do
+    context 'with new report' do
+      it 'return empty list' do
         shop = create(:shop)
-        report = create(:report, :shop => shop, :created_at => Time.now)
+        create(:report, :shop => shop, :created_at => Time.now)
 
         expect(Shop.not_reviewed(Time.now - 1.month)).to be_blank
       end
     end
   end
+
+  describe 'delete_shop_items' do
+    it 'deletes all items' do
+      shop = create(:shop)
+      create(:shop_item, :shop => shop)
+
+      shop.soft_delete
+      shop.reload
+
+      expect(shop.shop_items).to be_blank
+    end
+  end
+
+  describe 'delete_employees' do
+    it 'deletes all employees' do
+      shop = create(:shop)
+      create(:employee, :shop => shop)
+
+      shop.soft_delete
+      shop.reload
+
+      expect(shop.employees).to be_blank
+    end
+  end
+
 end

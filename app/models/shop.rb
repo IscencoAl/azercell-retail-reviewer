@@ -3,17 +3,17 @@ class Shop < ActiveRecord::Base
   include Modules::Filterable
   include Modules::Sortable
 
-  belongs_to :type, :class_name => 'ShopType', :foreign_key => 'shop_type_id'
-  belongs_to :city, touch: true
+  belongs_to :type,   :class_name => 'ShopType', :foreign_key => 'shop_type_id'
+  belongs_to :city,   touch: true
   belongs_to :dealer, touch: true
-  belongs_to :user, -> { where(:role => UserRole.reviewer) }
+  belongs_to :user,   -> { where(:role => UserRole.reviewer) }
 
   has_one :region, :through => :city
 
-  has_many :photos, :class_name => 'ShopPhoto', :dependent => :destroy
-  has_many :shop_items, :dependent => :destroy
-  has_many :reports
+  has_many :photos,     :class_name => 'ShopPhoto'
+  has_many :shop_items
   has_many :employees
+  has_many :reports
 
   validates :type,  :presence => true
   validates :city,  :presence => true
@@ -35,6 +35,8 @@ class Shop < ActiveRecord::Base
   scope :by_address, -> (dir) { joins(:city).order("cities.name #{dir}, address #{dir}") }
   scope :by_score, -> (dir) { order("score #{dir} nulls last")}
 
+  before_soft_delete :delete_shop_items, :delete_employees
+
   def name
     City.unscoped do
       [city.name, address].join(', ')
@@ -55,5 +57,19 @@ class Shop < ActiveRecord::Base
   def self.not_reviewed(date)
     last_reports = Report.select("distinct on(shop_id) shop_id, created_at").order("shop_id, created_at desc").to_sql
     return Shop.joins("left outer join (#{last_reports}) as reports on reports.shop_id = shops.id").where("reports.created_at < ? or reports.created_at is null", date)
+  end
+
+  private
+
+  def delete_shop_items
+    shop_items.each do |item|
+      item.destroy
+    end
+  end
+
+  def delete_employees
+    employees.each do |employee|
+      employee.soft_delete
+    end
   end
 end

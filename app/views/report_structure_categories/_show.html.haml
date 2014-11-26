@@ -1,6 +1,6 @@
 .category-container.panel.panel-default
   .category-header.panel-heading
-    = render :partial => 'report_structure_categories/header'
+    = render 'report_structure_categories/header', :category => category
 
   .table-responsive
     .div-table.div-table-striped.div-table-condensed
@@ -12,6 +12,5 @@
           .div-th= t('activerecord.attributes.report_structure_element.shop_types')
           .div-th
       .element-list.div-tbody
-        - @category.elements.each do |elem|
-          - @element = elem
-          = render :partial => 'report_structure_elements/show'
+        - category.elements.each do |elem|
+          = render 'report_structure_elements/show', :element => elem

@@ -17,5 +17,4 @@
   #report-structure.col-lg-offset-1.col-lg-10
 
     - @categories.each do |cat|
-      - @category = cat
-      = render :partial => 'report_structure_categories/show'
+      = render 'report_structure_categories/show', :category => cat

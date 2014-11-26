@@ -19,13 +19,12 @@
           %th= t('activerecord.attributes.shop.score')
         %th.text-right
           - if can?(:create, Shop)
-            %a.btn.btn-default.btn-xs{:href => new_shop_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
+            %a.btn.btn-default.btn-xs{:href => new_shop_path, :title => t('views.common.add'), :data => {:toggle => 'tooltip'}}
               %span.glyphicon.glyphicon-plus
 
-
     %tbody
-      - if @shops.any?
-        - @shops.each do |shop|
+      - if shops.any?
+        - shops.each do |shop|
           %tr
             %td= shop.type.name
             - if not shop.is_deleted and can?(:read, shop)
@@ -51,15 +50,15 @@
             %td= shop.score ? link_to(shop.score, shop.last_report) : '-'
             %td.text-right
               - if can?(:restore, shop)
-                %a.btn.btn-default.btn-xs{:href => restore_shop_path(shop), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
+                %a.btn.btn-default.btn-xs{:href => restore_shop_path(shop), :title => t('views.common.restore'), :data => {:toggle => 'tooltip'}}
                   %span.glyphicon.glyphicon-ok
               - if can?(:update, shop)
-                %a.btn.btn-default.btn-xs{:href => edit_shop_path(shop), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
+                %a.btn.btn-default.btn-xs{:href => edit_shop_path(shop), :title => t('views.common.edit'), :data => {:toggle => 'tooltip'}}
                   %span.glyphicon.glyphicon-edit
               - if can?(:destroy, shop)
-                %a.btn.btn-default.btn-xs{:href => shop_path(shop), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
+                %a.btn.btn-default.btn-xs{:href => shop_path(shop), :title => t('views.common.delete'), :data => {:toggle => 'tooltip', :method => 'delete', :confirm => t('views.common.confirm')}}
                   %span.glyphicon.glyphicon-remove
-                  
+
       - else
         %tr
           %td{:colspan => 6}

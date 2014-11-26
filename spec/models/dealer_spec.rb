@@ -3,17 +3,17 @@ require 'modules/soft_delete_spec'
 
 RSpec.describe Dealer, :type => :model do
 
-  it_behaves_like "soft deletable", :dealer, Dealer
+  it_behaves_like 'soft deletable', :dealer, Dealer
 
-  describe "factory" do
-    it "is valid" do
+  describe 'factory' do
+    it 'is valid' do
       dealer = create(:dealer)
 
       expect(dealer).to be_valid
     end
 
-    context "trait 'deleted'" do
-      it "is valid" do
+    context 'trait "deleted"' do
+      it 'is valid' do
         dealer = create(:dealer, :deleted)
 
         expect(dealer).to be_valid
@@ -95,7 +95,7 @@ RSpec.describe Dealer, :type => :model do
       it 'returns empty result' do
         dealer = create(:dealer, :deleted)
 
-        expect(Dealer.with_is_deleted("")).to eq([])
+        expect(Dealer.with_is_deleted('')).to eq([])
       end
     end
 
@@ -168,15 +168,27 @@ RSpec.describe Dealer, :type => :model do
     end
   end
 
-  describe 'delete shops' do
+  describe 'delete_shops' do
     it 'deletes all shops' do
       dealer = create(:dealer)
-      shop = create(:shop, :dealer => dealer)
+      create(:shop, :dealer => dealer)
 
-      dealer.delete_shops
+      dealer.soft_delete
       dealer.reload
 
       expect(dealer.shops).to be_blank
+    end
+  end
+
+  describe 'delete_users' do
+    it 'deletes all users' do
+      dealer = create(:dealer)
+      create(:user, :user_dealer, :dealer => dealer)
+
+      dealer.soft_delete
+      dealer.reload
+
+      expect(dealer.users).to be_blank
     end
   end
   

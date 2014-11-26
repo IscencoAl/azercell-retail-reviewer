@@ -21,7 +21,7 @@ class ShopItem < ActiveRecord::Base
 
     return Item.all unless shop
 
-    existing_items_id = shop.shop_items.select(:item_id)
-    Item.where("id not in (?)", existing_items_id)
+    Item.where('id not in (?)', shop.shop_items.select(:item_id))
   end
+
 end

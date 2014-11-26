@@ -1,11 +1,11 @@
-= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp"
-= javascript_include_tag "http://www.google.com/jsapi"
-= javascript_include_tag "maps/dealer_show"
-= javascript_include_tag "chart_helper"
+= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp'
+= javascript_include_tag 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'
+= javascript_include_tag 'http://www.google.com/jsapi'
+= javascript_include_tag 'maps/shops'
+= javascript_include_tag 'chart_helper'
 
 :javascript
   google.load("visualization", "1", {packages:["corechart"]});
-
 
 %h2.text-center= @user.full_name
 %br
@@ -14,11 +14,10 @@
   .row
     .col-md-6
       .panel.panel-default
-        %div#map_canvas.map-container
+        %div#map_canvas.map-container{:data => {:mapinfo => shop_map_info_path({:filter => {:user => @user}})}}
     .col-md-6
       .panel.panel-default
-        - @shops = @user.shops
-        = render 'shops/list', :max_height => 300
+        = render 'shops/list', :shops => @user.shops, :max_height => 300
 
 %h3.text-center= t('views.reports.list')
 - if @reports.any?
@@ -28,6 +27,6 @@
 .row
   .col-sm-12
     .panel.panel-default
-      =render 'reports/list'
+      =render 'reports/list', :reports => @reports
 
     = paginate @reports

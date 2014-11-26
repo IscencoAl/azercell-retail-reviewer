@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   include Modules::Sortable
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :omniauthable:, registerable, :recoverable
+  # :confirmable, :lockable, :timeoutable, :omniauthable:, :registerable, :recoverable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
   validates :name, :presence => true

@@ -10,7 +10,7 @@ class ReportStructureElementsController < ApplicationController
   def show
     if request.xhr?
       respond_to do |format|
-        format.html { render :partial => 'show' }
+        format.html { render :partial => 'show', :locals => {:element => @element} }
       end
     end
   end
