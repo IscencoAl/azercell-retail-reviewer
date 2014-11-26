@@ -1,7 +1,13 @@
-.galery-wrapper.panel.panel-default{:class => "#{"hidden" if photos.blank?}"}
-  .panel-body
-    .galery.row
-      - photos.each do |p|
-        .col-sm-2.photo
-          %a.thumbnail{:href => p.photo, :target => '_blank;'}
-            %img.img-responsive{:src => p.photo}
+.panel.panel-default{:class => "#{"hidden" if photos.blank?}"}
+  .panel-heading
+    %h4=t('views.report_photos.list')
+  .list-group
+    - photos.each do |p|
+      .list-group-item
+        .row
+          .col-xs-4
+            %a.thumbnail{:href => p.photo, :target => '_blank;', :data => {:preview => 'modal'}}
+              %img.img-responsive{:src => p.photo}
+          .col-xs-8
+            %strong=t('views.report_photos.comment')
+            %p=p.comment

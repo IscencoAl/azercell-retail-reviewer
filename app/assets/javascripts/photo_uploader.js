@@ -30,6 +30,7 @@ function PhotoUploader(){
     var $photo = $(data.result);
 
     handlePhotoControls($photo);
+    handleElements($photo);
 
     self.$progress.fadeTo(1000, 0, function(){
       self.$galery_wrapper.removeClass('hidden');
@@ -64,19 +65,6 @@ function PhotoUploader(){
             self.$galery_wrapper.addClass('hidden');
         }
       })
-    });
-
-    $elem.find('a.thumbnail').click(function(e){
-      e.preventDefault();
-
-      var $photo = $(this),
-          $modal = $('#mainmodal'),
-          $modal_content = $modal.find('.modal-body'),
-          $img = $photo.find('img').clone();
-          console.log($photo)
-    
-
-      $modal.modal();
     });
   }
 }

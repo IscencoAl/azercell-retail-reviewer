@@ -30,9 +30,8 @@
       .panel.panel-default
         = render 'shop_photos/slideshow', :shop => @shop
 
-%h3.text-center= t('views.reports.list')
-
 - if @reports.any?
+  %h3.text-center= t('views.reports.list')
   .row
     .col-sm-6
       = render 'layouts/chart', :container_id => 'score-chart', :source => reports_score_chart_path, :extra_params => {:filter => {:shop => @shop.id}}

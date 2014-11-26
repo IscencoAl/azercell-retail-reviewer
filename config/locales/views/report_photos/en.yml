@@ -1,0 +1,5 @@
+en:
+  views:
+    report_photos:
+      list: 'Photos'
+      comment: 'Comment'
