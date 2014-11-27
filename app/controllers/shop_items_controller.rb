@@ -14,22 +14,19 @@ class ShopItemsController < ApplicationController
 
   # GET /shop_items/new
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /shop_items/1/edit
   def edit
-    session[:return_to] = request.referer
-    if request.xhr?
-      render :partial => "shops/items/edit", :locals => {:item => @shop_item}
-    end
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # POST /shop_items
   def create
     if @shop_item.save
       flash[:success] = t('controllers.shop_items.created', name: @shop_item.item.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || shop_items_url
     else
       render :new
     end
@@ -39,7 +36,7 @@ class ShopItemsController < ApplicationController
   def update
     if @shop_item.update(shop_item_params)
       flash[:success] = t('controllers.shop_items.updated', name: @shop_item.item.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || shop_items_url
     else
       render :edit
     end

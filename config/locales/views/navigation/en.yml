@@ -2,10 +2,12 @@ en:
   views:
     navigation:
       users: "Users"
+      profle: "Profile"
+      edit_profle: "Edit Profile"
       places: "Places"
       regions: "Regions"
       cities: "Cities"
-      report_structure: "Report structure"
+      report_structure: "Report Structure"
       reports: "Reports"
       retail: "Retail"
       dealers: "Dealers"

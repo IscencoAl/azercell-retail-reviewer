@@ -15,19 +15,19 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /items/1/edit
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # POST /items
   def create
     if @item.save
       flash[:success] = t('controllers.items.created', name: @item.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || items_url
     else
       render :new
     end
@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       flash[:success] = t('controllers.items.updated', name: @item.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || items_url
     else
       render :edit
     end

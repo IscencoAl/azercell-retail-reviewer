@@ -15,19 +15,19 @@ class RegionsController < ApplicationController
 
   # GET /regions/new
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /regions/1/edit
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # POST /regions
   def create
     if @region.save
       flash[:success] = t('controllers.regions.created', name: @region.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || regions_url
     else
       render :new
     end
@@ -37,7 +37,7 @@ class RegionsController < ApplicationController
   def update
     if @region.update(region_params)
       flash[:success] = t('controllers.regions.updated', name: @region.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || regions_url
     else
       render :edit
     end

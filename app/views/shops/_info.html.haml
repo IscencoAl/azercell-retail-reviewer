@@ -2,13 +2,13 @@
   %tbody
     %tr
       %td= t('activerecord.attributes.shop.region')
-      %td= link_to shop.region.name, shop.region
+      %td= can_link_to shop.region.name, shop.region
     %tr
       %td= t('activerecord.attributes.shop.city')
-      %td= link_to shop.city.name, shop.city
+      %td= can_link_to shop.city.name, shop.city
     %tr
       %td= t('activerecord.attributes.shop.address')
-      %td= link_to shop.address, shop
+      %td= can_link_to shop.address, shop
     %tr
       %td= t('activerecord.attributes.shop.type')
       %td= shop.type.name
@@ -17,10 +17,10 @@
       %td= shop.square_footage || '-'
     %tr
       %td= t('activerecord.attributes.shop.dealer')
-      %td= link_to shop.dealer.name, shop.dealer
+      %td= can_link_to shop.dealer.name, shop.dealer
     %tr
       %td= t('activerecord.attributes.shop.user')
-      %td= shop.user ? link_to(shop.user.full_name, shop.user) : '-'
+      %td= shop.user ? can_link_to(shop.user.full_name, shop.user) : '-'
     %tr
       %td= t('activerecord.attributes.shop.score')
-      %td= shop.score ? link_to(shop.score, shop.last_report) : '-'
+      %td= shop.score ? can_link_to(shop.score, shop.last_report) : '-'

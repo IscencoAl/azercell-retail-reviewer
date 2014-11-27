@@ -15,19 +15,19 @@ class CitiesController < ApplicationController
 
   # GET /cities/new
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /cities/1/edit
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # POST /cities
   def create
     if @city.save
       flash[:success] = t('controllers.cities.created', name: @city.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || cities_url
     else
       render :new
     end
@@ -37,7 +37,7 @@ class CitiesController < ApplicationController
   def update
     if @city.update(city_params)
       flash[:success] = t('controllers.cities.updated', name: @city.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || cities_url
     else
       render :edit
     end
@@ -53,7 +53,7 @@ class CitiesController < ApplicationController
   # GET /cities/1/restore
   def restore
     @city = City.deleted.find(params[:id])
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /cities/1/restore_info
@@ -63,7 +63,7 @@ class CitiesController < ApplicationController
     if @city.update(city_params)
       @city.restore
       flash[:success] = t('controllers.cities.restored', name: @city.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || cities_url
     else
       render :restore
     end
@@ -81,6 +81,6 @@ class CitiesController < ApplicationController
     end
 
     def sorting_params
-      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
+      params.fetch(:sort, {:col => 'name', :dir => 'asc'}).permit(:col, :dir)
     end
 end

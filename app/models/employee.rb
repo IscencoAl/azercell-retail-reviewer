@@ -3,7 +3,7 @@ class Employee < ActiveRecord::Base
   include Modules::Filterable
   include Modules::Sortable
 
-  validates :name,                  :presence => true, :uniqueness => true
+  validates :name,                  :presence => true
   validates :shop,                  :presence => true
   validates :employee_workposition, :presence => true
 

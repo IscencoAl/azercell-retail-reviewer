@@ -31,7 +31,7 @@ class Shop < ActiveRecord::Base
 
   scope :by_type, -> (dir) { joins(:type).order("shop_types.name #{dir}") }
   scope :by_dealer, -> (dir) { joins(:dealer).order("dealers.name #{dir}") }
-  scope :by_user, -> (dir) { joins(:user).order("users.name #{dir}") }
+  scope :by_user, -> (dir) { includes(:user).order("users.name #{dir} nulls last") }
   scope :by_address, -> (dir) { joins(:city).order("cities.name #{dir}, address #{dir}") }
   scope :by_score, -> (dir) { order("score #{dir} nulls last")}
 

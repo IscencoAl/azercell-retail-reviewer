@@ -16,19 +16,19 @@ class ShopsController < ApplicationController
 
   # GET /shops/new
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /shops/1/edit
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # POST /shops
   def create
     if @shop.save
       flash[:success] = t('controllers.shops.created', name: @shop.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || shops_url
     else
       render :new
     end
@@ -38,7 +38,7 @@ class ShopsController < ApplicationController
   def update
     if @shop.update(shop_params)
       flash[:success] = t('controllers.shops.updated', name: @shop.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || shops_url
     else
       render :edit
     end
@@ -54,7 +54,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/1/restore
   def restore
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer  unless request.referer == request.url
     @shop = Shop.deleted.find(params[:id])
   end
 
@@ -65,7 +65,7 @@ class ShopsController < ApplicationController
     if @shop.update(shop_params)
       @shop.restore
       flash[:success] = t('controllers.shops.restored', name: @shop.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || shops_url
     else
       render :restore
     end
@@ -80,7 +80,8 @@ class ShopsController < ApplicationController
 
   # GET /shops/map_info
   def map_info
-    @map_shops = Shop.filter(filtering_params).all.map{ |shop| {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude} }
+    @map_shops = Shop.filter(filtering_params).all
+      .map{ |shop| {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude} }
     render :json => @map_shops
   end
 
@@ -164,7 +165,7 @@ class ShopsController < ApplicationController
     end
   end
 
-  #PATCH/PUT /shops/employees/1
+  # PATCH/PUT /shops/employees/1
   def update_employee
     employee = Employee.find(params[:employee_id])
     @shop = employee.shop

@@ -28,13 +28,13 @@
           %tr
             %td= shop.type.name
             - if not shop.is_deleted and can?(:read, shop)
-              %td= link_to(shop.name, shop)
+              %td= link_to shop.name, shop
             - else
               %td= shop.name
             - unless params[:controller] == 'dealers'
               - if shop.dealer
                 - if can?(:read, shop.dealer)
-                  %td= link_to(shop.dealer.name, shop.dealer)
+                  %td= link_to shop.dealer.name, shop.dealer
                 - else
                   %td= shop.dealer.name
               - else
@@ -42,7 +42,7 @@
             - unless params[:controller] == 'users'
               - if shop.user
                 - if can?(:read, shop.user)
-                  %td= link_to(shop.user.full_name, shop.user)
+                  %td= link_to shop.user.full_name, shop.user
                 - else
                   %td= shop.user.full_name
               - else

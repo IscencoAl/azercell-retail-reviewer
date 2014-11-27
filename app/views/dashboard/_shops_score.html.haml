@@ -2,11 +2,11 @@
   %table.table.table-condensed.table-striped.table-vcentered
     %thead
       %tr
-        %th{:class => "#{title == "best" ? "text-success" : "text-danger"}"}= t("views.common.#{title}")
+        %th{:class => "#{title == 'best' ? 'text-success' : 'text-danger'}"}= t("views.common.#{title}")
         %th
 
     %tbody
       - shops.each do |shop|
         %tr
-          %td= link_to shop.name, shop
+          %td= can_link_to(shop.name, shop)
           %td.text-right= shop.score

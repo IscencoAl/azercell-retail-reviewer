@@ -15,19 +15,19 @@ class EmployeesController < ApplicationController
 
   # GET /employees/new
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /employees/1/edit
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # POST /employees
   def create
     if @employee.save
       flash[:success] = t('controllers.employees.created', name: @employee.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || employees_url
     else
       render :new
     end
@@ -37,7 +37,7 @@ class EmployeesController < ApplicationController
   def update
     if @employee.update(employee_params)
       flash[:success] = t('controllers.employees.updated', name: @employee.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || employees_url
     else
       render :edit
     end

@@ -8,5 +8,5 @@
     %tbody
       - dealers.each do |dealer|
         %tr
-          %td= link_to dealer.name, dealer
+          %td= can_link_to(dealer.name, dealer)
           %td.text-right= dealer.score

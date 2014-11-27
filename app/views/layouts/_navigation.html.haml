@@ -18,31 +18,34 @@
           %a{:href => reports_path}= t('views.navigation.reports')
 
         %li.dropdown
-          %a.dropdown-toggle{:href => "javascript:;", :data => {:toggle => 'dropdown'}}
+          %a.dropdown-toggle{:href => '', :data => {:toggle => 'dropdown'}}
             = t('views.navigation.retail')
             %span.caret
-          %ul.dropdown-menu{:role => "dropdown"}
+          %ul.dropdown-menu{:role => 'dropdown'}
             - if can?(:read, Dealer)
               %li
                 %a{:href => dealers_path}= t('views.navigation.dealers')
             - if can?(:read, Shop)
               %li
                 %a{:href => shops_path}= t('views.navigation.shops')
+            -if can?(:read, Employee)
+              %li
+                %a{:href => employees_path}= t('views.navigation.employees')
+            -if can?(:read, ShopItem)
+              %li
+                %a{:href => shop_items_path}= t('views.navigation.shop_items')
+
+            - if can?(:read, ShopType) or can?(:read, EmployeeWorkposition) or can?(:read, Item)
+              %li.divider
             - if can?(:read, ShopType)
               %li
                 %a{:href => shop_types_path}= t('views.navigation.shop_types')
             -if can?(:read, EmployeeWorkposition)
               %li
                 %a{:href => employee_workpositions_path}= t('views.navigation.employee_workpositions')
-            -if can?(:read, Employee)
-              %li
-                %a{:href => employees_path}= t('views.navigation.employees')
             -if can?(:read, Item)
               %li
                 %a{:href => items_path}= t('views.navigation.items')
-            -if can?(:read, ShopItem)
-              %li
-                %a{:href => shop_items_path}= t('views.navigation.shop_items')
 
         - if can?(:read, Region) or can?(:read, City)
           %li.dropdown
@@ -57,13 +60,29 @@
                 %li
                   %a{:href => cities_path}= t('views.navigation.cities')
 
-      %ul.nav.navbar-nav.navbar-right
         - if can?(:read, User)
           %li
             %a{:href => users_path}= t('views.navigation.users')
 
-        %li
-          %a{:href => destroy_user_session_path, :data => {:method => 'delete'}}= t('views.navigation.log_out')
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a.dropdown-toggle{:href => '', :data => {:toggle => 'dropdown'}}
+            = current_user.full_name
+            %span.caret
+
+          %ul.dropdown-menu{:role => 'dropdown'}
+            - if can?(:read, current_user)
+              %li
+                %a{:href => user_path(current_user)}= t('views.navigation.profile')
+
+            - if can?(:update, current_user)
+              %li
+                %a{:href => edit_user_path(current_user)}= t('views.navigation.edit_profile')
+
+            %li.divider
+
+            %li
+              %a{:href => destroy_user_session_path, :data => {:method => 'delete'}}= t('views.navigation.log_out')
 
         %li.dropdown
           %a.dropdown-toggle{:href => "javascript:;", :data => {:toggle => 'dropdown'}}

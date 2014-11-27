@@ -3,14 +3,20 @@
     %thead
       %tr
         %th= t('activerecord.attributes.report.shop')
-        %th= t('activerecord.attributes.report.user')
+        %th.text-right= t('activerecord.attributes.report.user')
 
     %tbody
       -if shops.any?
         - shops.each do |shop|
           %tr
-            %td= link_to shop.name, shop
-            %td= link_to shop.user.full_name, shop.user
+            %td= can_link_to(shop.name, shop)
+
+            %td.text-right
+              - if shop.user
+                = can_link_to(shop.user.full_name, shop.user)
+              - else
+                = '-'
+
       - else
         %tr
           %td{:colspan => 2}

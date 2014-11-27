@@ -17,7 +17,7 @@
 
     = f.input_field :shop_id, :as => :hidden
 
-    = render "shop_photos/galery", :shop => @shop
+    = render 'shop_photos/galery', :shop => @shop
 
 .row
   .col-sm-6
@@ -39,4 +39,4 @@
 
       .btn-toolbar.text-center
         = f.button :submit, t('views.common.save')
-        = link_to t('views.common.cancel'), session[:return_to], :class => "btn btn-default"
+        %a.btn.btn-default{:href => session[:return_to] || shops_path}= t('views.common.cancel')

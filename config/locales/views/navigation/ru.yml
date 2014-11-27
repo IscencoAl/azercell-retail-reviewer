@@ -2,6 +2,8 @@ ru:
   views:
     navigation:
       users: "Пользователи"
+      profile: "Профиль"
+      edit_profile: "Изменить профиль"
       places: "Места"
       regions: "Регионы"
       cities: "Города"

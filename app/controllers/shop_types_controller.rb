@@ -14,19 +14,19 @@ class ShopTypesController < ApplicationController
 
   # GET /shop_types/new
   def new
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # GET /shop_types/1/edit
   def edit
-    session[:return_to] = request.referer
+    session[:return_to] = request.referer unless request.referer == request.url
   end
 
   # POST /shop_types
   def create
     if @shop_type.save
       flash[:success] = t('controllers.shop_types.created', name: @shop_type.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || shop_types_url
     else
       render :new
     end
@@ -36,7 +36,7 @@ class ShopTypesController < ApplicationController
   def update
     if @shop_type.update(shop_type_params)
       flash[:success] = t('controllers.shop_types.updated', name: @shop_type.name)
-      redirect_to session.delete(:return_to)
+      redirect_to session.delete(:return_to) || shop_types_url
     else
       render :edit
     end

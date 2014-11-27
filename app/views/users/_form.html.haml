@@ -5,7 +5,7 @@
   = f.input :name
   = f.input :surname
   = f.input :email
-  = f.input :password, :input_html => {:value => ""}
+  = f.input :password, :input_html => {:value => ''}
   = f.input :password_confirmation
   = f.association :role, :prompt => false, :disabled => cannot?(:manage, UserRole), :input_html => {:id => 'user_role', :data => {:enable_dealer => UserRole.dealer.id}}
   = f.association :dealer, :prompt => false, :disabled => (not @user.dealer?), :input_html => {:id => 'user_dealer'}
@@ -13,4 +13,4 @@
 
   .btn-toolbar.text-center
     = f.button :submit, t('views.common.save')
-    %a.btn.btn-default{:href => users_path}= t('views.common.cancel')
+    %a.btn.btn-default{:href => session[:return_to] || users_path}= t('views.common.cancel')

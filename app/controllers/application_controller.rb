@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    render 'layouts/access_denied'
+    flash[:error] = t('views.common.not_authorized')
+    redirect_to root_url
   end
 end
