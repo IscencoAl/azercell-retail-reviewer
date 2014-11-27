@@ -21,6 +21,7 @@ ReportStructureElementType.create(:name => 'input')
 Setting.create(:name => 'app_version', :value => '1')
 Setting.create(:name => 'shops_structure_version', :value => '1')
 Setting.create(:name => 'report_structure_version', :value => '1')
+Setting.create(:name => 'review_associated_shops', :value => 'yes')
 
 # Create user
 # User.create(:name => 'Admin', :surname => 'Magnetsoft', :email => 'admin@magnetsoft.md', :password => 'admin@magnetsoft.md', :password_confirmation => 'admin@magnetsoft.md', :role => UserRole.admin)
