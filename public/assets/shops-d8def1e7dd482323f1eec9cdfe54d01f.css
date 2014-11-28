@@ -1,0 +1,21 @@
+#shop-photos {
+  height: 300px;
+}
+#shop-photos .placeholder {
+  line-height: 300px;
+  margin: 0px;
+}
+#shop-photos .carousel-inner .item .img-container {
+  line-height: 300px;
+  height: 300px;
+}
+#shop-photos .carousel-inner .item .img-container img {
+  max-height: 100%;
+  max-width: 100%;
+}
+#general-info tr td:first-child {
+  font-weight: bold;
+}
+#general-info tr td:last-child {
+  text-align: right;
+}

@@ -42,7 +42,10 @@
 
       .col-sm-6
         .panel.panel-default
-          #map_canvas.map-container{:data => {:markers => [{:url => "/assets/shop11.png", :lat => @report.shop.latitude, :lng => @report.shop.longitude, :tooltip => t('activerecord.models.shop')}, {:url => "/assets/blank15.png",:lat => @report.latitude, :lng => @report.longitude, :tooltip => t('activerecord.models.report')}].to_json}}
+          #map_canvas.map-container{:data => {:markers => [{:url => asset_url('shop11.png'),
+          :lat => @report.shop.latitude, :lng => @report.shop.longitude, :tooltip => t('activerecord.models.shop')},
+          {:url => asset_url('blank15.png'), :lat => @report.latitude, :lng => @report.longitude,
+          :tooltip => t('activerecord.models.report')}].to_json}}
 
 %hr
 

@@ -1,0 +1,1 @@
+$(document).ready(function(){$("select#user_role").change(function(){var e=$(this),a=e.data("enable-dealer"),d=e.find("option:selected").val();$dealer=$("select#user_dealer"),a==d?$dealer.prop("disabled",!1):$dealer.prop("disabled",!0)})});

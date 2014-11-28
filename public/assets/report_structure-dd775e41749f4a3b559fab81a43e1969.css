@@ -1,0 +1,15 @@
+#report-structure .panel .panel-heading {
+  padding: 5px;
+}
+#report-structure .element-list .element .type {
+  width: 100px;
+}
+#report-structure .element-list .element .weight {
+  width: 70px;
+}
+#report-structure .element-list .element .shop-types {
+  width: 200px;
+}
+#report-structure .element-list .element .controls {
+  width: 100px;
+}

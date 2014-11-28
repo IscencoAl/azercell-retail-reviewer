@@ -17,10 +17,13 @@
 # Ignore all logfiles and tempfiles.
 /log
 
+# Old tests
 /test
 
+# Database configs
 /config/database.yml
 
+# Unnecessary public folders
 /public/photos
 /public/uploads
 
