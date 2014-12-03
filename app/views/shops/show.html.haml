@@ -7,6 +7,7 @@
   google.load("visualization", "1", {packages:["corechart"]});
 
 = stylesheet_link_tag 'shops'
+
 .well.well-sm
   .row
     .col-md-4.col-sm-12
@@ -21,9 +22,9 @@
         %a.btn.btn-default.btn-sm{:data => {:modal=> 'true', :source => items_from_shop_path(@shop)}}= t('views.common.show_items')
       %br
       .btn-toolbar.text-center
-        - if can?(:update, @shop)
+        - if policy(@shop).update?
           %a.btn.btn-default.btn-sm{:href => edit_shop_path(@shop)}= t('views.common.edit')
-        - if can?(:destroy, @shop)
+        - if policy(@shop).destroy?
           %a.btn.btn-default.btn-sm{:href => shop_path(@shop), :data => {:method => 'delete', :confirm => t('views.common.confirm')}}= t('views.common.delete')
 
     .col-md-4.col-sm-6

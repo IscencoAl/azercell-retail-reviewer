@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, :set_locale
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  include Pundit
   protect_from_forgery with: :exception
 
   def set_locale
@@ -12,7 +13,7 @@ class ApplicationController < ActionController::Base
     { locale: locale }
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
+  rescue_from Pundit::NotAuthorizedError do |exception|
     flash[:error] = t('views.common.not_authorized')
     redirect_to root_url
   end

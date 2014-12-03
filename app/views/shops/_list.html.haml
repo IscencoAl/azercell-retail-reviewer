@@ -18,7 +18,7 @@
             %th= t('activerecord.attributes.shop.user')
           %th= t('activerecord.attributes.shop.score')
         %th.text-right
-          - if can?(:create, Shop)
+          - if policy(Shop).create?
             %a.btn.btn-default.btn-xs{:href => new_shop_path, :title => t('views.common.add'), :data => {:toggle => 'tooltip'}}
               %span.glyphicon.glyphicon-plus
 
@@ -27,35 +27,26 @@
         - shops.each do |shop|
           %tr
             %td= shop.type.name
-            - if not shop.is_deleted and can?(:read, shop)
-              %td= link_to shop.name, shop
-            - else
-              %td= shop.name
+            %td= can_link_to shop.name, shop
             - unless params[:controller] == 'dealers'
               - if shop.dealer
-                - if can?(:read, shop.dealer)
-                  %td= link_to shop.dealer.name, shop.dealer
-                - else
-                  %td= shop.dealer.name
+                %td= can_link_to shop.dealer.name, shop.dealer
               - else
                 %td -
             - unless params[:controller] == 'users'
               - if shop.user
-                - if can?(:read, shop.user)
-                  %td= link_to shop.user.full_name, shop.user
-                - else
-                  %td= shop.user.full_name
+                %td= can_link_to shop.user.full_name, shop.user
               - else
                 %td -
-            %td= shop.score ? link_to(shop.score, shop.last_report) : '-'
+            %td= shop.score ? can_link_to(shop.score, shop.last_report) : '-'
             %td.text-right
-              - if can?(:restore, shop)
+              - if policy(shop).restore?
                 %a.btn.btn-default.btn-xs{:href => restore_shop_path(shop), :title => t('views.common.restore'), :data => {:toggle => 'tooltip'}}
                   %span.glyphicon.glyphicon-ok
-              - if can?(:update, shop)
+              - if policy(shop).update?
                 %a.btn.btn-default.btn-xs{:href => edit_shop_path(shop), :title => t('views.common.edit'), :data => {:toggle => 'tooltip'}}
                   %span.glyphicon.glyphicon-edit
-              - if can?(:destroy, shop)
+              - if policy(shop).destroy?
                 %a.btn.btn-default.btn-xs{:href => shop_path(shop), :title => t('views.common.delete'), :data => {:toggle => 'tooltip', :method => 'delete', :confirm => t('views.common.confirm')}}
                   %span.glyphicon.glyphicon-remove
 

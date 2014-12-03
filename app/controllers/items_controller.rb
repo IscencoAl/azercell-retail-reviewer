@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  before_action :load_item, only: [:show, :edit, :update, :destroy]
 
   helper_method :sorting_params
 
   # GET /items
   def index
+    @items = policy_scope(Item)
     @items = @items.filter(filtering_params).sort(sorting_params)
   end
 
@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
 
   # GET /items/new
   def new
+    @item = Item.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -25,6 +26,8 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
+    @item = Item.new(item_params)
+
     if @item.save
       flash[:success] = t('controllers.items.created', name: @item.name)
       redirect_to session.delete(:return_to) || items_url
@@ -51,16 +54,20 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
-    def item_params
-      params.require(:item).permit(:name)
-    end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :is_deleted)
-    end
+  def load_item
+    @item = Item.find(params[:id])
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
-    end
+  def item_params
+    params.require(:item).permit(:name)
+  end
+
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :is_deleted)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
+  end
 end

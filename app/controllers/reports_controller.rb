@@ -1,10 +1,10 @@
 class ReportsController < ApplicationController
-  load_and_authorize_resource
-
+  before_action :load_report, only: [:show]
   helper_method :sorting_params
 
   # GET /reports
   def index
+    @reports = policy_scope(Report)
     @reports = @reports.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
@@ -19,11 +19,15 @@ class ReportsController < ApplicationController
 
   private
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:user, :shop, :score_from, :score_to, :date_from, :date_to)
-    end
+  def load_report
+    @report = Report.find(params[:id])
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => "created_at", :dir => "desc"}).permit(:col, :dir)
-    end
+  def filtering_params
+    params.fetch(:filter, {}).permit(:user, :shop, :score_from, :score_to, :date_from, :date_to)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => 'created_at', :dir => 'desc'}).permit(:col, :dir)
+  end
 end

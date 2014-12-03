@@ -1,10 +1,10 @@
 class ReportStructureCategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :load_category, only: [:show, :edit, :update, :destroy]
 
   # GET /report_structure_categories
   def index
-    authorize!(:change, :report_structure)
     @categories = ReportStructureCategory.all
+    authorize @categories
   end
 
   # GET /report_structure_categories/1
@@ -68,13 +68,12 @@ class ReportStructureCategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = ReportStructureCategory.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def category_params
-      params.require(:report_structure_category).permit(:name)
-    end
+  def load_category
+    @category = ReportStructureCategory.find(params[:id])
+  end
+
+  def category_params
+    params.require(:report_structure_category).permit(:name)
+  end
 end

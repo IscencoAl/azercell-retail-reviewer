@@ -37,8 +37,8 @@ gem 'rspec-rails', '3.0.2', :group => [:development, :test]
 gem 'factory_girl_rails', '4.4.1', :group => [:development, :test]
 gem 'faker', '1.4.3', :group => [:development, :test]
 
-# Use cancancan to define abilities
-gem 'cancancan', '~> 1.9'
+# Use pundit to define abilities
+gem 'pundit', '0.3.0'
 
 # Use Kaminari for pagination
 gem 'kaminari', '0.16.1'

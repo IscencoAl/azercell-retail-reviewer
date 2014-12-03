@@ -1,11 +1,10 @@
 class ShopTypesController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore]
-
+  before_action :load_shop_type, only: [:show, :edit, :update, :destroy]
   
   # GET /shop_types
   def index
-    @shop_types = ShopType.filter(filtering_params).order(:name)
+    @shop_types = policy_scope(ShopType)
+    @shop_types = @shop_types.filter(filtering_params).order(:name)
   end
 
   # GET /shop_types/1
@@ -14,6 +13,7 @@ class ShopTypesController < ApplicationController
 
   # GET /shop_types/new
   def new
+    @shop_type = ShopType.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -24,6 +24,8 @@ class ShopTypesController < ApplicationController
 
   # POST /shop_types
   def create
+    @shop_type = ShopType.new(shop_type_params)
+
     if @shop_type.save
       flash[:success] = t('controllers.shop_types.created', name: @shop_type.name)
       redirect_to session.delete(:return_to) || shop_types_url
@@ -59,12 +61,16 @@ class ShopTypesController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
-    def shop_type_params
-      params.require(:shop_type).permit(:name, :abbreviation)
-    end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :is_deleted)
-    end
+  def load_shop_type
+    @shop_type = ShopType.find(params[:id])
+  end
+
+  def shop_type_params
+    params.require(:shop_type).permit(:name, :abbreviation)
+  end
+
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :is_deleted)
+  end
 end

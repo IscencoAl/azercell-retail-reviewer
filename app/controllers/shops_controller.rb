@@ -1,7 +1,7 @@
 class ShopsController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore, :restore_info, :map_info, :destroy_item, :edit_employee, :update_employee, :destroy_employee]
-
+  before_action :load_shop, only: [:show, :edit, :update, :destroy, :restore, :restore_info, :info,
+                                   :employees, :new_employee, :create_employee, :items, :new_item, :create_item]
+  before_action :load_shops, only: [:index, :map_info]
   helper_method :sorting_params
 
   # GET /shops
@@ -16,6 +16,7 @@ class ShopsController < ApplicationController
 
   # GET /shops/new
   def new
+    @shop = Shop.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -26,6 +27,8 @@ class ShopsController < ApplicationController
 
   # POST /shops
   def create
+    @shop = Shop.new(shop_params)
+
     if @shop.save
       flash[:success] = t('controllers.shops.created', name: @shop.name)
       redirect_to session.delete(:return_to) || shops_url
@@ -74,15 +77,16 @@ class ShopsController < ApplicationController
   # GET /shops/1/info
   def info
     if request.xhr?
-      render :partial => "info", :locals => { :shop => @shop }
+      render :partial => 'info', :locals => { :shop => @shop }
     end
   end
 
   # GET /shops/map_info
   def map_info
-    @map_shops = Shop.filter(filtering_params).all
+    @shops = @shops.filter(filtering_params).all
       .map{ |shop| {:info => info_shop_path(shop), :latitude => shop.latitude, :longitude => shop.longitude} }
-    render :json => @map_shops
+
+    render :json => @shops
   end
 
   # --================== Item methods ========================--
@@ -189,6 +193,14 @@ class ShopsController < ApplicationController
   end
 
   private
+    def load_shop
+      @shop = Shop.find(params[:id])
+    end
+
+    def load_shops
+      @shops = policy_scope(Shop)
+    end
+
     # Only allow a trusted parameter "white list" through.
     def shop_params
       params.require(:shop).permit(:shop_type_id, :city_id, :address, :latitude, :longitude,

@@ -16,7 +16,7 @@
               %th= t('activerecord.attributes.dealer.email')
               %th= sortable(:score, t('activerecord.attributes.report.score'))
               %th.text-right
-                - if can?(:create, Dealer)
+                - if policy(Dealer).create?
                   %a.btn.btn-default.btn-xs{:href => new_dealer_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-plus
 
@@ -30,13 +30,13 @@
                   %td= dealer.email
                   %td= dealer.score
                   %td.text-right
-                    - if can?(:restore, dealer)
+                    - if policy(dealer).restore?
                       %a.btn.btn-default.btn-xs{:href => restore_dealer_path(dealer), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
                         %span.glyphicon.glyphicon-ok
-                    - if can?(:update, dealer)
+                    - if policy(dealer).edit?
                       %a.btn.btn-default.btn-xs{:href => edit_dealer_path(dealer), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
                         %span.glyphicon.glyphicon-edit
-                    - if can?(:destroy, dealer)
+                    - if policy(dealer).destroy?
                       %a.btn.btn-default.btn-xs{:href => dealer_path(dealer), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.dealers.confirm')}}
                         %span.glyphicon.glyphicon-remove
 

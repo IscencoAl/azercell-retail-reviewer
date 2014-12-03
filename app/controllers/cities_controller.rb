@@ -1,6 +1,5 @@
 class CitiesController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore, :restore_info]
+  before_action :load_city, only: [:show, :edit, :update, :destroy]
 
   helper_method :sorting_params
   
@@ -15,6 +14,7 @@ class CitiesController < ApplicationController
 
   # GET /cities/new
   def new
+    @city = City.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -25,6 +25,8 @@ class CitiesController < ApplicationController
 
   # POST /cities
   def create
+    @city = City.new(city_params)
+
     if @city.save
       flash[:success] = t('controllers.cities.created', name: @city.name)
       redirect_to session.delete(:return_to) || cities_url
@@ -71,16 +73,19 @@ class CitiesController < ApplicationController
 
   private
 
-    # Only allow a trusted parameter "white list" through.
-    def city_params
-      params.require(:city).permit(:name, :region_id)
-    end
+  def load_city
+    @city = City.find(params[:id])
+  end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :region, :is_deleted)
-    end
+  def city_params
+    params.require(:city).permit(:name, :region_id)
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => 'name', :dir => 'asc'}).permit(:col, :dir)
-    end
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :region, :is_deleted)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => 'name', :dir => 'asc'}).permit(:col, :dir)
+  end
 end

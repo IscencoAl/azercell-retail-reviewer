@@ -15,13 +15,12 @@
               %label{:for => 'contact_name'}= t('activerecord.attributes.dealer.contact_name')
               %input#contact_name.form-control.input-sm{:type => 'text', :name => 'filter[contact_name]', :value => filtering_params[:contact_name], :autocomplete => :off}
 
-            - if can?(:restore, Dealer)
-              .form-group.col-sm-2
-                %label &nbsp;
-                .checkbox{:style => 'margin: 0px;'}
-                  %label
-                    %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
-                      %strong= t('activerecord.attributes.dealer.is_deleted')
+            .form-group.col-sm-2
+              %label &nbsp;
+              .checkbox{:style => 'margin: 0px;'}
+                %label
+                  %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
+                    %strong= t('activerecord.attributes.dealer.is_deleted')
 
             .form-group.col-sm-2
               %label.text-block &nbsp;

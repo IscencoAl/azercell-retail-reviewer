@@ -1,10 +1,11 @@
 class ShopItemsController < ApplicationController
-  load_and_authorize_resource
+  before_action :load_shop_item, only: [:show, :edit, :update, :destroy]
 
   helper_method :sorting_params
 
   # GET /shop_items
   def index
+    @shop_items = policy_scope(ShopItem)
     @shop_items = @shop_items.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
@@ -14,6 +15,7 @@ class ShopItemsController < ApplicationController
 
   # GET /shop_items/new
   def new
+    @shop_item = ShopItem.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -24,6 +26,8 @@ class ShopItemsController < ApplicationController
 
   # POST /shop_items
   def create
+    @shop_item = ShopItem.new(shop_item_params)
+
     if @shop_item.save
       flash[:success] = t('controllers.shop_items.created', name: @shop_item.item.name)
       redirect_to session.delete(:return_to) || shop_items_url
@@ -50,16 +54,20 @@ class ShopItemsController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
-    def shop_item_params
-      params.require(:shop_item).permit(:item_id, :shop_id)
-    end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:shop, :item)
-    end
+  def load_shop_item
+    @shop_item = ShopItem.find(params[:id])
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => "item", :dir => "asc"}).permit(:col, :dir)
-    end
+  def shop_item_params
+    params.require(:shop_item).permit(:item_id, :shop_id)
+  end
+
+  def filtering_params
+    params.fetch(:filter, {}).permit(:shop, :item)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => "item", :dir => "asc"}).permit(:col, :dir)
+  end
 end

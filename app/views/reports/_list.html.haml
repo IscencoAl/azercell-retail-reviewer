@@ -22,19 +22,13 @@
         - reports.each do |report|
           %tr
             - unless params[:controller] == "shops"
-              - if not report.shop.is_deleted and can?(:read, report.shop)
-                %td= link_to(report.shop.name, report.shop)
-              - else
-                %td= report.shop.name
+              %td= can_link_to(report.shop.name, report.shop)
             - unless params[:controller] == "users"
-              - if not report.user.is_deleted and can?(:read, report.user)
-                %td= link_to(report.user.full_name, report.user)
-              - else
-                %td= report.user.full_name
+              %td= can_link_to(report.user.full_name, report.user)
             %td= report.created_at.strftime("%d.%m.%Y %H:%M")
             %td= report.score
             %td.text-right
-              - if can?(:read, report)
+              - if policy(report).show?
                 %a.btn.btn-xs.btn-default{:href => report_path(report), :title => t('views.common.show'), :data => {:toggle => "tooltip"}}
                   %span.glyphicon.glyphicon-list
 

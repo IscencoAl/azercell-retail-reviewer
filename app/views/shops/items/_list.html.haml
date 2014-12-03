@@ -5,7 +5,7 @@
         %tr
           %th= sortable(:name, t('activerecord.attributes.shop_item.name'))
           %th.text-right
-            - if can?(:create_item, @shop)
+            - if policy(ShopItem).create?
               %a.btn.btn-default.btn-xs{:title => t('views.common.add'), :data => {:toggle => "tooltip", :modal => "true", :source => new_item_for_shop_path(@shop)}}
                 %span.glyphicon.glyphicon-plus
 
@@ -15,7 +15,7 @@
             %tr
               %td= item.item.name
               %td.text-right
-                - if can?(:destroy_item, item.shop)
+                - if policy(item).destroy?
                   %a.btn.btn-default.btn-xs{:title => t('views.common.delete'), :data => {:toggle => "tooltip", :type => 'delete', :modal => "true", :source => destroy_item_from_shop_path(item), :confirm => t('views.common.confirm')}}
                     %span.glyphicon.glyphicon-remove
         -else

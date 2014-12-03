@@ -15,22 +15,22 @@
               %label{:for => 'shop'}= t('activerecord.attributes.employee.shop')
               %select#shop.form-control.input-sm{:type => 'text', :name => 'filter[shop]'}
                 %option{:value => ''}= t('views.common.all')
-                - Shop.all.each do |shop|
+                - policy_scope(Shop).each do |shop|
                   %option{:value => shop.id, :selected => filtering_params[:shop].to_i == shop.id}= shop.name
+
             .form-group.col-sm-3
               %label{:for => 'employee_workposition'}= t('activerecord.attributes.employee.employee_workposition')
               %select#employee_workposition.form-control.input-sm{:type => 'text', :name => 'filter[employee_workposition]'}
                 %option{:value => ''}= t('views.common.all')
                 - EmployeeWorkposition.all.each do |workposition|
                   %option{:value => workposition.id, :selected => filtering_params[:employee_workposition].to_i == workposition.id}= workposition.name
-              
-            - if can?(:restore, Employee)
-              .form-group.col-sm-2
-                %label &nbsp;
-                .checkbox{:style => 'margin: 0px;'}
-                  %label
-                    %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
-                      %strong= t('activerecord.attributes.employee_workposition.is_deleted')
+
+            .form-group.col-sm-2
+              %label &nbsp;
+              .checkbox{:style => 'margin: 0px;'}
+                %label
+                  %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
+                    %strong= t('activerecord.attributes.employee_workposition.is_deleted')
 
 
           .row

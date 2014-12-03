@@ -1,4 +1,4 @@
-= javascript_include_tag "range_picker"
+= javascript_include_tag 'range_picker'
 
 - filtering_params = params[:filter] || {}
 
@@ -9,7 +9,7 @@
 
         %form{:role => 'form'}
           .row
-            - unless current_user.reviewer?
+            - if policy(Report).filter_reviewer?
               .form-group.col-sm-2
                 %label{:for => 'user'}= t('activerecord.attributes.report.user')
                 %select#user.form-control.input-sm{:name => 'filter[user]'}
@@ -17,7 +17,7 @@
                   - UserRole.reviewer.users.each do |u|
                     %option{:value => u.id, :selected => filtering_params[:user].to_i == u.id}= u.full_name
 
-            - shops = (current_user.dealer?) ? current_user.dealer.shops : Shop.all
+            - shops = policy_scope(Shop).by_address('asc')
             .form-group.col-sm-3
               %label{:for => 'shop'}= t('activerecord.attributes.report.shop')
               %select#shop.form-control.input-sm{:name => 'filter[shop]'}

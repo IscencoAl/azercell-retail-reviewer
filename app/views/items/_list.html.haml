@@ -5,7 +5,7 @@
         %tr
           %th= sortable(:name, t('activerecord.attributes.item.name'))
           %th.text-right
-            - if can?(:create, Item)
+            - if policy(Item).create?
               %a.btn.btn-default.btn-xs{:href => new_item_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
                 %span.glyphicon.glyphicon-plus
       %tbody
@@ -14,10 +14,10 @@
             %tr
               %td= item.name
               %td.text-right
-                - if can?(:update, item)
+                - if policy(item).update?
                   %a.btn.btn-default.btn-xs{:href => edit_item_path(item), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-edit
-                - if can?(:destroy, item)
+                - if policy(item).destroy?
                   %a.btn.btn-default.btn-xs{:href => item_path(item), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
                     %span.glyphicon.glyphicon-remove
         -else

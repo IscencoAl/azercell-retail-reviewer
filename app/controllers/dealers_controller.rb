@@ -1,11 +1,11 @@
 class DealersController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  before_action :load_dealer, only: [:show, :edit, :update, :destroy]
 
   helper_method :sorting_params
 
   # GET /dealers
   def index
+    @dealers = policy_scope(Dealer)
     @dealers = @dealers.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
@@ -15,6 +15,7 @@ class DealersController < ApplicationController
 
   # GET /dealers/new
   def new
+    @dealer = Dealer.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -25,6 +26,8 @@ class DealersController < ApplicationController
 
   # POST /dealers
   def create
+    @dealer = Dealer.new(dealer_params)
+
     if @dealer.save
       flash[:success] = t('controllers.dealers.created', name: @dealer.name)
       redirect_to session.delete(:return_to) || dealers_url
@@ -61,16 +64,19 @@ class DealersController < ApplicationController
 
   private
 
-    # Only allow a trusted parameter "white list" through.
-    def dealer_params
-      params.require(:dealer).permit(:name, :contact_name, :phone_number, :email)
-    end
+  def load_dealer
+    @dealer = Dealer.find(params[:id])
+  end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :contact_name, :is_deleted)
-    end
+  def dealer_params
+    params.require(:dealer).permit(:name, :contact_name, :phone_number, :email)
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
-    end
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :contact_name, :is_deleted)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
+  end
 end

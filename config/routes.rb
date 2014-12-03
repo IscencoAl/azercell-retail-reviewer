@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     put '/shops/employees/:employee_id', :to => 'shops#update_employee', :employee_id => /\d+/, :as => 'update_employee_for_shop'
     delete '/shops/employees/:employee_id', :to => 'shops#destroy_employee', :employee_id => /\d+/, :as => 'destroy_employee_from_shop'
     resources :shops
+
     resources :shop_items
    
     resources :shop_photos

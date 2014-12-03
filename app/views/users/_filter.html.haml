@@ -20,16 +20,14 @@
               %select#role.form-control.input-sm{:type => 'text', :name => 'filter[role]'}
                 %option{:value => ''}= t('views.common.all')
                 - UserRole.all.each do |role|
-                  %option{:value => role.id, :selected => filtering_params[:role].to_i == role.id}= role.name
+                  %option{:value => role.id, :selected => filtering_params[:role].to_i == role.id}= role.name.humanize
 
-            - if can?(:restore, User)
-              .form-group.col-sm-2
-                %label &nbsp;
-                .checkbox{:style => 'margin: 0px;'}
-                  %label
-                    %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
-                      %strong= t('activerecord.attributes.user.is_deleted')
-
+            .form-group.col-sm-2
+              %label &nbsp;
+              .checkbox{:style => 'margin: 0px;'}
+                %label
+                  %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
+                    %strong= t('activerecord.attributes.user.is_deleted')
 
             .form-group.col-sm-2
               %label.text-block &nbsp;

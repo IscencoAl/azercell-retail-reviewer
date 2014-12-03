@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def can_link_to(name=nil, object=nil, html_options=nil)
-    if can?(:read, object)
+    if policy(object).show?
       link_to(name, object, html_options)
     else
       name

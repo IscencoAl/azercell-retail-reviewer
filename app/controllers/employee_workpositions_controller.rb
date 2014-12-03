@@ -1,9 +1,9 @@
 class EmployeeWorkpositionsController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  before_action :load_employee_workposition, only: [:show, :edit, :update, :destroy]
 
   # GET /employee_workpositions
   def index
+    @employee_workpositions = policy_scope(EmployeeWorkposition)
     @employee_workpositions =  @employee_workpositions.filter(filtering_params).order(:name)
   end
 
@@ -13,6 +13,7 @@ class EmployeeWorkpositionsController < ApplicationController
 
   # GET /employee_workpositions/new
   def new
+    @employee_workposition = EmployeeWorkposition.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -23,6 +24,8 @@ class EmployeeWorkpositionsController < ApplicationController
 
   # POST /employee_workpositions
   def create
+    @employee_workposition = EmployeeWorkposition.new(employee_workposition_params)
+
     if @employee_workposition.save
       flash[:success] = t('controllers.employee_workpositions.created', name: @employee_workposition.name)
       redirect_to session.delete(:return_to) || employee_workpositions_url
@@ -58,12 +61,16 @@ class EmployeeWorkpositionsController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
-    def employee_workposition_params
-      params.require(:employee_workposition).permit(:name)
-    end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :is_deleted)
-    end
+  def load_employee_workposition
+    @employee_workposition = EmployeeWorkposition.find(params[:id])
+  end
+
+  def employee_workposition_params
+    params.require(:employee_workposition).permit(:name)
+  end
+
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :is_deleted)
+  end
 end

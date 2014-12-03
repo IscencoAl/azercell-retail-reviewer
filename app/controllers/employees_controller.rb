@@ -1,11 +1,11 @@
 class EmployeesController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  before_action :load_employee, only: [:show, :edit, :update, :destroy]
 
   helper_method :sorting_params
 
   # GET /employees
   def index
+    @employees = policy_scope(Employee)
     @employees = @employees.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
@@ -15,6 +15,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees/new
   def new
+    @employee = Employee.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -25,6 +26,8 @@ class EmployeesController < ApplicationController
 
   # POST /employees
   def create
+    @employee = Employee.new(employee_params)
+
     if @employee.save
       flash[:success] = t('controllers.employees.created', name: @employee.name)
       redirect_to session.delete(:return_to) || employees_url
@@ -60,16 +63,21 @@ class EmployeesController < ApplicationController
   end
 
   private
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :shop, :employee_workposition, :is_deleted)
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def employee_params
-      params.require(:employee).permit(:name, :phone, :email, :shop_id, :employee_workposition_id, :is_deleted)
-    end
+  def load_employee
+    @employee = Employee.find(params[:id])
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
-    end
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :shop, :employee_workposition, :is_deleted)
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def employee_params
+    params.require(:employee).permit(:name, :phone, :email, :shop_id, :employee_workposition_id, :is_deleted)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => 'name', :dir => 'asc'}).permit(:col, :dir)
+  end
 end

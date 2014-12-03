@@ -12,7 +12,7 @@
             %tr
               %th= sortable(:name, t('activerecord.attributes.region.name'))
               %th.text-right
-                - if can?(:create, Region)
+                - if policy(Region).create?
                   %a.btn.btn-default.btn-xs{:href => new_region_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-plus
 
@@ -22,16 +22,16 @@
                 %tr
                   %td= link_to region.name, region
                   %td.text-right
-                    - if can?(:restore, region)
+                    - if policy(region).restore?
                       %a.btn.btn-default.btn-xs{:href => restore_region_path(region), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
                         %span.glyphicon.glyphicon-ok
-                    - if can?(:destroy, region)
+                    - if policy(region).destroy?
                       %a.btn.btn-default.btn-xs{:href => region_path(region), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
                         %span.glyphicon.glyphicon-remove
-                    - if can?(:update, region)
+                    - if policy(region).update?
                       %a.btn.btn-default.btn-xs{:href => edit_region_path(region), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
                         %span.glyphicon.glyphicon-edit
-                        
+
             -else
               %tr
                 %td{:colspan => 2}

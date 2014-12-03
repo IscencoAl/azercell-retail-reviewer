@@ -1,7 +1,7 @@
 %h2.text-center= t('views.employee_workpositions.list')
 %br
 
-=render 'filter'
+= render 'filter'
 
 .row
   .col-lg-offset-1.col-lg-10
@@ -12,7 +12,7 @@
             %tr
               %th= t('activerecord.attributes.shop_type.name')
               %th.text-right
-                - if can?(:create, EmployeeWorkposition)
+                - if policy(EmployeeWorkposition).create?
                   %a.btn.btn-default.btn-xs{:href => new_employee_workposition_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-plus
           %tbody
@@ -21,15 +21,16 @@
                 %tr
                   %td= employee_workposition.name
                   %td.text-right
-                    - if can?(:restore, employee_workposition)
+                    - if policy(employee_workposition).restore?
                       %a.btn.btn-default.btn-xs{:href => restore_employee_workposition_path(employee_workposition), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
                         %span.glyphicon.glyphicon-ok
-                    - if can?(:update, employee_workposition)
-                      %a.btn.btn-default.btn-xs{:href => edit_employee_workposition_path(employee_workposition), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
-                        %span.glyphicon.glyphicon-edit
-                    - if can?(:destroy, employee_workposition)
+                    - if policy(employee_workposition).destroy?
                       %a.btn.btn-default.btn-xs{:href => employee_workposition_path(employee_workposition), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
                         %span.glyphicon.glyphicon-remove
+                    - if policy(employee_workposition).update?
+                      %a.btn.btn-default.btn-xs{:href => edit_employee_workposition_path(employee_workposition), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
+                        %span.glyphicon.glyphicon-edit
+
             -else
               %tr
                 %td{:colspan => 2}

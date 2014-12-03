@@ -1,8 +1,8 @@
 %h2.text-center= t('views.items.list')
 %br
 
-=render 'filter'
+= render 'filter'
 
 .row
   .col-lg-offset-1.col-lg-10
-    =render 'list', :items => @items
+    = render 'list', :items => @items

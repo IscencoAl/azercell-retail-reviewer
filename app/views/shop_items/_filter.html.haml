@@ -7,7 +7,7 @@
 
         %form{:role => 'form'}
           .row
-            - shops = (current_user.dealer?) ? current_user.dealer.shops : Shop.all
+            - shops = policy_scope(Shop)
             .form-group.col-sm-6
               %label{:for => 'shop'}= t('activerecord.attributes.shop_item.shop')
               %select#shop.form-control.input-sm{:name => 'filter[shop]'}

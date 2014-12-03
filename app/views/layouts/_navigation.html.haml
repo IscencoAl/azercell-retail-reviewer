@@ -10,7 +10,7 @@
 
     #navbar-main.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        - if can?(:change, :report_structure)
+        - if policy(ReportStructureCategory).index?
           %li
             %a{:href => report_structure_path}= t('views.navigation.report_structure')
 
@@ -22,45 +22,45 @@
             = t('views.navigation.retail')
             %span.caret
           %ul.dropdown-menu{:role => 'dropdown'}
-            - if can?(:read, Dealer)
+            - if policy(Dealer).index?
               %li
                 %a{:href => dealers_path}= t('views.navigation.dealers')
-            - if can?(:read, Shop)
+            - if policy(Shop).index?
               %li
                 %a{:href => shops_path}= t('views.navigation.shops')
-            -if can?(:read, Employee)
+            -if policy(Employee).index?
               %li
                 %a{:href => employees_path}= t('views.navigation.employees')
-            -if can?(:read, ShopItem)
+            -if policy(ShopItem).index?
               %li
                 %a{:href => shop_items_path}= t('views.navigation.shop_items')
 
-            - if can?(:read, ShopType) or can?(:read, EmployeeWorkposition) or can?(:read, Item)
+            - if policy(ShopType).index? or policy(EmployeeWorkposition).index? or policy(Item).index?
               %li.divider
-            - if can?(:read, ShopType)
+            - if policy(ShopType).index?
               %li
                 %a{:href => shop_types_path}= t('views.navigation.shop_types')
-            -if can?(:read, EmployeeWorkposition)
+            -if policy(EmployeeWorkposition).index?
               %li
                 %a{:href => employee_workpositions_path}= t('views.navigation.employee_workpositions')
-            -if can?(:read, Item)
+            -if policy(Item).index?
               %li
                 %a{:href => items_path}= t('views.navigation.items')
 
-        - if can?(:read, Region) or can?(:read, City)
+        - if policy(Region).index? or policy(City).index?
           %li.dropdown
             %a.dropdown-toggle{:href => "javascript:;", :data => {:toggle => 'dropdown'}}
               = t('views.navigation.places')
               %span.caret
             %ul.dropdown-menu{:role => "dropdown"}
-              - if can?(:read, Region)
+              - if policy(Region).index?
                 %li
                   %a{:href => regions_path}= t('views.navigation.regions')
-              - if can?(:read, City)
+              - if policy(City).index?
                 %li
                   %a{:href => cities_path}= t('views.navigation.cities')
 
-        - if can?(:read, User)
+        - if policy(User).index?
           %li
             %a{:href => users_path}= t('views.navigation.users')
 
@@ -71,11 +71,11 @@
             %span.caret
 
           %ul.dropdown-menu{:role => 'dropdown'}
-            - if can?(:read, current_user)
+            - if policy(current_user).show?
               %li
                 %a{:href => user_path(current_user)}= t('views.navigation.profile')
 
-            - if can?(:update, current_user)
+            - if policy(current_user).edit?
               %li
                 %a{:href => edit_user_path(current_user)}= t('views.navigation.edit_profile')
 

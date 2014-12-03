@@ -1,12 +1,12 @@
 class RegionsController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  before_action :load_region, only: [:show, :edit, :update, :destroy]
 
   helper_method :sorting_params
 
   # GET /regions
-  def index 
-    @regions = Region.filter(filtering_params).sort(sorting_params).page(params[:page])
+  def index
+    @regions = policy_scope(Region)
+    @regions = @regions.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
   # GET /regions/1
@@ -15,6 +15,7 @@ class RegionsController < ApplicationController
 
   # GET /regions/new
   def new
+    @region = Region.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -25,6 +26,8 @@ class RegionsController < ApplicationController
 
   # POST /regions
   def create
+    @region = Region.new(region_params)
+
     if @region.save
       flash[:success] = t('controllers.regions.created', name: @region.name)
       redirect_to session.delete(:return_to) || regions_url
@@ -60,16 +63,20 @@ class RegionsController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
-    def region_params
-      params.require(:region).permit(:name)
-    end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :is_deleted)
-    end
+  def load_region
+    @region = Region.find(params[:id])
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
-    end
+  def region_params
+    params.require(:region).permit(:name)
+  end
+
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :is_deleted)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
+  end
 end

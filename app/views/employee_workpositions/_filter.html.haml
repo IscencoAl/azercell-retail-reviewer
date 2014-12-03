@@ -10,14 +10,13 @@
             .form-group.col-sm-4
               %label{:for => 'name'}= t('activerecord.attributes.employee_workposition.name')
               %input#name.form-control.input-sm{:type => 'text', :name => 'filter[name]', :value => filtering_params[:name], :autocomplete => :off}
-              
-            - if can?(:restore, EmployeeWorkposition)
-              .form-group.col-sm-2
-                %label &nbsp;
-                .checkbox{:style => 'margin: 0px;'}
-                  %label
-                    %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
-                      %strong= t('activerecord.attributes.employee_workposition.is_deleted')
+
+            .form-group.col-sm-2
+              %label &nbsp;
+              .checkbox{:style => 'margin: 0px;'}
+                %label
+                  %input{:type => 'checkbox', :name => 'filter[is_deleted]', :checked => (not filtering_params[:is_deleted].blank?)}
+                    %strong= t('activerecord.attributes.employee_workposition.is_deleted')
 
 
             .form-group.col-sm-2

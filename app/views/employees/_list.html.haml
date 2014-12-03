@@ -17,7 +17,7 @@
               %th= sortable(:shop ,t('activerecord.attributes.employee.shop'))
             %th= sortable(:employee_workposition ,t('activerecord.attributes.employee.employee_workposition'))
           %th.text-right
-            - if can?(:create, Employee)
+            - if policy(Employee).create?
               %a.btn.btn-default.btn-xs{:href => new_employee_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
                 %span.glyphicon.glyphicon-plus
       %tbody
@@ -31,18 +31,16 @@
                 %td= can_link_to employee.shop.name, employee.shop
               %td= employee.employee_workposition.name
               %td.text-right
-                - if can?(:restore, employee)
+                - if policy(employee).restore?
                   %a.btn.btn-default.btn-xs{:href => restore_employee_path(employee), :title => t('views.common.restore'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-ok
-                - if can?(:update, employee)
+                - if policy(employee).update?
                   %a.btn.btn-default.btn-xs{:href => edit_employee_path(employee), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-edit
-                - if can?(:destroy, employee)
+                - if policy(employee).destroy?
                   %a.btn.btn-default.btn-xs{:href => employee_path(employee), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
                     %span.glyphicon.glyphicon-remove
         -else
           %tr
             %td{:colspan => 6}
               %h4.text-center= t('views.common.empty')
-
-    

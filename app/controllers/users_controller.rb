@@ -1,20 +1,22 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
-  skip_load_resource :only => [:restore]
+  before_action :load_user, only: [:show, :edit, :update, :destroy]
 
   helper_method :sorting_params
 
   # GET /users
   def index
+    @users = policy_scope(User)
     @users = @users.filter(filtering_params).sort(sorting_params).page(params[:page])
   end
 
+  # GET /users/1
   def show
     @reports = @user.reports.order('created_at DESC').page(params[:page])
   end
 
   # GET /users/new
   def new
+    @user = User.new
     session[:return_to] = request.referer unless request.referer == request.url
   end
 
@@ -25,6 +27,8 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
+    @user = User.new(user_params)
+
     if @user.save
       flash[:success] = t('controllers.users.created', name: @user.full_name)
       redirect_to session.delete(:return_to) || users_path
@@ -65,17 +69,22 @@ class UsersController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.require(:user).permit(:name, :surname, :user_role_id, :subscription,
-        :email, :password, :password_confirmation, :dealer_id)
-    end
 
-    def filtering_params
-      params.fetch(:filter, {}).permit(:name, :surname, :role, :email, :is_deleted)
-    end
+  def load_user
+    @user = User.find(params[:id])
+  end
 
-    def sorting_params
-      params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def user_params
+    params.require(:user).permit(:name, :surname, :user_role_id, :subscription,
+      :email, :password, :password_confirmation, :dealer_id)
+  end
+
+  def filtering_params
+    params.fetch(:filter, {}).permit(:name, :surname, :role, :email, :is_deleted)
+  end
+
+  def sorting_params
+    params.fetch(:sort, {:col => "name", :dir => "asc"}).permit(:col, :dir)
+  end
 end
