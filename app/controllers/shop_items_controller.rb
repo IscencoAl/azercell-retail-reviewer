@@ -5,8 +5,15 @@ class ShopItemsController < ApplicationController
 
   # GET /shop_items
   def index
-    @shop_items = policy_scope(ShopItem)
-    @shop_items = @shop_items.filter(filtering_params).sort(sorting_params).page(params[:page])
+    if redirected_from_shop?
+      shop = load_shop
+      shop_items = policy_scope(shop.shop_items)
+
+      render :partial => 'shops/items/list', :locals => {:shop_items => shop_items, :shop => shop}
+    else
+      @shop_items = policy_scope(ShopItem)
+      @shop_items = @shop_items.filter(filtering_params).sort(sorting_params).page(params[:page])
+    end
   end
 
   # GET /shop_items/1
@@ -15,8 +22,15 @@ class ShopItemsController < ApplicationController
 
   # GET /shop_items/new
   def new
-    @shop_item = ShopItem.new
-    session[:return_to] = request.referer unless request.referer == request.url
+    if redirected_from_shop?
+      shop = load_shop
+      shop_item = shop.shop_items.build
+
+      render :partial => 'shops/items/new', :locals => {:shop_item => shop_item}
+    else
+      @shop_item = ShopItem.new
+      session[:return_to] = request.referer unless request.referer == request.url
+    end
   end
 
   # GET /shop_items/1/edit
@@ -26,13 +40,24 @@ class ShopItemsController < ApplicationController
 
   # POST /shop_items
   def create
-    @shop_item = ShopItem.new(shop_item_params)
+    if redirected_from_shop?
+      shop = load_shop
+      shop_item = shop.shop_items.build(shop_item_params)
 
-    if @shop_item.save
-      flash[:success] = t('controllers.shop_items.created', name: @shop_item.item.name)
-      redirect_to session.delete(:return_to) || shop_items_url
+      if shop_item.save
+        redirect_to shop_shop_items_path(shop)
+      else
+        render :partial => 'shops/items/new', :locals => {:shop_item => shop_item}
+      end
     else
-      render :new
+      @shop_item = ShopItem.new(shop_item_params)
+
+      if @shop_item.save
+        flash[:success] = t('controllers.shop_items.created', name: @shop_item.item.name)
+        redirect_to session.delete(:return_to) || shop_items_url
+      else
+        render :new
+      end
     end
   end
 
@@ -49,8 +74,13 @@ class ShopItemsController < ApplicationController
   # DELETE /shop_items/1
   def destroy
     @shop_item.destroy
-    flash[:success] = t('controllers.shop_items.destroyed', name: @shop_item.item.name)
-    redirect_to request.referer
+    if redirected_from_shop?
+      shop = load_shop
+      redirect_to shop_shop_items_path(shop), :status => 303
+    else
+      flash[:success] = t('controllers.shop_items.destroyed', name: @shop_item.item.name)
+      redirect_to request.referer
+    end
   end
 
   private
@@ -69,5 +99,14 @@ class ShopItemsController < ApplicationController
 
   def sorting_params
     params.fetch(:sort, {:col => "item", :dir => "asc"}).permit(:col, :dir)
+  end
+
+  # Shop helper methods
+  def load_shop
+    Shop.find(params[:shop_id])
+  end
+
+  def redirected_from_shop?
+    params.has_key?(:shop_id) and params[:shop_id].present?
   end
 end

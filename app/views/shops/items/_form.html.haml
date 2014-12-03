@@ -1,8 +1,8 @@
-= simple_form_for item, :url => url, :method => method, :html => {:class => 'form-horizontal', :role => 'form', :data => {:modal => "form"}} do |f|
+= simple_form_for item, :url => url, :method => method, :html => {:class => 'form-horizontal', :role => 'form', :data => {:modal => 'form'}} do |f|
 
   = f.association :shop, :disabled => true
   = f.association :item, :collection => item.missing_items
 
   .btn-toolbar.text-center
     = f.button :submit, t('views.common.save')
-    %a.btn.btn-default{:data => {:modal => "true", :source =>items_from_shop_path(@shop)}}= t('views.common.cancel')
+    %a.btn.btn-default{:data => {:modal => 'true', :source => shop_shop_items_path(item.shop)}}= t('views.common.cancel')

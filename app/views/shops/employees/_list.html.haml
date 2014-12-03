@@ -3,22 +3,14 @@
     %table.table.table-condensed.table-striped.table-vcentered
       %thead
         %tr
-          - if params[:controller] == 'employees'
-            %th= sortable(:name, t('activerecord.attributes.employee.name'))
-            %th= t('activerecord.attributes.employee.phone')
-            %th= t('activerecord.attributes.employee.email')
-            %th= sortable(:shop ,t('activerecord.attributes.employee.shop'))
-            %th= sortable(:employee_workposition ,t('activerecord.attributes.employee.employee_workposition'))
-          -else
-            %th= sortable(:name, t('activerecord.attributes.employee.name'))
-            %th= t('activerecord.attributes.employee.phone')
-            %th= t('activerecord.attributes.employee.email')
-            - unless params[:controller] == 'shops'
-              %th= sortable(:shop ,t('activerecord.attributes.employee.shop'))
-            %th= sortable(:employee_workposition ,t('activerecord.attributes.employee.employee_workposition'))
+          %th= t('activerecord.attributes.employee.name')
+          %th= t('activerecord.attributes.employee.phone')
+          %th= t('activerecord.attributes.employee.email')
+          %th= t('activerecord.attributes.employee.employee_workposition')
           %th.text-right
-            - if policy(Employee).create?
-              %a.btn.btn-default.btn-xs{:title => t('views.common.add'), :data => {:toggle => 'tooltip', :modal => 'true', :source => new_employee_for_shop_path(@shop)}}
+            - if policy(Employee.new(:shop => shop)).create?
+              %a.btn.btn-default.btn-xs{:title => t('views.common.add'), :data => {:toggle => 'tooltip',
+              :modal => 'true', :source => new_shop_employee_path(shop)}}
                 %span.glyphicon.glyphicon-plus
       %tbody
         -if employees.any?
@@ -27,15 +19,16 @@
               %td= employee.name
               %td= employee.phone
               %td= employee.email
-              - unless params[:controller] == 'shops'
-                %td= employee.shop.name
               %td= employee.employee_workposition.name
               %td.text-right
                 - if policy(employee).update?
-                  %a.btn.btn-default.btn-xs{ :title => t('views.common.edit'), :data => {:toggle => "tooltip", :modal => "true", :source => edit_employee_for_shop_path(employee)}}
+                  %a.btn.btn-default.btn-xs{ :title => t('views.common.edit'), :data => {:toggle => 'tooltip',
+                  :modal => 'true', :source => edit_shop_employee_path(shop, employee)}}
                     %span.glyphicon.glyphicon-edit
                 - if policy(employee).destroy?
-                  %a.btn.btn-default.btn-xs{:title => t('views.common.delete'), :data => {:toggle => "tooltip",:modal => "true", :source => destroy_employee_from_shop_path(employee), :type => 'delete', :confirm => t('views.common.confirm')}}
+                  %a.btn.btn-default.btn-xs{:title => t('views.common.delete'), :data => {:toggle => 'tooltip',
+                  :modal => 'true', :source => shop_employee_path(shop, employee), :type => 'delete',
+                  :confirm => t('views.common.confirm')}}
                     %span.glyphicon.glyphicon-remove
         -else
           %tr

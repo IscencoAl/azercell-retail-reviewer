@@ -18,8 +18,8 @@
       .panel.panel-default
         = render 'info', :shop => @shop
       .btn-toolbar.text-center
-        %a.btn.btn-default.btn-sm{:data => {:modal=> 'true', :source => employees_from_shop_path(@shop)}}= t('views.common.show_employees')
-        %a.btn.btn-default.btn-sm{:data => {:modal=> 'true', :source => items_from_shop_path(@shop)}}= t('views.common.show_items')
+        %a.btn.btn-default.btn-sm{:data => {:modal=> 'true', :source => shop_employees_path(@shop)}}= t('views.common.show_employees')
+        %a.btn.btn-default.btn-sm{:data => {:modal=> 'true', :source => shop_shop_items_path(@shop)}}= t('views.common.show_items')
       %br
       .btn-toolbar.text-center
         - if policy(@shop).update?

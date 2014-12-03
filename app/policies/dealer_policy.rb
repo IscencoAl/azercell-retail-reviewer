@@ -25,15 +25,6 @@ class DealerPolicy < ApplicationPolicy
     record.is_deleted and user.admin?
   end
 
-  # Helper actions
-  def update_role?
-    user.admin?
-  end
-
-  def update_dealer?
-    user.admin?
-  end
-
   # Scope
   class Scope < Scope
     def resolve

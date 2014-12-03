@@ -17,7 +17,7 @@
               %th= sortable(:shop ,t('activerecord.attributes.employee.shop'))
             %th= sortable(:employee_workposition ,t('activerecord.attributes.employee.employee_workposition'))
           %th.text-right
-            - if policy(Employee).create?
+            - if policy(Employee.new).create?
               %a.btn.btn-default.btn-xs{:href => new_employee_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
                 %span.glyphicon.glyphicon-plus
       %tbody

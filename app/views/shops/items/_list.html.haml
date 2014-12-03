@@ -5,20 +5,23 @@
         %tr
           %th= sortable(:name, t('activerecord.attributes.shop_item.name'))
           %th.text-right
-            - if policy(ShopItem).create?
-              %a.btn.btn-default.btn-xs{:title => t('views.common.add'), :data => {:toggle => "tooltip", :modal => "true", :source => new_item_for_shop_path(@shop)}}
+            - if policy(ShopItem.new(:shop => shop)).create?
+              %a.btn.btn-default.btn-xs{:title => t('views.common.add'), :data => {:toggle => 'tooltip',
+              :modal => 'true', :source => new_shop_shop_item_path(shop)}}
                 %span.glyphicon.glyphicon-plus
 
       %tbody
-        -if items.any?
-          - items.each do |item|
+        - if shop_items.any?
+          - shop_items.each do |shop_item|
             %tr
-              %td= item.item.name
+              %td= shop_item.item.name
               %td.text-right
-                - if policy(item).destroy?
-                  %a.btn.btn-default.btn-xs{:title => t('views.common.delete'), :data => {:toggle => "tooltip", :type => 'delete', :modal => "true", :source => destroy_item_from_shop_path(item), :confirm => t('views.common.confirm')}}
+                - if policy(shop_item).destroy?
+                  %a.btn.btn-default.btn-xs{:title => t('views.common.delete'), :data => {:toggle => 'tooltip',
+                  :type => 'delete', :modal => 'true', :source => shop_shop_item_path(shop, shop_item),
+                  :confirm => t('views.common.confirm')}}
                     %span.glyphicon.glyphicon-remove
-        -else
+        - else
           %tr
             %td{:colspan => 2}
               %h4.text-center= t('views.common.empty')

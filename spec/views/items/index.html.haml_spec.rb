@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "items/index", :type => :view do
   before(:each) do
-    assign(:items, [
+    assign(:shop_items, [
       Item.create!(
         :name => "Name",
         :is_deleted => false

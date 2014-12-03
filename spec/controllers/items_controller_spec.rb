@@ -40,7 +40,7 @@ RSpec.describe ItemsController, :type => :controller do
     it "assigns all items as @items" do
       item = Item.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:items)).to eq([item])
+      expect(assigns(:shop_items)).to eq([item])
     end
   end
 

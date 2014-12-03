@@ -6,7 +6,7 @@ class ItemPolicy < ApplicationPolicy
   end
 
   def show?
-    not record.is_deleted
+    true
   end
 
   def create?
@@ -23,15 +23,6 @@ class ItemPolicy < ApplicationPolicy
 
   def restore?
     record.is_deleted and user.admin?
-  end
-
-  # Helper actions
-  def update_role?
-    user.admin?
-  end
-
-  def update_dealer?
-    user.admin?
   end
 
   # Scope

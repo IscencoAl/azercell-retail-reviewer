@@ -13,15 +13,15 @@
               %th= sortable(:item, t('activerecord.attributes.shop_item.item'))
               %th= sortable(:shop, t('activerecord.attributes.shop_item.shop'))
               %th.text-right
-                - if policy(ShopItem).create?
+                - if policy(ShopItem.new).create?
                   %a.btn.btn-default.btn-xs{:href => new_shop_item_path, :title => t('views.common.add'), :data => {:toggle => "tooltip"}}
                     %span.glyphicon.glyphicon-plus
           %tbody
-            -if @shop_items.any?
+            - if @shop_items.any?
               - @shop_items.each do |item|
                 %tr
                   %td= item.item.name
-                  %td= item.shop.name
+                  %td= can_link_to(item.shop.name, item.shop)
                   %td.text-right
                     - if policy(item).update?
                       %a.btn.btn-default.btn-xs{:href => edit_shop_item_path(item), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
@@ -29,7 +29,7 @@
                     - if policy(item).destroy?
                       %a.btn.btn-default.btn-xs{:href => shop_item_path(item), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
                         %span.glyphicon.glyphicon-remove
-            -else
+            - else
               %tr
                 %td{:colspan => 3}
                   %h4.text-center= t('views.common.empty')

@@ -6,28 +6,17 @@ class ShopItemPolicy < ApplicationPolicy
   end
 
   def show?
-    not record.is_deleted
+    true
   end
 
   def create?
-    user.admin?
-  end
-
-  def update?
-    user.admin?
+    user.admin? or user.simple_user? or (record.shop and ((user.reviewer? and record.shop.user == user) or
+      (user.dealer? and record.shop.dealer == user.dealer)))
   end
 
   def destroy?
-    user.admin?
-  end
-
-  # Helper actions
-  def update_role?
-    user.admin?
-  end
-
-  def update_dealer?
-    user.admin?
+    user.admin? or user.simple_user? or (user.reviewer? and record.shop.user == user) or
+      (user.dealer? and record.shop.dealer == user.dealer)
   end
 
   # Scope

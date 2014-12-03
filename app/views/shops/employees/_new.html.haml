@@ -1,4 +1,4 @@
 %h2.text-center= t('views.employees.new')
 %br
 
-= render 'shops/employees/form', :employee => employee, :url => create_employee_for_shop_path, :method => :post
+= render 'shops/employees/form', :employee => employee, :url => shop_employees_path(employee.shop), :method => :post

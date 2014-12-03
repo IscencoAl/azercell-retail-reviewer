@@ -10,28 +10,23 @@ class EmployeePolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?
+    user.admin? or user.simple_user? or (record.shop and ((user.reviewer? and record.shop.user == user) or
+      (user.dealer? and record.shop.dealer == user.dealer)))
   end
 
   def update?
-    not record.is_deleted and user.admin?
+    not record.is_deleted and (user.admin? or user.simple_user? or (user.reviewer? and record.shop.user == user) or
+      (user.dealer? and record.shop.dealer == user.dealer))
   end
 
   def destroy?
-    not record.is_deleted and user.admin?
+    not record.is_deleted and (user.admin? or user.simple_user? or (user.reviewer? and record.shop.user == user) or
+      (user.dealer? and record.shop.dealer == user.dealer))
   end
 
   def restore?
-    record.is_deleted and user.admin?
-  end
-
-  # Helper actions
-  def update_role?
-    user.admin?
-  end
-
-  def update_dealer?
-    user.admin?
+    record.is_deleted and (user.admin? or user.simple_user? or (user.reviewer? and record.shop.user == user) or
+      (user.dealer? and record.shop.dealer == user.dealer))
   end
 
   # Scope
