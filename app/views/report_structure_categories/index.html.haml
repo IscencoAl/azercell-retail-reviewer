@@ -1,6 +1,6 @@
-= stylesheet_link_tag "report_structure"
+= stylesheet_link_tag 'report_structure'
 
-= javascript_include_tag "report_structure"
+= javascript_include_tag 'report_structure'
 
 .row
   .col-lg-offset-1.col-lg-7.col-sm-9
@@ -10,6 +10,11 @@
     %br
     .btn-toolbar.text-right
       %a.btn.btn.btn-primary{:href => new_report_structure_category_path, :data => {:newcategory => true}}= t('views.report_structure.add_category')
+
+.row
+  .col-lg-offset-1.col-lg-10.col-sm-9
+    %input#review-associated-shops{:type => :checkbox, :data => {:setting => Setting::REVIEW_ASSOCIATED_SHOPS}}
+    %label= t('views.report_structure.review_associated_shops')
 
 %br
 

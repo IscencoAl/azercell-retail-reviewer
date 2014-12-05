@@ -9,7 +9,7 @@
   .panel-body
     .row
       .col-md-6
-        %div#map_canvas.map-container-lg{:data => {:mapinfo => shop_map_info_path({:filter => {:region => @region}})}}
+        %div#map_canvas.map-container-lg{:data => {:mapinfo => map_info_shops_path({:filter => {:region => @region}})}}
       .col-md-6
         .panel.panel-default
           = render 'shops/list', :shops => policy_scope(@region.shops), :max_height => 450

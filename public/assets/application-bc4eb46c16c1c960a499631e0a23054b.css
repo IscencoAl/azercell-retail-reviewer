@@ -6251,6 +6251,9 @@ button.close {
     width: 900px;
   }
 }
+.modal-header .close {
+  margin-top: -10px;
+}
 .tooltip {
   position: absolute;
   z-index: 1070;

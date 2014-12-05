@@ -14,7 +14,7 @@
   .row
     .col-md-6
       .panel.panel-default
-        %div#map_canvas.map-container{:data => {:mapinfo => shop_map_info_path({:filter => {:user => @user}})}}
+        %div#map_canvas.map-container{:data => {:mapinfo => map_info_shops_path({:filter => {:user => @user}})}}
     .col-md-6
       .panel.panel-default
         = render 'shops/list', :shops => @user.shops, :max_height => 300

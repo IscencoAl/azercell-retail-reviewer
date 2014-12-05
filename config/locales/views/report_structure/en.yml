@@ -3,3 +3,4 @@ en:
     report_structure:
       index: "Reports Structure"
       add_category: "Add Category"
+      review_associated_shops: "Reviewer can make reports only for his shops"

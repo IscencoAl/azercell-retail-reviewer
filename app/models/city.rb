@@ -24,6 +24,6 @@ class City < ActiveRecord::Base
   private
 
   def change_shop_structure_version
-    Setting.change_version('shops_structure_version')
+    Setting.change_version(Setting::SHOPS_STRUCTURE_VERSION)
   end
 end

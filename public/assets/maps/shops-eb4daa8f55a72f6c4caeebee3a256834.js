@@ -27,7 +27,7 @@ function initialize() {
         map.fitBounds(bounds);
       }
       
-      if (map_container.data("clusterize") == true){
+      if (map_container.data("clusterize") != false){
         new MarkerClusterer(map, markers);
       }
       

@@ -3,3 +3,4 @@ ru:
     report_structure:
       index: "Структура отчетов"
       add_category: "Добавить категорию"
+      review_associated_shops: "Обозреватель может делать отчеты только на свои магазины"

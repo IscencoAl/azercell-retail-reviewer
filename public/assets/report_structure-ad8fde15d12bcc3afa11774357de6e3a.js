@@ -9,16 +9,40 @@ $(document).ready(function(){
     $.ajax({
       url: url,
       success: function(data){
-        var $data = $(data)
+        var $data = $(data);
+
         $('#report-structure').append($data);
         handleReportElements($data);
       }
-    })
-  })
+    });
+  });
+
+  $.ajax({
+    url: '/settings/review_associated_shops',
+    success: function(data){
+      var setting = data;
+
+      if (setting.value == 'yes'){
+        $('#review-associated-shops').prop('checked', true);
+      }
+
+      $('#review-associated-shops').change(function(){
+        var $checkbox = $(this),
+          checked = $checkbox.is(":checked"),
+          value = checked ? 'yes' : 'no';
+
+        $.ajax({
+          url: '/settings/review_associated_shops',
+          type: 'PUT',
+          data: {value: value}
+        });
+      });
+    }
+  });
 
   handleReportElements($('body'));
 
-})
+});
 
 function handleReportElements($elem){
 
@@ -42,7 +66,7 @@ function handleReportElements($elem){
         handleReportElements($data);
       }
     })
-  })
+  });
 
   $elem.find('a[data-showcategory]').click(function(e){
     e.preventDefault();
