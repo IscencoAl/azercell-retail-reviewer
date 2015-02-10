@@ -16,6 +16,7 @@ UserRole.create(:name => 'dealer')
 ReportStructureElementType.create(:name => 'mark')
 ReportStructureElementType.create(:name => 'check')
 ReportStructureElementType.create(:name => 'input')
+ReportStructureElementType.create(:name => 'number')
 
 # Create API settings
 Setting.create(:name => 'app_version', :value => '1')

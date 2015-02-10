@@ -1,15 +1,13 @@
 class ReportStructureElementType < ActiveRecord::Base
   validates :name,  :presence => true, :uniqueness => true
 
-  def self.mark
-    find_by_name('mark')
-  end
+  TYPES = ['mark', 'check', 'input', 'number']
 
-  def self.check
-    find_by_name('check')
-  end
-
-  def self.input
-    find_by_name('input')
+  class << self
+    TYPES.each do |type|
+      define_method type do
+        find_by_name(type)
+      end
+    end
   end
 end
