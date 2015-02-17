@@ -1,15 +1,34 @@
 = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp'
+= javascript_include_tag 'http://www.google.com/jsapi'
+= javascript_include_tag 'chart_helper'
 = javascript_include_tag 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'
 = javascript_include_tag 'maps/shops'
 
-%h2.text-center= @dealer.name
-%br
+:javascript
+  google.load("visualization", "1", {packages:["corechart"]});
 
-.panel.panel-default
-  .panel-body
-    .row
-      .col-md-6
+
+.well.well-sm
+  .row
+    .col-md-6.col-sm-12
+      .panel.panel-default
         %div#map_canvas.map-container-lg{:data => {:mapinfo => map_info_shops_path({:filter => {:dealer => @dealer}})}}
-      .col-md-6
-        .panel.panel-default
-          = render 'shops/list', :shops => policy_scope(@dealer.shops.by_score('desc')), :max_height => 450
+    .col-md-6.col-sm-6
+      .panel.panel-default
+        = render 'info', :dealer => @dealer
+          
+      .panel.panel-default
+        = render 'shops/list', :shops => policy_scope(@dealer.shops.by_score('desc')), :max_height => 228
+
+- if @reports.any?
+  %h3.text-center= t('views.reports.list')
+  .row
+    .col-sm-6
+      = render 'layouts/chart', :container_id => 'score-chart', :source => reports_score_chart_path, :extra_params => {:filter => {:dealer => @dealer.id}}
+    .col-sm-6
+      .panel.panel-default
+  
+        %div.chart-container{:style => 'overflow: auto;'}
+          = render 'reports/list', :reports => @reports
+
+      = paginate @reports

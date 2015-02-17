@@ -7,6 +7,9 @@ ru:
         phone_number: "Телефонный номер"
         email: "Email"
         is_deleted: "Удаленные"
+        number_of_shops: "Количество магазинов"
+        best_shop: "Лучший магазин"
+        worst_shop: "Худший магазин"
 
     errors:
       models:

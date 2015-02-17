@@ -11,6 +11,7 @@ class DealersController < ApplicationController
 
   # GET /dealers/1
   def show
+    @reports = @dealer.reports.by_created_at('DESC').page(params[:page]).per(10)
   end
 
   # GET /dealers/new

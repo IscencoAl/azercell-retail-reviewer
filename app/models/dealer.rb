@@ -7,6 +7,7 @@ class Dealer < ActiveRecord::Base
 
   has_many :shops
   has_many :users
+  has_many :reports, :through => :shops
 
   scope :with_name,         -> (name) { where('name ilike ?', "%#{name}%") }
   scope :with_contact_name, -> (contact_name) { where('contact_name ilike ?', "%#{contact_name}%") }
@@ -20,6 +21,15 @@ class Dealer < ActiveRecord::Base
   after_soft_delete   -> { self.touch }
   after_save          -> { self.touch }
   after_touch         :change_shop_structure_version
+
+
+  def best_shop
+    shops.by_score('desc').first
+  end
+
+  def worst_shop
+    shops.by_score('asc').first
+  end
 
   private
 

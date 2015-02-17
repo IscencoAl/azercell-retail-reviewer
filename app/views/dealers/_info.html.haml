@@ -1,0 +1,24 @@
+%table#general-info.table.table-condensed.table-striped
+  %tbody
+    %tr
+      %td=t('activerecord.attributes.dealer.name')
+      %td=  dealer.name
+    %tr
+      %td=t('activerecord.attributes.dealer.contact_name')
+      %td= dealer.contact_name
+    %tr
+      %td=t('activerecord.attributes.dealer.phone_number')
+      %td= dealer.phone_number
+    %tr
+      %td=t('activerecord.attributes.dealer.email')
+      %td= dealer.email
+    %tr
+      %td=t('activerecord.attributes.dealer.number_of_shops')
+      %td= dealer.shops.count
+    %tr
+      %td=t('activerecord.attributes.dealer.best_shop')
+      %td= dealer.best_shop ? can_link_to(dealer.best_shop.name, dealer.best_shop) : '-'
+    %tr
+      %td=t('activerecord.attributes.dealer.worst_shop')
+      %td= dealer.worst_shop ? can_link_to(dealer.worst_shop.name, dealer.worst_shop) : '-'
+    

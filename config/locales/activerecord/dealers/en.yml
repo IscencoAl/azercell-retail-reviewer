@@ -7,3 +7,6 @@ en:
         phone_number: "Phone Number"
         email: "Email"
         is_deleted: "Deleted"
+        number_of_shops: "Number of shops"
+        best_shop: "Best shop"
+        worst_shop: "Worst shop"

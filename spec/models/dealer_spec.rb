@@ -191,5 +191,59 @@ RSpec.describe Dealer, :type => :model do
       expect(dealer.users).to be_blank
     end
   end
+
+  describe 'best_shop' do
+    context 'without shops' do
+      it 'returns nil' do
+        dealer = create(:dealer)
+
+        expect(dealer.best_shop).to be_nil
+      end
+    end
+    context 'with one shop' do
+      it 'returns shop' do
+        dealer = create(:dealer)
+        shop = create(:shop, :dealer => dealer)
+
+        expect(dealer.best_shop).to eq(shop)
+      end
+    end
+    context 'with 2 shops' do
+      it 'returns shop with best score' do
+        dealer = create(:dealer)
+        shop1 = create(:shop, :dealer => dealer, :score => 5)
+        shop2 = create(:shop, :dealer => dealer, :score => 3)
+
+        expect(dealer.best_shop).to eq(shop1)
+      end
+    end
+  end
+
+   describe 'worst_shop' do
+    context 'without shops' do
+      it 'returns nil' do
+        dealer = create(:dealer)
+
+        expect(dealer.worst_shop).to be_nil
+      end
+    end
+    context 'with one shop' do
+      it 'returns shop' do
+        dealer = create(:dealer)
+        shop = create(:shop, :dealer => dealer)
+
+        expect(dealer.worst_shop).to eq(shop)
+      end
+    end
+    context 'with 2 shops' do
+      it 'returns shop with best score' do
+        dealer = create(:dealer)
+        shop1 = create(:shop, :dealer => dealer, :score => 5)
+        shop2 = create(:shop, :dealer => dealer, :score => 3)
+
+        expect(dealer.worst_shop).to eq(shop2)
+      end
+    end
+  end
   
 end
