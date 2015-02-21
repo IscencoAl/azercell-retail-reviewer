@@ -1,9 +1,9 @@
 class ReportStructureElementsController < ApplicationController
-  before_action :set_element, only: [:show, :edit, :update, :destroy]
+  before_action :set_element, only: [:show, :edit, :update, :destroy, :increase_priority, :decrease_priority]
 
   # GET /report_structure_elements
   def index
-    @elements = ReportStructureElements.all
+    @elements = ReportStructureElements.order(:priority)
   end
 
   # GET /report_structure_elements/1
@@ -64,6 +64,23 @@ class ReportStructureElementsController < ApplicationController
     @element.destroy
 
     render :nothing => true
+  end
+
+  # DELETE /report_structure_elements/1
+  def destroy
+    @element.destroy
+
+    render :nothing => true
+  end
+
+  # GET /report_structure_elements/1/increase_priority
+  def increase_priority
+    render :json => {:success => @element.increase_priority}
+  end
+
+  # GET /report_structure_elements/1/decrease_priority
+  def decrease_priority
+    render :json => {:success => @element.decrease_priority}
   end
 
   private

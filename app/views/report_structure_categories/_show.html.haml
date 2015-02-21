@@ -12,5 +12,9 @@
           .div-th= t('activerecord.attributes.report_structure_element.shop_types')
           .div-th
       .element-list.div-tbody
-        - category.elements.each do |elem|
+        - category.elements.order(:priority).each do |elem|
           = render 'report_structure_elements/show', :element => elem
+
+
+  
+

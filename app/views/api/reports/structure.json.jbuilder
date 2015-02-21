@@ -1,7 +1,7 @@
 json.categories @categories do |cat|
   json.id cat.id
   json.name cat.name
-  json.elements cat.elements do |elem|
+  json.elements cat.elements.order(:priority) do |elem|
     json.id elem.id
     json.name elem.name
     json.type elem.type.name

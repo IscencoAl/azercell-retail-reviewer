@@ -48,6 +48,34 @@ function handleReportElements($elem){
 
   handleElements($elem);
 
+  $('a[data-up]').click(function(){
+    var $this = $(this),
+        $row = $this.parents($this.data('parent')),
+        action = $this.data('action');
+
+    $.ajax({
+      url: action,
+      success: function(data){
+        if(data.success)
+          $row.insertBefore($row.prev());
+      }
+    })
+  })
+
+  $('a[data-down]').click(function(){
+    var $this = $(this),
+        $row = $this.parents($this.data('parent')),
+        action = $this.data('action');
+
+    $.ajax({
+      url: action,
+      success: function(data){
+        if(data.success)
+          $row.insertAfter($row.next());
+      }
+    })
+  })
+
   $elem.find('a[data-savecategory]').click(function(e){
     e.preventDefault();
 
@@ -143,6 +171,8 @@ function handleReportElements($elem){
       }
     })
   })
+
+
 
   $elem.find('a[data-editelement]').click(function(e){
     e.preventDefault();

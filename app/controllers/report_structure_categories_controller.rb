@@ -1,9 +1,10 @@
 class ReportStructureCategoriesController < ApplicationController
-  before_action :load_category, only: [:show, :edit, :update, :destroy]
+  before_action :load_category, only: [:show, :edit, :update, :destroy, 
+    :increase_priority, :decrease_priority]
 
   # GET /report_structure_categories
   def index
-    @categories = ReportStructureCategory.all
+    @categories = ReportStructureCategory.order(:priority)
     authorize @categories
   end
 
@@ -67,6 +68,16 @@ class ReportStructureCategoriesController < ApplicationController
     render :nothing => true
   end
 
+  # GET /report_structure_categories/1/increase_priority
+  def increase_priority
+    render :json => { :success => @category.increase_priority }
+  end
+
+  # GET /report_structure_categories/1/decrease_priority
+  def decrease_priority
+    render :json => { :success => @category.decrease_priority }
+  end
+
   private
 
   def load_category
@@ -74,6 +85,6 @@ class ReportStructureCategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:report_structure_category).permit(:name)
+    params.require(:report_structure_category).permit(:name,:priority)
   end
 end

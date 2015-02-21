@@ -3,7 +3,7 @@ class Api::ReportsController < Api::ApiController
   # GET /reports/structure
   def structure
     begin
-      @categories = ReportStructureCategory.all
+      @categories = ReportStructureCategory.order(:priority)
     rescue Exception => ex
       @msg = ex.message
       render 'api/common/error'

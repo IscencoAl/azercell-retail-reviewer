@@ -53,8 +53,20 @@ Rails.application.routes.draw do
 
     resources :reports, :only => [:index, :show]
 
-    resources :report_structure_categories
-    resources :report_structure_elements
+    resources :report_structure_categories do
+      member do
+        get 'increase_priority'
+        get 'decrease_priority'
+      end
+    end
+    
+    resources :report_structure_elements do
+      member do
+        get 'increase_priority'
+        get 'decrease_priority'
+      end
+    end
+
     get '/report_structure', :to => 'report_structure_categories#index', :as => 'report_structure'
 
     get '/settings/:name', :to => 'settings#show'

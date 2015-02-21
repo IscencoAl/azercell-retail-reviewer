@@ -68,9 +68,10 @@ function handleElements($elem){
       url : url,
       type: type,
       success:function(data){
-        var $data = $(data) 
+        var $data = $(data);
+        
         $body.html($data)
-        handleElements($data) 
+        handleElements($data)
       }
     })
     

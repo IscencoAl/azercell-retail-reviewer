@@ -2,6 +2,10 @@
   .col-sm-9
     %h4= category.name
   .col-sm-3.text-right
+    %a.btn.btn-sm.btn-default{:data => {:up => true, :parent => '.category-container.panel.panel-default', :action => increase_priority_report_structure_category_path(category, :format => :json)}}
+      %span.glyphicon.glyphicon-arrow-up
+    %a.btn.btn-sm.btn-default{:data => {:down => true, :parent => '.category-container.panel.panel-default', :action => decrease_priority_report_structure_category_path(category, :format => :json)}}
+      %span.glyphicon.glyphicon-arrow-down
     %a.btn.btn-sm.btn-default{:href => "#{new_report_structure_element_path}?report_structure_element[report_structure_category_id]=#{category.id}", :data => {:newelement => true}}
       %span.glyphicon.glyphicon-plus
 
