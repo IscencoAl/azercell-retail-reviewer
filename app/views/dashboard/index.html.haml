@@ -26,5 +26,5 @@
       = render 'not_reviewed', :shops => @not_reviewed_shops
 
     .panel.panel-default
-      .panel-body
+      .panel-body{:style => 'height : 633px;'}
         %div#map_canvas.map-container-shop{:data => {:mapinfo => map_info_shops_path}}
