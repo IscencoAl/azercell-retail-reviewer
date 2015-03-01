@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validates :role, :presence => true
   validates :dealer_id, :presence => true, :if => :dealer?
 
+  has_one :device, :class_name => 'UserDevice'
+
   has_many :shops
   has_many :reports
 
