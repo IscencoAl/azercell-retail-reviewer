@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    attributes:
+      user_device:
+        user: "User"
+        device_id: "Device id"

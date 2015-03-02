@@ -1,0 +1,24 @@
+%h2.text-center=t('views.user_devices.list')
+%br
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th=t('activerecord.attributes.user_device.user')
+              %th=t('activerecord.attributes.user_device.device_id')
+              %th
+              
+          %tbody
+            - @user_devices.each do |user_device|
+              %tr
+                %td= user_device.user.full_name
+                %td= user_device.device_id
+                %td.text-right
+                  - if policy(user_device).destroy?
+                    %a.btn.btn-default.btn-xs{:href => user_device_path(user_device), :title => t('views.common.delete'), :data => {:toggle => "tooltip", :method => 'delete', :confirm => t('views.common.confirm')}}
+                      %span.glyphicon.glyphicon-remove
+                  

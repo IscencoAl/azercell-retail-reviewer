@@ -108,6 +108,9 @@ Rails.application.routes.draw do
         get 'restore'
       end
     end
+
+    resources :user_devices
+
   end
 
   root 'dashboard#index'

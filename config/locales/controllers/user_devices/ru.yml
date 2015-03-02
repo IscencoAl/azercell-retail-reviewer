@@ -1,0 +1,4 @@
+ru:
+  controllers:
+    user_devices:
+      destroyed: "Привязка '%{name}' с девайсом была успешно удалена"

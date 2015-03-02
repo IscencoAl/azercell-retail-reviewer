@@ -1,0 +1,4 @@
+en:
+  controllers:
+    user_devices:
+      destroyed: "Linking '%{name}' with device was successfully destroyed"
