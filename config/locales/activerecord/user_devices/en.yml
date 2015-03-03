@@ -3,4 +3,4 @@ en:
     attributes:
       user_device:
         user: "User"
-        device_id: "Device id"
+        device_id: "Device ID"

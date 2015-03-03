@@ -1,10 +1,10 @@
 class UserDevicePolicy < ApplicationPolicy
-	def index?
+  def index?
     user.admin?
   end
 
   def destroy?
-   	user.admin? and record.created_at < Date.today
+    user.admin? and record.created_at < Date.today
   end
 
   # Scope

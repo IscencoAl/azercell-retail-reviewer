@@ -109,7 +109,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :user_devices
+    resources :user_devices, :only => [:index, :destroy]
 
   end
 

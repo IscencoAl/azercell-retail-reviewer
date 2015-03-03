@@ -1,4 +1,4 @@
 en:
   controllers:
     user_devices:
-      destroyed: "Linking '%{name}' with device was successfully destroyed"
+      destroyed: "Association between user '%{name}' and device was removed"
