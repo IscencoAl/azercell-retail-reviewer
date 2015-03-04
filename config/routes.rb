@@ -108,6 +108,9 @@ Rails.application.routes.draw do
         get 'restore'
       end
     end
+
+    resources :user_devices, :only => [:index, :destroy]
+
   end
 
   root 'dashboard#index'

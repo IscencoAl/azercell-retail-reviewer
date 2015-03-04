@@ -1,0 +1,4 @@
+en:
+  controllers:
+    user_devices:
+      destroyed: "Association between user '%{name}' and device was removed"

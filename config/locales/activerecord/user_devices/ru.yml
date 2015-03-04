@@ -1,0 +1,6 @@
+ru:
+  activerecord:
+    attributes:
+      user_device:
+        user: "Пользователь"
+        device_id: "Device ID"
