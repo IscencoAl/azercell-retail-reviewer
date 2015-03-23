@@ -1,0 +1,4 @@
+en:
+  controllers:
+    settings:
+      updated: "Setting '%{name}' was successfully updated"

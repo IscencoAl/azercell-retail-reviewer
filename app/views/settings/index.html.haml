@@ -1,0 +1,25 @@
+%h2.text-center=t('views.settings.list')
+%br
+
+.row
+  .col-lg-offset-1.col-lg-10
+    .panel.panel-default
+      .table-responsive
+        %table.table.table-condensed.table-striped.table-vcentered
+          %thead
+            %tr
+              %th=t('activerecord.attributes.setting.name')
+              %th=t('activerecord.attributes.setting.value')
+              %th
+              
+          %tbody
+            - @settings.each do |s|
+              %tr
+                %td= s.name
+                %td= s.value
+                %td.text-right
+                  - if policy(s).update?
+                    %a.btn.btn-default.btn-xs{:href => edit_setting_path(s), :title => t('views.common.edit'), :data => {:toggle => "tooltip"}}
+                      %span.glyphicon.glyphicon-edit
+                  
+                  

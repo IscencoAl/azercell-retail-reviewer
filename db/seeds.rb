@@ -11,6 +11,7 @@ UserRole.create(:name => 'admin')
 UserRole.create(:name => 'user')
 UserRole.create(:name => 'reviewer')
 UserRole.create(:name => 'dealer')
+UserRole.create(:name => 'super_admin')
 
 # Create report element types
 ReportStructureElementType.create(:name => 'mark')
@@ -23,6 +24,7 @@ Setting.create(:name => 'app_version', :value => '1')
 Setting.create(:name => 'shops_structure_version', :value => '1')
 Setting.create(:name => 'report_structure_version', :value => '1')
 Setting.create(:name => 'review_associated_shops', :value => 'yes')
+Setting.create(:name => 'max_user_devices_count', :value => '0')
 
 # Create user
 # User.create(:name => 'Admin', :surname => 'Magnetsoft', :email => 'admin@magnetsoft.md', :password => 'admin@magnetsoft.md', :password_confirmation => 'admin@magnetsoft.md', :role => UserRole.admin)

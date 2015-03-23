@@ -17,4 +17,16 @@ class ApplicationController < ActionController::Base
     flash[:error] = t('views.common.not_authorized')
     redirect_to root_url
   end
+
+  def current_user
+    User.unscoped do
+      super
+    end
+  end
+
+  def authenticate_user!
+    User.unscoped do
+      super
+    end
+  end
 end

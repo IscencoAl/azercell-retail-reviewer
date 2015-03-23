@@ -1,0 +1,6 @@
+en:
+  views:
+    settings:
+      list: "Settings"
+      edit: "Edit setting '%{name}'"
+    

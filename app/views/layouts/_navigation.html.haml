@@ -66,6 +66,9 @@
         - if policy(UserDevice).index?
           %li
             %a{:href => user_devices_path}= t('views.navigation.user_devices')
+        - if policy(Setting).index?
+          %li
+            %a{:href => settings_path}= t('views.navigation.settings')
 
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown

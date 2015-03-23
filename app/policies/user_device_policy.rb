@@ -1,6 +1,7 @@
 class UserDevicePolicy < ApplicationPolicy
+
   def index?
-    user.admin?
+    Setting.max_user_devices_count != 0 and user.admin?
   end
 
   def destroy?

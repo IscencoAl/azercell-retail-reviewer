@@ -3,6 +3,12 @@ class User < ActiveRecord::Base
   include Modules::Filterable
   include Modules::Sortable
 
+  default_scope do
+    UserRole.unscoped do
+      where.not(:role => UserRole.super_admin)
+    end
+  end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :omniauthable:, :registerable, :recoverable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
@@ -35,6 +41,10 @@ class User < ActiveRecord::Base
 
   before_create :generate_api_key
 
+  def role
+    UserRole.unscoped{ super }
+  end
+
   def admin?
     self.role == UserRole.admin
   end
@@ -49,6 +59,12 @@ class User < ActiveRecord::Base
 
   def dealer?
     self.role == UserRole.dealer
+  end
+
+  def super_admin?
+    UserRole.unscoped do
+      self.role == UserRole.super_admin
+    end
   end
 
   def full_name

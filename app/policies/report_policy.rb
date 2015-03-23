@@ -18,12 +18,12 @@ class ReportPolicy < ApplicationPolicy
   # Scope
   class Scope < Scope
     def resolve
-      if user.admin? or user.simple_user?
-        scope.all
-      elsif user.reviewer?
+      if user.reviewer?
         scope.where(:user => user)
       elsif user.dealer?
         scope.where(:shop => ShopPolicy::Scope.new(user, Shop).resolve)
+      else
+        scope.all
       end
     end
   end

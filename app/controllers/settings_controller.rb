@@ -1,26 +1,33 @@
 class SettingsController < ApplicationController
+  before_action :load_setting, only: [:edit, :update]
 
-  # GET /settings/name
-  def show
-    setting = Setting.find_by_name(params[:name])
-
-    render :json => setting
+  # GET /settings
+  def index
+    @settings = policy_scope(Setting)
   end
 
-  # PATCH/PUT /settings/name
+  # GET /settings/1
+  def edit
+    session[:return_to] = request.referer unless request.referer == request.url
+  end
+  
+  # PATCH/PUT /settings/1
   def update
-    setting = Setting.find_by_name(params[:name])
-    setting.value = params[:value]
-    setting.save
-    # if setting.save
-    # else
-      render :json => setting
-    # end
+    if @setting.update(setting_params)
+      flash[:success] = t('controllers.settings.updated', name: @setting.name)
+      redirect_to session.delete(:return_to) || settings_url
+    else
+      render :edit
+    end
   end
 
   private
 
   def setting_params
-    params.permit(:name, :value)
+    params.require(:setting).permit(:name, :value)
+  end
+
+  def load_setting
+    @setting = Setting.find(params[:id])
   end
 end

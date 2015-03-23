@@ -8,6 +8,8 @@ class UserDevice < ActiveRecord::Base
   private
 
   def total_count
-    errors.add(:base, "Maximum devices count is achieved") if UserDevice.count >= 1
+  	max_count = Setting.max_user_devices_count
+
+    errors.add(:base, "Maximum devices count is achieved") if UserDevice.count >= max_count
   end
 end

@@ -5,7 +5,7 @@ class Api::UsersController < Api::ApiController
   def sign_in
     begin
       user = get_user(params[:email], params[:password])
-      check_device(user, params[:device_id])
+      check_device(user, params[:device_id]) unless Setting.max_user_devices_count == 0
 
       @api_key = user.api_key
     rescue Exception => ex

@@ -69,8 +69,7 @@ Rails.application.routes.draw do
 
     get '/report_structure', :to => 'report_structure_categories#index', :as => 'report_structure'
 
-    get '/settings/:name', :to => 'settings#show'
-    put '/settings/:name', :to => 'settings#update'
+    resources :settings, :only => [:index, :edit, :update]
 
     resources :shops do
       collection do
@@ -102,7 +101,7 @@ Rails.application.routes.draw do
       end
     end
 
-    devise_for :users
+    devise_for :users, controllers: { sessions: "users/sessions" }
     resources :users do
       member do
         get 'restore'

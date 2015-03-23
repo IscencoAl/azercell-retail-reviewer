@@ -1,0 +1,8 @@
+= simple_form_for @setting, :html => {:class => 'form-horizontal', :role => 'form'} do |f|
+
+  = f.input :name
+  = f.input :value
+
+  .btn-toolbar.text-center
+    = f.button :submit, t('views.common.save')
+    %a.btn.btn-default{:href => session[:return_to] || settings_path}= t('views.common.cancel')

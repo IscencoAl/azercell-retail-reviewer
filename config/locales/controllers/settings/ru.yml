@@ -1,0 +1,4 @@
+ru:
+  controllers:
+    settings:
+      updated: "Настройка '%{name}' была успешно обновлена"

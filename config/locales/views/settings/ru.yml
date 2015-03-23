@@ -1,0 +1,5 @@
+ru:
+  views:
+    settings:
+      list: "Настройки"
+      edit: "Изменение настройки '%{name}'"

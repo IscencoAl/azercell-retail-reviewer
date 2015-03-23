@@ -38,12 +38,12 @@ class ShopPolicy < ApplicationPolicy
   # Scope
   class Scope < Scope
     def resolve
-      if user.admin? or user.simple_user?
-        scope.all
-      elsif user.reviewer?
+      if user.reviewer?
         scope.where(:user => user)
       elsif user.dealer?
         scope.where(:dealer => user.dealer)
+      else
+        scope.all
       end
     end
   end
