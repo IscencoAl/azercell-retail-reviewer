@@ -1,0 +1,37 @@
+= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp'
+= javascript_include_tag 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js'
+= javascript_include_tag 'http://www.google.com/jsapi'
+= javascript_include_tag 'maps/user_tracking'
+= javascript_include_tag 'range_picker'
+
+- filtering_params = params[:filter] || {}
+.row
+
+  %form{:role => 'form'}
+    .form-group.col-sm-2
+      %label{:for => 'user'}= t('activerecord.attributes.report.user')
+      %select.sel_with_place.form-control.input-sm{:type => 'text', :name => 'filter[user]', :value => filtering_params[:user], :autocomplete => :off}
+        - User.where(:role => UserRole.reviewer).each do |user|
+          %option{:value => user.id, :selected => filtering_params[:user].to_i == user.id}= user.name
+    .form-group.col-sm-4
+      %label{:for => 'period'}= t('views.reports.period')
+      #period.input-group.input-group-sm{:data => {:rangepicker => 'yes'}}
+        %input#created_at_from.form-control{:type => 'text', :name => 'filter[created_at_from]', :value => filtering_params[:created_at_from], :data => {:border => 'from'}}
+        %span.input-group-addon -
+        %input#created_at_to.form-control{:type => 'text', :name => 'filter[created_at_to]', :value => filtering_params[:created_at_to], :data => {:border => 'from'}}
+
+    .form-group.col-sm-2
+      %label=t('views.common.distance')
+      %input#distance.form-control.input-sm{:type => 'text', :autocomplete => :off,:disabled => 'disabled'}
+
+    
+    .form-group.col-sm-2
+      %label.text-block &nbsp;
+      %input.btn.btn-block.btn-sm.btn-default{:type => 'submit', :value => t('views.common.filter')}
+
+
+.row
+  .panel.panel-default 
+    
+    %div#map_canvas.map-container{:style => "height:550px;", :data => {:mapinfo => user_locations_path(params)}}
+

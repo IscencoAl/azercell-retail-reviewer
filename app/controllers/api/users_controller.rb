@@ -14,6 +14,28 @@ class Api::UsersController < Api::ApiController
     end
   end
 
+  # POST /api/users/geolocation
+  def geolocation
+    begin
+      final_params = params_to_geolocation(params)
+      @user_location = UserLocation.new(final_params)
+      @user_location.save
+      render nothing: true
+    rescue Exception => ex
+      @msg = ex.message
+      render 'api/common/error'
+    end
+  end
+
+  def params_to_geolocation(params)
+    
+    user = User.find_by(:api_key => params[:api_key])
+    geoloc = params[:geolocation].split(' ')
+    geo_param = { latitude: geoloc[0], longitude: geoloc[1], user_id: user.id, created_at: Time.now}
+
+    return geo_param
+  end
+
   # Helper methods
 
   def get_user(email, password)

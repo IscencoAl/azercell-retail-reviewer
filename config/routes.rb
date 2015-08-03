@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get '/settings/versions', :to => 'settings#versions', :as => 'settings_versions'
 
     post '/users/sign_in', :to => 'users#sign_in', :as => 'sign_in'
+    post '/users/geolocation', :to => 'users#geolocation', :as => 'user_geolocation'
   end
 
   scope '(:locale)' do
@@ -108,8 +109,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :user_devices, :only => [:index, :destroy]
+    resources :user_locations, :only => [:index] do
+      collection do
+        get 'map'
+      end
+    end
 
+    resources :user_devices, :only => [:index, :destroy]
   end
 
   root 'dashboard#index'

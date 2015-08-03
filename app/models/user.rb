@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
 
   has_many :shops
   has_many :reports
+  has_many :locations, :class_name => 'UserLocations'
 
   belongs_to :role, :class_name => 'UserRole', :foreign_key => :user_role_id
   belongs_to :dealer

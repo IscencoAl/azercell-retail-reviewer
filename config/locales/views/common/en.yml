@@ -14,6 +14,7 @@ en:
       empty: "No matching records found"
       all: "All"
       filter: "Filter"
+      distance: "Distance"
       best: "Best"
       worst: "Worst"
       send_mail: "Send Mail"

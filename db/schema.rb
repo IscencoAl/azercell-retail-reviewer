@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301122750) do
+ActiveRecord::Schema.define(version: 20150729100803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,16 @@ ActiveRecord::Schema.define(version: 20150301122750) do
   end
 
   add_index "user_devices", ["user_id"], name: "index_user_devices_on_user_id", using: :btree
+
+  create_table "user_locations", force: true do |t|
+    t.integer  "user_id"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_locations", ["user_id"], name: "index_user_locations_on_user_id", using: :btree
 
   create_table "user_roles", force: true do |t|
     t.string "name"
